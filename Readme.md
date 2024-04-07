@@ -13,7 +13,7 @@ O usuário consumidor deverá informar seu nome, email e senha, após o cadastro
 
 filtro de regiões administrativas
 filtro de produtos no perfil do supermercado
-opção do usuario consumidor seguir o supermercado
-aba de notificação no perfil do usuario consumidor
+opção do usuário consumidor seguir o supermercado
+aba de notificação no perfil do usuário consumidor
 aba de pesquisa de supermercados e produtos
 supermercado pode fazer o CRUD de seus produtos
