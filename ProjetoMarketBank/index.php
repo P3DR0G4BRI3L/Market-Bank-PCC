@@ -15,11 +15,11 @@
 						<h1> Market<span class="branco">Bank</span> </h1>
 				</div>
 				<div id="area-menu">
-						<a href="index.html">Home</a>
-						<a href="mercados.html">Mercados</a>
-						<a href="sessoes.html">Sessões</a>
-						<a href="contato.html">Contato</a>
-						<a href="fale.html">Fale Conosco</a>
+						<a href="index.php">Home</a>
+						<a href="mercados.php">Mercados</a>
+						<a href="sessoes.php">Sessões</a>
+						<a href="contato.php">Contato</a>
+						<a href="fale.php">Fale Conosco</a>
 				</div>
 	    </div>
 
@@ -34,7 +34,7 @@
 			        			<p>
 			        				Melhores mercados da região para seu conhecimento de produtos e diversos outras utilidades.
 			        			</p>
-			        			<a href="">Leia mais</a>
+			        			<a href="">Ver mais</a>
 			        	</div>
                         <!--// Fechamento postagem -->
 
@@ -46,7 +46,7 @@
 			        			<p>
 			        				O Market Bank foi criado na intenção de informar os clientes de produtos que os mesmos desejam.
 			        			</p>
-			        			<a href="">Leia mais</a>
+			        			<a href="">Ver mais</a>
 			        </div>
                         <!--// Fechamento postagem -->
 	            </div>
@@ -70,12 +70,12 @@
 				        		        <h3>Postagens recentes</h3>
 				        		<div class="postagem-lateral">
 				        				<p>O Market Bank é para você ter </p>
-				        				<a href="">Leia mais</a>
+				        				<a href="">Ver mais</a>
 				        		</div>
 				        			
 				        		<div class="postagem-lateral" style="border-bottom: none;">
 				        				<p>Produtos em destaque</p>
-				        				<a href="">Leia mais</a>
+				        				<a href="">Ver mais</a>
 				        		</div>
 				        </div>
 
