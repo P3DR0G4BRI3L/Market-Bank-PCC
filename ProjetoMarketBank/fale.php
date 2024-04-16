@@ -50,7 +50,9 @@
 				</p>
 				<a href="">Ver mais</a>
 				<br>
-				<textarea name="sugestao" id="fale" cols="30" rows="10"></textarea>
+
+					<input type="text" name="sugestao" >
+					
 				<br>
 				<input type="button" value="Enviar">
 				<br>
