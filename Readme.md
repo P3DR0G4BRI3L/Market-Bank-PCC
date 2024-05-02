@@ -19,9 +19,15 @@ aba de pesquisa de supermercados e produtos
 supermercado pode fazer o CRUD de seus produtos
 
 As principais funcionalidades do sistema, que são:
+
 Módulo de login: Realiza o cadastro, login,  redefine a senha do usuário,deleta as informações e acrescenta essas informações  ao banco de dados.
+
 Visualização de produtos:O cliente vai acessar os produtos na sessão.
+
 Gerenciar Pedidos: O cliente faz o pedido do seu produto no site,os pedidos são atualizados, excluídos e alterados 
+
 Realizar Pedidos: O cliente poderá fazer seu pedido que será enviado ao mercado,ele também pode atualizar,excluir e alterar.
+
 Gerenciar Produtos: O dono do mercado pode alterar,excluir  e adicionar novos produtos ao seu mercado.
+
 Gerenciar Clientes: O administrador  geral gerencia, exclui, altera ou atualizar os clientes.
