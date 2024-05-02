@@ -18,6 +18,7 @@ aba de notificação no perfil do usuário consumidor
 aba de pesquisa de supermercados e produtos
 supermercado pode fazer o CRUD de seus produtos
 
+
 As principais funcionalidades do sistema, que são:
 
 Módulo de login: Realiza o cadastro, login,  redefine a senha do usuário,deleta as informações e acrescenta essas informações  ao banco de dados.
