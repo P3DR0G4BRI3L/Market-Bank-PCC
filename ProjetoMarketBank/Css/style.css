@@ -19,14 +19,29 @@ body {
 }
 
 #area-logo, #area-menu {
+	
 	padding: 10px;
 }
-
-
+#area-menu{
+	display: flex;
+	gap: 5px;
+	justify-content: center;
+}
 #area-principal {
 	width: 920px;
 	margin: 0 auto;
 	padding: 15px;
+}
+#area-menu .cadastro_login_right{
+	display: flex;
+	color: #FFF;
+	padding: 0;
+	gap: 5px;
+	justify-content: end;
+}
+#area-cabecalho #area-menu a:hover{
+	background-color: #F7800F;
+	border-radius: 5px;
 }
 
 .postagem h2{
