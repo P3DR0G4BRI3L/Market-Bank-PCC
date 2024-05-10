@@ -36,15 +36,43 @@
 				<div class="container">
 					<div class="login-box">
 						<form action="" method="POST">
+
 							<div class="input-group">
-								<label for="username">Usuário:</label>
+								<label for="username">E-mail:</label>
 								<input type="email" id="username" name="username" required>
 							</div>
+
 							<div class="input-group">
-								<label for="password">Senha:</label>
-								<input type="password" id="password" name="password" required>
+								<label for="nome">Nome:</label>
+								<input type="text" id="nome" name="nome" required>
 							</div>
+                            
+                            <div class="input-group">
+								<label for="cnpj">CNPJ:</label>
+								<input type="text" id="cnpj" name="cnpj" required maxlength="14">
+							</div>
+
+							<div class="input-group">
+								<label for="endereco">Endereço:</label>
+								<input type="text" id="endereco" name="endereco" required>
+							</div>
+                            
+							<div class="input-group">
+                                <label for="horarioFunc">Horario de abertura:</label>
+								<input type="time" id="horarioFunc" name="horarioFuncAbertura" required>
+
+                                <label for="horarioFunc">Horario de fechamento:</label>
+								<input type="time" id="horarioFunc" name="horarioFuncFecha" required>
+							</div>
+
+                            <div class="input-group">
+								<label for="telefone">Telefone:</label>
+								<input type="tel" id="telefone" name="telefone" required maxlength="11">
+							</div>
+
+
 							<button type="submit">Entrar</button>
+
 						</form>
 					</div>
 				</div>

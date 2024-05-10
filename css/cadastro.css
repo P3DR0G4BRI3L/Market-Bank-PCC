@@ -165,7 +165,10 @@ label {
 }
 
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="text"],
+input[type="time"],
+input[type="tel"] {
     width: 100%; /* Faz os inputs ocuparem 100% da largura */
     padding: 10px;
     border: 1px solid #ccc;
