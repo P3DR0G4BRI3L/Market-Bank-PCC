@@ -88,6 +88,9 @@ body {
 	padding: 15px;
 	background: #CCC;
 }
+.postagem h2{
+	text-align: center;
+}
 
 
 /* Formatação do menu */
@@ -129,7 +132,7 @@ a{
 .sugestao{
 	width: 100%;
 }
-.container {
+.cadastro_option {
     display: flex;
     justify-content: center;
     align-items: start;
@@ -138,8 +141,9 @@ a{
 }
 
 .login-box {
+	margin: 0 auto;
     background-color: #fff;
-    padding: 0px 0px;
+    /* padding: 0px 0px; */
     border-radius: 5px;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     text-align: center; /* Centraliza o texto */
@@ -169,14 +173,26 @@ input[type="password"] {
     box-sizing: border-box; /* Garante que o padding não afete a largura total */
 }
 
-button {
-    width: 100%;
+button[type="submit"] {
+	font-size: 18px;
+    width: 25%;
     padding: 10px;
     background-color: #F7800F;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+	margin-bottom: 5px;
+}
+button{
+	font-size: 18px;
+    padding: 10px;
+    background-color: #F7800F;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+	margin-bottom: 5px;
 }
 
 button:hover {

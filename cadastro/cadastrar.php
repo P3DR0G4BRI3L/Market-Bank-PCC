@@ -33,19 +33,12 @@
 			<div class="postagem">
 				<h2>Área de cadastro</h2>
 				<p>
-				<div class="container">
+				<div class="cadastro_option">
 					<div class="login-box">
-						<h2>Login</h2>
-						<form action="cadastro.php" method="POST">
-							<div class="input-group">
-								<label for="username">Usuário:</label>
-								<input type="email" id="username" name="username" required>
-							</div>
-							<div class="input-group">
-								<label for="password">Senha:</label>
-								<input type="password" id="password" name="password" required>
-							</div>
-							<button type="submit">Entrar</button>
+						
+						
+							<button  onclick="window.location.href = 'cadastrarCliente.php'">Cliente</button>
+							<button  onclick="window.location.href = 'cadastrarMercado.php'">Mercado</button>
 						</form>
 					</div>
 				</div>

@@ -146,3 +146,6 @@ h3 {
 .sugestao{
 	width: 100%;
 }
+.hidden{
+	display: none;
+}

@@ -24,9 +24,12 @@
 			<a href="fale.php">Fale Conosco</a>
 
 			<div class="cadastro_login_right">
+
 				<a href="../cadastro/cadastrar.php">Cadastrar</a>
+
 				<a href="../cadastro/login.php">Login</a>
-			 </div>
+
+			</div>
 
 		</div>
 	</div>
@@ -115,7 +118,7 @@
 
 
 		<div id="rodape">
-		&copy Todos os direitos reservados
+			&copy Todos os direitos reservados
 		</div>
 
 	</div>
