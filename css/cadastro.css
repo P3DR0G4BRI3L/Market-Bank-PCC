@@ -131,8 +131,9 @@ a{
 }
 .container {
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: start;
+	
     /* height: 100vh; */
 }
 
@@ -159,7 +160,7 @@ label {
     text-align: left;
 }
 
-input[type="text"],
+input[type="email"],
 input[type="password"] {
     width: 100%; /* Faz os inputs ocuparem 100% da largura */
     padding: 10px;
@@ -171,7 +172,7 @@ input[type="password"] {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #F7800F;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -179,5 +180,6 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #d66800;
+	color: black;
 }

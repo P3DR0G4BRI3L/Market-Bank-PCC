@@ -31,7 +31,7 @@
 		<div id="area-postagens">
 			<!--Aberturac -->
 			<div class="postagem">
-				<h2>Área de cadastro</h2>
+				<h2>Área de login</h2>
 				<p>
 				<div class="container">
 					<div class="login-box">
@@ -39,7 +39,7 @@
 						<form action="" method="POST">
 							<div class="input-group">
 								<label for="username">Usuário:</label>
-								<input type="text" id="username" name="username" required>
+								<input type="email" id="username" name="username" required>
 							</div>
 							<div class="input-group">
 								<label for="password">Senha:</label>
