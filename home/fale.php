@@ -1,105 +1,127 @@
+<?php
+
+session_start();
+function usuarioEstaLogado(): bool
+{
+    return isset($_SESSION['usuario']);
+}
+if(usuarioEstaLogado()){
+$userlog=ucwords($_SESSION['usuario']['nome']);
+}?>
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title>Fale Conosco</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="../css/style.css">
+    <title>Fale Conosco</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src="script/script.js"></script>
 
 </head>
 
 <body>
 
-	<div id="area-cabecalho">
+    <div id="area-cabecalho">
+        <?php if (usuarioEstaLogado()): ?>
+            <p class="aviso-login">Seja bem vindo&nbsp;<?= $userlog; ?></p>
+        <?php endif ?>
+        <!-- abertura postagem -->
+        <div id="area-logo">
+            <img src="img/logo.png" alt="logo">
+        </div>
+        <div id="area-menu">
+            <a href="../index.php">Home</a>
 
-		<!-- abertura postagem -->
-		<div id="area-logo">
-			<img src="img/logo.png" alt="logo">
-		</div>
-		<div id="area-menu">
-			<a href="../index.php">Home</a>
-			<a href="mercados.php">Mercados</a>
-			<a href="sessoes.php">Sessões</a>
-			<a href="contato.php">Contato</a>
-			<a href="fale.php">Fale Conosco</a>
+            <?php if (usuarioEstaLogado()): ?>
+                <a href="mercados.php">Mercados</a>
+            <?php endif ?>
 
-			<div class="cadastro_login_right">
-				<a href="../cadastro/cadastrar.php">Cadastrar</a>
-				<a href="../cadastro/login.php">Login</a>
-			</div>
+            <a href="contato.php">Contato</a>
+            <a href="fale.php">Fale Conosco</a>
 
-		</div>
-	</div>
+            <div class="cadastro_login_right">
+                <?php if (!usuarioEstaLogado()): ?>
+                    <a href="../cadastro/cadastrar.php">Cadastrar</a>
+                    <a href="../cadastro/login.php">Login</a>
+                <?php endif ?>
 
-	<div id="area-principal">
+                <?php if (usuarioEstaLogado()): ?>
+                    <a href="../cadastro/logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
+                <?php endif ?>
+            </div>
 
-		<div id="area-postagens">
-			<!--Abertura postagem -->
-			<div class="postagem">
-				<h2>Fale Conosco.</h2>
-				<span class="data-postagem">postado 20 março 2022</span>
-				<img width="620px" src="img/img10.webp">
-				<p>
-					Deixe sua sugestão, reclamação, agradecimento, fale conosco.
-				</p>
-				<a href="">Ver mais</a>
-			</div>
-			<!--// Fechamento postagem -->
+        </div>
+    </div>
 
-			<!--Abertura postagem -->
-			<div class="postagem">
-				<h2>Agradecemos por visitar nossa página.</h2>
-				<span class="data-postagem">postado 10 março 2022</span>
-				<img width="620px" src="img/img11.jpg">
-				<p>
-					Fale conosco na caixa abaixo.
-				</p>
-				<a href="">Ver mais</a>
-				<br>
+    <div id="area-principal">
 
-				<input type="text" name="sugestao">
+        <div id="area-postagens">
+            <!--Abertura postagem -->
+            <div class="postagem">
+                <h2>Fale Conosco.</h2>
+                <span class="data-postagem">postado 20 março 2022</span>
+                <img width="620px" src="img/img10.webp">
+                <p>
+                    Deixe sua sugestão, reclamação, agradecimento, fale conosco.
+                </p>
+                <a href="">Ver mais</a>
+            </div>
+            <!--// Fechamento postagem -->
 
-				<br>
-				<input type="button" value="Enviar">
-				<br>
-			</div>
+            <!--Abertura postagem -->
+            <div class="postagem">
+                <h2>Agradecemos por visitar nossa página.</h2>
+                <span class="data-postagem">postado 10 março 2022</span>
+                <img width="620px" src="img/img11.jpg">
+                <p>
+                    Fale conosco na caixa abaixo.
+                </p>
+                <a href="">Ver mais</a>
+                <br>
 
-			<!--// Fechamento postagem -->
-		</div>
+                <input type="text" name="sugestao">
 
-		<div id="area-lateral">
-			<div class="conteudo-lateral">
-				<h3>Postagens recentes</h3>
-				<div class="postagem-lateral">
-					<p>O Market Bank é para você ter </p>
-					<a href="">Ver mais</a>
-				</div>
+                <br>
+                <input type="button" value="Enviar">
+                <br>
+            </div>
 
-				<div class="postagem-lateral" style="border-bottom: none;">
-					<p>Produtos em destaque</p>
-					<a href="">Ver mais</a>
-				</div>
-			</div>
+            <!--// Fechamento postagem -->
+        </div>
 
-			<div class="conteudo-lateral">
-				<h3>Categorias</h3>
+        <div id="area-lateral">
+            <div class="conteudo-lateral">
+                <h3>Postagens recentes</h3>
+                <div class="postagem-lateral">
+                    <p>O Market Bank é para você ter </p>
+                    <a href="">Ver mais</a>
+                </div>
 
-				<a href="">Comidas</a><br>
-				<a href="">Bebidas</a><br>
-				<a href="">Limpeza</a><br>
-				<a href="">Frutas/Legumes/Verduras</a><br>
-				<a href="">Congelados</a><br>
+                <div class="postagem-lateral" style="border-bottom: none;">
+                    <p>Produtos em destaque</p>
+                    <a href="">Ver mais</a>
+                </div>
+            </div>
 
-			</div>
+            <div class="conteudo-lateral">
+                <h3>substituir</h3>
 
-		</div>
+                <a href="">substituir</a><br>
+                <a href="">substituir</a><br>
+                <a href="">substituir</a><br>
+                <a href="">substituir</a><br>
+                <a href="">substituir</a><br>
+
+            </div>
+
+        </div>
 
 
-		<div id="rodape">
-		&copy Todos os direitos reservados
-		</div>
+        <div id="rodape">
+            &copy Todos os direitos reservados
+        </div>
 
-	</div>
+    </div>
 
 </body>
 

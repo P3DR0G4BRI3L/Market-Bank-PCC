@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS marketbank;
+CREATE DATABASE marketbank; 
+USE marketbank;
+
 -- Tabela Usuario
 CREATE TABLE usuario (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
@@ -12,7 +16,8 @@ CREATE TABLE mercado (
     id_mercado INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     endereco VARCHAR(255) NOT NULL,
-    horarioFunc TIME NOT NULL,
+    horarioAbert TIME NOT NULL,
+    horarioFecha TIME NOT NULL,
     telefone INT NOT NULL,
     cnpj  VARCHAR(20)NOT NULL,
     id_dono INT,

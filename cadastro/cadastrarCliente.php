@@ -1,3 +1,8 @@
+<?php
+function usuarioEstaLogado():bool {
+    return isset($_SESSION['usuario']);
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -18,8 +23,11 @@
 		</div>
 		<div id="area-menu">
 			<a href="../index.php">Home</a>
-			<a href="../home/mercados.php">Mercados</a>
-			<a href="../home/sessoes.php">Sessões</a>
+
+			<?php if(usuarioEstaLogado()): ?>
+            <a href="mercados.php">Mercados</a>
+             <?php endif ?> 
+
 			<a href="../home/contato.php">Contato</a>
 			<a href="../home/fale.php">Fale Conosco</a>
 
@@ -35,15 +43,23 @@
 				<p>
 				<div class="container">
 					<div class="login-box">
-						<form action="cadastro.php" method="POST">
+						<form action="cadastroC.php" method="POST">
+							
 							<div class="input-group">
-								<label for="username">Usuário:</label>
-								<input type="email" id="username" name="username" required>
+								<label for="nome">Nome:</label>
+								<input type="text" id="nome" name="nome" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
 							</div>
+							
 							<div class="input-group">
-								<label for="password">Senha:</label>
-								<input type="password" id="password" name="password" required>
+								<label for="email">Email:</label>
+								<input type="email" id="email" name="email" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
 							</div>
+							
+							<div class="input-group">
+								<label for="senha">Senha:</label>
+								<input type="password" id="senha" name="senha" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+							</div>
+							<button class="btn_left" onclick="window.history.back()">Voltar</button>
 							<button type="submit">Entrar</button>
 						</form>
 					</div>

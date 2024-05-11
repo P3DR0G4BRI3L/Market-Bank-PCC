@@ -1,4 +1,44 @@
 <?php
+session_start();
+
+// Conexão com o banco de dados
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "marketbank";
+
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Verifica a conexão
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+
+$email = $_POST['email'];
+$senha = $_POST['senha'];
+
+$sqlLog = "SELECT * FROM `usuario` WHERE email = '$email' AND senha = '$senha' AND tipo = 'dono';";
+
+$resultado = $conn->query($sqlLog);
+
+if($resultado->num_rows>0){
+    echo "<script>alert(Login realizado com sucesso);</script>";
+    $_SESSION['usuario'] = $resultado->fetch_assoc();
+    header("Location:../index.php");
+    exit;
+}else{
+    $default="Usuário ou senha incorretos";
+}
+// echo"<pre>";
+// var_dump($_SESSION['usuario']);
+// var_dump($email);
+// var_dump($senha);
+
+$conn->close();
+
+
+
 function usuarioEstaLogado():bool {
     return isset($_SESSION['usuario']);
 }
@@ -39,15 +79,15 @@ function usuarioEstaLogado():bool {
 		<div id="area-postagens">
 			<!--Aberturac -->
 			<div class="postagem">
-				<h2>Área de login</h2>
+				<h2><?=$default?></h2>
 				<p>
 				<div class="cadastro_option">
 					<div class="login-box">
 
-						<button class="btn_left" onclick="window.location.href='../index.php' ">Voltar</button>
-						<button onclick="window.location.href = 'loginCliente.php'">Cliente</button>
-						<button onclick="window.location.href = 'loginMercado.php'">Mercado</button>
-						<br>
+						 <button class="btn_left" onclick="window.location.href='loginMercado.php'">Voltar</button>
+						<!--<button onclick="window.location.href = 'cadastrarCliente.php'">Cliente</button>
+						<button onclick="window.location.href = 'cadastrarMercado.php'">Mercado</button>
+						<br> -->
 						
 
 						</form>
@@ -81,3 +121,4 @@ function usuarioEstaLogado():bool {
 </body>
 
 </html>
+

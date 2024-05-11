@@ -1,3 +1,9 @@
+<?php
+function usuarioEstaLogado(): bool
+{
+	return isset($_SESSION['usuario']);
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -18,8 +24,11 @@
 		</div>
 		<div id="area-menu">
 			<a href="../index.php">Home</a>
-			<a href="../home/mercados.php">Mercados</a>
-			<a href="../home/sessoes.php">Sessões</a>
+
+			<?php if (usuarioEstaLogado()): ?>
+				<a href="mercados.php">Mercados</a>
+			<?php endif ?>
+
 			<a href="../home/contato.php">Contato</a>
 			<a href="../home/fale.php">Fale Conosco</a>
 
@@ -35,41 +44,54 @@
 				<p>
 				<div class="container">
 					<div class="login-box">
-						<form action="" method="POST">
+						<form action="cadastroM.php" method="POST">
 
 							<div class="input-group">
 								<label for="username">E-mail:</label>
-								<input type="email" id="username" name="username" required>
+								<input type="email" id="username" name="email"
+									onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
 							</div>
 
 							<div class="input-group">
 								<label for="nome">Nome:</label>
-								<input type="text" id="nome" name="nome" required>
+								<input type="text" id="nome" name="nome"
+									onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
 							</div>
-                            
-                            <div class="input-group">
+
+							<div class="input-group">
 								<label for="cnpj">CNPJ:</label>
-								<input type="text" id="cnpj" name="cnpj" required maxlength="14">
+								<input type="text" id="cnpj" name="cnpj"
+									onkeydown="if(event.keyCode === 13) event.preventDefault()" required maxlength="14">
 							</div>
 
 							<div class="input-group">
 								<label for="endereco">Endereço:</label>
-								<input type="text" id="endereco" name="endereco" required>
+								<input type="text" id="endereco" name="endereco"
+									onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
 							</div>
-                            
+
+
 							<div class="input-group">
-                                <label for="horarioFunc">Horario de abertura:</label>
-								<input type="time" id="horarioFunc" name="horarioFuncAbertura" required>
+								<label for="horarioFunc">Horário de abertura:&nbsp;</label>
+								<input type="time" id="horarioFunc" name="horarioAbert"
+									onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
 
-                                <label for="horarioFunc">Horario de fechamento:</label>
-								<input type="time" id="horarioFunc" name="horarioFuncFecha" required>
+								<label for="horarioFunc">Horário de fechamento:</label>
+								<input type="time" id="horarioFunc" name="horarioFecha" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
 							</div>
 
-                            <div class="input-group">
+
+							<div class="input-group">
 								<label for="telefone">Telefone:</label>
-								<input type="tel" id="telefone" name="telefone" required maxlength="11">
+								<input type="tel" id="telefone" name="telefone" onkeydown="if(event.keyCode === 13) event.preventDefault()" required maxlength="11">
 							</div>
 
+							<div class="input-group">
+								<label for="senha">Senha:</label>
+								<input type="password" id="senha" name="senha" onkeydown="if(event.keyCode === 13) event.preventDefault()" required maxlength="11">
+							</div>
+
+							<button class="btn_left" onclick="window.history.back()">Voltar</button>
 
 							<button type="submit">Entrar</button>
 

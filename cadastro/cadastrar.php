@@ -1,3 +1,8 @@
+<?php
+function usuarioEstaLogado():bool {
+    return isset($_SESSION['usuario']);
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -18,8 +23,11 @@
 		</div>
 		<div id="area-menu">
 			<a href="../index.php">Home</a>
-			<a href="../home/mercados.php">Mercados</a>
-			<a href="../home/sessoes.php">Sessões</a>
+
+			<?php if(usuarioEstaLogado()): ?>
+            <a href="mercados.php">Mercados</a>
+             <?php endif ?> 
+			 
 			<a href="../home/contato.php">Contato</a>
 			<a href="../home/fale.php">Fale Conosco</a>
 
@@ -35,10 +43,13 @@
 				<p>
 				<div class="cadastro_option">
 					<div class="login-box">
+
+						<button class="btn_left" onclick="window.history.back()">Voltar</button>
+						<button onclick="window.location.href = 'cadastrarCliente.php'">Cliente</button>
+						<button onclick="window.location.href = 'cadastrarMercado.php'">Mercado</button>
+						<br>
 						
-						
-							<button  onclick="window.location.href = 'cadastrarCliente.php'">Cliente</button>
-							<button  onclick="window.location.href = 'cadastrarMercado.php'">Mercado</button>
+
 						</form>
 					</div>
 				</div>

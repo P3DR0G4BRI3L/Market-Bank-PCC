@@ -11,7 +11,10 @@ body {
 }
 
 /* Layout */
-
+.aviso-login{
+	font-weight: 500;
+	color: #e6e6e6;
+}
 #area-cabecalho {
 	background-color: rgb(34, 141, 34);
 	padding: 15px;
@@ -146,6 +149,11 @@ h3 {
 .sugestao{
 	width: 100%;
 }
-.hidden{
-	display: none;
+.postagem2{
+	color: rgb(9, 82, 9);
+	padding: 20px;
+	text-align: center;
+}
+html{
+	scroll-behavior: smooth;
 }

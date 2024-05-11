@@ -38,6 +38,10 @@ body {
 	gap: 5px;
 	justify-content: end;
 }
+#area-menu{
+	gap: 5px;
+}
+
 #area-cabecalho #area-menu a:hover{
 	background-color: #F7800F;
 	border-radius: 5px;
@@ -132,6 +136,7 @@ a{
 .sugestao{
 	width: 100%;
 }
+
 .cadastro_option {
     display: flex;
     justify-content: center;
@@ -202,3 +207,8 @@ button:hover {
     background-color: #d66800;
 	color: black;
 }
+.cadastro_option .login-box .btn_left{
+	justify-content: left;
+}
+
+

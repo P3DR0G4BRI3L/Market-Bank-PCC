@@ -13,11 +13,15 @@ if ($conn->connect_error) {
 }
 
 // Obtem os dados do formulário
-$username = $_POST['username'];
-$password = $_POST['password'];
+$nome = $_POST['nome'];
+$email = $_POST['email'];
+$senha = $_POST['senha'];
+$tipo = 1 ;
 
 // Insere os dados na tabela de usuários
-$sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
+$sql = "INSERT INTO usuario (nome, email, senha) 
+VALUES 
+('$nome', '$email', '$senha')";
 
 if ($conn->query($sql) === TRUE) {
      // Usuário autenticado com sucesso

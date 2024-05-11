@@ -1,3 +1,13 @@
+<?php
+session_start();
+function usuarioEstaLogado():bool {
+    return isset($_SESSION['usuario']);
+}
+
+if(usuarioEstaLogado()){
+	$userlog=ucwords($_SESSION['usuario']['nome']);
+	}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -5,27 +15,39 @@
 	<title>Market Bank Supermercados</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="script/script.js"></script>
 
 </head>
 
 <body>
 
 	<div id="area-cabecalho">
-
+	<?php if(usuarioEstaLogado()): ?>
+<p class="aviso-login">Seja bem vindo&nbsp;<?= $userlog;  ?></p>
+<?php endif ?>
 		<!-- abertura postagem -->
 		<div id="area-logo">
 			<img src="home/img/logo.png" alt="logo">
 		</div>
 		<div id="area-menu">
 			<a href="index.php">Home</a>
-			<a href="home/mercados.php">Mercados</a>
-			<a href="home/sessoes.php">Sessões</a>
+
+			 <?php if(usuarioEstaLogado()): ?>
+				<a href="home/mercados.php">Mercados</a>
+				 <?php endif ?> 
+
 			<a href="home/contato.php">Contato</a>
 			<a href="home/fale.php">Fale Conosco</a>
 			
 				<div class="cadastro_login_right">
-					<a href="cadastro/cadastrar.php">Cadastrar</a>
-					<a href="cadastro/login.php">Login</a>
+				<?php if(!usuarioEstaLogado()): ?>
+                <a href="cadastro/cadastrar.php">Cadastrar</a>
+                <a href="cadastro/login.php">Login</a>
+                <?php endif ?>
+
+				<?php if(usuarioEstaLogado()): ?>
+				<a href="cadastro/logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
+				<?php endif ?>
 				</div>
 				
 		</div>
@@ -76,13 +98,13 @@
 			</div>
 
 			<div class="conteudo-lateral">
-				<h3>Categorias</h3>
+				<h3>substituir</h3>
 
-				<a href="">Comidas</a><br>
-				<a href="">Bebidas</a><br>
-				<a href="">Limpeza</a><br>
-				<a href="">Frutas/Legumes/Verduras</a><br>
-				<a href="">Congelados</a><br>
+				<a href="">substituir</a><br>
+				<a href="">substituir</a><br>
+				<a href="">substituir</a><br>
+				<a href="">substituir</a><br>
+				<a href="">substituir</a><br>
 
 			</div>
 
