@@ -3,6 +3,7 @@ function usuarioEstaLogado(): bool
 {
 	return isset($_SESSION['usuario']);
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,7 +12,18 @@ function usuarioEstaLogado(): bool
 	<title>Market Bank Supermercados</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/cadastro.css">
+	<script>
+        window.onload = function() {
+            // Obtém a referência para o input específico
+            var input = document.getElementById('senha');
 
+            // Adiciona um ouvinte de eventos para o evento de foco (quando o input recebe o foco)
+            input.addEventListener('focus', function() {
+                // Rola a tela para baixo para o input específico
+                this.scrollIntoView();
+            });
+        };
+    </script>
 </head>
 
 <body>
@@ -44,37 +56,44 @@ function usuarioEstaLogado(): bool
 				<p>
 				<div class="container">
 					<div class="login-box">
-						<form action="cadastroM.php" method="POST">
+						<form action="cadastroM.php" method="POST" enctype="multipart/form-data" >
 
 							<div class="input-group">
 								<label for="username">E-mail:</label>
+								
 								<input type="email" id="username" name="email"
-									onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+									onkeydown="if(event.keyCode === 13) event.preventDefault()" placeholder="Insira seu email"required>
 							</div>
 
 							<div class="input-group">
-								<label for="nome">Nome:</label>
+								<label for="nome">Nome do proprietário:</label>
 								<input type="text" id="nome" name="nome"
-									onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+									onkeydown="if(event.keyCode === 13) event.preventDefault()" placeholder="Insira seu nome"required>
+							</div>
+
+							<div class="input-group">
+								<label for="nome">Nome do Mercado:</label>
+								<input type="text" id="nome" name="nome_mercado"
+									onkeydown="if(event.keyCode === 13) event.preventDefault()" placeholder="Insira o nome do mercado" required>
 							</div>
 
 							<div class="input-group">
 								<label for="cnpj">CNPJ:</label>
 								<input type="text" id="cnpj" name="cnpj"
-									onkeydown="if(event.keyCode === 13) event.preventDefault()" required maxlength="14">
+									onkeydown="if(event.keyCode === 13) event.preventDefault()" required placeholder="Insira seu CNPJ" maxlength="14">
 							</div>
 
 							<div class="input-group">
 								<label for="endereco">Endereço:</label>
 								<input type="text" id="endereco" name="endereco"
-									onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+									onkeydown="if(event.keyCode === 13) event.preventDefault()" placeholder="Insira o endereço" required>
 							</div>
 
 
 							<div class="input-group">
 								<label for="horarioFunc">Horário de abertura:&nbsp;</label>
 								<input type="time" id="horarioFunc" name="horarioAbert"
-									onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+									onkeydown="if(event.keyCode === 13) event.preventDefault()"  required>
 
 								<label for="horarioFunc">Horário de fechamento:</label>
 								<input type="time" id="horarioFunc" name="horarioFecha" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
@@ -83,15 +102,21 @@ function usuarioEstaLogado(): bool
 
 							<div class="input-group">
 								<label for="telefone">Telefone:</label>
-								<input type="tel" id="telefone" name="telefone" onkeydown="if(event.keyCode === 13) event.preventDefault()" required maxlength="11">
+								<input type="tel" id="telefone" name="telefone" onkeydown="if(event.keyCode === 13) event.preventDefault()" required placeholder="Insira o telefone para contato"
+								 maxlength="11">
 							</div>
 
 							<div class="input-group">
 								<label for="senha">Senha:</label>
-								<input type="password" id="senha" name="senha" onkeydown="if(event.keyCode === 13) event.preventDefault()" required maxlength="11">
+								<input type="password" id="senha" name="senha" onkeydown="if(event.keyCode === 13) event.preventDefault()" required placeholder="Insira sua senha">
 							</div>
 
-							<button class="btn_left" onclick="window.history.back()">Voltar</button>
+							<div class="input-group">
+								<label for="imagem">Foto do supermercado:</label>
+								<input type="file" id="imagem" name="imagem" onkeydown="if(event.keyCode === 13) event.preventDefault()" required placeholder="faça upload de uma foto do mercado">
+							</div>
+
+							<button class="btn_left" onclick="window.location.href='cadastrar.php'">Voltar</button>
 
 							<button type="submit">Entrar</button>
 
@@ -100,18 +125,7 @@ function usuarioEstaLogado(): bool
 				</div>
 				</p>
 			</div>
-			<!--// Fechamento postagem -->
-
-			<!--Abertura postagem -->
-			<div class="postagem">
-				<h2>Explore.</h2>
-				<span class="data-postagem">postado 10 março 2022</span>
-				<p>
-					O Market Bank foi criado na intenção de informar os clientes de produtos que os mesmos desejam.
-				</p>
-				<a href="">Ver mais</a>
-			</div>
-			<!--// Fechamento postagem -->
+			
 		</div>
 
 

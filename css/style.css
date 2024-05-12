@@ -63,7 +63,7 @@ body {
 
 .postagem {
 	padding: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 50px;
 	background: white;
 }
 .conteudo-lateral {
@@ -156,4 +156,94 @@ h3 {
 }
 html{
 	scroll-behavior: smooth;
+}
+
+
+
+
+
+
+
+
+/*basjabdiabdsuijdhsuids*/
+cadastro_option {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+	
+    /* height: 100vh; */
+}
+
+.login-box {
+	margin: 0 auto;
+    background-color: #fff;
+    /* padding: 0px 0px; */
+    border-radius: 5px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    text-align: center; /* Centraliza o texto */
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: center; /* Centraliza o conteúdo do grupo */
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    text-align: left;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="time"],
+input[type="tel"],
+input[type="file"],
+input[type="number"] {
+    width: 100%; /* Faz os inputs ocuparem 100% da largura */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Garante que o padding não afete a largura total */
+}
+
+button[type="submit"] {
+	font-size: 18px;
+    width: 25%;
+    padding: 10px;
+    background-color: #F7800F;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+	margin-bottom: 5px;
+}
+button{
+	font-size: 18px;
+    padding: 10px;
+    background-color: #F7800F;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+	margin-bottom: 5px;
+}
+
+button:hover {
+    background-color: #d66800;
+	color: black;
+}
+.cadastro_option .login-box .btn_left{
+	justify-content: left;
+}
+
+.postagem .btn_ud{
+margin: 30px auto;
+align-items: center;
+justify-content: center;
 }

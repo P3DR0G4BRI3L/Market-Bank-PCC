@@ -173,7 +173,9 @@ input[type="email"],
 input[type="password"],
 input[type="text"],
 input[type="time"],
-input[type="tel"] {
+input[type="tel"],
+input[type="file"],
+input[type="number"] {
     width: 100%; /* Faz os inputs ocuparem 100% da largura */
     padding: 10px;
     border: 1px solid #ccc;
@@ -209,6 +211,9 @@ button:hover {
 }
 .cadastro_option .login-box .btn_left{
 	justify-content: left;
+}
+input[type="file"]{
+	
 }
 
 

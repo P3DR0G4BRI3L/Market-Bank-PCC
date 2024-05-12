@@ -1,12 +1,34 @@
 <?php
+
+require_once 'cadastro/cadastro.php';
 session_start();
-function usuarioEstaLogado():bool {
-    return isset($_SESSION['usuario']);
+function usuarioEstaLogado(): bool
+{
+	return isset($_SESSION['usuario']);
+}
+function mercadoEstaLogado()
+{
+	if (isset($_SESSION['usuario'])) {
+		return $_SESSION['usuario']['tipo'] == 'dono';
+	}
 }
 
-if(usuarioEstaLogado()){
-	$userlog=ucwords($_SESSION['usuario']['nome']);
+if (usuarioEstaLogado()) {
+	$userlog = ucwords($_SESSION['usuario']['nome']);
+}
+
+// se o usuario estiver logado, armazena o nome dele em $userlog, //se o tipo for dono, armazena o nome do mercado dentro de $mercName
+
+if (usuarioEstaLogado()) {
+	$userlog = $_SESSION['usuario']['nome'];
+	if ($_SESSION['usuario']['tipo'] == 'dono') {
+		$mercName = $_SESSION['usuario']['id_usuario'];
+		$mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$mercName'");
+		$infmercado = $mercado->fetch_assoc();
+
 	}
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,9 +44,20 @@ if(usuarioEstaLogado()){
 <body>
 
 	<div id="area-cabecalho">
-	<?php if(usuarioEstaLogado()): ?>
-<p class="aviso-login">Seja bem vindo&nbsp;<?= $userlog;  ?></p>
-<?php endif ?>
+
+		<!-- só é mostrado se o usuario estiver logado -->
+		<?php if (usuarioEstaLogado()): ?>
+
+			<p class="aviso-login">Seja bem vindo&nbsp;<?= $userlog; ?></p>
+
+			<!-- só mostra se for um mercado que estiver logado, mostra o nome do mercado -->
+			<?php if (mercadoEstaLogado()): ?>
+				<p class="aviso-login">Você está logado no mercado:&nbsp;<?= $infmercado['nomeMerc']; ?></p>
+			<?php endif ?>
+
+		<?php endif ?>
+
+
 		<!-- abertura postagem -->
 		<div id="area-logo">
 			<img src="home/img/logo.png" alt="logo">
@@ -32,24 +65,35 @@ if(usuarioEstaLogado()){
 		<div id="area-menu">
 			<a href="index.php">Home</a>
 
-			 <?php if(usuarioEstaLogado()): ?>
+			<?php if (usuarioEstaLogado()): ?>
 				<a href="home/mercados.php">Mercados</a>
-				 <?php endif ?> 
+			<?php endif ?>
 
 			<a href="home/contato.php">Contato</a>
 			<a href="home/fale.php">Fale Conosco</a>
-			
-				<div class="cadastro_login_right">
-				<?php if(!usuarioEstaLogado()): ?>
-                <a href="cadastro/cadastrar.php">Cadastrar</a>
-                <a href="cadastro/login.php">Login</a>
-                <?php endif ?>
 
-				<?php if(usuarioEstaLogado()): ?>
-				<a href="cadastro/logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
+			<div class="cadastro_login_right">
+				<?php if (!usuarioEstaLogado()): ?>
+					<a href="cadastro/cadastrar.php">Cadastrar</a>
+					<a href="cadastro/login.php">Login</a>
 				<?php endif ?>
-				</div>
-				
+
+
+
+				<?php if (mercadoEstaLogado()): ?>
+					<a href="cadastro/addprod.php">Adicionar produto</a>
+				<?php endif ?>
+
+				<?php if (mercadoEstaLogado()): ?>
+					<a href="cadastro/verMeuMercado.php">Visualizar perfil</a>
+				<?php endif ?>
+
+				<?php if (usuarioEstaLogado()): ?>
+					<a href="cadastro/logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
+				<?php endif ?>
+			</div>
+
+
 		</div>
 	</div>
 
@@ -114,7 +158,7 @@ if(usuarioEstaLogado()){
 
 
 		<div id="rodape">
-		&copy Todos os direitos reservados
+			&copy Todos os direitos reservados
 		</div>
 
 	</div>
@@ -122,3 +166,10 @@ if(usuarioEstaLogado()){
 </body>
 
 </html>
+
+<?php echo "<pre>";
+var_dump($_SESSION['usuario']);
+echo "<hr>";
+var_dump($infmercado);
+
+?>

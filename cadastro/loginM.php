@@ -14,7 +14,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
 $email = $_POST['email'];
 $senha = $_POST['senha'];
 
@@ -25,6 +24,8 @@ $resultado = $conn->query($sqlLog);
 if($resultado->num_rows>0){
     echo "<script>alert(Login realizado com sucesso);</script>";
     $_SESSION['usuario'] = $resultado->fetch_assoc();
+    
+
     header("Location:../index.php");
     exit;
 }else{

@@ -43,9 +43,7 @@ function usuarioEstaLogado():bool {
 				<p>
 				<div class="container">
 					<div class="login-box">
-						<form action="cadastro.php" method="POST">
-							
-							
+						<form action="loginC.php" method="POST">
 							
 							<div class="input-group">
 								<label for="email">Email:</label>
@@ -53,11 +51,12 @@ function usuarioEstaLogado():bool {
 							</div>
 							
 							<div class="input-group">
-								<label for="password">Senha:</label>
-								<input type="password" id="password" name="password" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+								<label for="senha">Senha:</label>
+								<input type="password" id="senha" name="senha" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
 							</div>
-							<button class="btn_left" onclick="window.history.back()">Voltar</button>
+							<button class="btn_left" onclick="window.location.href='login.php'">Voltar</button>
 							<button type="submit">Entrar</button>
+                            
 						</form>
 					</div>
 				</div>
@@ -65,16 +64,7 @@ function usuarioEstaLogado():bool {
 			</div>
 			<!--// Fechamento postagem -->
 
-			<!--Abertura postagem -->
-			<div class="postagem">
-				<h2>Explore.</h2>
-				<span class="data-postagem">postado 10 março 2022</span>
-				<p>
-					O Market Bank foi criado na intenção de informar os clientes de produtos que os mesmos desejam.
-				</p>
-				<a href="">Ver mais</a>
-			</div>
-			<!--// Fechamento postagem -->
+			
 		</div>
 
 

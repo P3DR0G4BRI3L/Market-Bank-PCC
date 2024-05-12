@@ -16,12 +16,22 @@ if ($conn->connect_error) {
 $nome = $_POST['nome'];
 $email = $_POST['email'];
 $senha = $_POST['senha'];
-$tipo = 1 ;
+ ;
+
+ $sqlverify = "SELECT * FROM usuario WHERE email = '$email';";
+ $result = $conn->query($sqlverify);
+ if($result->num_rows>0){
+     echo "<script>
+             alert('O email inserido já está em uso');
+             window.location.href = 'cadastrarCliente.php';
+           </script>";
+     exit;
+ }
 
 // Insere os dados na tabela de usuários
-$sql = "INSERT INTO usuario (nome, email, senha) 
+$sql = "INSERT INTO usuario (nome, email, senha, tipo) 
 VALUES 
-('$nome', '$email', '$senha')";
+('$nome', '$email', '$senha', 'cliente');";
 
 if ($conn->query($sql) === TRUE) {
      // Usuário autenticado com sucesso
@@ -34,4 +44,4 @@ if ($conn->query($sql) === TRUE) {
 
 
 $conn->close();
-?>
+

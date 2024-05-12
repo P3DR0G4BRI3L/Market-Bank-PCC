@@ -1,5 +1,5 @@
 <?php
-
+require_once '../cadastro/cadastro.php';
 session_start();
 function usuarioEstaLogado()
 {
@@ -7,6 +7,21 @@ function usuarioEstaLogado()
 }
 if (usuarioEstaLogado()) {
     $userlog = ucwords($_SESSION['usuario']['nome']);
+}
+function mercadoEstaLogado()
+{
+    if (isset($_SESSION['usuario'])) {
+        return $_SESSION['usuario']['tipo'] == 'dono';
+    }
+}
+if (usuarioEstaLogado()) {
+    $userlog = $_SESSION['usuario']['nome'];
+    if ($_SESSION['usuario']['tipo'] == 'dono') {
+        $mercName = $_SESSION['usuario']['id_usuario'];
+        $mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$mercName'");
+        $infmercado = $mercado->fetch_assoc();
+
+    }
 }
 ?>
 
@@ -24,13 +39,21 @@ if (usuarioEstaLogado()) {
 <body>
 
     <div id="area-cabecalho">
+
         <?php if (usuarioEstaLogado()): ?>
             <p class="aviso-login">Seja bem vindo&nbsp;<?= $userlog; ?></p>
+
+            <?php if (mercadoEstaLogado()): ?>
+                <p class="aviso-login">Você está logado no mercado:&nbsp;<?= $infmercado['nomeMerc']; ?></p>
+            <?php endif ?>
+
         <?php endif ?>
+
         <!-- abertura postagem -->
         <div id="area-logo">
             <img src="img/logo.png" alt="logo">
         </div>
+
         <div id="area-menu">
             <a href="../index.php">Home</a>
 
@@ -45,6 +68,16 @@ if (usuarioEstaLogado()) {
                 <?php if (!usuarioEstaLogado()): ?>
                     <a href="../cadastro/cadastrar.php">Cadastrar</a>
                     <a href="../cadastro/login.php">Login</a>
+                <?php endif ?>
+
+
+
+                <?php if (mercadoEstaLogado()): ?>
+                    <a href="../cadastro/addprod.php">Adicionar produto</a>
+                <?php endif ?>
+
+                <?php if (mercadoEstaLogado()): ?>
+                    <a href="../cadastro/verMeuMercado.php">Visualizar perfil</a>
                 <?php endif ?>
 
                 <?php if (usuarioEstaLogado()): ?>

@@ -12,22 +12,20 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Obtem os dados do formulário
-$username = $_POST['username'];
-$password = $_POST['password'];
+
 
 // Insere os dados na tabela de usuários
-$sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
+// $sql = "SELECT * FROM mercado WHERE ";
 
-if ($conn->query($sql) === TRUE) {
-     // Usuário autenticado com sucesso
-     echo "<script>alert('Cadastro realizado com sucesso!');</script>";
-    echo "<script>window.location.href = '../index.php';</script>";
-     exit; // Certifique-se de sair do script após o redirecionamento
-} else {
-    echo "Erro ao cadastrar: " . $conn->error;
-}
+// if ($conn->query($sql) === TRUE) {
+//      // Usuário autenticado com sucesso
+//      echo "<script>alert('Cadastro realizado com sucesso!');</script>";
+//     echo "<script>window.location.href = '../index.php';</script>";
+//      exit; // Certifique-se de sair do script após o redirecionamento
+// } else {
+//     echo "Erro ao cadastrar: " . $conn->error;
+// }
 
 
-$conn->close();
-?>
+// $conn->close();
+// ?>

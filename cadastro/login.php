@@ -4,7 +4,7 @@ function usuarioEstaLogado():bool {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang = "pt-br">
 
 <head>
 	<title>Market Bank Supermercados</title>
@@ -31,6 +31,11 @@ function usuarioEstaLogado():bool {
 			<a href="../home/contato.php">Contato</a>
 			<a href="../home/fale.php">Fale Conosco</a>
 
+			<div class="cadastro_login_right">
+                <?php if (!usuarioEstaLogado()): ?>
+                    <a href="../cadastro/cadastrar.php">Cadastrar</a>
+                    <a href="../cadastro/login.php">Login</a>
+                <?php endif ?> </div>
 		</div>
 	</div>
 

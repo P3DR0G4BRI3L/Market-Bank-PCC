@@ -1,13 +1,29 @@
 <?php
-
+require_once '../cadastro/cadastro.php';
 session_start();
 function usuarioEstaLogado(): bool
 {
     return isset($_SESSION['usuario']);
 }
+function mercadoEstaLogado()
+{
+    if(isset($_SESSION['usuario'])){
+        return $_SESSION['usuario']['tipo'] == 'dono';
+        }
+    }
 if(usuarioEstaLogado()){
 $userlog=ucwords($_SESSION['usuario']['nome']);
-}?>
+}
+if (usuarioEstaLogado()) {
+    $userlog = $_SESSION['usuario']['nome'];
+    if ($_SESSION['usuario']['tipo'] == 'dono') {
+        $mercName = $_SESSION['usuario']['id_usuario'];
+        $mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$mercName'");
+        $infmercado = $mercado->fetch_assoc();
+
+}
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -24,6 +40,11 @@ $userlog=ucwords($_SESSION['usuario']['nome']);
     <div id="area-cabecalho">
         <?php if (usuarioEstaLogado()): ?>
             <p class="aviso-login">Seja bem vindo&nbsp;<?= $userlog; ?></p>
+
+            <?php if (mercadoEstaLogado()): ?>
+				<p class="aviso-login">Você está logado no mercado:&nbsp;<?= $infmercado['nomeMerc']; ?></p>
+			<?php endif ?>
+
         <?php endif ?>
         <!-- abertura postagem -->
         <div id="area-logo">
@@ -41,12 +62,20 @@ $userlog=ucwords($_SESSION['usuario']['nome']);
 
             <div class="cadastro_login_right">
                 <?php if (!usuarioEstaLogado()): ?>
-                    <a href="../cadastro/cadastrar.php">Cadastrar</a>
+                    <a href="../cadastro/cadastrar.php">Cadastrar</a><!-- verifica se o usuario não está logado e mostra somente se ele não estiver logado-->
                     <a href="../cadastro/login.php">Login</a>
                 <?php endif ?>
 
+                <?php if (mercadoEstaLogado()): ?>
+					<a href="../cadastro/addprod.php">Adicionar produto</a><!-- verifica se o MERCADO está logado e mostra somente se ele estiver logado-->
+				<?php endif ?>
+
+				<?php if (mercadoEstaLogado()): ?>
+					<a href="../cadastro/verMeuMercado.php">Visualizar perfil</a><!-- verifica se o MERCADO está logado e mostra somente se ele estiver logado-->
+				<?php endif ?>
+
                 <?php if (usuarioEstaLogado()): ?>
-                    <a href="../cadastro/logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
+                    <a href="../cadastro/logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a><!-- verifica se o usuario está logado e mostra somente se ele estiver logado-->
                 <?php endif ?>
             </div>
 
