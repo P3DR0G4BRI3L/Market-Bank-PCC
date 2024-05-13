@@ -146,7 +146,7 @@ if (usuarioEstaLogado()) {
 						<button class="btn_ud" onclick="confirmarExclusaoMercado();">Excluir</button>
 
 						<button class="btn_ud" onclick="window.location.href = 'CRUD/read-prod.php'"> Ver Produtos</button>
-
+                        <button class='btn_left' type="submit" onclick="window.location.href='../index.php'">Voltar</button>
                 
             </div>
           

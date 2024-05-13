@@ -125,6 +125,7 @@ if (usuarioEstaLogado()) {
                     <input type="hidden" name="deleteperfil" value="<?= $infcliente['id_usuario']; ?>">
                     <button class='btn_left' type="submit">Excluir</button>
                 </form>
+                <button class='btn_left' type="submit" onclick="window.location.href='../index.php'">Voltar</button>
 
 
 

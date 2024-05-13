@@ -33,6 +33,15 @@ $sql = "INSERT INTO usuario (nome, email, senha, tipo)
 VALUES 
 ('$nome', '$email', '$senha', 'cliente');";
 
+//insere na tabela cliente id usuario
+// $conn->query($sql);
+// $infusuario = $conn->query("SELECT * FROM usuario WHERE email = '$email' ");
+// $id_usuario = $infusuario->fetch_assoc();
+// $id_usuariof = $id_usuario['id_usuario'];
+// $conn->query("INSERT INTO cliente (id_usuario) 
+// VALUES 
+// ('$id_usuariof');");
+
 if ($conn->query($sql) === TRUE) {
      // Usuário autenticado com sucesso
      echo "<script>alert('Cadastro realizado com sucesso!');</script>";
