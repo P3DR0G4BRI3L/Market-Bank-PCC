@@ -51,8 +51,11 @@ function usuarioEstaLogado():bool {
 					<div class="login-box">
 
 						<button class="btn_left" onclick="window.history.back()">Voltar</button>
+
+						
 						<button onclick="window.location.href = 'cadastrarCliente.php'">Cliente</button>
 						<button onclick="window.location.href = 'cadastrarMercado.php'">Mercado</button>
+
 						<br>
 						
 

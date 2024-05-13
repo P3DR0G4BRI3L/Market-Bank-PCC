@@ -16,7 +16,7 @@ function mercadoEstaLogado()
     return $_SESSION['usuario']['tipo'] == 'dono';
 }
 if (!usuarioEstaLogado()) {
-    echo "<script>alert(Você não tem permissão para acessar essa página);</script>";
+    echo "<script>alert('Você não tem permissão para acessar essa página');</script>";
     echo "<script>window.location.href='../index.php';</script>";
 }
 if (usuarioEstaLogado()) {
@@ -78,9 +78,7 @@ if (usuarioEstaLogado()) {
 
 
 
-            <?php if (mercadoEstaLogado()): ?>
-                <a href="addprod.php">Adicionar produto</a>
-            <?php endif ?>
+            
 
             <?php if (mercadoEstaLogado()): ?>
                 <a href="verMeuMercado.php">Visualizar perfil</a>
@@ -107,7 +105,7 @@ if (usuarioEstaLogado()) {
 
                 <div class="container">
 					<div class="login-box">
-						<form action=".php" method="POST" enctype="multipart/form-data">
+						<form action="CRUD/create-prod.php" method="POST" enctype="multipart/form-data">
 							
 							<div class="input-group">
 								<label for="nome">Nome do produto:</label>
@@ -116,14 +114,14 @@ if (usuarioEstaLogado()) {
 							
 							<div class="input-group">
 								<label for="preco">Preço:</label>
-								<input type="text" id="preco" name="preco" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+								<input type="number" id="preco" name="preco" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
 							</div>
 							
 							<div class="input-group">
 								<label for="senha">Foto do produto:</label>
-								<input type="file" id="senha" name="senha" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+								<input type="file" id="senha" name="imgprod" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
 							</div>
-							<button class="btn_left" onclick="window.history.back()">Voltar</button>
+							<button class="btn_left" onclick="window.location.href='CRUD/read-prod.php'">Voltar</button>
 							<button type="submit">Entrar</button>
 						</form>
 					</div>
@@ -137,12 +135,12 @@ if (usuarioEstaLogado()) {
         <div id="rodape">
             &copy Todos os direitos reservados
         </div>
-
     </div>
 
 </body>
 
 </html>
 <?php
+
 
 ?>

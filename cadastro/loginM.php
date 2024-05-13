@@ -22,7 +22,7 @@ $sqlLog = "SELECT * FROM `usuario` WHERE email = '$email' AND senha = '$senha' A
 $resultado = $conn->query($sqlLog);
 
 if($resultado->num_rows>0){
-    echo "<script>alert(Login realizado com sucesso);</script>";
+    echo "<script>alert('Login realizado com sucesso');</script>";
     $_SESSION['usuario'] = $resultado->fetch_assoc();
     
 
@@ -122,4 +122,3 @@ function usuarioEstaLogado():bool {
 </body>
 
 </html>
-

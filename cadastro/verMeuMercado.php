@@ -19,12 +19,9 @@ if (!usuarioEstaLogado()) {
     echo "<script>alert(Você não tem permissão para acessar essa página);</script>";
     echo "<script>window.location.href='../index.php';</script>";
 }
-if (usuarioEstaLogado()) {
-    $userlog = ucwords($_SESSION['usuario']['nome']);
-}
 
 if (usuarioEstaLogado()) {
-    $userlog = $_SESSION['usuario']['nome'];
+    $userlog = ucwords($_SESSION['usuario']['nome']);
     if ($_SESSION['usuario']['tipo'] == 'dono') {
         $mercName = $_SESSION['usuario']['id_usuario'];
         $mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$mercName'");
@@ -42,9 +39,18 @@ if (usuarioEstaLogado()) {
     <title>Mercados</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <style>
-        
-    </style>
+    <script>
+    function confirmarExclusaoMercado() {
+        // Exibe uma mensagem de confirmação
+        if (confirm("Tem certeza que deseja excluir este mercado?\n Todos os seus produtos serão excluídos")) {
+            // Se o usuário confirmar, redireciona para a página de exclusão
+            window.location.href = 'CRUD/delete-mercado.php';
+        } else {
+            // Se o usuário cancelar, não faz nada
+            return false;
+        }
+    }
+</script>
 </head>
 
 <body>
@@ -57,7 +63,7 @@ if (usuarioEstaLogado()) {
 
             <!-- só mostra se for um mercado que estiver logado, mostra o nome do mercado -->
             <?php if (mercadoEstaLogado()): ?>
-                <p class="aviso-login">Você está logado no mercado&nbsp;<?= $infmercado['nomeMerc']; ?></p>
+                <p class="aviso-login">Você está logado no mercado:&nbsp;<?= ucwords($infmercado['nomeMerc']); ?></p>
             <?php endif ?>
 
         <?php endif ?>
@@ -78,11 +84,9 @@ if (usuarioEstaLogado()) {
 
 
 
-            <?php if (mercadoEstaLogado()): ?>
-                <a href="addprod.php">Adicionar produto</a>
-            <?php endif ?>
+            
 
-            <?php if (mercadoEstaLogado()): ?>
+            <?php if (usuarioEstaLogado()): ?>
                 <a href="verMeuMercado.php">Visualizar perfil</a>
             <?php endif ?>
 
@@ -99,118 +103,53 @@ if (usuarioEstaLogado()) {
     <div id="area-principal">
 
         <div id="area-postagens">
+<?php        if ($_SESSION['usuario']['tipo']=='cliente' || !usuarioEstaLogado()) { // se  for cliente ou alguem que não te login, é barrado
+                ?>
+                <div class="postagem">
+                    <link rel="stylesheet" href="../css/cadastro.css">
+                    <h2>Você não tem permissão para acessar essa página</h2>
+                    
+
+                    <div class="login-box"><button class='btn_left' onclick="window.location.href='../index.php'; ">Voltar</button></div>
+
+                </div>
+                <div id="rodape">
+                    &copy Todos os direitos reservados
+                </div>
+                <?php
+                exit;
+            }?>
             <!--Abertura postagem -->
             <div class="postagem">
+<?php
+            echo "<h2> " . ucwords($infmercado['nomeMerc']) . " </h2>"; //nome do mercado
+                
+                echo '<img src="../cadastro/uploads/' . $infmercado['imagem'] . '" alt="Imagem do mercado" width="620px">';
 
-                <h2><?= $infmercado['nomeMerc'] ?></h2>
-                <?php
-                echo '<img src="uploads/' . $infmercado['imagem'] . '" alt="Imagem do mercado" width="620px">';
-                ?>
 
-                <p>
-                    <?= $infmercado['endereco'] ?>
-                </p>
+                echo "<h2>" . ucwords($infmercado['endereco']) . "</h2>"; //endereço do mercado
+
+                echo "<h2>Aberto das " . date('H:i', strtotime($infmercado['horarioFecha'])) . "</h2>"; //endereço do mercado
+
+                echo "<h2> Até as " . date('H:i', strtotime($infmercado['horarioFecha'])) . "</h2>"; //endereço do mercado
+                
+                $telefone=$infmercado['telefone'];
+                $telefone_ =  substr($telefone, 0, 2) . ' ' . substr($telefone, 2, 1) . ' ' . substr($telefone, 3, 4) . '-' . substr($telefone, 7);
+                echo "<h2> telefone para contato: " . $telefone_ . "</h2>";
+
+                $cnpj = $infmercado['cnpj'];//formata cnpj para aparecer barra e ponto
+                $cnpj_ = $cnpj_formatado = substr($cnpj, 0, 2) . '.' . substr($cnpj, 2, 3) . '.' . substr($cnpj, 5, 3) . '/' . substr($cnpj, 8, 4) . '-' . substr($cnpj, 12, 2);
+                 
+                echo "<h2> CNPJ: " . $cnpj_ . "</h2>";
+?>
                         <button class="btn_ud" onclick="window.location.href='editarMercado'">Editar</button>
-						<button class="btn_ud" onclick="window.location.href = 'excluirMercado.php'">Excluir</button>
+						<button class="btn_ud" onclick="confirmarExclusaoMercado();">Excluir</button>
+
+						<button class="btn_ud" onclick="window.location.href = 'CRUD/read-prod.php'"> Ver Produtos</button>
+
                 
             </div>
-            <!--// Fechamento postagem -->
-
-            <!--Abertura postagem -->
-           
-            <hr>
-            <!--// Fechamento postagem -->
-
-            <!--Abertura postagem -->
-            <h2 class="postagem2">Sessões</h2>
-            <div class="postagem" id="paes">
-                <h2>Pães e Bolos</h2>
-                <span class="data-postagem">postado 20 março 2022</span>
-                <img width="400px" src="../home/img/pao.jpg">
-
-                <p>
-                    Pães, Bolos e Queijos.
-                </p>
-                <a href="">Ver mais</a>
-            </div>
-            <div class="postagem" id="bebidas">
-                <h2>Bebidas Alcoolicas.</h2>
-                <span class="data-postagem">postado 20 março 2022</span>
-                <img width="400px" src="../home/img/img5.webp">
-
-                <p>
-                    Cervejas,Vinhos e Destilados.
-                </p>
-                <a href="">Ver mais</a>
-            </div>
-            <div class="postagem" id="bebidas2">
-                <h2>Refrigerantes.</h2>
-                <span class=" data-postagem">postado 10 março 2022</span>
-                <img width="400px" src="../home/img/img6.webp">
-                <p>
-                    Coca Cola, Sprite, Fanta, Cola etc.
-                </p>
-                <a href="">Ver mais</a>
-            </div>
-            <div class="postagem" id="fvl">
-                <h2>Frutas, Legumes e Verduras.</h2>
-                <span class="data-postagem">postado 10 março 2022</span>
-                <img width="400px" src="../home/img/img7.jpg">
-                <p>
-                    Maçã, Melancia, Berinjela, Alface etc.
-                </p>
-                <a href="">Ver mais</a>
-            </div>
-            <div class="postagem" id="limpeza">
-                <h2 href="">Produtos de limpeza</h2>
-                <span class="data-postagem">postado 10 março 2022</span>
-                <img width="400px" src="../home/img/img8.jpg">
-                <p>
-                    Vassouras, Desinfetantes, Sabão, Detergente etc.
-                </p>
-                <a href="">Ver mais</a>
-            </div>
-            <div class="postagem" id="frios">
-                <h2>Congelados</h2>
-                <span class="data-postagem">postado 10 março 2022</span>
-                <img width="400px" src="../home/img/img9.avif">
-                <p>
-                    Hamburguer, Lasanha, Pizza, Frango etc.
-                </p>
-                <a href="">Ver mais</a>
-            </div>
-            <!-- // Fechamento postagem -->
-        </div>
-
-        <div id="area-lateral">
-            <div class="conteudo-lateral">
-                <h3>Postagens recentes</h3>
-                <div class="postagem-lateral">
-                    <p>O Market Bank é para você ter </p>
-                    <a href="">Ver mais</a>
-                </div>
-
-                <div class="postagem-lateral" style="border-bottom: none;">
-                    <p>Produtos em destaque</p>
-                    <a href="">Ver mais</a>
-                </div>
-            </div>
-
-            <div class="conteudo-lateral">
-                <h3>Categorias/Sessões</h3>
-
-                <a href="#paes">Pães e Bolos</a><br>
-                <a href="#bebidas">Bebidas Alcoolicas</a><br>
-                <a href="#bebidas2">Bebidas sem alcool</a><br>
-                <a href="#limpeza">Limpeza</a><br>
-                <a href="#fvl">Frutas/Legumes/Verduras</a><br>
-                <a href="#frios">Congelados</a><br>
-
-            </div>
-
-        </div>
-
-
+          
         <div id="rodape">
             &copy Todos os direitos reservados
         </div>
@@ -221,5 +160,4 @@ if (usuarioEstaLogado()) {
 
 </html>
 <?php
-var_dump($_SESSION['usuario']);
 ?>

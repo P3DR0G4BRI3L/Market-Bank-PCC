@@ -92,7 +92,8 @@ if ($conn->query($sqlUser) === TRUE) {
         VALUES
         ( '$nomeMercado', '$endereco', '$horarioAbert', '$horarioFecha', '$telefone', '$cnpj', '$nomeOriginal', '$id_usuario' );";
 
-        if ($conn->query($sqlMerc)) {
+    $connmerc = $conn->query($sqlMerc);
+        if ($connmerc) {
 
             echo "<script>alert('Cadastro realizado com sucesso!');</script>";
              echo "<script>window.location.href = '../index.php';</script>";

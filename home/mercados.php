@@ -1,26 +1,31 @@
 <?php
 require_once '../cadastro/cadastro.php';
 session_start();
+
+//verifica se tem algum usuário logado retorna true ou false
 function usuarioEstaLogado(): bool
 {
     return isset($_SESSION['usuario']);
 }
+
+
+
+//verifica se tem um cliente logado
+function clienteEstaLogado()
+{
+
+    return isset($_SESSION['usuario']) && $_SESSION['usuario']['tipo'] == 'cliente';
+}
+//verifica se um mercado está logado
 function mercadoEstaLogado()
 {
-    return $_SESSION['usuario']['tipo'] == 'dono';
-}
-if (!usuarioEstaLogado()) {
-    echo "<script>
-    alert(Você não tem permissão para acessar essa página);
-    window.location.href='../index.php';
-    </script>";
-}
-if (usuarioEstaLogado()) {
-    $userlog = ucwords($_SESSION['usuario']['nome']);
+    return isset($_SESSION['usuario']) && $_SESSION['usuario']['tipo'] == 'dono';
 }
 
+
+
 if (usuarioEstaLogado()) {
-    $userlog = $_SESSION['usuario']['nome'];
+    $userlog = ucwords($_SESSION['usuario']['nome']);
     if ($_SESSION['usuario']['tipo'] == 'dono') {
         $mercName = $_SESSION['usuario']['id_usuario'];
         $mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$mercName'");
@@ -75,9 +80,10 @@ if (usuarioEstaLogado()) {
 
 
 
-                <?php if (mercadoEstaLogado()): ?>
-                    <a href="../cadastro/addprod.php">Adicionar produto</a>
-                <?php endif ?>
+
+                <?php if (clienteEstaLogado()): ?>
+					<a href="../cadastro/verMeuCliente.php">Visualizar perfil</a>
+				<?php endif ?>
 
                 <?php if (mercadoEstaLogado()): ?>
                     <a href="../cadastro/verMeuMercado.php">Visualizar perfil</a>
@@ -91,30 +97,75 @@ if (usuarioEstaLogado()) {
         </div>
     </div>
 
+
+
     <div id="area-principal">
 
         <div id="area-postagens">
+
+
+            <?php
+            // o cabeçalho é mostrado em cima normal, porem, se a pessoa não estiver logada é criado uma div postagem e mostra pro usuário que ele não pode acessar essa pagina 
+            if (!usuarioEstaLogado()) {
+                ?>
+                <div class="postagem">
+                    <link rel="stylesheet" href="../css/cadastro.css">
+                    <h2>Você não tem permissão para acessar essa página</h2>
+                    <h2>Realize o cadastro</h2>
+
+                    <div class="login-box"><button class='btn_left' onclick="window.location.href='../index.php'; ">Voltar</button></div>
+
+                </div>
+                <div id="rodape">
+                    &copy Todos os direitos reservados
+                </div>
+                <?php
+                exit;
+            }
+
+            ?>
+
+
             <?php
             $result = $conn->query("SELECT * FROM mercado;");
             ?>
 
             <!--Abertura postagem -->
-            <?php if ($result->num_rows > 0){
-                while($row=$result->fetch_assoc()){?> 
-            <div class="postagem">
-                             
+
+            <!--lista os mercados, cada vez que o metodo fetch_all() é chamado ele armazena uma linha em $row e mostra dentro do laço while  -->
+            <?php if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) { ?>
+                    <div class="postagem">
+                    
                         <?php
-                        echo "<h2> ". $row['nomeMerc']." </h2>"; //nome do mercado
-
+                        
+                        
+                        
+                        echo "<h2> " . ucwords($row['nomeMerc']) . " </h2>"; //nome do mercado
+                
                         echo '<img src="../cadastro/uploads/' . $row['imagem'] . '" alt="Imagem do mercado" width="620px">';
-                        
-                            
-                        echo "<p>".$row['endereco']."</p>" //endereço do mercado
-                        
-                        ?>
 
-                <a href="">cliente ver mercado</a>
-            </div><?php }} ?>
+
+                        echo "<h2>" . $row['endereco'] . "</h2>"; //endereço do mercado
+
+                        echo "<h2>Aberto das " . date('H:i', strtotime($row['horarioFecha'])) . "</h2>"; //endereço do mercado
+
+                        echo "<h2> Até as " . date('H:i', strtotime($row['horarioFecha'])) . "</h2>"; //endereço do mercado
+                        
+                        echo "<h2> telefone para contato: " . $row['telefone'] . "</h2>";
+                        
+                
+                            ?>
+                        <?php if (clienteEstaLogado()): ?>
+                            <form action="../cadastro/CRUD/read-prod.php" method="POST">
+                                <input type="hidden" name="id_mercado" value="<?= $row['id_mercado']; ?>">
+                                <button class='btn_left' type="submit">Ver produtos</button>
+
+                            </form>
+                        <?php endif ?>
+                    </div><?php }    
+                    
+            } ?>
             <hr>
             <!--// Fechamento postagem -->
 
@@ -219,7 +270,7 @@ if (usuarioEstaLogado()) {
 </html>
 <?php
 echo "<pre>";
-var_dump($result);
-$listmercfinal = $result->fetch_assoc();
-var_dump($listmercfinal);
+// var_dump($result);
+// $listmercfinal = $result->fetch_assoc();
+// var_dump($listmercfinal);
 ?>

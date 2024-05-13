@@ -11,11 +11,17 @@ function mercadoEstaLogado()
         return $_SESSION['usuario']['tipo'] == 'dono';
         }
     }
+    function clienteEstaLogado()
+{
+	if (isset($_SESSION['usuario'])) {
+		return $_SESSION['usuario']['tipo'] == 'cliente';
+	}
+}   
 if(usuarioEstaLogado()){
 $userlog=ucwords($_SESSION['usuario']['nome']);
 }
 if (usuarioEstaLogado()) {
-    $userlog = $_SESSION['usuario']['nome'];
+    $userlog = ucwords($_SESSION['usuario']['nome']);
     if ($_SESSION['usuario']['tipo'] == 'dono') {
         $mercName = $_SESSION['usuario']['id_usuario'];
         $mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$mercName'");
@@ -66,10 +72,10 @@ if (usuarioEstaLogado()) {
                     <a href="../cadastro/login.php">Login</a>
                 <?php endif ?>
 
-                <?php if (mercadoEstaLogado()): ?>
-					<a href="../cadastro/addprod.php">Adicionar produto</a><!-- verifica se o MERCADO está logado e mostra somente se ele estiver logado-->
+               
+                <?php if (clienteEstaLogado()): ?>
+					<a href="../cadastro/verMeuCliente.php">Visualizar perfil</a>
 				<?php endif ?>
-
 				<?php if (mercadoEstaLogado()): ?>
 					<a href="../cadastro/verMeuMercado.php">Visualizar perfil</a><!-- verifica se o MERCADO está logado e mostra somente se ele estiver logado-->
 				<?php endif ?>

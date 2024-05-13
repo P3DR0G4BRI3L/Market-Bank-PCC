@@ -47,7 +47,7 @@ function usuarioEstaLogado():bool {
 							
 							<div class="input-group">
 								<label for="email">Email:</label>
-								<input type="email" id="email" name="email" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+								<input type="email" id="email" name="email" onkeydown="if(event.keyCode === 13) event.preventDefault()" required autofocus>
 							</div>
 							
 							<div class="input-group">

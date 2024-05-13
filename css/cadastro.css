@@ -8,6 +8,7 @@ body {
 	font-size: 1em;
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 	background: #e6e6e6;
+	overflow-y: scroll; /* Sempre mostra a barra de rolagem vertical */
 }
 
 /* Layout */
@@ -91,6 +92,7 @@ body {
 	text-align: center;
 	padding: 15px;
 	background: #CCC;
+	width: 890px;
 }
 .postagem h2{
 	text-align: center;

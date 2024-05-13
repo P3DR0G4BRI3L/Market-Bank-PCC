@@ -13,14 +13,19 @@ function mercadoEstaLogado()
 	}
 }
 
-if (usuarioEstaLogado()) {
-	$userlog = ucwords($_SESSION['usuario']['nome']);
+function clienteEstaLogado()
+{
+	if (isset($_SESSION['usuario'])) {
+		return $_SESSION['usuario']['tipo'] == 'cliente';
+	}
 }
+
 
 // se o usuario estiver logado, armazena o nome dele em $userlog, //se o tipo for dono, armazena o nome do mercado dentro de $mercName
 
 if (usuarioEstaLogado()) {
-	$userlog = $_SESSION['usuario']['nome'];
+	
+	$userlog = ucwords($_SESSION['usuario']['nome']);
 	if ($_SESSION['usuario']['tipo'] == 'dono') {
 		$mercName = $_SESSION['usuario']['id_usuario'];
 		$mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$mercName'");
@@ -28,6 +33,8 @@ if (usuarioEstaLogado()) {
 
 	}
 }
+
+
 
 ?>
 <!DOCTYPE html>
@@ -52,7 +59,7 @@ if (usuarioEstaLogado()) {
 
 			<!-- só mostra se for um mercado que estiver logado, mostra o nome do mercado -->
 			<?php if (mercadoEstaLogado()): ?>
-				<p class="aviso-login">Você está logado no mercado:&nbsp;<?= $infmercado['nomeMerc']; ?></p>
+				<p class="aviso-login">Você está logado no mercado:&nbsp;<?= ucwords($infmercado['nomeMerc']); ?></p>
 			<?php endif ?>
 
 		<?php endif ?>
@@ -80,13 +87,15 @@ if (usuarioEstaLogado()) {
 
 
 
-				<?php if (mercadoEstaLogado()): ?>
-					<a href="cadastro/addprod.php">Adicionar produto</a>
+				
+
+				<?php if (clienteEstaLogado()): ?>
+					<a href="cadastro/verMeuCliente.php">Visualizar perfil</a>
 				<?php endif ?>
 
 				<?php if (mercadoEstaLogado()): ?>
-					<a href="cadastro/verMeuMercado.php">Visualizar perfil</a>
-				<?php endif ?>
+                    <a href="cadastro/verMeuMercado.php">Visualizar perfil</a>
+                <?php endif ?>
 
 				<?php if (usuarioEstaLogado()): ?>
 					<a href="cadastro/logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
@@ -168,8 +177,8 @@ if (usuarioEstaLogado()) {
 </html>
 
 <?php echo "<pre>";
-var_dump($_SESSION['usuario']);
-echo "<hr>";
-var_dump($infmercado);
+// print_r($_SESSION['usuario']);
+// echo "<hr>";
+// print_r($infmercado);
 
 ?>
