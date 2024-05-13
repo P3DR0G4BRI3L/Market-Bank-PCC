@@ -28,8 +28,19 @@ if (usuarioEstaLogado()) {
     if ($_SESSION['usuario']['tipo'] == 'cliente') {
         $clienteName = $_SESSION['usuario']['id_usuario'];
         $cliente = $conn->query("SELECT * FROM usuario WHERE id_usuario = '$clienteName'");
+        $infusuario = $cliente->fetch_assoc();
+        //armazena todas as informações do usuario logado na variavel $infusuario 
+    }
+}
+
+if (usuarioEstaLogado()) {
+    $userlog = $_SESSION['usuario']['nome'];
+    if ($_SESSION['usuario']['tipo'] == 'cliente') {
+        $clienteName = $_SESSION['usuario']['id_usuario'];
+        $cliente = $conn->query("SELECT * FROM cliente WHERE id_usuario = '$clienteName'");
         $infcliente = $cliente->fetch_assoc();
-        // 
+        // armazena todas as informações do cliente logado na variavel $infusuario 
+    
     }
 }
 
@@ -109,23 +120,28 @@ if (usuarioEstaLogado()) {
             <!--Abertura postagem -->
             <div class="postagem">
 
-                <h2>Seu nome: <?= ucwords($infcliente['nome']) ?></h2>
+                <h2>Seu nome: <?= ucwords($infusuario['nome']) ?></h2>
                 <?php
-                echo "<p>Seu email logado: " . $infcliente['email'] . "</p>";
+                echo "<p>Seu email logado: " . $infusuario['email'] . "</p>";
                 ?>
 
-
-                <button class="btn_ud" onclick="window.location.href='editarMercado'">Editar</button>
-
-
-
-
-
-                <form action="CRUD/delete-cliente.php" method="POST" onsubmit="return confirmarExclusaoCliente()">
-                    <input type="hidden" name="deleteperfil" value="<?= $infcliente['id_usuario']; ?>">
-                    <button class='btn_left' type="submit">Excluir</button>
+                <!-- redireciona  o usuario para para editar o perfil -->
+                <form action="CRUD/update-cliente.php" method="POST" onsubmit="return confirmarExclusaoCliente()">
+                    <input type="hidden" name="deleteperfil" value="<?= $infusuario['id_usuario']; ?>">
+                    <button class='btn_left' type="submit">Editar</button>
                 </form>
-                <button class='btn_left' type="submit" onclick="window.location.href='../index.php'">Voltar</button>
+
+
+
+                    <!-- redireciona  o usuario para para deletar o perfil -->
+                    <form action="CRUD/delete-cliente.php" method="POST" onsubmit="return confirmarExclusaoCliente()">
+                        <input type="hidden" name="deleteperfil" value="<?= $infusuario['id_usuario']; ?>">
+                        <input type="hidden" name="deletecliente" value="<?= $infcliente['id_usuario']; ?>">
+
+                        <input type="hidden" name="deleteperfil" value="<?= $infusuario['id_usuario']; ?>">
+                        <button class='btn_left' type="submit">Excluir</button>
+                    </form>
+                    <button class='btn_left' type="submit" onclick="window.location.href='../index.php'">Voltar</button>
 
 
 

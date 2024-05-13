@@ -20,6 +20,7 @@ $senha = $_POST['senha'];
 
 $sqlLog = "SELECT * FROM `usuario` WHERE email = '$email' AND senha = '$senha' AND tipo = 'cliente';";
 
+
 $resultado = $conn->query($sqlLog);
 
 if($resultado->num_rows>0){
