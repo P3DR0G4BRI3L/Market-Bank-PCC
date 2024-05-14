@@ -4,7 +4,7 @@ function usuarioEstaLogado():bool {
 }
 ?>
 <!DOCTYPE html>
-<html lang = "pt-br">
+<html>
 
 <head>
 	<title>Market Bank Supermercados</title>
@@ -27,15 +27,10 @@ function usuarioEstaLogado():bool {
 			<?php if(usuarioEstaLogado()): ?>
             <a href="mercados.php">Mercados</a>
              <?php endif ?> 
-			 
+             
 			<a href="../home/contato.php">Contato</a>
 			<a href="../home/fale.php">Fale Conosco</a>
 
-			<div class="cadastro_login_right">
-                <?php if (!usuarioEstaLogado()): ?>
-                    <a href="../cadastro/cadastrar.php">Cadastrar</a>
-                    <a href="../cadastro/login.php">Login</a>
-                <?php endif ?> </div>
 		</div>
 	</div>
 
@@ -44,17 +39,24 @@ function usuarioEstaLogado():bool {
 		<div id="area-postagens">
 			<!--Aberturac -->
 			<div class="postagem">
-				<h2>Área de login</h2>
+				<h2>Login</h2>
 				<p>
-				<div class="cadastro_option">
+				<div class="container">
 					<div class="login-box">
-
-						<button class="btn_left" onclick="window.location.href='../index.php' ">Voltar</button>
-						<button onclick="window.location.href = 'loginCliente.php'">Cliente</button>
-						<button onclick="window.location.href = 'loginMercado.php'">Mercado</button>
-						<br>
-						
-
+						<form action="logingeral.php" method="POST">
+							
+							<div class="input-group">
+								<label for="email">Email:</label>
+								<input type="email" id="email" name="email" onkeydown="if(event.keyCode === 13) event.preventDefault()" required autofocus>
+							</div>
+							
+							<div class="input-group">
+								<label for="senha">Senha:</label>
+								<input type="password" id="senha" name="senha" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+							</div>
+							<button class="btn_left" onclick="window.location.href='../index.php'">Voltar</button>
+							<button type="submit">Entrar</button>
+                            
 						</form>
 					</div>
 				</div>
@@ -62,16 +64,7 @@ function usuarioEstaLogado():bool {
 			</div>
 			<!--// Fechamento postagem -->
 
-			<!--Abertura postagem -->
-			<div class="postagem">
-				<h2>Explore.</h2>
-				<span class="data-postagem">postado 10 março 2022</span>
-				<p>
-					O Market Bank foi criado na intenção de informar os clientes de produtos que os mesmos desejam.
-				</p>
-				<a href="">Ver mais</a>
-			</div>
-			<!--// Fechamento postagem -->
+			
 		</div>
 
 

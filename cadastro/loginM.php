@@ -14,9 +14,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$email = $_POST['email'];
-$senha = $_POST['senha'];
-
+$email = $_SESSION['usuario']['email'];
+$senha = $_SESSION['usuario']['senha'];
 $sqlLog = "SELECT * FROM `usuario` WHERE email = '$email' AND senha = '$senha' AND tipo = 'dono';";
 
 $resultado = $conn->query($sqlLog);
@@ -85,7 +84,7 @@ function usuarioEstaLogado():bool {
 				<div class="cadastro_option">
 					<div class="login-box">
 
-						 <button class="btn_left" onclick="window.location.href='loginMercado.php'">Voltar</button>
+						 <button class="btn_left" onclick="window.location.href='login.php'">Voltar</button>
 						<!--<button onclick="window.location.href = 'cadastrarCliente.php'">Cliente</button>
 						<button onclick="window.location.href = 'cadastrarMercado.php'">Mercado</button>
 						<br> -->

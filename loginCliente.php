@@ -43,7 +43,7 @@ function usuarioEstaLogado():bool {
 				<p>
 				<div class="container">
 					<div class="login-box">
-						<form action="loginC.php" method="POST">
+						<form action="login.php" method="POST">
 							
 							<div class="input-group">
 								<label for="email">Email:</label>
