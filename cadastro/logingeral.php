@@ -18,19 +18,19 @@ if ($conn->connect_error) {
 $email = $_POST['email'];
 $senha = $_POST['senha'];
 
-$sqlLog = "SELECT * FROM `usuario` WHERE email = '$email' AND senha = '$senha';-- AND tipo = 'cliente';";
+$sqlLog = "SELECT * FROM `usuario` WHERE email = '$email' AND senha = '$senha';";
 
-if($conn->query($sqlLog)){
 $resultado = $conn->query($sqlLog);
-}
-$tipo = $resultado->fetch_assoc();
-var_dump($tipo);
-switch ($tipo['tipo']) {
+if($resultado && $resultado->num_rows>0 ){//se a query der certo E resultado (que se torna um objeto se a query der certo) tiver mais de 0 linhas, 
+
+$infoUser = $resultado->fetch_assoc(); //atribua todas as informações do usuario a variavel $infoUser, após isso, essa variavel se torna um array associativo com todas as informações do usuario
+    $tipo= $infoUser['tipo']; //variavel $tipo, recebe o tipo do usuario
+switch ($tipo) {
 
     case "cliente":
         if ($resultado->num_rows > 0) {
             echo "<script>alert('Login realizado com sucesso');</script>";
-            $_SESSION['usuario'] = $resultado->fetch_assoc();
+            $_SESSION['usuario'] = $infoUser;
             header("Location:loginC.php");
             exit;
         } else {
@@ -45,12 +45,13 @@ switch ($tipo['tipo']) {
     case "dono":
         if ($resultado->num_rows > 0) {
             echo "<script>alert('Login realizado com sucesso');</script>";
-            $_SESSION['usuario'] = $resultado->fetch_assoc();
+            $_SESSION['usuario'] = $infoUser;
             header("Location:loginM.php");
             exit;
         } else {
             $default = "Usuário ou senha incorretos";
         }
+        break;
 
 
 
@@ -59,25 +60,17 @@ switch ($tipo['tipo']) {
     case "administrador":
         if ($resultado->num_rows > 0) {
             echo "<script>alert('Login realizado com sucesso');</script>";
-            $_SESSION['usuario'] = $resultado->fetch_assoc();
+            $_SESSION['usuario'] = $infoUser;
             header("Location:../index.php");
             exit;
         } else {
             $default = "Usuário ou senha incorretos";
         }
+        break;
 
+}}else{
 
-
-
-
-
-
-
-
-
-
-
-
+    $default = "Usuário ou senha incorretos";
 
 }
 
@@ -131,15 +124,16 @@ function usuarioEstaLogado(): bool
 
         <div id="area-postagens">
             <!--Aberturac -->
+            
             <div class="postagem">
                 <h2>
-                 <?= $default;//mostra usuario ou senha incorretos ?>
+                 <?php if(isset($default)) echo"$default";//mostra usuario ou senha incorretos ?>
                 </h2>
                 <p>
                 <div class="cadastro_option">
                     <div class="login-box">
 
-                        <button class="btn_left" onclick="window.location.href='loginCliente.php'">Voltar</button>
+                        <button class="btn_left" onclick="window.location.href='login.php'">Voltar</button>
                         <!--<button onclick="window.location.href = 'cadastrarCliente.php'">Cliente</button>
                         <button onclick="window.location.href = 'cadastrarMercado.php'">Mercado</button>
                         <br> -->
@@ -150,6 +144,7 @@ function usuarioEstaLogado(): bool
                 </div>
                 </p>
             </div>
+            
             <!--// Fechamento postagem -->
 
             <!--Abertura postagem -->

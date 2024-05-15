@@ -2,19 +2,8 @@
 session_start();
 
 // Conexão com o banco de dados
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "marketbank";
-
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Verifica a conexão
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-
+require_once 'cadastro.php' ;
+var_dump($_SESSION);
 $email = $_SESSION['usuario']['email'];
 $senha = $_SESSION['usuario']['senha'];
 

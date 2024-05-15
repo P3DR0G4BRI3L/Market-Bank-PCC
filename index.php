@@ -1,5 +1,4 @@
 <?php
-
 require_once 'cadastro/cadastro.php';
 session_start();
 function usuarioEstaLogado(): bool

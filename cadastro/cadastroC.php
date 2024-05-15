@@ -49,7 +49,7 @@ if ($conn->query($sql) === TRUE) {
     if ($conn->query($sqlcliente) === TRUE)
         // Usuário autenticado com sucesso
         echo "<script>alert('Cadastro realizado com sucesso!');</script>";
-    echo "<script>window.location.href = '../index.php';</script>";
+    echo "<script>window.location.href = 'login.php';</script>";
     exit; // Certifique-se de sair do script após o redirecionamento
 } else {
     echo "Erro ao cadastrar: " . $conn->error;
