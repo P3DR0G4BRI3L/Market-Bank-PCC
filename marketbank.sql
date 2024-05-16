@@ -69,9 +69,9 @@ CREATE TABLE `mercado` (
 --
 
 INSERT INTO `mercado` (`id_mercado`, `nomeMerc`, `endereco`, `horarioAbert`, `horarioFecha`, `telefone`, `cnpj`, `imagem`, `id_dono`) VALUES
-(1, 'mercadin do predo', 'samambaia sul qr 514 logradouro 42 apartamento 12', '07:00:00', '22:00:00', 2147483647, '12345672345678', 'Leonardo_Diffusion_XL_crie_uma_imagem_de_fundo_de_um_site_de_r_0.jpg', 1),
-(2, 'buteco mercado do pedro', 'taguatinga norte qnh 13 conjunto 12 lote 9', '05:00:00', '23:00:00', 2147483647, '23232323232233', 'th.jpeg', 4),
-(3, 'americanas', 'samambaia norte qn213 conjunto 3 lote 14', '05:00:00', '21:00:00', 2147483647, '12234343235343', 'americanas.jpeg', 5);
+(1, 'mercado 1', 'samambaia sul qr 514 logradouro 42 apartamento 12', '07:00:00', '22:00:00', 2147483647, '12345672345678', 'Leonardo_Diffusion_XL_crie_uma_imagem_de_fundo_de_um_site_de_r_0.jpg', 1),
+(2, 'mercado 2', 'taguatinga norte qnh 13 conjunto 12 lote 9', '05:00:00', '23:00:00', 2147483647, '23232323232233', 'th.jpeg', 4),
+(3, 'mercado 3', 'samambaia norte qn213 conjunto 3 lote 14', '05:00:00', '21:00:00', 2147483647, '12234343235343', 'americanas.jpeg', 5);
 
 -- --------------------------------------------------------
 

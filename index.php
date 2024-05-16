@@ -165,6 +165,6 @@ if (usuarioEstaLogado()) {
 <?php echo "<pre>";
 // print_r($_SESSION['usuario']);
 // echo "<hr>";
-print_r($infmercado);
+// print_r($infmercado);
 $conn = null;
 ?>

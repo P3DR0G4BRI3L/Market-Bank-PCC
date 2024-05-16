@@ -13,13 +13,13 @@ require_once 'cadastro.php';
 if ($_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
     // Diretório onde você deseja armazenar as imagens
     $diretorioDestino = 'C:\xampp\htdocs\Market-Bank\cadastro\uploads\\';
-
+    
     // Nome do arquivo original
     $imagem = $_FILES['imagem']['name'];
-
+    
     // Caminho completo para onde o arquivo será movido
     $caminhoDestino = $diretorioDestino . $imagem;
-
+    
     // Move o arquivo enviado para o diretório de destino
     if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminhoDestino)) {
         echo "Arquivo enviado com sucesso.";
@@ -84,12 +84,12 @@ if ($torf) {
         VALUES
         ( :nomeMerc, :endereco, :horarioAbert, :horarioFecha, :telefone, :cnpj, :imagem, :id_dono );";
 
-    $connmerc = $conn->prepare($sqlMerc);//salva/prepara a consulta sql para ser executada
+    $connmerc = $conn->prepare($sqlMerc);// salva/prepara a consulta sql para ser executada
     $connmerc->bindValue(':nomeMerc',$nomeMerc,PDO::PARAM_STR);//substitui os parametros pelo valor inserido em bindValue
     $connmerc->bindValue(':endereco',$endereco,PDO::PARAM_STR);
-    $connmerc->bindValue(':horarioAbert',$horarioAbert,PDO::PARAM_INT);
-    $connmerc->bindValue(':horarioFecha',$horarioFecha,PDO::PARAM_INT);
-    $connmerc->bindValue(':telefone',$telefone,PDO::PARAM_INT);
+    $connmerc->bindValue(':horarioAbert',$horarioAbert);
+    $connmerc->bindValue(':horarioFecha',$horarioFecha);
+    $connmerc->bindValue(':telefone',$telefone);
     $connmerc->bindValue(':cnpj',$cnpj,PDO::PARAM_STR);
     $connmerc->bindValue(':imagem',$imagem,PDO::PARAM_STR);
     $connmerc->bindValue(':id_dono',$id_dono,PDO::PARAM_INT);

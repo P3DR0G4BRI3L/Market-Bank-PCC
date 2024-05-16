@@ -108,18 +108,16 @@ if (usuarioEstaLogado()) {
 <?php
             echo "<h2> " . ucwords($infmercado['nomeMerc']) . " </h2>"; //nome do mercado
                 
-                echo '<img src="../cadastro/uploads/' . $infmercado['imagem'] . '" alt="Imagem do mercado" width="620px">';
+                echo '<img src="uploads/' . $infmercado['imagem'] . '" alt="Imagem do mercado" width="620px">';
 
 
                 echo "<h2>" . ucwords($infmercado['endereco']) . "</h2>"; //endereço do mercado
 
-                echo "<h2>Aberto das " . date('H:i', strtotime($infmercado['horarioFecha'])) . "</h2>"; //endereço do mercado
+                echo "<h2>Aberto das " . date('H:i', strtotime($infmercado['horarioAbert'])) . "</h2>"; //endereço do mercado
 
                 echo "<h2> Até as " . date('H:i', strtotime($infmercado['horarioFecha'])) . "</h2>"; //endereço do mercado
                 
-                $telefone=$infmercado['telefone'];
-                $telefone_ =  substr($telefone, 0, 2) . ' ' . substr($telefone, 2, 1) . ' ' . substr($telefone, 3, 4) . '-' . substr($telefone, 7);
-                echo "<h2> telefone para contato: " . $telefone_ . "</h2>";
+                echo "<h2> telefone para contato: " . $infmercado['telefone'] . "</h2>";
 
                 $cnpj = $infmercado['cnpj'];//formata cnpj para aparecer barra e ponto
                 $cnpj_ = $cnpj_formatado = substr($cnpj, 0, 2) . '.' . substr($cnpj, 2, 3) . '.' . substr($cnpj, 5, 3) . '/' . substr($cnpj, 8, 4) . '-' . substr($cnpj, 12, 2);
