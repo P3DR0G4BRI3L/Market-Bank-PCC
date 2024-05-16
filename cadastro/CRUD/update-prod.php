@@ -1,23 +1,25 @@
 <?php 
 session_start();
 require_once '../cadastro.php';
+require_once '../../func/func.php';
 
-function usuarioEstaLogado(){
-    return isset($_SESSION['usuario']);
-}
 if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'dono') {
 
     //armazena todas as informações do mercado logado em $infmercado
     $mercName = $_SESSION['usuario']['id_usuario'];
-    $mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$mercName'");
-    $infmercado = $mercado->fetch_assoc();
+    $mercado = $conn->prepare("SELECT * FROM mercado WHERE id_dono = :mercName");
+    $mercado_>bindValue(':mercName',$mercName,PDO::PARAM_INT);
+
+    $infmercado = $mercado->fetch();
 
 
 }
 $id_produto = $_POST['updateprod'];
 $id_mercado = $infmercado['id_mercado'];
-$deleteprod = $conn->query("UPDATE produto SET nome = null , ';");
-if($deleteprod){
+
+$updateprod = $conn->query("UPDATE produto SET nome = null , ';");
+
+if($updateprod){
 echo "<script>
     alert('Produto alterado com sucesso');
     window.location.href='read-prod.php';
@@ -45,22 +47,6 @@ session_start();
 
 
 
-//verifica se tem um cliente logado
-function clienteEstaLogado()
-{
-
-    return isset($_SESSION['usuario']) && $_SESSION['usuario']['tipo'] == 'cliente';
-}
-//verifica se um mercado está logado
-function mercadoEstaLogado()
-{
-    return isset($_SESSION['usuario']) && $_SESSION['usuario']['tipo'] == 'dono';
-}
-
-if (usuarioEstaLogado()) {
-
-    $userlog = ucwords($_SESSION['usuario']['nome']);
-}
 
 if (usuarioEstaLogado()) {
     $userlog = ucwords($_SESSION['usuario']['nome']);
@@ -68,8 +54,9 @@ if (usuarioEstaLogado()) {
     if ($_SESSION['usuario']['tipo'] == 'dono') {
         $id_produto = $_POST['updateprod'];
         
-        $mercado = $conn->query("SELECT * FROM produto WHERE id_produto = '$id_produto'");
-        $infproduto = $mercado->fetch_assoc();
+        $mercado = $conn->prepare("SELECT * FROM produto WHERE id_produto = :id_produto");
+        $mercado->bindValue(':id_produto',$id_produto,PDO::PARAM_INT);
+        $infproduto = $mercado->fetch();
 
     }
 }
@@ -202,8 +189,8 @@ function confirmarExclusaoMercado() {
             <!--lista os produtos, cada vez que o metodo fetch_all() é chamado ele armazena uma linha em $row e mostra dentro do laço while  -->
             <?php 
             if(mercadoEstaLogado()){
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) { ?>
+            if ($result->rowCount() > 0) {
+                while ($row = $result->fetch()) { ?>
                     <div class="postagem">
 
                         <?php
@@ -238,8 +225,8 @@ function confirmarExclusaoMercado() {
             if(clienteEstaLogado()){
                 $id_mercado = $_POST['id_mercado'];
                $result= $conn->query("SELECT * FROM produto WHERE id_mercado = '$id_mercado' ");
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) { ?>
+            if ($result->rowCount() > 0) {
+                while ($row = $result->fetch()) { ?>
                     <div class="postagem">
 
                         <?php

@@ -1,37 +1,32 @@
 <?php
 session_start();
-
+require_once 'cadastro.php';
+require_once '../func/func.php';
 // Conexão com o banco de dados
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "marketbank";
 
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Verifica a conexão
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 
 $email = $_POST['email'];
 $senha = $_POST['senha'];
 
-$sqlLog = "SELECT * FROM `usuario` WHERE email = '$email' AND senha = '$senha';";
 
-$resultado = $conn->query($sqlLog);
-if($resultado && $resultado->num_rows>0 ){//se a query der certo E resultado (que se torna um objeto se a query der certo) tiver mais de 0 linhas, 
 
-$infoUser = $resultado->fetch_assoc(); //atribua todas as informações do usuario a variavel $infoUser, após isso, essa variavel se torna um array associativo com todas as informações do usuario
+$resultado = $conn->prepare("SELECT * FROM `usuario` WHERE email = :email AND senha = :senha;");
+$resultado->bindValue(':email',$email,PDO::PARAM_STR);
+$resultado->bindValue(':senha',$senha,PDO::PARAM_STR);
+$resultado->execute();
+
+if($resultado && $resultado->rowCount()>0 ){//se a query der certo E resultado (que se torna um objeto se a query der certo) tiver mais de 0 linhas, 
+
+$infoUser = $resultado->fetch(); //atribua todas as informações do usuario a variavel $infoUser, após isso, essa variavel se torna um array associativo com todas as informações do usuario
     $tipo= $infoUser['tipo']; //variavel $tipo, recebe o tipo do usuario
 switch ($tipo) {
 
     case "cliente":
-        if ($resultado->num_rows > 0) {
+        if ($resultado->rowCount() > 0) {
             echo "<script>alert('Login realizado com sucesso');</script>";
             $_SESSION['usuario'] = $infoUser;
-            header("Location:loginC.php");
+            header("Location:../index.php");
             exit;
         } else {
             $default = "Usuário ou senha incorretos";
@@ -43,10 +38,10 @@ switch ($tipo) {
 
 
     case "dono":
-        if ($resultado->num_rows > 0) {
+        if ($resultado->rowCount() > 0) {
             echo "<script>alert('Login realizado com sucesso');</script>";
             $_SESSION['usuario'] = $infoUser;
-            header("Location:loginM.php");
+            header("Location:../index.php");
             exit;
         } else {
             $default = "Usuário ou senha incorretos";
@@ -58,7 +53,7 @@ switch ($tipo) {
 
 
     case "administrador":
-        if ($resultado->num_rows > 0) {
+        if ($resultado->rowCount() > 0) {
             echo "<script>alert('Login realizado com sucesso');</script>";
             $_SESSION['usuario'] = $infoUser;
             header("Location:../index.php");
@@ -80,14 +75,10 @@ switch ($tipo) {
 // var_dump($email);
 // var_dump($senha);
 
-$conn->close();
 
 
 
-function usuarioEstaLogado(): bool
-{
-    return isset($_SESSION['usuario']);
-}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -171,3 +162,7 @@ function usuarioEstaLogado(): bool
 </body>
 
 </html>
+
+<?php
+$conn = null;
+?>

@@ -1,20 +1,15 @@
 <?php
 require_once 'cadastro.php';
+require_once '../func/func.php';
 
 session_start();
 
-function usuarioEstaLogado(): bool
-{
-    return isset($_SESSION['usuario']);
-}
+
 if (!usuarioEstaLogado()) {
     header('location:../index.php');
     exit;
 }
-function mercadoEstaLogado()
-{
-    return $_SESSION['usuario']['tipo'] == 'dono';
-}
+
 if (!usuarioEstaLogado()) {
     echo "<script>alert(Você não tem permissão para acessar essa página);</script>";
     echo "<script>window.location.href='../index.php';</script>";
@@ -26,9 +21,11 @@ if (usuarioEstaLogado()) {
 if (usuarioEstaLogado()) { //USUARIO
     $userlog = $_SESSION['usuario']['nome'];
     if ($_SESSION['usuario']['tipo'] == 'cliente') {
-        $clienteName = $_SESSION['usuario']['id_usuario'];
-        $cliente = $conn->query("SELECT * FROM usuario WHERE id_usuario = '$clienteName'");
-        $infusuario = $cliente->fetch_assoc();
+        $id_usuario = $_SESSION['usuario']['id_usuario'];
+        $usuario = $conn->prepare("SELECT * FROM usuario WHERE id_usuario = :id_usuario");
+        $usuario->bindValue(':id_usuario',$id_usuario,PDO::PARAM_INT);
+        $usuario->execute();
+        $infusuario = $usuario->fetch();
         //armazena todas as informações do usuario logado na variavel $infusuario 
     }
 }
@@ -36,9 +33,10 @@ if (usuarioEstaLogado()) { //USUARIO
 if (usuarioEstaLogado()) { //  CLIENTE
     $userlog = $_SESSION['usuario']['nome'];
     if ($_SESSION['usuario']['tipo'] == 'cliente') {
-        $clienteName = $_SESSION['usuario']['id_usuario'];
-        $cliente = $conn->query("SELECT * FROM cliente WHERE id_usuario = '$clienteName'");
-        $infcliente = $cliente->fetch_assoc();
+        $id_cliente = $_SESSION['usuario']['id_usuario'];
+        $cliente = $conn->prepare("SELECT * FROM cliente WHERE id_usuario = :id_cliente");
+        $cliente->bindValue(':id_cliente',$id_cliente,PDO::PARAM_INT);
+        $infcliente = $cliente->fetch();
         // armazena todas as informações do cliente logado na variavel $infusuario 
     
     }
@@ -158,4 +156,5 @@ if (usuarioEstaLogado()) { //  CLIENTE
 
 </html>
 <?php
+$conn = null;
 ?>

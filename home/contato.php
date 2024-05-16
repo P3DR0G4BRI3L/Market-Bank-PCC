@@ -1,31 +1,18 @@
 <?php
 require_once '../cadastro/cadastro.php';
+require_once '../func/func.php';
+
 session_start();
-function usuarioEstaLogado()
-{
-    return isset($_SESSION['usuario']);
-}
+
 if (usuarioEstaLogado()) {
     $userlog = ucwords($_SESSION['usuario']['nome']);
-}
-function mercadoEstaLogado()
-{
-    if (isset($_SESSION['usuario'])) {
-        return $_SESSION['usuario']['tipo'] == 'dono';
-    }
-}
-function clienteEstaLogado()
-{
-	if (isset($_SESSION['usuario'])) {
-		return $_SESSION['usuario']['tipo'] == 'cliente';
-	}
-}
-if (usuarioEstaLogado()) {
-    $userlog = ucwords($_SESSION['usuario']['nome']);
+
     if ($_SESSION['usuario']['tipo'] == 'dono') {
         $mercName = $_SESSION['usuario']['id_usuario'];
-        $mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$mercName'");
-        $infmercado = $mercado->fetch_assoc();
+        $mercado=$conn->prepare("SELECT * FROM mercado WHERE id_dono = :id_dono");
+        $mercado->bindValue(':id_dono',$mercName,PDO::PARAM_INT);
+        $mercado->execute();
+        $infmercado = $mercado->fetch();
 
     }
 }
@@ -156,3 +143,6 @@ if (usuarioEstaLogado()) {
 </body>
 
 </html>
+<?php
+$conn=null;
+?>

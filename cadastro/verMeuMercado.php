@@ -1,20 +1,16 @@
 <?php
 require_once 'cadastro.php';
+require_once '../func/func.php';
+
 
 session_start();
 
-function usuarioEstaLogado(): bool
-{
-    return isset($_SESSION['usuario']);
-}
+
 if(!usuarioEstaLogado()){
     header('location:../index.php');
     exit;
 }
-function mercadoEstaLogado()
-{
-    return $_SESSION['usuario']['tipo'] == 'dono';
-}
+
 if (!usuarioEstaLogado()) {
     echo "<script>alert(Você não tem permissão para acessar essa página);</script>";
     echo "<script>window.location.href='../index.php';</script>";
@@ -22,10 +18,13 @@ if (!usuarioEstaLogado()) {
 
 if (usuarioEstaLogado()) {
     $userlog = ucwords($_SESSION['usuario']['nome']);
+
     if ($_SESSION['usuario']['tipo'] == 'dono') {
         $mercName = $_SESSION['usuario']['id_usuario'];
-        $mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$mercName'");
-        $infmercado = $mercado->fetch_assoc();
+        $mercado=$conn->prepare("SELECT * FROM mercado WHERE id_dono = :id_dono");
+        $mercado->bindValue(':id_dono',$mercName,PDO::PARAM_STR);
+        $mercado->execute();
+        $infmercado = $mercado->fetch();
 
     }
 }
@@ -42,7 +41,7 @@ if (usuarioEstaLogado()) {
     <script>
     function confirmarExclusaoMercado() {
         // Exibe uma mensagem de confirmação
-        if (confirm("Tem certeza que deseja excluir este mercado?\n Todos os seus produtos serão excluídos")) {
+        if (confirm("Tem certeza que deseja excluir seu perfil como mercado?\n Todos os seus produtos serão excluídos")) {
             // Se o usuário confirmar, redireciona para a página de exclusão
             window.location.href = 'CRUD/delete-mercado.php';
         } else {
@@ -103,22 +102,7 @@ if (usuarioEstaLogado()) {
     <div id="area-principal">
 
         <div id="area-postagens">
-<?php        if ($_SESSION['usuario']['tipo']=='cliente' || !usuarioEstaLogado()) { // se  for cliente ou alguem que não te login, é barrado
-                ?>
-                <div class="postagem">
-                    <link rel="stylesheet" href="../css/cadastro.css">
-                    <h2>Você não tem permissão para acessar essa página</h2>
-                    
 
-                    <div class="login-box"><button class='btn_left' onclick="window.location.href='../index.php'; ">Voltar</button></div>
-
-                </div>
-                <div id="rodape">
-                    &copy Todos os direitos reservados
-                </div>
-                <?php
-                exit;
-            }?>
             <!--Abertura postagem -->
             <div class="postagem">
 <?php
@@ -160,4 +144,5 @@ if (usuarioEstaLogado()) {
 
 </html>
 <?php
+$conn = null;
 ?>

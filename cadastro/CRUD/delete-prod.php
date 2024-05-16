@@ -1,22 +1,30 @@
 <?php 
 session_start();
 require_once '../cadastro.php';
+require_once '../../func/func.php';
 
-function usuarioEstaLogado(){
-    return isset($_SESSION['usuario']);
-}
+
 if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'dono') {
 
     
     $mercName = $_SESSION['usuario']['id_usuario'];
-    $mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$mercName'");
-    $infmercado = $mercado->fetch_assoc();
+    $mercado = $conn->prepare("SELECT * FROM mercado WHERE id_dono = :mercName");
+    $mercado->bindValue(':mercName',$mercName,PDO::PARAM_INT);
+    $mercado->execute();
+    $infmercado = $mercado->fetch();
 
 
 }
+
+
 $id_produto = $_POST['deleteprod'];
 $id_mercado = $infmercado['id_mercado'];
-$deleteprod = $conn->query("DELETE  FROM produto WHERE id_produto = '$id_produto' AND id_mercado = '$id_mercado';");
+
+$deleteprod = $conn->prepare("DELETE  FROM produto WHERE id_produto = :id_produto AND id_mercado = :id_mercado;");
+$deleteprod->bindValue(':id_produto',$id_produto,PDO::PARAM_INT);
+$deleteprod->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
+$deleteprod->execute();
+
 if($deleteprod){
 echo "<script>
     alert('Produto deletado com sucesso');

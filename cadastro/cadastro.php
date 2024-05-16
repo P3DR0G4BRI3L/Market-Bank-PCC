@@ -1,16 +1,17 @@
 <?php
-// Conexão com o banco de dados
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "marketbank";
 
-$conn = new mysqli($servername, $username, $password, $database);
+$dsn = "mysql:host=127.0.0.1;dbname=marketbank"  ;
+try{//tenta executar este trecho, se alguma exceção/erro for encontrada, pula pro bloco catch
+$conn = new PDO("$dsn","root","");
 
-// Verifica a conexão
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+$conn->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
+}catch(PDOException $erro){ //se alguma exceção do tipo PDOException for capturada, o bloco catch é executado e a variavel $erro se torna um objeto do tipo PDOException
+
+    echo "Falha na conexão:".$erro->getMessage();
+
 }
+
+
 
 
 

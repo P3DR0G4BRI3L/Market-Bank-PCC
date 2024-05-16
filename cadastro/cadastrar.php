@@ -1,7 +1,6 @@
 <?php
-function usuarioEstaLogado():bool {
-    return isset($_SESSION['usuario']);
-}
+require_once '../func/func.php';
+session_start()
 ?>
 <!DOCTYPE html>
 <html>

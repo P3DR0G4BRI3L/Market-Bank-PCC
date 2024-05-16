@@ -1,36 +1,23 @@
 <?php
 require_once 'cadastro/cadastro.php';
+require_once 'func/func.php';
 session_start();
-function usuarioEstaLogado(): bool
-{
-	return isset($_SESSION['usuario']);
-}
-function mercadoEstaLogado()
-{
-	if (isset($_SESSION['usuario'])) {
-		return $_SESSION['usuario']['tipo'] == 'dono';
-	}
-}
 
-function clienteEstaLogado()
-{
-	if (isset($_SESSION['usuario'])) {
-		return $_SESSION['usuario']['tipo'] == 'cliente';
-	}
-}
 
 
 // se o usuario estiver logado, armazena o nome dele em $userlog, //se o tipo for dono, armazena o nome do mercado dentro de $mercName
 
 if (usuarioEstaLogado()) {
-	
-	$userlog = ucwords($_SESSION['usuario']['nome']);
-	if ($_SESSION['usuario']['tipo'] == 'dono') {
-		$mercName = $_SESSION['usuario']['id_usuario'];
-		$mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$mercName'");
-		$infmercado = $mercado->fetch_assoc();
+    $userlog = ucwords($_SESSION['usuario']['nome']);
 
-	}
+    if ($_SESSION['usuario']['tipo'] == 'dono') {
+        $mercName = $_SESSION['usuario']['id_usuario'];
+        $mercado=$conn->prepare("SELECT * FROM mercado WHERE id_dono = :id_dono");
+        $mercado->bindValue(':id_dono',$mercName,PDO::PARAM_INT);
+        $mercado->execute();
+        $infmercado = $mercado->fetch();
+
+    }
 }
 
 
@@ -178,6 +165,6 @@ if (usuarioEstaLogado()) {
 <?php echo "<pre>";
 // print_r($_SESSION['usuario']);
 // echo "<hr>";
-// print_r($infmercado);
-
+print_r($infmercado);
+$conn = null;
 ?>

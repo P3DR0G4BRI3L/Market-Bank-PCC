@@ -6,3 +6,4 @@
     header('Location: ../index.php');
     
     exit();
+//encerra sessão

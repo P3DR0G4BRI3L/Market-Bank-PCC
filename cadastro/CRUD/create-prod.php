@@ -2,10 +2,11 @@
 <?php
 session_start();
  require_once '../../func/func.php';
+ require_once '../cadastro.php';
  // o cabeçalho é mostrado em cima normal, porem, se a pessoa não estiver logada é criado uma div postagem e mostra pro usuário que ele não pode acessar essa pagina 
  if (!usuarioEstaLogado()) {
      
-require_once '../cadastro.php';
+
 
 
 
@@ -14,25 +15,12 @@ require_once '../cadastro.php';
 
 
 
-//verifica se tem um cliente logado
-
-//verifica se um mercado está logado
 
 
-if (usuarioEstaLogado()) {
 
-    $userlog = ucwords($_SESSION['usuario']['nome']);
-}
 
-if (usuarioEstaLogado()) {
-    $userlog = $_SESSION['usuario']['nome'];
-    if ($_SESSION['usuario']['tipo'] == 'dono') {
-        $mercName = $_SESSION['usuario']['id_usuario'];
-        $mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$mercName'");
-        $infmercado = $mercado->fetch_assoc();
+//armazena as informações do mercado em $infmercado
 
-    }
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -126,12 +114,12 @@ if (usuarioEstaLogado()) {
  }
 
  
-session_start();
-require_once '../cadastro.php';
-require_once '../../func/func.php';
 
 
-// redirecionamento();
+
+
+
+
 
 if ($_FILES['imgprod']['error'] === UPLOAD_ERR_OK) {
     // Diretório onde você deseja armazenar as imagens
@@ -153,26 +141,41 @@ if ($_FILES['imgprod']['error'] === UPLOAD_ERR_OK) {
     echo "Erro no envio do arquivo: " . $_FILES['imgprod']['error'];
 }
 
-if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'dono') {
+// i
+if (usuarioEstaLogado()) {
+    $userlog = ucwords($_SESSION['usuario']['nome']);
 
-    $idDono = $_SESSION['usuario']['id_usuario'];
-    $mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$idDono'");
-    $infmercado = $mercado->fetch_assoc();
+    if ($_SESSION['usuario']['tipo'] == 'dono') {
+        $mercName = $_SESSION['usuario']['id_usuario'];
+        $mercado=$conn->prepare("SELECT * FROM mercado WHERE id_dono = :id_dono");
+        $mercado->bindValue(':id_dono',$mercName,PDO::PARAM_STR);
+        $mercado->execute();
+        $infmercado = $mercado->fetch();
 
-
+    }
 }
-$id_mercado = $infmercado['id_mercado'];
-$nomeprod = $_POST['nomeprod'];
-$preco = $_POST['preco'];
-$imagem = $_FILES['imgprod']['name'];
 
-$sqlprod = "INSERT INTO produto (nome, preco, fotoProduto, id_mercado)
-VALUES
-('$nomeprod', '$preco', '$imagem', '$id_mercado')
-";
-$conn->query($sqlprod);
+$nome = $_POST['nomeprod'];
+$preco = $_POST['preco'];
+$fotoProduto = $_FILES['imgprod']['name'];
+$id_mercado = $infmercado['id_mercado'];
+
+$sqlprod = "INSERT INTO produto (nome, preco, fotoProduto, id_mercado) VALUES (:nome, :preco, :fotoProduto, :id_mercado);";
+
+$stmt = $conn->prepare($sqlprod);
+$stmt->bindValue(':nome',$nome,PDO::PARAM_STR);
+$stmt->bindValue(':preco',$preco,PDO::PARAM_INT);
+$stmt->bindValue(':fotoProduto',$fotoProduto,PDO::PARAM_STR);
+$stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
+$stmt->execute();
+
+if($stmt){
 
 echo "<script>
     alert('Produto cadastrado com sucesso');
     window.location.href='read-prod.php';
 </script>";
+}else{
+    echo "Erro de conexão". $stmt->errorInfo();
+}
+$conn = null;

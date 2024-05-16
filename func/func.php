@@ -26,15 +26,18 @@ function redirecionamento()
     }
 }
 
-function armazenainfoMercado()
-{
-    if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'dono') {
-
-        require_once '../cadastro/cadastro.php';
-        $mercName = $_SESSION['usuario']['id_usuario'];
-        $mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$mercName'");
-        return $mercado->fetch_assoc();
-
-
-    }
-}
+// function armazenainfoMercado()
+// {
+//     if (usuarioEstaLogado()) {
+//         $userlog = ucwords($_SESSION['usuario']['nome']);
+    
+//         if ($_SESSION['usuario']['tipo'] == 'dono') {
+//             $mercName = $_SESSION['usuario']['id_usuario'];
+//             $mercado=$conn->prepare("SELECT * FROM mercado WHERE id_dono = :id_dono");
+//             $mercado->bindValue(':id_dono',$mercName,PDO::PARAM_STR);
+//             $mercado->execute();
+//             $infmercado = $mercado->fetch();
+    
+//         }
+//     }
+// }

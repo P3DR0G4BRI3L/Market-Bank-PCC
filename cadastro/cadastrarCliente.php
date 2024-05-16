@@ -1,7 +1,6 @@
 <?php
-function usuarioEstaLogado():bool {
-    return isset($_SESSION['usuario']);
-}
+require_once '../func/func.php';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,7 +9,7 @@ function usuarioEstaLogado():bool {
 	<title>Market Bank Supermercados</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/cadastro.css">
-
+	<script src="../script/script.js"></script>
 </head>
 
 <body>

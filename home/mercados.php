@@ -1,35 +1,21 @@
 <?php
 require_once '../cadastro/cadastro.php';
+require_once '../func/func.php';
 session_start();
 
 //verifica se tem algum usuário logado retorna true ou false
-function usuarioEstaLogado(): bool
-{
-    return isset($_SESSION['usuario']);
-}
-
-
-
-//verifica se tem um cliente logado
-function clienteEstaLogado()
-{
-
-    return isset($_SESSION['usuario']) && $_SESSION['usuario']['tipo'] == 'cliente';
-}
-//verifica se um mercado está logado
-function mercadoEstaLogado()
-{
-    return isset($_SESSION['usuario']) && $_SESSION['usuario']['tipo'] == 'dono';
-}
 
 
 
 if (usuarioEstaLogado()) {
     $userlog = ucwords($_SESSION['usuario']['nome']);
+
     if ($_SESSION['usuario']['tipo'] == 'dono') {
         $mercName = $_SESSION['usuario']['id_usuario'];
-        $mercado = $conn->query("SELECT * FROM mercado WHERE id_dono = '$mercName'");
-        $infmercado = $mercado->fetch_assoc();
+        $mercado=$conn->prepare("SELECT * FROM mercado WHERE id_dono = :id_dono");
+        $mercado->bindValue(':id_dono',$mercName,PDO::PARAM_INT);
+        $mercado->execute();
+        $infmercado = $mercado->fetch();
 
     }
 }
@@ -127,14 +113,15 @@ if (usuarioEstaLogado()) {
 
 
             <?php
-            $result = $conn->query("SELECT * FROM mercado;");
+            $result = $conn->prepare("SELECT * FROM mercado;");
+            $result->execute();
             ?>
 
             <!--Abertura postagem -->
 
             <!--lista os mercados, cada vez que o metodo fetch_all() é chamado ele armazena uma linha em $row e mostra dentro do laço while  -->
-            <?php if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) { ?>
+            <?php if ($result->rowCount() > 0) {
+                while ($row = $result->fetch()) { ?>
                     <div class="postagem">
                     
                         <?php
@@ -269,8 +256,9 @@ if (usuarioEstaLogado()) {
 
 </html>
 <?php
-echo "<pre>";
+// echo "<pre>";
 // var_dump($result);
 // $listmercfinal = $result->fetch_assoc();
 // var_dump($listmercfinal);
+$conn = null;
 ?>
