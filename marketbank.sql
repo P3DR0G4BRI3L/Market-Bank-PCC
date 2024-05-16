@@ -58,7 +58,7 @@ CREATE TABLE `mercado` (
   `endereco` varchar(255) NOT NULL,
   `horarioAbert` time NOT NULL,
   `horarioFecha` time NOT NULL,
-  `telefone` int(11) NOT NULL,
+  `telefone` varchar(11) NOT NULL,
   `cnpj` varchar(20) NOT NULL,
   `imagem` varchar(120) NOT NULL,
   `id_dono` int(11) DEFAULT NULL
