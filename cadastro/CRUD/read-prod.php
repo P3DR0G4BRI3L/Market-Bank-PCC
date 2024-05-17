@@ -3,15 +3,6 @@ require_once '../cadastro.php';
 require_once '../../func/func.php';
 session_start();
 
-//verifica se tem algum usuário logado retorna true ou false
-
-
-
-//verifica se tem um cliente logado
-//verifica se um mercado está logado
-
-
-
 
 //armazena as informações do mercado em $infmercado
 if (usuarioEstaLogado()) {
@@ -34,21 +25,10 @@ if (usuarioEstaLogado()) {
     <title>Mercados</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
-    <script>
+    <script src="../../script/script.js"></script>
 
 
-function confirmarExclusaoMercado() {
-    // Exibe uma mensagem de confirmação
-    if (confirm("Tem certeza que deseja excluir seu perfil?")) {
-        // Se o usuário confirmar, redireciona para a página de exclusão
-        window.location.href = 'CRUD/delete-cliente.php';
-        return true;
-    } else {
-        // Se o usuário cancelar, retorna false
-        return false;
-    }
-}
-</script>
+
 </head>
 
 <body>
@@ -164,7 +144,7 @@ function confirmarExclusaoMercado() {
                         <?php
                         echo "<h2> " . $row['nome'] . " </h2>"; //nome do produto
                 
-                        echo '<img src="../uploads/' . $row['fotoProduto'] . '" alt="Imagem do mercado" width="620px">';
+                        echo '<img src="../uploads/' . $row['fotoProduto'] . '" alt="Imagem do produto" width="620px">';
 
 
                         echo "<p>" . $row['preco'] . " reais</p>" //preço do produto
@@ -172,7 +152,7 @@ function confirmarExclusaoMercado() {
                             ?>
                         <div class="login-box">
  
-                            <form action="update-prod.phpp" method="POST">
+                            <form action="update-prod.php" method="POST">
                                 <input type="hidden" name="updateprod" value="<?= $row['id_produto']; ?>">
                                 <button class='btn_left' type="submit">Editar</button>
                             </form>

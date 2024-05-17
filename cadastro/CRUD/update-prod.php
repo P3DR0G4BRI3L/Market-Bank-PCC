@@ -1,65 +1,83 @@
-<?php 
+<?php
 session_start();
 require_once '../cadastro.php';
 require_once '../../func/func.php';
 
+if (usuarioEstaLogado()) {
+    $userlog = $_SESSION['usuario']['nome'];
+}
 if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'dono') {
 
     //armazena todas as informações do mercado logado em $infmercado
     $mercName = $_SESSION['usuario']['id_usuario'];
-    $mercado = $conn->prepare("SELECT * FROM mercado WHERE id_dono = :mercName");
-    $mercado_>bindValue(':mercName',$mercName,PDO::PARAM_INT);
-
+    $mercado = $conn->prepare("SELECT * FROM mercado WHERE id_dono = :mercName;");
+    $mercado->bindValue(':mercName', $mercName, PDO::PARAM_INT);
+    $mercado->execute();
     $infmercado = $mercado->fetch();
-
-
-}
-$id_produto = $_POST['updateprod'];
-$id_mercado = $infmercado['id_mercado'];
-
-$updateprod = $conn->query("UPDATE produto SET nome = null , ';");
-
-if($updateprod){
-echo "<script>
-    alert('Produto alterado com sucesso');
-    window.location.href='read-prod.php';
-</script>";
-}else{
-    echo "<script>
-    alert('ocorreu um erro');
-    window.location.href='read-prod.php';
-</script>";
     
-}
-echo"<pre>";
-// var_dump($_SESSION['usuario']);
-// var_dump($infmercado);
-//separação cima update, baixo inputs/formulario
-?>
-<?php
-require_once '../cadastro.php';
-
-session_start();
-
-//verifica se tem algum usuário logado retorna true ou false
 
 
-
-
-
-
-if (usuarioEstaLogado()) {
-    $userlog = ucwords($_SESSION['usuario']['nome']);
     $id_produto = $_POST['updateprod'];
-    if ($_SESSION['usuario']['tipo'] == 'dono') {
-        $id_produto = $_POST['updateprod'];
-        
-        $mercado = $conn->prepare("SELECT * FROM produto WHERE id_produto = :id_produto");
-        $mercado->bindValue(':id_produto',$id_produto,PDO::PARAM_INT);
-        $infproduto = $mercado->fetch();
 
+    $stmt = $conn->prepare("SELECT * FROM produto WHERE id_produto = :id_produto");
+    $stmt->bindValue(':id_produto', $id_produto, PDO::PARAM_INT);
+    $stmt->execute();
+    $infproduto = $stmt->fetch();
+
+}
+// var_dump($infmercado , $infproduto);
+
+//update do produto, enviado post nomeprod , preco , imgprod
+
+
+
+
+
+if (isset($_POST['nomeprod'], $_POST['preco']) && isset($_FILES['imgprod']) || isset($_POST['imgprod'])) {
+
+    if (isset($_FILES['imgprod']) &&  $_FILES['imgprod']['error'] === UPLOAD_ERR_OK) {
+        // Diretório onde você deseja armazenar as imagens
+        $diretorioDestino = 'C:\xampp\htdocs\Market-Bank\cadastro\uploads\\';
+        
+        // Nome do arquivo original
+        $imagem = $_FILES['imgprod']['name'];
+        
+        // Caminho completo para onde o arquivo será movido
+        $caminhoDestino = $diretorioDestino . $imagem;
+        
+        // Move o arquivo enviado para o diretório de destino
+        if (move_uploaded_file($_FILES['imgprod']['tmp_name'], $caminhoDestino)) {
+            echo "Arquivo enviado com sucesso.";
+        } else {
+            echo "Erro ao mover o arquivo para o diretório de destino.";
+        }
+    } else {
+        echo "Erro no envio do arquivo: " . $_FILES['imgprod']['error'];
+    }
+    
+
+    $fotoProduto = (isset($_FILES['imgprod'])) ? $_FILES['imgprod']['name'] : $_POST['imgprod2'];//se não for inserida nenhuma imagem no formulario a antiga permanece, caso contrario a nova entra
+    $nomeprod = $_POST['nomeprod'];
+    $preco = $_POST['preco'];
+    $stmt = $conn->prepare("UPDATE produto SET nome = :nome , preco = :preco , fotoProduto = :fotoProduto WHERE id_produto = :id_produto");
+    $stmt->bindValue(":nome",$nomeprod,PDO::PARAM_STR);
+    $stmt->bindValue(":preco",$preco,PDO::PARAM_STR);
+    $stmt->bindValue(":fotoProduto",$fotoProduto,PDO::PARAM_STR);
+    $stmt->bindValue(":id_produto",$infproduto['id_produto'],PDO::PARAM_INT);
+
+    if($stmt->execute() && $stmt->rowCount() > 0){
+        echo "<script>
+        alert('Produto editado com sucesso!');
+       // window.location.href='read-prod.php';
+        </script>";
+    }else{
+        echo "<script>
+        alert('Ocorreu um erro');
+        //window.location.href='read-prod.php';
+        </script>".$stmt->errorCode();
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -67,37 +85,27 @@ if (usuarioEstaLogado()) {
 <head>
     <title>Mercados</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../../css/cadastro.css">
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
-    <script>
+    <script src="script/script.js"></script>
 
-
-function confirmarExclusaoMercado() {
-    // Exibe uma mensagem de confirmação
-    if (confirm("Tem certeza que deseja excluir seu perfil?")) {
-        // Se o usuário confirmar, redireciona para a página de exclusão
-        window.location.href = 'CRUD/delete-cliente.php';
-        return true;
-    } else {
-        // Se o usuário cancelar, retorna false
-        return false;
-    }
-}
-</script>
 </head>
 
 <body>
 
-    <div id="area-cabecalho">
+    <div id="area-cabecalho"><!-- cabeçalho abertura-->
+
         <?php if (usuarioEstaLogado()): ?>
 
-            <p class="aviso-login">Seja bem vindo&nbsp;<?= $userlog; ?></p>
+            <p class="aviso-login">Seja bem vindo&nbsp;<?= ucwords($userlog); ?></p>
 
+            <!-- só mostra se for um mercado que estiver logado, mostra o nome do mercado -->
             <?php if (mercadoEstaLogado()): ?>
-
-                <p class="aviso-login">Você está logado no mercado:&nbsp;<?= ucwords($infmercado['nomeMerc']); ?></p>
-
+                <p class="aviso-login">Você está logado no mercado&nbsp;<?= $infmercado['nomeMerc']; ?></p>
             <?php endif ?>
+
         <?php endif ?>
+
         <!-- abertura postagem -->
         <div id="area-logo">
             <img src="../../home/img/logo.png" alt="logo">
@@ -106,163 +114,81 @@ function confirmarExclusaoMercado() {
             <a href="../index.php">Home</a>
 
             <?php if (usuarioEstaLogado()): ?>
-                <a href="../../home/mercados.php">Mercados</a>
+                <a href="../home/mercados.php">Mercados</a>
             <?php endif ?>
 
-            <a href="../../home/contato.php">Contato</a>
-            <a href="../../home/fale.php">Fale Conosco</a>
+            <a href="../home/contato.php">Contato</a>
+            <a href="../home/fale.php">Fale Conosco</a>
 
-            <div class="cadastro_login_right">
-                <?php if (!usuarioEstaLogado()): ?>
-                    <a href="../cadastro/cadastrar.php">Cadastrar</a>
-                    <a href="../cadastro/login.php">Login</a>
-                <?php endif ?>
+            <?php if (mercadoEstaLogado()): ?>
+                <a href="verMeuMercado.php">Visualizar perfil</a>
+            <?php endif ?>
 
-
-
-
-
-                <?php if (mercadoEstaLogado()): ?>
-                    <a href="../verMeuMercado.php">Visualizar perfil</a>
-                <?php endif ?>
-
-                <?php if (usuarioEstaLogado()): ?>
-                    <a href="../logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
-                <?php endif ?>
-            </div>
-
+            <?php if (usuarioEstaLogado()): ?>
+                <a href="logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
+            <?php endif ?>
         </div>
+
     </div>
 
+    <?php
 
-
+    ?>
     <div id="area-principal">
 
         <div id="area-postagens">
-
-
-            <?php
-            // o cabeçalho é mostrado em cima normal, porem, se a pessoa não estiver logada é criado uma div postagem e mostra pro usuário que ele não pode acessar essa pagina 
-            if (!usuarioEstaLogado()) {
-                ?>
-                <div class="postagem">
-                    <link rel="stylesheet" href="../../css/cadastro.css">
-                    <h2>Você não tem permissão para acessar essa página</h2>
-                    <h2>Realize o cadastro</h2>
-
-                    <div class="login-box"><button class='btn_left'
-                            onclick="window.location.href='../../index.php' ">Voltar</button></div>
-
-                </div>
-                <div id="rodape">
-                    &copy Todos os direitos reservados
-                </div>
-                <?php
-                exit;
-            }
-
-            ?>
-
-
-            <?php
-            if(mercadoEstaLogado()){
-            $id_mercado = $infmercado['id_mercado'];
-            $result = $conn->query("SELECT * FROM produto WHERE id_mercado = '$id_mercado' ;");
-            }
-            ?>
-
             <!--Abertura postagem -->
             <div class="postagem">
 
-                <div class="login-box">
-                    <?php if (mercadoEstaLogado()): ?>
-                        <button class='btn_left' onclick="window.location.href='../verMeuMercado.php' ">Voltar</button>
-                        <button class='btn_left' onclick="window.location.href='../addprod.php' ">Adicionar produto</button>
-                    <?php endif ?>
+                <h2>Editar produto <?= $infproduto['nome'] ?> :&nbsp;<?= $infmercado['nomeMerc'] ?></h2>
 
-                    <?php if (clienteEstaLogado()): ?>
-                        <button class='btn_left' onclick="window.location.href='../../home/mercados.php' ">Voltar</button>
-                    <?php endif ?>
 
+                <div class="container">
+                    <div class="login-box">
+                        <form action="" method="POST" enctype="multipart/form-data">
+
+                            <div class="input-group">
+                                <label for="nome">Nome do produto:</label>
+                                <input type="text" id="nome" name="nomeprod" value="<?= $infproduto['nome'] ?>"
+                                    onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="preco">Preço:</label>
+                                <input type="number" id="preco" name="preco" value="<?= $infproduto['preco'] ?>"
+                                    onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="senha">Foto do produto:</label>
+                                <input type="file" id="senha" name="imgprod"
+                                    onkeydown="if(event.keyCode === 13) event.preventDefault()">
+
+                                <input type="hidden" name="imgprod2" value="<?= $infproduto['fotoProduto'] ?>">
+                                <input type="hidden" name="updateprod" value="<?= $infproduto['id_produto'] ?>">
+
+                            </div>
+                            <button class="btn_left" onclick="window.history.back()'">Voltar</button>
+                            <button type="submit">Salvar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <!--lista os produtos, cada vez que o metodo fetch_all() é chamado ele armazena uma linha em $row e mostra dentro do laço while  -->
-            <?php 
-            if(mercadoEstaLogado()){
-            if ($result->rowCount() > 0) {
-                while ($row = $result->fetch()) { ?>
-                    <div class="postagem">
-
-                        <?php
-                        echo "<h2> " . $row['nome'] . " </h2>"; //nome do produto
-                
-                        echo '<img src="../uploads/' . $row['fotoProduto'] . '" alt="Imagem do mercado" width="620px">';
-
-
-                        echo "<p>" . $row['preco'] . " reais</p>" //preço do produto
-               
-                            ?>
-                        <div class="login-box">
- 
-                            <form action="update-prod.php" method="POST">
-                                <button class='btn_left' type="submit">Editar</button>
-                            </form>
-
-                            <form action="delete-prod.php" method="POST" onsubmit="return confirmarExclusaoMercado()">
-                    <input type="hidden" name="deleteprod" value="<?= $row['id_produto']; ?>">
-                    <button class='btn_left' type="submit">Excluir</button>
-                </form>
-                        </div>
-
-
-                    </div>
-                <?php }
-            } else {
-                echo "<div class='postagem'>
-                    <h2>Ainda não foram inseridos produtos</h2>
-                </div>";
-            }} 
-            if(clienteEstaLogado()){
-                $id_mercado = $_POST['id_mercado'];
-               $result= $conn->query("SELECT * FROM produto WHERE id_mercado = '$id_mercado' ");
-            if ($result->rowCount() > 0) {
-                while ($row = $result->fetch()) { ?>
-                    <div class="postagem">
-
-                        <?php
-                        echo "<h2> " . $row['nome'] . " </h2>"; //nome do produto
-                
-                        echo '<img src="../uploads/' . $row['fotoProduto'] . '" alt="Imagem do mercado" width="620px">';
-
-
-                        echo "<h2>" .number_format($row['preco'], 2, ',', '.')  . " R$ </h2>" //preço do produto
-                
-                            ?>
-                        <div class="login-box">
-                        <button class='btn_left' onclick="window.location.href='../../home/mercados.php' ">Voltar</button>
-                        </div>
-
-
-                    </div>
-                <?php }
-            } else {
-                echo "<div class='postagem'>
-                    <h2>Ainda não foram inseridos produtos</h2>
-                </div>";
-
-            }} ?>
-            <hr>
             <!--// Fechamento postagem -->
+
+            <!--Abertura postagem -->
 
 
             <div id="rodape">
                 &copy Todos os direitos reservados
-            </div>
-
+            </div><?php  
+echo "<pre>" ;
+// print_r($infmercado);
+var_dump($infproduto);
+$conn = null;
+?>
         </div>
 
 </body>
 
 </html>
-<?php
-?>

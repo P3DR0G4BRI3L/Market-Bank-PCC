@@ -125,7 +125,7 @@ if (usuarioEstaLogado()) { //  CLIENTE
 
                 <!-- redireciona  o usuario para para editar o perfil -->
                 <form action="CRUD/update-cliente.php" method="POST" >
-                    <input type="hidden" name="deleteperfil" value="<?= $infusuario['id_usuario']; ?>">
+                    <input type="hidden" name="updateperfil" value="<?= $infusuario['id_usuario']; ?>">
                     <button class='btn_left' type="submit">Editar</button>
                 </form>
 

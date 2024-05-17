@@ -17,3 +17,14 @@ function mostrarsenha() {
         senhaInput.type = "password";
     }
 }
+function confirmarExclusaoMercado() {
+    // Exibe uma mensagem de confirmação
+    if (confirm("Tem certeza que deseja excluir seu perfil?")) {
+        // Se o usuário confirmar, redireciona para a página de exclusão
+        window.location.href = 'CRUD/delete-cliente.php';
+        return true;
+    } else {
+        // Se o usuário cancelar, retorna false
+        return false;
+    }
+}

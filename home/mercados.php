@@ -119,7 +119,7 @@ if (usuarioEstaLogado()) {
 
             <!--Abertura postagem -->
 
-            <!--lista os mercados, cada vez que o metodo fetch_all() é chamado ele armazena uma linha em $row e mostra dentro do laço while  -->
+            <!--lista os mercados, cada vez que o metodo fetch() é chamado ele armazena uma linha em $row e mostra dentro do laço while  -->
             <?php if ($result->rowCount() > 0) {
                 while ($row = $result->fetch()) { ?>
                     <div class="postagem">
@@ -135,7 +135,7 @@ if (usuarioEstaLogado()) {
 
                         echo "<h2>" . $row['endereco'] . "</h2>"; //endereço do mercado
 
-                        echo "<h2>Aberto das " . date('H:i', strtotime($row['horarioFecha'])) . "</h2>"; //endereço do mercado
+                        echo "<h2>Aberto das " . date('H:i', strtotime($row['horarioAbert'])) . "</h2>"; //endereço do mercado
 
                         echo "<h2> Até as " . date('H:i', strtotime($row['horarioFecha'])) . "</h2>"; //endereço do mercado
                         
