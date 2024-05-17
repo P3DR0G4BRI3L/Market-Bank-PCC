@@ -45,8 +45,8 @@ $senha = $_POST['senha'];
 $sqlverify = "SELECT * FROM usuario WHERE email = :email;";
 $result = $conn->prepare($sqlverify);
 $result->bindValue(':email', $email, PDO::PARAM_STR);
-$result->execute();
-if($result->rowCount()>0){
+
+if($result->execute() && $result->rowCount()>0){
     echo "<script>
             alert('O email inserido já está em uso');
             window.location.href = 'cadastrarMercado.php';

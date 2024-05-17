@@ -33,7 +33,7 @@ if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'dono') {
 
 
 
-if (isset($_POST['nomeprod'], $_POST['preco']) && isset($_FILES['imgprod']) || isset($_POST['imgprod'])) {
+if (isset($_POST['nomeprod'], $_POST['preco']) && isset($_FILES['imgprod']) || isset($_POST['imgprod2'])) {
 
     if (isset($_FILES['imgprod']) &&  $_FILES['imgprod']['error'] === UPLOAD_ERR_OK) {
         // Diretório onde você deseja armazenar as imagens
@@ -68,7 +68,7 @@ if (isset($_POST['nomeprod'], $_POST['preco']) && isset($_FILES['imgprod']) || i
     if($stmt->execute() && $stmt->rowCount() > 0){
         echo "<script>
         alert('Produto editado com sucesso!');
-       // window.location.href='read-prod.php';
+        window.location.href='read-prod.php';
         </script>";
     }else{
         echo "<script>

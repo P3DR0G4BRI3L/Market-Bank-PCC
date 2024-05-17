@@ -148,7 +148,7 @@ a{
 }
 
 .login-box {
-	margin: 0 auto;
+	margin: 0 400px;
     background-color: #fff;
     /* padding: 0px 0px; */
     border-radius: 5px;
@@ -214,8 +214,6 @@ button:hover {
 .cadastro_option .login-box .btn_left{
 	justify-content: left;
 }
-input[type="file"]{
-	
-}
+
 
 

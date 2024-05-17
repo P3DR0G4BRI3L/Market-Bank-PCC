@@ -17,6 +17,10 @@ function mercadoEstaLogado()
 {
     return isset($_SESSION['usuario']) && $_SESSION['usuario']['tipo'] == 'dono';
 }
+function admEstaLogado()
+{
+    return isset($_SESSION['usuario']) && $_SESSION['usuario']['tipo'] == 'administrador';
+}
 
 // redireciona  o usuario caso ele não esteja logado
 function redirecionamento()

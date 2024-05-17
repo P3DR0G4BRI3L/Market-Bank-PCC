@@ -117,7 +117,7 @@ require_once '../func/func.php';
 
 							<button class="btn_left" onclick="window.location.href='cadastrar.php'">Voltar</button>
 
-							<button type="submit">Entrar</button>
+							<button type="submit">Cadastrar</button>
 
 						</form>
 					</div>
