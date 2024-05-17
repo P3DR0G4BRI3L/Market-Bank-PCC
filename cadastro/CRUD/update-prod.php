@@ -56,9 +56,10 @@ if (isset($_POST['nomeprod'], $_POST['preco']) && isset($_FILES['imgprod']) || i
     }
     
 
-    $fotoProduto = (isset($_FILES['imgprod'])) ? $_FILES['imgprod']['name'] : $_POST['imgprod2'];//se não for inserida nenhuma imagem no formulario a antiga permanece, caso contrario a nova entra
+    $fotoProduto = ($_FILES['imgprod']['name'] != "") ? $_FILES['imgprod']['name'] : $_POST['imgprod2'];//se não for inserida nenhuma imagem no formulario a antiga permanece, caso contrario a nova entra
     $nomeprod = $_POST['nomeprod'];
     $preco = $_POST['preco'];
+    // var_dump($infproduto['id_produto'], $fotoProduto, $nomeprod, $preco);exit;
     $stmt = $conn->prepare("UPDATE produto SET nome = :nome , preco = :preco , fotoProduto = :fotoProduto WHERE id_produto = :id_produto");
     $stmt->bindValue(":nome",$nomeprod,PDO::PARAM_STR);
     $stmt->bindValue(":preco",$preco,PDO::PARAM_STR);

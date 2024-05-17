@@ -10,8 +10,8 @@ if (usuarioEstaLogado()) {
 
     if ($_SESSION['usuario']['tipo'] == 'dono') {
         $mercName = $_SESSION['usuario']['id_usuario'];
-        $mercado=$conn->prepare("SELECT * FROM mercado WHERE id_dono = :id_dono");
-        $mercado->bindValue(':id_dono',$mercName,PDO::PARAM_STR);
+        $mercado = $conn->prepare("SELECT * FROM mercado WHERE id_dono = :id_dono");
+        $mercado->bindValue(':id_dono', $mercName, PDO::PARAM_STR);
         $mercado->execute();
         $infmercado = $mercado->fetch();
 
@@ -36,11 +36,15 @@ if (usuarioEstaLogado()) {
     <div id="area-cabecalho">
         <?php if (usuarioEstaLogado()): ?>
 
-            <p class="aviso-login">Seja bem vindo&nbsp;<?= $userlog; ?></p>
+            <p class="aviso-login">Seja bem vindo&nbsp;
+                <?= $userlog; ?>
+            </p>
 
             <?php if (mercadoEstaLogado()): ?>
 
-                <p class="aviso-login">Você está logado no mercado:&nbsp;<?= ucwords($infmercado['nomeMerc']); ?></p>
+                <p class="aviso-login">Você está logado no mercado:&nbsp;
+                    <?= ucwords($infmercado['nomeMerc']); ?>
+                </p>
 
             <?php endif ?>
         <?php endif ?>
@@ -111,11 +115,11 @@ if (usuarioEstaLogado()) {
 
 
             <?php
-            if(mercadoEstaLogado()){
-            $id_mercado = $infmercado['id_mercado'];
-            $result = $conn->prepare("SELECT * FROM produto WHERE id_mercado = :id_mercado ;");
-            $result->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
-            $result->execute();
+            if (mercadoEstaLogado()) {
+                $id_mercado = $infmercado['id_mercado'];
+                $result = $conn->prepare("SELECT * FROM produto WHERE id_mercado = :id_mercado ;");
+                $result->bindValue(':id_mercado', $id_mercado, PDO::PARAM_INT);
+                $result->execute();
             }
             ?>
 
@@ -135,75 +139,77 @@ if (usuarioEstaLogado()) {
                 </div>
             </div>
             <!--lista os produtos, cada vez que o metodo fetch_all() é chamado ele armazena uma linha em $row e mostra dentro do laço while  -->
-            <?php 
-            if(mercadoEstaLogado()){
-            if ($result->rowCount() > 0) {
-                while ($row = $result->fetch()) { ?>
-                    <div class="postagem">
+            <?php
+            if (mercadoEstaLogado()) {
+                if ($result->rowCount() > 0) {
+                    while ($row = $result->fetch()) { ?>
+                        <div class="postagem">
 
-                        <?php
-                        echo "<h2> " . $row['nome'] . " </h2>"; //nome do produto
+                            <?php
+                            echo "<h2> " . $row['nome'] . " </h2>"; //nome do produto
                 
-                        echo '<img src="../uploads/' . $row['fotoProduto'] . '" alt="Imagem do produto" width="620px">';
+                            echo '<img src="../uploads/' . $row['fotoProduto'] . '" alt="Imagem do produto" width="620px">';
 
 
-                        echo "<p>" . $row['preco'] . " reais</p>" //preço do produto
-               
-                            ?>
-                        <div class="login-box">
- 
-                            <form action="update-prod.php" method="POST">
-                                <input type="hidden" name="updateprod" value="<?= $row['id_produto']; ?>">
-                                <button class='btn_left' type="submit">Editar</button>
-                            </form>
+                            echo "<p>" . $row['preco'] . " reais</p>" //preço do produto
+                
+                                ?>
+                            <div class="login-box">
 
-                            <form action="delete-prod.php" method="POST" onsubmit="return confirmarExclusaoMercado()">
-                    <input type="hidden" name="deleteprod" value="<?= $row['id_produto']; ?>">
-                    <button class='btn_left' type="submit">Excluir</button>
-                </form>
+                                <form action="update-prod.php" method="POST">
+                                    <input type="hidden" name="updateprod" value="<?= $row['id_produto']; ?>">
+                                    <button class='btn_left' type="submit">Editar</button>
+                                </form>
+
+                                <form action="delete-prod.php" method="POST" onsubmit="return confirmarExclusaoMercado()">
+                                    <input type="hidden" name="deleteprod" value="<?= $row['id_produto']; ?>">
+                                    <button class='btn_left' type="submit">Excluir</button>
+                                </form>
+                            </div>
+
+
                         </div>
-
-
-                    </div>
-                <?php }
-            } else {
-                echo "<div class='postagem'>
+                    <?php }
+                } else {
+                    echo "<div class='postagem'>
                     <h2>Ainda não foram inseridos produtos</h2>
                 </div>";
-            }} 
-            if(clienteEstaLogado()){
+                }
+            }
+            if (clienteEstaLogado()) {
                 $id_mercado = $_POST['id_mercado'];
 
-               $result= $conn->prepare("SELECT * FROM produto WHERE id_mercado = :id_mercado ");
-                $result->bindValue(':id_mercado', $id_mercado,PDO::PARAM_INT);
+                $result = $conn->prepare("SELECT * FROM produto WHERE id_mercado = :id_mercado ");
+                $result->bindValue(':id_mercado', $id_mercado, PDO::PARAM_INT);
                 $result->execute();
-                
-            if ($result->rowCount() > 0) {
-                while ($row = $result->fetch()) { ?>
-                    <div class="postagem">
 
-                        <?php
-                        echo "<h2> " . $row['nome'] . " </h2>"; //nome do produto
+                if ($result->rowCount() > 0) {
+                    while ($row = $result->fetch()) { ?>
+                        <div class="postagem">
+
+                            <?php
+                            echo "<h2> " . $row['nome'] . " </h2>"; //nome do produto
                 
-                        echo '<img src="../uploads/' . $row['fotoProduto'] . '" alt="Imagem do mercado" width="620px">';
+                            echo '<img src="../uploads/' . $row['fotoProduto'] . '" alt="Imagem do mercado" width="620px">';
 
 
-                        echo "<h2>" .number_format($row['preco'], 2, ',', '.')  . " R$ </h2>" //preço do produto
+                            echo "<h2>" . number_format($row['preco'], 2, ',', '.') . " R$ </h2>" //preço do produto
                 
-                            ?>
-                        <div class="login-box">
-                        <button class='btn_left' onclick="window.location.href='../../home/mercados.php' ">Voltar</button>
+                                ?>
+                            <div class="login-box">
+                                <button class='btn_left' onclick="window.location.href='../../home/mercados.php' ">Voltar</button>
+                            </div>
+
+
                         </div>
-
-
-                    </div>
-                <?php }
-            } else {
-                echo "<div class='postagem'>
+                    <?php }
+                } else {
+                    echo "<div class='postagem'>
                     <h2>Ainda não foram inseridos produtos</h2>
                 </div>";
 
-            }} ?>
+                }
+            } ?>
             <hr>
             <!--// Fechamento postagem -->
 

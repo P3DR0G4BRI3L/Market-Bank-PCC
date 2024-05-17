@@ -25,7 +25,7 @@ switch ($tipo) {
     case "cliente":
         if ($resultado->rowCount() > 0) {
             echo "<script>alert('Login realizado com sucesso');</script>";
-            $_SESSION['usuario'] = $infoUser;
+            $_SESSION['usuario'] = $infoUser;//atribui todas as informações do usuario ao usuario de sessão
             header("Location:../index.php");
             exit;
         } else {
@@ -40,7 +40,7 @@ switch ($tipo) {
     case "dono":
         if ($resultado->rowCount() > 0) {
             echo "<script>alert('Login realizado com sucesso');</script>";
-            $_SESSION['usuario'] = $infoUser;
+            $_SESSION['usuario'] = $infoUser;//atribui todas as informações do usuario ao usuario de sessão
             header("Location:../index.php");
             exit;
         } else {
@@ -55,7 +55,7 @@ switch ($tipo) {
     case "administrador":
         if ($resultado->rowCount() > 0) {
             echo "<script>alert('Login realizado com sucesso');</script>";
-            $_SESSION['usuario'] = $infoUser;
+            $_SESSION['usuario'] = $infoUser;//atribui todas as informações do usuario ao usuario de sessão
             header("Location:../index.php");
             exit;
         } else {

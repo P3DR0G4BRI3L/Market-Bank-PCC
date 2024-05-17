@@ -1,6 +1,7 @@
 <?php
 require_once 'cadastro/cadastro.php';
 require_once 'func/func.php';
+
 session_start();
 
 
@@ -21,7 +22,7 @@ if (usuarioEstaLogado()) {
 }
 
 
-
+// require 'inc/cabecalho.php';
 ?>
 <!DOCTYPE html>
 <html>
