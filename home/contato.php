@@ -22,57 +22,57 @@ require_once '../inc/cabecalho.php';//mostra o cabeçalho
 
 
 
-    <div id="area-principal">
+<div id="area-principal">
 
-        <div id="area-postagens">
-            <!--Abertura postagem -->
-            <div class="postagem">
-                <h2>Nos visite nas nossas redes sociais.
-                    <br>
-                    Telefone : 6195392-8374
-                </h2>
-                <span class="data-postagem">postado 20 março 2022</span>
-                <img width="620px" src="img/img12.jpg">
-                <p>
-                    Nossas redes sociais
-                </p>
-                <a href="">Ver mais</a>
+    <div id="area-postagens">
+        <!--Abertura postagem -->
+        <div class="postagem">
+            <h2>Nos visite nas nossas redes sociais.
                 <br>
-                <a href="#">Facebook</a>
-                <a href="#">Instagram</a>
-                <a href="#">E-mail</a>
-            </div>
-            <!--// Fechamento postagem -->
+                Telefone : 6195392-8374
+            </h2>
+            <span class="data-postagem">postado 20 março 2022</span>
+            <img width="620px" src="img/img12.jpg">
+            <p>
+                Nossas redes sociais
+            </p>
+            <a href="">Ver mais</a>
+            <br>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">E-mail</a>
+        </div>
+        <!--// Fechamento postagem -->
 
+
+    </div>
+
+    <div id="area-lateral">
+        <div class="conteudo-lateral">
+            <h3>Postagens recentes</h3>
+            <div class="postagem-lateral">
+                <p>O Market Bank é para você ter </p>
+                <a href="">Ver mais</a>
+            </div>
+
+            <div class="postagem-lateral" style="border-bottom: none;">
+                <p>Produtos em destaque</p>
+                <a href="">Ver mais</a>
+            </div>
+        </div>
+
+        <div class="conteudo-lateral">
+            <h3>substituir</h3>
+
+            <a href="">substituir</a><br>
+            <a href="">substituir</a><br>
+            <a href="">substituir</a><br>
+            <a href="">substituir</a><br>
+            <a href="">substituir</a><br>
 
         </div>
 
-        <div id="area-lateral">
-            <div class="conteudo-lateral">
-                <h3>Postagens recentes</h3>
-                <div class="postagem-lateral">
-                    <p>O Market Bank é para você ter </p>
-                    <a href="">Ver mais</a>
-                </div>
-
-                <div class="postagem-lateral" style="border-bottom: none;">
-                    <p>Produtos em destaque</p>
-                    <a href="">Ver mais</a>
-                </div>
-            </div>
-
-            <div class="conteudo-lateral">
-                <h3>substituir</h3>
-
-                <a href="">substituir</a><br>
-                <a href="">substituir</a><br>
-                <a href="">substituir</a><br>
-                <a href="">substituir</a><br>
-                <a href="">substituir</a><br>
-
-            </div>
-
-        </div>
+    </div>
 
 
-       <?php require_once '../inc/rodape.php'; ?>
+    <?php require_once '../inc/rodape.php'; ?>

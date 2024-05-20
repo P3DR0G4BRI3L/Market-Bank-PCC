@@ -20,7 +20,7 @@ if (usuarioEstaLogado()) {
 require_once '../inc/cabecalho.php'; ?>
 
 
-<div id="area-principal">
+<dkiv id="area-principal">
 
     <div id="area-postagens">
 
@@ -29,19 +29,19 @@ require_once '../inc/cabecalho.php'; ?>
         // o cabeçalho é mostrado em cima normal, porem, se a pessoa não estiver logada é criado uma div postagem e mostra pro usuário que ele não pode acessar essa pagina 
         if (!usuarioEstaLogado()) {
             ?>
-            <div class="postagem">
-                <link rel="stylesheet" href="../../css/cadastro.css">
-                <h2>Você não tem permissão para acessar essa página</h2>
-                <h2>Realize o cadastro</h2>
+        <div class="postagem">
+            <link rel="stylesheet" href="../../css/cadastro.css">
+            <h2>Você não tem permissão para acessar essa página</h2>
+            <h2>Realize o cadastro</h2>
 
-                <div class="login-box"><button class='btn_left'
-                        onclick="window.location.href='../index.php' ">Voltar</button></div>
+            <div class="login-box"><button class='btn_left'
+                    onclick="window.location.href='../index.php' ">Voltar</button></div>
 
-            </div>
-            <div id="rodape">
-                &copy Todos os direitos reservados
-            </div>
-            <?php
+        </div>
+        <div id="rodape">
+            &copy Todos os direitos reservados
+        </div>
+        <?php
             exit;
         }
 
@@ -62,12 +62,13 @@ require_once '../inc/cabecalho.php'; ?>
 
             <div class="login-box">
                 <?php if (mercadoEstaLogado()): ?>
-                    <button class='btn_left' onclick="window.location.href='../cadastro/verMeuMercado.php' ">Voltar</button>
-                    <button class='btn_left' onclick="window.location.href='../cadastro/addprod.php' ">Adicionar produto</button>
+                <button class='btn_left' onclick="window.location.href='../cadastro/verMeuMercado.php' ">Voltar</button>
+                <button class='btn_left' onclick="window.location.href='../cadastro/addprod.php' ">Adicionar
+                    produto</button>
                 <?php endif ?>
 
                 <?php if (clienteEstaLogado()): ?>
-                    <button class='btn_left' onclick="window.location.href='../home/mercados.php' ">Voltar</button>
+                <button class='btn_left' onclick="window.location.href='../home/mercados.php' ">Voltar</button>
                 <?php endif ?>
 
             </div>
@@ -81,9 +82,9 @@ require_once '../inc/cabecalho.php'; ?>
             if ($result->rowCount() > 0) {
                 $produtos = $result->fetchAll();
                 foreach ($produtos as $produto) { ?>
-                    <div class="postagem">
+        <div class="postagem">
 
-                        <?php
+            <?php
                         echo "<h2> " . $produto['nome'] . " </h2>"; //nome do produto
             
                         echo '<img src="../cadastro/uploads/' . $produto['fotoProduto'] . '" alt="Imagem do produto" width="300px">';
@@ -92,22 +93,22 @@ require_once '../inc/cabecalho.php'; ?>
                         echo "<p>" . $produto['preco'] . " reais</p>" //preço do produto
             
                             ?>
-                        <div class="login-box">
+            <div class="login-box">
 
-                            <form action="update-prod.php" method="POST">
-                                <input type="hidden" name="updateprod" value="<?= $produto['id_produto']; ?>">
-                                <button class='btn_left' type="submit">Editar</button>
-                            </form>
+                <form action="update-prod.php" method="POST">
+                    <input type="hidden" name="updateprod" value="<?= $produto['id_produto']; ?>">
+                    <button class='btn_left' type="submit">Editar</button>
+                </form>
 
-                            <form action="delete-prod.php" method="POST" onsubmit="return confirmarExclusaoProduto()">
-                                <input type="hidden" name="deleteprod" value="<?= $produto['id_produto']; ?>">
-                                <button class='btn_left' type="submit">Excluir</button>
-                            </form>
-                        </div>
+                <form action="delete-prod.php" method="POST" onsubmit="return confirmarExclusaoProduto()">
+                    <input type="hidden" name="deleteprod" value="<?= $produto['id_produto']; ?>">
+                    <button class='btn_left' type="submit">Excluir</button>
+                </form>
+            </div>
 
 
-                    </div>
-                <?php }
+        </div>
+        <?php }
             } else {
                 echo "<div class='postagem'>
                     <h2>Ainda não foram inseridos produtos</h2>
@@ -126,9 +127,9 @@ require_once '../inc/cabecalho.php'; ?>
             if ($result->rowCount() > 0) {
                 $produtos = $result->fetchAll();
                 foreach ($produtos as $produto) { ?>
-                    <div class="postagem">
+        <div class="postagem">
 
-                        <?php
+            <?php
                         echo "<h2> " . $produto['nome'] . " </h2>"; //nome do produto
             
                         echo '<img src="../cadastro/uploads/' . $produto['fotoProduto'] . '" alt="Imagem do mercado" width="300px">';
@@ -137,13 +138,13 @@ require_once '../inc/cabecalho.php'; ?>
                         echo "<h2>" . number_format($produto['preco'], 2, ',', '.') . " R$ </h2>" //preço do produto
             
                             ?>
-                        <div class="login-box">
-                            <button class='btn_left' onclick="window.location.href='../home/mercados.php' ">Voltar</button>
-                        </div>
+            <div class="login-box">
+                <button class='btn_left' onclick="window.location.href='../home/mercados.php' ">Voltar</button>
+            </div>
 
 
-                    </div>
-                <?php }
+        </div>
+        <?php }
             } else {
                 echo "<div class='postagem'>
                     <h2>Ainda não foram inseridos produtos</h2>

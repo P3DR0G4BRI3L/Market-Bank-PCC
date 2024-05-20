@@ -11,20 +11,20 @@ if (!usuarioEstaLogado()) {
 
 
 
-    <div id="area-principal">
+<div id="area-principal">
 
-        <div id="area-postagens"></div>
+    <div id="area-postagens"></div>
 
-        <div class="postagem">
-            <link rel="stylesheet" href="../../css/cadastro.css">
-            <h2>Você não tem permissão para acessar essa página</h2>
-            <h2>Realize o cadastro</h2>
+    <div class="postagem">
+        <link rel="stylesheet" href="../../css/cadastro.css">
+        <h2>Você não tem permissão para acessar essa página</h2>
+        <h2>Realize o cadastro</h2>
 
-            <div class="login-box"><button class='btn_left'
-                    onclick="window.location.href='../../index.php' ">Voltar</button></div>
+        <div class="login-box"><button class='btn_left'
+                onclick="window.location.href='../../index.php' ">Voltar</button></div>
 
-        </div>
-        <?php require_once '../inc/rodape.php'; ?>
+    </div>
+    <?php require_once '../inc/rodape.php'; ?>
     <?php
     exit;
 }

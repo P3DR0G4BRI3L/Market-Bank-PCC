@@ -28,13 +28,13 @@ if (usuarioEstaLogado()) {
 
 require_once '../inc/cabecalho.php' ;
 ?>
-    <div id="area-principal">
+<div id="area-principal">
 
-        <div id="area-postagens">
+    <div id="area-postagens">
 
-            <!--Abertura postagem -->
-            <div class="postagem">
-<?php
+        <!--Abertura postagem -->
+        <div class="postagem">
+            <?php
             echo "<h2> " . ucwords($infmercado['nomeMerc']) . " </h2>"; //nome do mercado
                 
                 echo '<img src="uploads/' . $infmercado['imagem'] . '" alt="Imagem do mercado" width="620px">';
@@ -50,12 +50,12 @@ require_once '../inc/cabecalho.php' ;
   
                 echo "<h2> CNPJ: " . formatarCNPJ($infmercado['cnpj']) . "</h2>";
 ?>
-                        <button class="btn_ud" onclick="window.location.href='update-mercado.php'">Editar</button>
-						<button class="btn_ud" onclick="confirmarExclusaoMercado();">Excluir</button>
+            <button class="btn_ud" onclick="window.location.href='update-mercado.php'">Editar</button>
+            <button class="btn_ud" onclick="confirmarExclusaoMercado();">Excluir</button>
 
-						<button class="btn_ud" onclick="window.location.href = '../CRUD/read-prod.php'"> Ver Produtos</button>
-                        <button class='btn_left' type="submit" onclick="window.location.href='../index.php'">Voltar</button>
-                
-            </div>
-          
-            <?php require_once '../inc/rodape.php'; ?>
+            <button class="btn_ud" onclick="window.location.href = '../CRUD/read-prod.php'"> Ver Produtos</button>
+            <button class='btn_left' type="submit" onclick="window.location.href='../index.php'">Voltar</button>
+
+        </div>
+
+        <?php require_once '../inc/rodape.php'; ?>

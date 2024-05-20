@@ -82,49 +82,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nomeprod'], $_POST['p
 require_once '../inc/cabecalho.php';
 ?>
 
-    <div id="area-principal">
+<div id="area-principal">
 
-        <div id="area-postagens">
-            <!--Abertura postagem -->
-            <div class="postagem">
+    <div id="area-postagens">
+        <!--Abertura postagem -->
+        <div class="postagem">
 
-                <h2>Editar produto <?= $infproduto['nome'] ?> :&nbsp;<?= $infmercado['nomeMerc'] ?></h2>
+            <h2>Editar produto <?= $infproduto['nome'] ?> :&nbsp;<?= $infmercado['nomeMerc'] ?></h2>
 
 
-                <div class="container">
-                    <div class="login-box">
-                        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="container">
+                <div class="login-box">
+                    <form action="" method="POST" enctype="multipart/form-data">
 
-                            <div class="input-group">
-                                <label for="nome">Nome do produto:</label>
-                                <input type="text" id="nome" name="nomeprod" value="<?= $infproduto['nome'] ?>"
-                                    onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
-                            </div>
+                        <div class="input-group">
+                            <label for="nome">Nome do produto:</label>
+                            <input type="text" id="nome" name="nomeprod" value="<?= $infproduto['nome'] ?>"
+                                onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+                        </div>
 
-                            <div class="input-group">
-                                <label for="preco">Preço:</label>
-                                <input type="text" id="preco" name="preco" value="<?= $infproduto['preco'] ?>"
-                                    onkeydown="if(event.keyCode === 13) event.preventDefault()" required maxlength="7" oninput="restringirLetras(this)">
-                            </div>
+                        <div class="input-group">
+                            <label for="preco">Preço:</label>
+                            <input type="text" id="preco" name="preco" value="<?= $infproduto['preco'] ?>"
+                                onkeydown="if(event.keyCode === 13) event.preventDefault()" required maxlength="7"
+                                oninput="restringirLetras(this)">
+                        </div>
 
-                            <div class="input-group">
-                                <label for="foto">Foto do produto:</label>
-                                <input type="file" id="foto" name="imgprod"
-                                    onkeydown="if(event.keyCode === 13) event.preventDefault()">
+                        <div class="input-group">
+                            <label for="foto">Foto do produto:</label>
+                            <input type="file" id="foto" name="imgprod"
+                                onkeydown="if(event.keyCode === 13) event.preventDefault()">
 
-                                <input type="hidden" name="imgprod2" value="<?= $infproduto['fotoProduto'] ?>">
-                                <input type="hidden" name="updateprod" value="<?= $infproduto['id_produto'] ?>">
+                            <input type="hidden" name="imgprod2" value="<?= $infproduto['fotoProduto'] ?>">
+                            <input type="hidden" name="updateprod" value="<?= $infproduto['id_produto'] ?>">
 
-                            </div>
-                            <button class="btn_left" onclick="window.history.back()'">Voltar</button>
-                            <button type="submit">Salvar</button>
-                        </form>
-                    </div>
+                        </div>
+                        <button class="btn_left" onclick="window.history.back()'">Voltar</button>
+                        <button type="submit">Salvar</button>
+                    </form>
                 </div>
             </div>
-            <!--// Fechamento postagem -->
+        </div>
+        <!--// Fechamento postagem -->
 
-            <!--Abertura postagem -->
+        <!--Abertura postagem -->
 
 
-           <?php require_once '../inc/rodape.php'; ?>
+        <?php require_once '../inc/rodape.php'; ?>
