@@ -92,7 +92,7 @@ if ($torf) {
     $connmerc->bindValue(':telefone',$telefone);
     $connmerc->bindValue(':cnpj',$cnpj,PDO::PARAM_STR);
     $connmerc->bindValue(':imagem',$imagem,PDO::PARAM_STR);
-    $connmerc->bindValue(':id_dono',$id_dono,PDO::PARAM_INT);
+    $connmerc->bindValue(':id_dono',$id_dono,PDO::PARAM_INT);//id_dono referencia id_usuario na tabela usuario
     $connmerc->execute();
         if ($connmerc) {
 
