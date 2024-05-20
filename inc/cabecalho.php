@@ -1,12 +1,11 @@
-
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Market Bank</title>
+    <title>Mercados</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <script src="script/script.js"></script>
+    <script src="../script/script.js"></script>
 
 </head>
 
@@ -15,27 +14,27 @@
     <div id="area-cabecalho">
         <?php if (usuarioEstaLogado()): ?>
 
-            <p class="aviso-login">Seja bem vindo&nbsp;<?= $userlog; ?></p>
+            <p class="aviso-login">Seja bem vindo&nbsp;<?= ucwords($userlog); ?></p>
 
             <?php if (mercadoEstaLogado()): ?>
 
-                <p class="aviso-login">Você está logado no mercado:&nbsp;<?= $infmercado['nomeMerc']; ?></p>
+                <p class="aviso-login">Você está logado no mercado:&nbsp;<?= ucwords($infmercado['nomeMerc']); ?></p>
 
             <?php endif ?>
         <?php endif ?>
         <!-- abertura postagem -->
         <div id="area-logo">
-            <img src="../../home/img/logo.png" alt="logo">
+            <img src="../home/img/logo.png" alt="logo">
         </div>
         <div id="area-menu">
             <a href="../index.php">Home</a>
 
             <?php if (usuarioEstaLogado()): ?>
-                <a href="home/mercados.php">Mercados</a>
+                <a href="../home/mercados.php">Mercados</a>
             <?php endif ?>
 
-            <a href="home/contato.php">Contato</a>
-            <a href="home/fale.php">Fale Conosco</a>
+            <a href="../home/contato.php">Contato</a>
+            <a href="../home/fale.php">Fale Conosco</a>
 
             <div class="cadastro_login_right">
                 <?php if (!usuarioEstaLogado()): ?>
@@ -45,16 +44,17 @@
 
 
 
+
+                <?php if (clienteEstaLogado()): ?>
+					<a href="../cadastro/verMeuCliente.php">Visualizar perfil</a>
+				<?php endif ?>
+
                 <?php if (mercadoEstaLogado()): ?>
                     <a href="../cadastro/verMeuMercado.php">Visualizar perfil</a>
                 <?php endif ?>
 
-                <?php if (clienteEstaLogado()): ?>
-                    <a href="../cadastro/verMeuMercado.php">Visualizar perfil</a>
-                <?php endif ?>
-
                 <?php if (usuarioEstaLogado()): ?>
-                    <a href="../logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
+                    <a href="../cadastro/logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
                 <?php endif ?>
             </div>
 

@@ -19,12 +19,70 @@ function mostrarsenha() {
 }
 function confirmarExclusaoMercado() {
     // Exibe uma mensagem de confirmação
-    if (confirm("Tem certeza que deseja excluir seu perfil?")) {
+    if (confirm("Tem certeza que deseja excluir seu mercado?\n Todos os seus produtos também vão ser excluídos")) {
         // Se o usuário confirmar, redireciona para a página de exclusão
-        window.location.href = 'CRUD/delete-cliente.php';
+        window.location.href = '../CRUD/delete-mercado.php';
         return true;
     } else {
         // Se o usuário cancelar, retorna false
         return false;
+    }
+}
+
+function confirmarExclusaoCliente() {
+    // Exibe uma mensagem de confirmação
+    if (confirm("Tem certeza que deseja excluir seu perfil?")) {
+        // Se o usuário confirmar, redireciona para a página de exclusão
+        window.location.href = '../CRUD/delete-cliente.php';
+        return true;
+    } else {
+        // Se o usuário cancelar, retorna false
+        return false;
+    }
+}
+
+function confirmarExclusaoProduto() {
+    // Exibe uma mensagem de confirmação
+    if (confirm("Tem certeza que deseja excluir esse produto?")) {
+        // Se o usuário confirmar, redireciona para a página de exclusão
+        window.location.href = '../CRUD/delete-cliente.php';
+        return true;
+    } else {
+        // Se o usuário cancelar, retorna false
+        return false;
+    }
+}
+
+
+function restringirLetras(input) {
+    input.value = input.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+}
+
+document.getElementById("cnpj").addEventListener("input", function() {
+    this.value = this.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+    if (this.value.length > 14) {
+        this.value = this.value.slice(0, 14);
+    }
+});
+
+document.getElementById("telefone").addEventListener("input", function() {
+    this.value = this.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+    if (this.value.length > 11) {
+        this.value = this.value.slice(0, 11);
+    }
+});
+
+
+function formatarPreco(input) {
+    // Remove caracteres não numéricos, exceto vírgulas
+    input.value = input.value.replace(/[^\d,]/g, '');
+
+    // Substitui todas as vírgulas adicionais, exceto a primeira, por uma string vazia
+    input.value = input.value.replace(/(.*),/, '$1').replace(/,/g, '');
+
+    // Formata o preço para ter duas casas decimais
+    var parts = input.value.split(',');
+    if (parts.length > 1) {
+        input.value = parts[0] + ',' + parts[1].substring(0, 2);
     }
 }

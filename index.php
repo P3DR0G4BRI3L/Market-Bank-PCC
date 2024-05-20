@@ -153,19 +153,5 @@ if (usuarioEstaLogado()) {
 		</div>
 
 
-		<div id="rodape">
-			&copy Todos os direitos reservados
-		</div>
-
-	</div>
-
-</body>
-
-</html>
-
-<?php echo "<pre>";
-// print_r($_SESSION['usuario']);
-// echo "<hr>";
-// print_r($infmercado);
-$conn = null;
-?>
+		
+		<?php require_once 'inc/rodape.php'; ?>

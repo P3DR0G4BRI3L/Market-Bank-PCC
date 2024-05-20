@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once '../cadastro.php';
-require_once '../../func/func.php';
+require_once '../func/func.php';
+require_once '../cadastro/cadastro.php';
 
 
 if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'cliente') {

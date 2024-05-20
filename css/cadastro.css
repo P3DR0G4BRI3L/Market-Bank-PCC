@@ -184,6 +184,14 @@ input[type="number"] {
     border-radius: 5px;
     box-sizing: border-box; /* Garante que o padding não afete a largura total */
 }
+input[type="number"]::-webkit-inner-spin-button,/*oculta as setas de incremento no chrome*/
+input[type="number"]::-webkit-outer-spin-button {/*oculta as setas de incremento no firefox*/
+    display: none;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
 
 button[type="submit"] {
 	font-size: 18px;

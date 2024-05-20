@@ -9,9 +9,10 @@ $senha = $_POST['senha'];
 
 
 //verifica se o email inserido na hora do cadastro já está cadastrado no sistema, se estiver retorna erro
-$sqlverify = "SELECT * FROM usuario WHERE email = ':email';";
+$sqlverify = "SELECT * FROM usuario WHERE email = :email;";
 $result = $conn->prepare($sqlverify);
 $result->bindValue(':email', $email,PDO::PARAM_STR);
+$result->execute();
 if ($result->rowCount() > 0) {
     echo "<script>
              alert('O email inserido já está em uso');

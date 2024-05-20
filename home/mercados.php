@@ -19,69 +19,8 @@ if (usuarioEstaLogado()) {
 
     }
 }
+require_once '../inc/cabecalho.php';//mostra o cabeçalho
 ?>
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Mercados</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <script src="script/script.js"></script>
-
-</head>
-
-<body>
-
-    <div id="area-cabecalho">
-        <?php if (usuarioEstaLogado()): ?>
-
-            <p class="aviso-login">Seja bem vindo&nbsp;<?= $userlog; ?></p>
-
-            <?php if (mercadoEstaLogado()): ?>
-
-                <p class="aviso-login">Você está logado no mercado:&nbsp;<?= $infmercado['nomeMerc']; ?></p>
-
-            <?php endif ?>
-        <?php endif ?>
-        <!-- abertura postagem -->
-        <div id="area-logo">
-            <img src="img/logo.png" alt="logo">
-        </div>
-        <div id="area-menu">
-            <a href="../index.php">Home</a>
-
-            <?php if (usuarioEstaLogado()): ?>
-                <a href="mercados.php">Mercados</a>
-            <?php endif ?>
-
-            <a href="contato.php">Contato</a>
-            <a href="fale.php">Fale Conosco</a>
-
-            <div class="cadastro_login_right">
-                <?php if (!usuarioEstaLogado()): ?>
-                    <a href="../cadastro/cadastrar.php">Cadastrar</a>
-                    <a href="../cadastro/login.php">Login</a>
-                <?php endif ?>
-
-
-
-
-                <?php if (clienteEstaLogado()): ?>
-					<a href="../cadastro/verMeuCliente.php">Visualizar perfil</a>
-				<?php endif ?>
-
-                <?php if (mercadoEstaLogado()): ?>
-                    <a href="../cadastro/verMeuMercado.php">Visualizar perfil</a>
-                <?php endif ?>
-
-                <?php if (usuarioEstaLogado()): ?>
-                    <a href="../cadastro/logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
-                <?php endif ?>
-            </div>
-
-        </div>
-    </div>
 
 
 
@@ -119,33 +58,34 @@ if (usuarioEstaLogado()) {
 
             <!--Abertura postagem -->
 
-            <!--lista os mercados, cada vez que o metodo fetch() é chamado ele armazena uma linha em $row e mostra dentro do laço while  -->
+            <!--lista os mercados, usando fetchAll no $result,  -->
             <?php if ($result->rowCount() > 0) {
-                while ($row = $result->fetch()) { ?>
+                $mercados=$result->fetchAll();
+                foreach ($mercados as $mercado  ) { ?>
                     <div class="postagem">
                     
                         <?php
                         
                         
                         
-                        echo "<h2> " . ucwords($row['nomeMerc']) . " </h2>"; //nome do mercado
+                        echo "<h2> " . ucwords($mercado['nomeMerc']) . " </h2>"; //nome do mercado
                 
-                        echo '<img src="../cadastro/uploads/' . $row['imagem'] . '" alt="Imagem do mercado" width="620px">';
+                        echo '<img src="../cadastro/uploads/' . $mercado['imagem'] . '" alt="Imagem do mercado" width="620px">';
 
 
-                        echo "<h2>" . $row['endereco'] . "</h2>"; //endereço do mercado
+                        echo "<h2>" . $mercado['endereco'] . "</h2>"; //endereço do mercado
 
-                        echo "<h2>Aberto das " . date('H:i', strtotime($row['horarioAbert'])) . "</h2>"; //endereço do mercado
+                        echo "<h2>Aberto das " . date('H:i', strtotime($mercado['horarioAbert'])) . "</h2>"; //endereço do mercado
 
-                        echo "<h2> Até as " . date('H:i', strtotime($row['horarioFecha'])) . "</h2>"; //endereço do mercado
+                        echo "<h2> Até as " . date('H:i', strtotime($mercado['horarioFecha'])) . "</h2>"; //endereço do mercado
                         
-                        echo "<h2> telefone para contato: " . $row['telefone'] . "</h2>";
+                        echo "<h2> telefone para contato: " . formatarTelefone($mercado['telefone']) . "</h2>";
                         
                 
                             ?>
                         <?php if (clienteEstaLogado()): ?>
-                            <form action="../cadastro/CRUD/read-prod.php" method="POST">
-                                <input type="hidden" name="id_mercado" value="<?= $row['id_mercado']; ?>">
+                            <form action="../CRUD/read-prod.php" method="POST">
+                                <input type="hidden" name="id_mercado" value="<?= $mercado['id_mercado']; ?>">
                                 <button class='btn_left' type="submit">Ver produtos</button>
 
                             </form>
@@ -246,19 +186,5 @@ if (usuarioEstaLogado()) {
         </div>
 
 
-        <div id="rodape">
-            &copy Todos os direitos reservados
-        </div>
-
-    </div>
-
-</body>
-
-</html>
-<?php
-// echo "<pre>";
-// var_dump($result);
-// $listmercfinal = $result->fetch_assoc();
-// var_dump($listmercfinal);
-$conn = null;
-?>
+        
+       <?php require_once '../inc/rodape.php'; ?>

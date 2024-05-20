@@ -16,70 +16,11 @@ if (usuarioEstaLogado()) {
 
     }
 }
+
+require_once '../inc/cabecalho.php';//mostra o cabeçalho
 ?>
 
-<!DOCTYPE html>
-<html>
 
-<head>
-    <title>Contato</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <script src="script/script.js"></script>
-
-</head>
-
-<body>
-
-    <div id="area-cabecalho">
-
-        <?php if (usuarioEstaLogado()): ?>
-            <p class="aviso-login">Seja bem vindo&nbsp;<?= $userlog; ?></p>
-
-            <?php if (mercadoEstaLogado()): ?>
-                <p class="aviso-login">Você está logado no mercado:&nbsp;<?= $infmercado['nomeMerc']; ?></p>
-            <?php endif ?>
-
-        <?php endif ?>
-
-        <!-- abertura postagem -->
-        <div id="area-logo">
-            <img src="img/logo.png" alt="logo">
-        </div>
-
-        <div id="area-menu">
-            <a href="../index.php">Home</a>
-
-            <?php if (usuarioEstaLogado()): ?>
-                <a href="mercados.php">Mercados</a>
-            <?php endif ?>
-
-            <a href="contato.php">Contato</a>
-            <a href="fale.php">Fale Conosco</a>
-
-            <div class="cadastro_login_right">
-                <?php if (!usuarioEstaLogado()): ?>
-                    <a href="../cadastro/cadastrar.php">Cadastrar</a>
-                    <a href="../cadastro/login.php">Login</a>
-                <?php endif ?>
-
-
-                <?php if (clienteEstaLogado()): ?>
-					<a href="../cadastro/verMeuCliente.php">Visualizar perfil</a>
-				<?php endif ?>
-                
-
-                <?php if (mercadoEstaLogado()): ?>
-                    <a href="../cadastro/verMeuMercado.php">Visualizar perfil</a>
-                <?php endif ?>
-
-                <?php if (usuarioEstaLogado()): ?>
-                    <a href="../cadastro/logout.php" onclick=" return confirm('Deseja realizar logout?');">Logout</a>
-                <?php endif ?>
-            </div>
-
-        </div>
-    </div>
 
     <div id="area-principal">
 
@@ -134,15 +75,4 @@ if (usuarioEstaLogado()) {
         </div>
 
 
-        <div id="rodape">
-            &copy Todos os direitos reservados
-        </div>
-
-    </div>
-
-</body>
-
-</html>
-<?php
-$conn=null;
-?>
+       <?php require_once '../inc/rodape.php'; ?>

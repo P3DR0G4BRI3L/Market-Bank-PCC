@@ -2,37 +2,9 @@
 require_once '../func/func.php';
 
 
+require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-	<title>Market Bank Supermercados</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="../css/cadastro.css">
-	<script src="../script/script.js"></script>
-</head>
-
-<body>
-
-	<div id="area-cabecalho">
-
-		<!-- abertura postagem -->
-		<div id="area-logo">
-			<img src="../home/img/logo.png" alt="logo">
-		</div>
-		<div id="area-menu">
-			<a href="../index.php">Home</a>
-
-			<?php if (usuarioEstaLogado()): ?>
-				<a href="mercados.php">Mercados</a>
-			<?php endif ?>
-
-			<a href="../home/contato.php">Contato</a>
-			<a href="../home/fale.php">Fale Conosco</a>
-
-		</div>
-	</div>
 
 	<div id="area-principal">
 
@@ -69,9 +41,9 @@ require_once '../func/func.php';
 
 							<div class="input-group">
 								<label for="cnpj">CNPJ:</label>
-								<input type="text" id="cnpj" name="cnpj"
+								<input type="text" id="cnpj" name="cnpj" 
 									onkeydown="if(event.keyCode === 13) event.preventDefault()" required
-									placeholder="Insira seu CNPJ" maxlength="14">
+									placeholder="Insira seu CNPJ" minlength="14" maxlength="14" oninput="restringirLetras(this)" >
 							</div>
 
 							<div class="input-group">
@@ -95,9 +67,9 @@ require_once '../func/func.php';
 
 							<div class="input-group">
 								<label for="telefone">Telefone:</label>
-								<input type="tel" id="telefone" name="telefone"
+								<input type="text" id="telefone" name="telefone"
 									onkeydown="if(event.keyCode === 13) event.preventDefault()" required
-									placeholder="Insira o telefone para contato" maxlength="11">
+									placeholder="Insira o telefone para contato" minlength="11" maxlength="11" oninput="restringirLetras(this)">
 							</div>
 
 							<div class="input-group">
@@ -130,12 +102,5 @@ require_once '../func/func.php';
 
 
 
-		<div id="rodape">
-			&copy Todos os direitos reservados
-		</div>
-
-	</div>
-
-</body>
-
-</html>
+		
+		<?php require_once '../inc/rodape.php'; ?>

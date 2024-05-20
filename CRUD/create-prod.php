@@ -1,24 +1,10 @@
 <?php
 session_start();
-require_once '../../func/func.php';
-require_once '../cadastro.php';
+require_once '../func/func.php';
+require_once '../cadastro/cadastro.php';
 // o cabeçalho é mostrado em cima normal, porem, se a pessoa não estiver logada é criado uma div postagem e mostra pro usuário que ele não pode acessar essa pagina 
 if (!usuarioEstaLogado()) {
-    require_once '../../inc/cabecalho.php';
-
-
-
-
-    //verifica se tem algum usuário logado retorna true ou false
-
-
-
-
-
-
-
-
-    //armazena as informações do mercado em $infmercado
+    require_once '../inc/cabecalho.php';
 
     ?>
 
@@ -38,11 +24,7 @@ if (!usuarioEstaLogado()) {
                     onclick="window.location.href='../../index.php' ">Voltar</button></div>
 
         </div>
-        <div id="rodape">
-            &copy Todos os direitos reservados
-        </div>
-    </div>
-    </div>
+        <?php require_once '../inc/rodape.php'; ?>
     <?php
     exit;
 }

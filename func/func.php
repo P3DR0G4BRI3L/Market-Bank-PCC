@@ -30,18 +30,35 @@ function redirecionamento()
     }
 }
 
-// function armazenainfoMercado()
-// {
-//     if (usuarioEstaLogado()) {
-//         $userlog = ucwords($_SESSION['usuario']['nome']);
-    
-//         if ($_SESSION['usuario']['tipo'] == 'dono') {
-//             $mercName = $_SESSION['usuario']['id_usuario'];
-//             $mercado=$conn->prepare("SELECT * FROM mercado WHERE id_dono = :id_dono");
-//             $mercado->bindValue(':id_dono',$mercName,PDO::PARAM_STR);
-//             $mercado->execute();
-//             $infmercado = $mercado->fetch();
-    
-//         }
-//     }
-// }
+function formatarTelefone($numero) {
+   
+
+    // Quebra o número em partes usando substr
+    $ddd = substr($numero, 0, 2);         // DDD (2 dígitos)
+    $prefixo = substr($numero, 2, 1);     // Prefixo (1 dígito)
+    $parte1 = substr($numero, 3, 4);      // Primeira parte do número (4 dígitos)
+    $parte2 = substr($numero, 7, 4);      // Segunda parte do número (4 dígitos)
+
+    // Concatena as partes com os espaços e hífens necessários
+    $numeroFormatado = $ddd . " " . $prefixo . " " . $parte1 . "-" . $parte2;
+
+    return $numeroFormatado;
+}
+function formatarCNPJ($cnpj) {
+    // Remove todos os caracteres não numéricos
+    $cnpj = preg_replace('/\D/', '', $cnpj);
+
+    // Verifica se o CNPJ tem exatamente 14 dígitos
+    if (strlen($cnpj) != 14) {
+        return "CNPJ inválido";
+    }
+
+    // Formata o CNPJ
+    $cnpjFormatado = substr($cnpj, 0, 2) . '.' .
+                     substr($cnpj, 2, 3) . '.' .
+                     substr($cnpj, 5, 3) . '/' .
+                     substr($cnpj, 8, 4) . '-' .
+                     substr($cnpj, 12, 2);
+
+    return $cnpjFormatado;
+}

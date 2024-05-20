@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once '../cadastro.php';
-require_once '../../func/func.php';
+require_once '../func/func.php';
+require_once '../cadastro/cadastro.php';
 
 if (usuarioEstaLogado()) {
     $userlog = $_SESSION['usuario']['nome'];
@@ -33,17 +33,21 @@ if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'dono') {
 
 
 
-if (isset($_POST['nomeprod'], $_POST['preco']) && isset($_FILES['imgprod']) || isset($_POST['imgprod2'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nomeprod'], $_POST['preco'])) {
+
+    $fotoProduto = $_POST['imgprod2'];//se não for inserida nenhuma imagem no formulario a antiga permanece, caso contrario a nova entra
+    $nomeprod = $_POST['nomeprod'];
+    $preco = $_POST['preco'];
 
     if (isset($_FILES['imgprod']) &&  $_FILES['imgprod']['error'] === UPLOAD_ERR_OK) {
         // Diretório onde você deseja armazenar as imagens
         $diretorioDestino = 'C:\xampp\htdocs\Market-Bank\cadastro\uploads\\';
         
         // Nome do arquivo original
-        $imagem = $_FILES['imgprod']['name'];
+        $fotoProduto = $_FILES['imgprod']['name'];
         
         // Caminho completo para onde o arquivo será movido
-        $caminhoDestino = $diretorioDestino . $imagem;
+        $caminhoDestino = $diretorioDestino . $fotoProduto;
         
         // Move o arquivo enviado para o diretório de destino
         if (move_uploaded_file($_FILES['imgprod']['tmp_name'], $caminhoDestino)) {
@@ -56,9 +60,6 @@ if (isset($_POST['nomeprod'], $_POST['preco']) && isset($_FILES['imgprod']) || i
     }
     
 
-    $fotoProduto = ($_FILES['imgprod']['name'] != "") ? $_FILES['imgprod']['name'] : $_POST['imgprod2'];//se não for inserida nenhuma imagem no formulario a antiga permanece, caso contrario a nova entra
-    $nomeprod = $_POST['nomeprod'];
-    $preco = $_POST['preco'];
     // var_dump($infproduto['id_produto'], $fotoProduto, $nomeprod, $preco);exit;
     $stmt = $conn->prepare("UPDATE produto SET nome = :nome , preco = :preco , fotoProduto = :fotoProduto WHERE id_produto = :id_produto");
     $stmt->bindValue(":nome",$nomeprod,PDO::PARAM_STR);
@@ -78,63 +79,9 @@ if (isset($_POST['nomeprod'], $_POST['preco']) && isset($_FILES['imgprod']) || i
         </script>".$stmt->errorCode();
     }
 }
-
+require_once '../inc/cabecalho.php';
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <title>Mercados</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../../css/cadastro.css">
-    <link rel="stylesheet" type="text/css" href="../../css/style.css">
-    <script src="script/script.js"></script>
-
-</head>
-
-<body>
-
-    <div id="area-cabecalho"><!-- cabeçalho abertura-->
-
-        <?php if (usuarioEstaLogado()): ?>
-
-            <p class="aviso-login">Seja bem vindo&nbsp;<?= ucwords($userlog); ?></p>
-
-            <!-- só mostra se for um mercado que estiver logado, mostra o nome do mercado -->
-            <?php if (mercadoEstaLogado()): ?>
-                <p class="aviso-login">Você está logado no mercado&nbsp;<?= $infmercado['nomeMerc']; ?></p>
-            <?php endif ?>
-
-        <?php endif ?>
-
-        <!-- abertura postagem -->
-        <div id="area-logo">
-            <img src="../../home/img/logo.png" alt="logo">
-        </div>
-        <div id="area-menu">
-            <a href="../index.php">Home</a>
-
-            <?php if (usuarioEstaLogado()): ?>
-                <a href="../home/mercados.php">Mercados</a>
-            <?php endif ?>
-
-            <a href="../home/contato.php">Contato</a>
-            <a href="../home/fale.php">Fale Conosco</a>
-
-            <?php if (mercadoEstaLogado()): ?>
-                <a href="verMeuMercado.php">Visualizar perfil</a>
-            <?php endif ?>
-
-            <?php if (usuarioEstaLogado()): ?>
-                <a href="logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
-            <?php endif ?>
-        </div>
-
-    </div>
-
-    <?php
-
-    ?>
     <div id="area-principal">
 
         <div id="area-postagens">
@@ -156,13 +103,13 @@ if (isset($_POST['nomeprod'], $_POST['preco']) && isset($_FILES['imgprod']) || i
 
                             <div class="input-group">
                                 <label for="preco">Preço:</label>
-                                <input type="number" id="preco" name="preco" value="<?= $infproduto['preco'] ?>"
-                                    onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+                                <input type="text" id="preco" name="preco" value="<?= $infproduto['preco'] ?>"
+                                    onkeydown="if(event.keyCode === 13) event.preventDefault()" required maxlength="7" oninput="restringirLetras(this)">
                             </div>
 
                             <div class="input-group">
-                                <label for="senha">Foto do produto:</label>
-                                <input type="file" id="senha" name="imgprod"
+                                <label for="foto">Foto do produto:</label>
+                                <input type="file" id="foto" name="imgprod"
                                     onkeydown="if(event.keyCode === 13) event.preventDefault()">
 
                                 <input type="hidden" name="imgprod2" value="<?= $infproduto['fotoProduto'] ?>">
@@ -180,16 +127,4 @@ if (isset($_POST['nomeprod'], $_POST['preco']) && isset($_FILES['imgprod']) || i
             <!--Abertura postagem -->
 
 
-            <div id="rodape">
-                &copy Todos os direitos reservados
-            </div><?php  
-echo "<pre>" ;
-// print_r($infmercado);
-var_dump($infproduto);
-$conn = null;
-?>
-        </div>
-
-</body>
-
-</html>
+           <?php require_once '../inc/rodape.php'; ?>

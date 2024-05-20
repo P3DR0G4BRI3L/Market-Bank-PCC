@@ -5,18 +5,13 @@ require_once '../func/func.php';
 session_start();
 
 
-if (!usuarioEstaLogado()) {
-    header('location:../index.php');
-    exit;
-}
+
 
 if (!usuarioEstaLogado()) {
-    echo "<script>alert(Você não tem permissão para acessar essa página);</script>";
+    echo "<script>alert('Você não tem permissão para acessar essa página');</script>";
     echo "<script>window.location.href='../index.php';</script>";
 }
-if (usuarioEstaLogado()) {
-    $userlog = ucwords($_SESSION['usuario']['nome']);
-}
+
 
 if (usuarioEstaLogado()) { //USUARIO
     $userlog = $_SESSION['usuario']['nome'];
@@ -42,76 +37,9 @@ if (usuarioEstaLogado()) { //  CLIENTE
     }
 }
 
-
+require_once '../inc/cabecalho.php' ;
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <title>Mercados</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <script>
-
-
-        function confirmarExclusaoCliente() {
-            // Exibe uma mensagem de confirmação
-            if (confirm("Tem certeza que deseja excluir seu perfil?")) {
-                // Se o usuário confirmar, redireciona para a página de exclusão
-                window.location.href = 'CRUD/delete-cliente.php';
-                return true;
-            } else {
-                // Se o usuário cancelar, retorna false
-                return false;
-            }
-        }
-    </script>
-</head>
-
-<body>
-
-    <div id="area-cabecalho">
-
-        <?php if (usuarioEstaLogado()): ?>
-
-            <p class="aviso-login">Seja bem vindo&nbsp;<?= ucwords($userlog); ?></p>
-
-
-
-        <?php endif ?>
-
-        <!-- abertura postagem -->
-        <div id="area-logo">
-            <img src="../home/img/logo.png" alt="logo">
-        </div>
-        <div id="area-menu">
-            <a href="../index.php">Home</a>
-
-            <?php if (usuarioEstaLogado()): ?>
-                <a href="../home/mercados.php">Mercados</a>
-            <?php endif ?>
-
-            <a href="../home/contato.php">Contato</a>
-            <a href="../home/fale.php">Fale Conosco</a>
-
-
-
-
-
-            <?php if (usuarioEstaLogado()): ?>
-                <a href="verMeuCliente.php">Visualizar perfil</a>
-            <?php endif ?>
-
-            <?php if (usuarioEstaLogado()): ?>
-                <a href="logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
-            <?php endif ?>
-        </div>
-
-    </div>
-    </div>
-    <?php
-
-    ?>
     <div id="area-principal">
 
         <div id="area-postagens">
@@ -124,7 +52,7 @@ if (usuarioEstaLogado()) { //  CLIENTE
                 ?>
 
                 <!-- redireciona  o usuario para para editar o perfil -->
-                <form action="CRUD/update-cliente.php" method="POST" >
+                <form action="../CRUD/update-cliente.php" method="POST" >
                     <input type="hidden" name="updateperfil" value="<?= $infusuario['id_usuario']; ?>">
                     <button class='btn_left' type="submit">Editar</button>
                 </form>
@@ -146,15 +74,4 @@ if (usuarioEstaLogado()) { //  CLIENTE
 
             </div>
 
-            <div id="rodape">
-                &copy Todos os direitos reservados
-            </div>
-
-        </div>
-
-</body>
-
-</html>
-<?php
-$conn = null;
-?>
+            <?php require_once '../inc/rodape.php'; ?>

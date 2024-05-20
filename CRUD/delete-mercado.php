@@ -1,7 +1,7 @@
 <?php 
 session_start();
-require_once '../cadastro.php';
-require_once '../../func/func.php';
+require_once '../func/func.php';
+require_once '../cadastro/cadastro.php';
 
 //checa se é um mercado que está logado
 if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'dono') {
@@ -38,7 +38,7 @@ $deleteuser->execute();
 if($deletemerc && $deleteallprod && $deleteuser){
 echo "<script>
     alert('O mercado, seus produtos e seu login foram excluídos com sucesso');
-    window.location.href='../logout.php';
+    window.location.href='../cadastro/logout.php';
 </script>";
 }else{
     echo "<script>
