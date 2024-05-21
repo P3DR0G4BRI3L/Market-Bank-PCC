@@ -50,7 +50,7 @@ require_once '../inc/cabecalho.php' ;
   
                 echo "<h2> CNPJ: " . formatarCNPJ($infmercado['cnpj']) . "</h2>";
 ?>
-            <button class="btn_ud" onclick="window.location.href='update-mercado.php'">Editar</button>
+            <button class="btn_ud" onclick="window.location.href='../CRUD/update-mercado.php'">Editar</button>
             <button class="btn_ud" onclick="confirmarExclusaoMercado();">Excluir</button>
 
             <button class="btn_ud" onclick="window.location.href = '../CRUD/read-prod.php'"> Ver Produtos</button>

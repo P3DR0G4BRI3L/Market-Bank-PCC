@@ -27,6 +27,9 @@ $stmt->bindValue(':email',$_POST['email'],PDO::PARAM_STR);
 $stmt->bindValue(':senha',$_POST['senha'],PDO::PARAM_STR);
 $stmt->bindValue(':id_usuario',$_SESSION['usuario']['id_usuario'],PDO::PARAM_INT);
 if($stmt->execute()){
+    $_SESSION['usuario']['nome']=$_POST['nome'];
+    $_SESSION['usuario']['email']=$_POST['email'];
+    $_SESSION['usuario']['senha']=$_POST['senha'];
     echo "<script>alert('Perfil alterado com sucesso')</script>";
     echo "<script>window.location.href='../cadastro/verMeuCliente.php'</script>";
     

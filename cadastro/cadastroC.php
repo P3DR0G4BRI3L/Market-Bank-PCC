@@ -35,6 +35,7 @@ if ($stmt) {
     
     $infusuario = $conn->prepare("SELECT * FROM usuario WHERE email = :email ");
     $infusuario->bindValue(':email',$email,PDO::PARAM_STR);
+    $infusuario->execute();
     $id_usuario = $infusuario->fetch();
     $id_cliente = $id_usuario['id_usuario'];
     

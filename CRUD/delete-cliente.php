@@ -42,7 +42,7 @@ if ($deletecliente) {
 
     echo "<script>
     alert('Perfil deletado com sucesso');
-    window.location.href='../logout.php';
+    window.location.href='../cadastro/logout.php';
     </script>";
 } else {
     echo "<script>

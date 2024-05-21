@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nomeprod'], $_POST['p
     $stmt->bindValue(":fotoProduto",$fotoProduto,PDO::PARAM_STR);
     $stmt->bindValue(":id_produto",$infproduto['id_produto'],PDO::PARAM_INT);
 
-    if($stmt->execute() && $stmt->rowCount() > 0){
+    if($stmt->execute()){
         echo "<script>
         alert('Produto editado com sucesso!');
         window.location.href='read-prod.php';
@@ -109,7 +109,12 @@ require_once '../inc/cabecalho.php';
                         </div>
 
                         <div class="input-group">
-                            <label for="foto">Foto do produto:</label>
+
+                            <picture>
+                                <img src="../cadastro/uploads/<?= $infproduto['fotoProduto'] ?>" alt="foto do produto" width="100px" >
+                                <legend>Imagem atual</legend>
+                            </picture>
+                            <label for="foto">Foto do produto: <h6 style="color:red">* escolha uma nova imagem se quiser trocar a atual</h6></label>
                             <input type="file" id="foto" name="imgprod"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()">
 

@@ -20,7 +20,7 @@ if (usuarioEstaLogado()) {
 require_once '../inc/cabecalho.php'; ?>
 
 
-<dkiv id="area-principal">
+<div id="area-principal">
 
     <div id="area-postagens">
 
