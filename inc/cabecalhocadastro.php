@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Market Bank Supermercados</title>
+	<title>Market Bank </title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/cadastro.css">
 	<script src="../script/script.js"></script>
@@ -28,5 +28,12 @@
 			<a href="../home/contato.php">Contato</a>
 			<a href="../home/fale.php">Fale Conosco</a>
 
+			<?php if (usuarioEstaLogado()): ?>
+                <a href="../cadastro/logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
+                <?php endif ?>
+
+                <?php if(admEstaLogado()): ?>
+                    <a href="../CRUD/administrador.php">ADM</a>
+                <?php endif ?>
 		</div>
 	</div>

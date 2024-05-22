@@ -67,7 +67,7 @@ require_once '../inc/cabecalho.php'; ?>
                     produto</button>
                 <?php endif ?>
 
-                <?php if (clienteEstaLogado()): ?>
+                <?php if (usuarioEstaLogado()): ?>
                 <button class='btn_left' onclick="window.location.href='../home/mercados.php' ">Voltar</button>
                 <?php endif ?>
 
@@ -102,6 +102,7 @@ require_once '../inc/cabecalho.php'; ?>
 
                 <form action="delete-prod.php" method="POST" onsubmit="return confirmarExclusaoProduto()">
                     <input type="hidden" name="deleteprod" value="<?= $produto['id_produto']; ?>">
+                    <input type="hidden" name="deletefile" value="<?= $produto['fotoProduto']; ?>">
                     <button class='btn_left' type="submit">Excluir</button>
                 </form>
             </div>
@@ -118,6 +119,7 @@ require_once '../inc/cabecalho.php'; ?>
 
 
         case 'cliente' : 
+        case 'administrador' : 
             $id_mercado = $_POST['id_mercado'];
 
             $result = $conn->prepare("SELECT * FROM produto WHERE id_mercado = :id_mercado ");

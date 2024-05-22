@@ -1,8 +1,10 @@
+<?php require_once '../func/func.php' ; ?>
 <!DOCTYPE html>
+
 <html>
 
 <head>
-    <title>Mercados</title>
+    <title>Market Bank</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <script src="../script/script.js"></script>
@@ -56,6 +58,11 @@
                 <?php if (usuarioEstaLogado()): ?>
                 <a href="../cadastro/logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
                 <?php endif ?>
+
+                <?php if(admEstaLogado()): ?>
+                    <a href="../CRUD/administrador.php">ADM</a>
+                <?php endif ?>
+
             </div>
 
         </div>

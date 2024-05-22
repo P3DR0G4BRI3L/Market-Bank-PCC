@@ -32,7 +32,11 @@ if ($_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
 
 $nome = $_POST['nome'];
 $nomeMerc = $_POST['nome_mercado'];
+$regadmin = $_POST['regadmin'] ;
 $endereco = $_POST['endereco'];
+
+$descricao = isset($_POST['descricao']) ?? null;
+
 $horarioAbert = $_POST['horarioAbert'];
 $horarioFecha = $_POST['horarioFecha'];
 $telefone = $_POST['telefone'];
@@ -57,7 +61,7 @@ if($result->execute() && $result->rowCount()>0){
 
 
 $sqlUser = "INSERT INTO usuario (nome, email, senha, tipo) VALUES (:nome, :email, :senha, 'dono');";
-$torf=$conn->prepare($sqlUser); //$torf== True OR False
+$torf=$conn->prepare($sqlUser); //$torf == True OR False
 $torf->bindValue(':nome', $nome, PDO::PARAM_STR);
 $torf->bindValue(':email', $email, PDO::PARAM_STR);
 $torf->bindValue(':senha', $senha, PDO::PARAM_STR);
@@ -87,6 +91,8 @@ if ($torf) {
     $connmerc = $conn->prepare($sqlMerc);// salva/prepara a consulta sql para ser executada
     $connmerc->bindValue(':nomeMerc',$nomeMerc,PDO::PARAM_STR);//substitui os parametros pelo valor inserido em bindValue
     $connmerc->bindValue(':endereco',$endereco,PDO::PARAM_STR);
+    //$connmerc->bindValue(':regadmin',$regadmin,PDO::PARAM_STR); quando o banco de dados for atualizado descomentar e adicionar na tabela
+    //$connmerc->bindValue(':descricao',$descricao,PDO::PARAM_STR);
     $connmerc->bindValue(':horarioAbert',$horarioAbert);
     $connmerc->bindValue(':horarioFecha',$horarioFecha);
     $connmerc->bindValue(':telefone',$telefone);

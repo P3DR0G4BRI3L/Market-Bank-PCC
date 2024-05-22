@@ -10,10 +10,7 @@ if(!usuarioEstaLogado()){
     exit;
 }
 
-if (!usuarioEstaLogado()) {
-    echo "<script>alert('Você não tem permissão para acessar essa página');</script>";
-    echo "<script>window.location.href='../index.php';</script>";
-}
+
 
 
 if (usuarioEstaLogado()) {
@@ -60,9 +57,15 @@ if (usuarioEstaLogado()) {
 							</div>
 							
 							<div class="input-group">
-								<label for="senha">Foto do produto:</label>
-								<input type="file" id="senha" name="imgprod" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+								<label for="foto">Foto do produto:</label>
+								<input type="file" id="foto" name="imgprod" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
 							</div>
+
+							<div class="input-group">
+								<label for="descricao">Foto do produto:</label>
+								<input type="text" id="descricao" name="descricao" onkeydown="if(event.keyCode === 13) event.preventDefault()">
+							</div>
+
 							<button class="btn_left" onclick="window.location.href='../CRUD/read-prod.php'">Voltar</button>
 							<button type="submit">Entrar</button>
 						</form>

@@ -74,6 +74,7 @@ if (usuarioEstaLogado()) {
 $nome = $_POST['nomeprod'];
 $preco = $_POST['preco'];
 $fotoProduto = $_FILES['imgprod']['name'];
+$descricao = $_POST['descricao'] ?? null  ;
 $id_mercado = $infmercado['id_mercado'];
 
 $sqlprod = "INSERT INTO produto (nome, preco, fotoProduto, id_mercado) VALUES (:nome, :preco, :fotoProduto, :id_mercado);";

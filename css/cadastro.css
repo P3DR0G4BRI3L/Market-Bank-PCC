@@ -222,6 +222,12 @@ button:hover {
 .cadastro_option .login-box .btn_left{
 	justify-content: left;
 }
-
+.input-group select{
+	width: 100%; /* Faz os inputs ocuparem 100% da largura */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
 
 

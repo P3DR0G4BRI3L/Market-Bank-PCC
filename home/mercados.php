@@ -83,7 +83,7 @@ require_once '../inc/cabecalho.php';//mostra o cabeçalho
                         
                 
                             ?>
-                        <?php if (clienteEstaLogado()): ?>
+                        <?php if ($_SESSION['usuario']['tipo'] != 'dono'): ?>
                             <form action="../CRUD/read-prod.php" method="POST">
                                 <input type="hidden" name="id_mercado" value="<?= $mercado['id_mercado']; ?>">
                                 <button class='btn_left' type="submit">Ver produtos</button>
