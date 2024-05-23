@@ -90,7 +90,9 @@ require_once '../inc/cabecalho.php'; ?>
                         echo '<img src="../cadastro/uploads/' . $produto['fotoProduto'] . '" alt="Imagem do produto" width="300px">';
 
 
-                        echo "<p>" . $produto['preco'] . " reais</p>" //preço do produto
+                        echo "<p>" . number_format($produto['preco'], 2, ',', '.') . " reais</p>"; //preço do produto
+
+                        echo "<h2>Descrição:" . $produto['descricao'] . "</h2>"; //descrição do produto
             
                             ?>
             <div class="login-box">
@@ -137,8 +139,9 @@ require_once '../inc/cabecalho.php'; ?>
                         echo '<img src="../cadastro/uploads/' . $produto['fotoProduto'] . '" alt="Imagem do mercado" width="300px">';
 
 
-                        echo "<h2>" . number_format($produto['preco'], 2, ',', '.') . " R$ </h2>" //preço do produto
-            
+                        echo "<h2>" . number_format($produto['preco'], 2, ',', '.') . " R$ </h2>" ;//preço do produto
+
+                        echo "<h2>Descrição:" . $produto['descricao'] . "</h2>"; //descrição do produto
                             ?>
             <div class="login-box">
                 <button class='btn_left' onclick="window.location.href='../home/mercados.php' ">Voltar</button>

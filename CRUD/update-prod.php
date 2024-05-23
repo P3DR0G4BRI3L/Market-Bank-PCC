@@ -33,11 +33,12 @@ if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'dono') {
 
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nomeprod'], $_POST['preco'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nomeprod'], $_POST['preco'],$_POST['descricao'])) {
 
     $fotoProduto = $_POST['imgprod2'];//se não for inserida nenhuma imagem no formulario a antiga permanece, caso contrario a nova entra
     $nomeprod = $_POST['nomeprod'];
     $preco = $_POST['preco'];
+    $descricao = $_POST['descricao'];
 
     if (isset($_FILES['imgprod']) &&  $_FILES['imgprod']['error'] === UPLOAD_ERR_OK) {
         // Diretório onde você deseja armazenar as imagens
@@ -61,10 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nomeprod'], $_POST['p
     
 
     // var_dump($infproduto['id_produto'], $fotoProduto, $nomeprod, $preco);exit;
-    $stmt = $conn->prepare("UPDATE produto SET nome = :nome , preco = :preco , fotoProduto = :fotoProduto WHERE id_produto = :id_produto");
+    $stmt = $conn->prepare("UPDATE produto SET nome = :nome , preco = :preco , fotoProduto = :fotoProduto, descricao = :descricao  WHERE id_produto = :id_produto");
     $stmt->bindValue(":nome",$nomeprod,PDO::PARAM_STR);
     $stmt->bindValue(":preco",$preco,PDO::PARAM_STR);
     $stmt->bindValue(":fotoProduto",$fotoProduto,PDO::PARAM_STR);
+    $stmt->bindValue(":descricao",$descricao,PDO::PARAM_STR);
     $stmt->bindValue(":id_produto",$infproduto['id_produto'],PDO::PARAM_INT);
 
     if($stmt->execute()){
@@ -122,6 +124,12 @@ require_once '../inc/cabecalho.php';
                             <input type="hidden" name="updateprod" value="<?= $infproduto['id_produto'] ?>">
 
                         </div>
+
+                        <div class="input-group">
+								<label for="descricao">Descrição: <h6>*opcional</h6></label>
+								<input type="text" id="descricao" name="descricao" value="<?= $infproduto['descricao'] ?>" onkeydown="if(event.keyCode === 13) event.preventDefault()">
+							</div>
+
                         <button class="btn_left" onclick="window.history.back()'">Voltar</button>
                         <button type="submit">Salvar</button>
                     </form>

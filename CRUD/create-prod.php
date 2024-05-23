@@ -77,12 +77,13 @@ $fotoProduto = $_FILES['imgprod']['name'];
 $descricao = $_POST['descricao'] ?? null  ;
 $id_mercado = $infmercado['id_mercado'];
 
-$sqlprod = "INSERT INTO produto (nome, preco, fotoProduto, id_mercado) VALUES (:nome, :preco, :fotoProduto, :id_mercado);";
+$sqlprod = "INSERT INTO produto (nome, preco, fotoProduto, descricao, id_mercado) VALUES (:nome, :preco, :fotoProduto, :descricao,:id_mercado);";
 
 $stmt = $conn->prepare($sqlprod);
 $stmt->bindValue(':nome', $nome, PDO::PARAM_STR);
 $stmt->bindValue(':preco', $preco, PDO::PARAM_INT);
 $stmt->bindValue(':fotoProduto', $fotoProduto, PDO::PARAM_STR);
+$stmt->bindValue(':descricao', $descricao, PDO::PARAM_STR);
 $stmt->bindValue(':id_mercado', $id_mercado, PDO::PARAM_INT);
 $stmt->execute();
 

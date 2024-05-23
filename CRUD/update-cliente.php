@@ -20,7 +20,21 @@ if($stmt->execute()){
     
 require_once '../inc/cabecalho.php';//mostra o cabeçalhos
 if(isset($_POST['nome'] , $_POST['email'] , $_POST['senha'])){
+    $stmtverify=$conn->prepare("SELECT * FROM usuario WHERE email = :email");//verifica se existe um usuario com esse email na tabela
+    $stmtverify->bindValue(':email',$_POST['email'],PDO::PARAM_STR);
 
+    if($stmtverify->execute() && $stmtverify->rowCount()>0){
+        $verify = $stmtverify->fetch();
+        // var_dump($verify['email']);exit;
+        // $verify2=$conn->prepare("SELECT * FROM ")        ;
+        if($verify['email']!=$_SESSION['usuario']['email'])
+        echo "<script>
+
+            alert('O email inserido já está em uso');
+                window.location.href='../cadastro/verMeuCliente.php';
+            
+        </script>";
+    }
 $stmt = $conn->prepare("UPDATE usuario SET nome = :nome , email = :email ,senha = :senha WHERE id_usuario = :id_usuario ");
 $stmt->bindValue(':nome',$_POST['nome'],PDO::PARAM_STR);
 $stmt->bindValue(':email',$_POST['email'],PDO::PARAM_STR);
