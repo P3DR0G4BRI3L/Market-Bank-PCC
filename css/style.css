@@ -53,6 +53,7 @@ body {
 }
 
 #area-postagens {
+	margin: 0 auto;
 	width: 660px;
 	float: left;
 }
@@ -197,6 +198,10 @@ label {
     display: block;
     font-weight: bold;
     text-align: left;
+}
+
+ h6{
+	color: red;
 }
 
 input[type="email"],

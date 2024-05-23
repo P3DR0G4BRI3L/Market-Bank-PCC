@@ -6,6 +6,7 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/cadastro.css">
 	<script src="../script/script.js"></script>
+	<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 
 
 </head>

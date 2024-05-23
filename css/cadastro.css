@@ -165,6 +165,23 @@ h2 {
     text-align: center; /* Centraliza o conteúdo do grupo */
 }
 
+.login-box input{
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	
+}
+.login-box h6{
+	color: red;
+}
+.input-group #cnpj{
+	margin-bottom: 10px;
+}
+.input-endereco{
+	display:flex ;
+	margin-bottom: 30px;
+}
+
+.input-endereco label{align-content: center;}
+
 label {
     display: block;
     font-weight: bold;
@@ -174,7 +191,7 @@ label {
 input[type="email"],
 input[type="password"],
 input[type="text"],
-input[type="time"],
+
 input[type="tel"],
 input[type="file"],
 input[type="number"] {
@@ -184,6 +201,62 @@ input[type="number"] {
     border-radius: 5px;
     box-sizing: border-box; /* Garante que o padding não afete a largura total */
 }
+.login-box select{
+	width: 100%; /* Faz o select ocupar 100% da largura */
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+.input-time{
+	display: flex;
+	gap: 10px;
+	margin: 20px;
+
+}
+.input-time input[type="time"]{
+	width: 30%;
+	padding: 10px;
+	border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+	justify-content: start;
+
+}
+.input-name {
+	display: flex;
+	margin-bottom: 15px;
+    text-align: center; /* Centraliza o conteúdo do grupo */
+}
+.input-name input{
+	width:50%;
+	margin-left: 0px;
+}
+.input-name label{
+	margin-right:0px ;
+}
+.input-group #senha{width:80%;}
+.input-group #senha , #mostrarSenha{
+	display: flex;
+
+}
+.input-compra{
+	display: flex;
+	margin-bottom: 15px;
+    text-align: center;
+}
+.input-compra p {
+	margin-right: 30px;
+}
+.input-compra label{
+	width: block;
+
+}.input-compra input{
+	box-shadow: none;
+}
+
+
 input[type="number"]::-webkit-inner-spin-button,/*oculta as setas de incremento no chrome*/
 input[type="number"]::-webkit-outer-spin-button {/*oculta as setas de incremento no firefox*/
     display: none;
@@ -222,12 +295,53 @@ button:hover {
 .cadastro_option .login-box .btn_left{
 	justify-content: left;
 }
-.input-group select{
-	width: 100%; /* Faz os inputs ocuparem 100% da largura */
-    padding: 10px;
-    border: 1px solid #ccc;
+
+
+#mostrarSenha {
+    position: relative;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #F7800F;
+    color: white;
+    border: none;
     border-radius: 5px;
-    box-sizing: border-box;
+    cursor: pointer;
+    overflow: hidden; /* Garantir que a linha não saia dos limites do botão */
 }
 
+#mostrarSenha::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -10%; /* Ajusta a posição inicial para fora do botão */
+    width: 120%; /* Aumenta a largura para cobrir toda a diagonal */
+    height: 2px; /* Espessura da linha */
+    background-color: black; /* Cor da linha */
+    transform: rotate(-45deg); /* Rotaciona a linha para diagonal */
+    display: none; /* Inicialmente invisível */
+}
 
+#mostrarSenha.active::before {
+    display: block; /* Torna a linha visível quando a classe 'active' está presente */
+}
+table,tr,th,thead{
+	border: 1px solid black;
+	width: auto;
+}
+#btn_tabela{
+	font-size: 10px;
+    padding: 10px;
+    background-color: #F7800F;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+	margin-bottom: 5px;
+}
+.imagem{
+	width: 60px;
+}
+.imagem:hover{
+	width: 500px;
+	
+}

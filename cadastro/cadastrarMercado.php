@@ -8,14 +8,12 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
 
 <div id="area-principal">
 
-    <div id="area-postagens">
         <!--Aberturac -->
         <div class="postagem">
             <h2>Área de cadastro do mercado</h2>
             <p>
-            <div class="container">
                 <div class="login-box">
-                    <form action="cadastroM.php" method="POST" enctype="multipart/form-data">
+                    <form action="cadastroM.php" method="POST" enctype="multipart/form-data" onsubmit="return validarquant();">
 
                         <div class="input-group">
                             <label for="username">E-mail:</label>
@@ -25,14 +23,12 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
                                 placeholder="Insira seu email" required>
                         </div>
 
-                        <div class="input-group">
+                        <div class="input-name">
                             <label for="nome">Nome do proprietário:</label>
                             <input type="text" id="nome" name="nome"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()"
                                 placeholder="Insira seu nome" required>
-                        </div>
-
-                        <div class="input-group">
+                        
                             <label for="nome">Nome do Mercado:</label>
                             <input type="text" id="nome" name="nome_mercado"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()"
@@ -47,9 +43,9 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
                                 oninput="restringirLetras(this)">
                         </div>
 
-                        <div class="input-group">
-                            <label for="regadmin">Região Administrativa:</label>
-                            <select id="regadmin" name="regadmin" required>
+                        <div class="input-endereco">
+                            <label for="regiaoadm">Região Administrativa:</label>
+                            <select id="regiaoadm" name="regiaoadm" required>
                                 <option value="" disabled selected>Selecione a região administrativa</option>
                                 <option value="Brasília">Brasília</option>
                                 <option value="Gama">Gama</option>
@@ -84,9 +80,8 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
                                 <option value="Fercal">Fercal</option>
                             </select>
 
-                        </div><!--regadmin == Região administrativa-->
+                        <!--regadmin == Região administrativa-->
 
-                        <div class="input-group">
                             <label for="endereco">Endereço:</label>
                             <input type="text" id="endereco" name="endereco"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()"
@@ -94,14 +89,14 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
                         </div>
 
                         <div class="input-group">
-                            <label for="descricao">Informações adicionais:<h6 style="color:red;">*Opcional</h6></label>
+                            <label for="descricao">Informações adicionais:<h6>*Opcional</h6></label>
                             <input type="text" id="descricao" name="descricao"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()"
                                 placeholder="Insira as Informações adicionais" >
                         </div>
 
 
-                        <div class="input-group">
+                        <div class="input-time">
                             <label for="horarioFunc">Horário de abertura:&nbsp;</label>
                             <input type="time" id="horarioFunc" name="horarioAbert"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
@@ -125,7 +120,8 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
                             <input type="password" id="senha" name="senha"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()" required
                                 placeholder="Insira sua senha">
-                            <button type="button" id="mostrarSenha" onclick="mostrarsenha()">Mostrar Senha</button>
+                            <button type="button" id="mostrarSenha" onclick="mostrarsenha()"><span class="lnr lnr-eye"></span></button>
+                            
                         </div>
 
                         <div class="input-group">
@@ -135,17 +131,25 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
                                 placeholder="faça upload de uma foto do mercado">
                         </div>
 
+                        <div class="input-compra">
+                            <label for="compras">Deseja fornecer compras pelo site?&nbsp;&nbsp;&nbsp;</label>
+                            <input type="radio" id="compras" name="compras" value="sim" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+                            <p>Sim</p>
+
+                            <input type="radio" id="compras" name="compras" value="nao" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+                            <p>Não</p>
+
+                        </div>
+
                         <button class="btn_left" onclick="window.location.href='cadastrar.php'">Voltar</button>
 
                         <button type="submit">Cadastrar</button>
 
                     </form>
                 </div>
-            </div>
             </p>
         </div>
 
-    </div>
 
 
 

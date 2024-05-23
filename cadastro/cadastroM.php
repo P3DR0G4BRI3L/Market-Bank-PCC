@@ -32,15 +32,16 @@ if ($_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
 
 $nome = $_POST['nome'];
 $nomeMerc = $_POST['nome_mercado'];
-$regadmin = $_POST['regadmin'] ;
+$regiaoadm = $_POST['regiaoadm'] ;
 $endereco = $_POST['endereco'];
 
-$descricao = isset($_POST['descricao']) ?? null;
+$descricao = $_POST['descricao'] ?? null;
 
 $horarioAbert = $_POST['horarioAbert'];
 $horarioFecha = $_POST['horarioFecha'];
 $telefone = $_POST['telefone'];
 $cnpj = $_POST['cnpj'];
+$compras = $_POST['compras'];
 
 $email = $_POST['email'];
 $senha = $_POST['senha'];
@@ -84,26 +85,29 @@ if ($torf) {
         $id_dono = $id['id_usuario'];
 
         //insere os dados na tabela mercado
-       $sqlMerc = "INSERT INTO mercado ( nomeMerc, endereco, horarioAbert, horarioFecha, telefone, cnpj, imagem, id_dono)
+       $sqlMerc = "INSERT INTO mercado ( nomeMerc, endereco, horarioAbert, horarioFecha, telefone, cnpj, imagem, id_dono, descricao, regiaoadm, compras)
         VALUES
-        ( :nomeMerc, :endereco, :horarioAbert, :horarioFecha, :telefone, :cnpj, :imagem, :id_dono );";
+        ( :nomeMerc, :endereco, :horarioAbert, :horarioFecha, :telefone, :cnpj, :imagem, :id_dono, :descricao , :regiaoadm, :compras );";
 
     $connmerc = $conn->prepare($sqlMerc);// salva/prepara a consulta sql para ser executada
     $connmerc->bindValue(':nomeMerc',$nomeMerc,PDO::PARAM_STR);//substitui os parametros pelo valor inserido em bindValue
     $connmerc->bindValue(':endereco',$endereco,PDO::PARAM_STR);
-    //$connmerc->bindValue(':regadmin',$regadmin,PDO::PARAM_STR); quando o banco de dados for atualizado descomentar e adicionar na tabela
-    //$connmerc->bindValue(':descricao',$descricao,PDO::PARAM_STR);
+    $connmerc->bindValue(':regiaoadm',$regiaoadm,PDO::PARAM_STR);
+    $connmerc->bindValue(':descricao',$descricao,PDO::PARAM_STR);
     $connmerc->bindValue(':horarioAbert',$horarioAbert);
     $connmerc->bindValue(':horarioFecha',$horarioFecha);
     $connmerc->bindValue(':telefone',$telefone);
     $connmerc->bindValue(':cnpj',$cnpj,PDO::PARAM_STR);
     $connmerc->bindValue(':imagem',$imagem,PDO::PARAM_STR);
+    $connmerc->bindValue(':descricao',$descricao,PDO::PARAM_STR);
+    $connmerc->bindValue(':regiaoadm',$regiaoadm,PDO::PARAM_STR);
+    $connmerc->bindValue(':compras',$compras,PDO::PARAM_STR);
     $connmerc->bindValue(':id_dono',$id_dono,PDO::PARAM_INT);//id_dono referencia id_usuario na tabela usuario
     $connmerc->execute();
         if ($connmerc) {
 
             echo "<script>alert('Cadastro realizado com sucesso!');</script>";
-             echo "<script>window.location.href = '../index.php';</script>";
+             echo "<script>window.location.href = 'login.php';</script>";
 
             exit; // Certifique-se de sair do script após o redirecionamento
         }

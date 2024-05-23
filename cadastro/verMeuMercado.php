@@ -40,6 +40,8 @@ require_once '../inc/cabecalho.php' ;
                 echo '<img src="uploads/' . $infmercado['imagem'] . '" alt="Imagem do mercado" width="620px">';
 
 
+                echo "<h2>" . ucwords($infmercado['regiaoadm']) . "</h2>"; //endereço do mercado
+
                 echo "<h2>" . ucwords($infmercado['endereco']) . "</h2>"; //endereço do mercado
 
                 echo "<h2>Aberto das " . date('H:i', strtotime($infmercado['horarioAbert'])) . "</h2>"; //endereço do mercado
@@ -49,6 +51,10 @@ require_once '../inc/cabecalho.php' ;
                 echo "<h2> telefone para contato: " . formatarTelefone($infmercado['telefone']) . "</h2>";
   
                 echo "<h2> CNPJ: " . formatarCNPJ($infmercado['cnpj']) . "</h2>";
+
+                echo "<h2> Descrição: " . $infmercado['descricao'] . "</h2>";
+
+                echo "<h2> Compras: " . ucwords($infmercado['compras']) . "</h2>";
 ?>
             <button class="btn_ud" onclick="window.location.href='../CRUD/update-mercado.php'">Editar</button>
             <button class="btn_ud" onclick="confirmarExclusaoMercado();">Excluir</button>

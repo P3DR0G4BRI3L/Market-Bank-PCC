@@ -39,7 +39,7 @@ if (usuarioEstaLogado()) {
             <!--Abertura postagem -->
             <div class="postagem">
 
-                <h2>Adicionar produto em:&nbsp;<?= $infmercado['nomeMerc'] ?></h2>
+                <h2>Adicionar produto no mercado:&nbsp;<?= $infmercado['nomeMerc'] ?></h2>
                
 
                 <div class="container">
@@ -62,12 +62,12 @@ if (usuarioEstaLogado()) {
 							</div>
 
 							<div class="input-group">
-								<label for="descricao">Foto do produto:</label>
+								<label for="descricao">Descrição: <h6>*opcional</h6></label>
 								<input type="text" id="descricao" name="descricao" onkeydown="if(event.keyCode === 13) event.preventDefault()">
 							</div>
 
 							<button class="btn_left" onclick="window.location.href='../CRUD/read-prod.php'">Voltar</button>
-							<button type="submit">Entrar</button>
+							<button type="submit">Adicionar</button>
 						</form>
 					</div>
 				</div>
