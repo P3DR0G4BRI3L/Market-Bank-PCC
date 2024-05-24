@@ -1,6 +1,8 @@
 <?php
 require_once 'cadastro.php';
 require_once '../func/func.php';
+require_once '../model/usuarioDAO.php';
+require_once '../model/clienteDAO.php';
 
 session_start();
 
@@ -17,6 +19,8 @@ if (usuarioEstaLogado()) { //USUARIO
     $userlog = $_SESSION['usuario']['nome'];
     if ($_SESSION['usuario']['tipo'] == 'cliente') {
         $id_usuario = $_SESSION['usuario']['id_usuario'];
+        $usuarioDAO = new usuarioDAO($conn);//cria um objeto cliente 
+        $usuarioDAO->getById($id_usuario);
         $usuario = $conn->prepare("SELECT * FROM usuario WHERE id_usuario = :id_usuario");
         $usuario->bindValue(':id_usuario',$id_usuario,PDO::PARAM_INT);
         $usuario->execute();
