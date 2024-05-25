@@ -39,7 +39,14 @@ class mercadoDAO{
 
     }
 
-
+    public function getAllMercados(){
+        $stmt = $this->conn->prepare("SELECT * FROM mercado;");
+        if($stmt->execute() && $stmt->rowCount()>0 ){
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);//vai retornar um array de indice com arrays associativos com os nome das colunas
+        }else{
+            return FALSE;
+        }
+    }
 
 
 

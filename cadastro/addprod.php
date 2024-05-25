@@ -1,6 +1,8 @@
 <?php
 require_once 'cadastro.php';
 require_once '../func/func.php';
+require_once '../model/mercadoDAO.php';
+require_once '../model/usuarioDAO.php';
 
 session_start();
 

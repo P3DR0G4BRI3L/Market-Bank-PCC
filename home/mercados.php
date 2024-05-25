@@ -1,23 +1,22 @@
 <?php
 require_once '../cadastro/cadastro.php';
 require_once '../func/func.php';
+require_once '../model/mercadoDAO.php';
+require_once '../model/usuarioDAO.php';
 session_start();
 
 //verifica se tem algum usuário logado retorna true ou false
 
 
+$mercadoDAO = new mercadoDAO($conn);
 
-if (usuarioEstaLogado()) {
+if (mercadoEstaLogado()) {
     $userlog = ucwords($_SESSION['usuario']['nome']);
 
-    if ($_SESSION['usuario']['tipo'] == 'dono') {
-        $mercName = $_SESSION['usuario']['id_usuario'];
-        $mercado=$conn->prepare("SELECT * FROM mercado WHERE id_dono = :id_dono");
-        $mercado->bindValue(':id_dono',$mercName,PDO::PARAM_INT);
-        $mercado->execute();
-        $infmercado = $mercado->fetch();
+       $infmercado = $mercadoDAO->getMercadoByIdUsuario($_SESSION['usuario']['id_usuario']);
+        
 
-    }
+
 }
 require_once '../inc/cabecalho.php';//mostra o cabeçalho
 ?>
@@ -51,38 +50,35 @@ require_once '../inc/cabecalho.php';//mostra o cabeçalho
             ?>
 
 
-            <?php
-            $result = $conn->prepare("SELECT * FROM mercado;");
-            $result->execute();
-            ?>
 
             <!--Abertura postagem -->
 
             <!--lista os mercados, usando fetchAll no $result,  -->
-            <?php if ($result->rowCount() > 0) {
-                $mercados=$result->fetchAll();
-                foreach ($mercados as $mercado  ) { ?>
+            <?php if ($mercadoDAO->getAllMercados()) {
+                $mercados=$mercadoDAO->getAllMercados();
+                //  echo"<pre>"; print_r($mercados);exit; ?>                        
+                <?php foreach ($mercados as $mercado  ) :  ?>
                     <div class="postagem">
                     
-                        <?php
                         
                         
-                        
-                        echo "<h2> " . ucwords($mercado['nomeMerc']) . " </h2>"; //nome do mercado
+                         <h2><?= ucwords($mercado['nomeMerc'])?> </h2>
                 
-                        echo '<img src="../cadastro/uploads/' . $mercado['imagem'] . '" alt="Imagem do mercado" width="620px">';
 
+                         
+                         <!-- <img src="../cadastro/uploads/ <?= $mercado['imagem'] ?>" alt="Imagem do mercado" width="620px"> -->
+                         <?php echo '<img src="../cadastro/uploads/' . $mercado['imagem'] . '" alt="Imagem do mercado" width="620px">';?>
 
-                        echo "<h2>" . $mercado['endereco'] . "</h2>"; //endereço do mercado
+                         <h2><?= $mercado['endereco'] ?> </h2>
 
-                        echo "<h2>Aberto das " . date('H:i', strtotime($mercado['horarioAbert'])) . "</h2>"; //endereço do mercado
+                         <h2>Aberto das <?= date('H:i', strtotime($mercado['horarioAbert'])) ?> </h2>
 
-                        echo "<h2> Até as " . date('H:i', strtotime($mercado['horarioFecha'])) . "</h2>"; //endereço do mercado
+                         <h2> Até as  <?= date('H:i', strtotime($mercado['horarioFecha'])) ?> </h2> 
                         
-                        echo "<h2> telefone para contato: " . formatarTelefone($mercado['telefone']) . "</h2>";
+                         <h2> telefone para contato:  <?= formatarTelefone($mercado['telefone']) ?> </h2>
                         
                 
-                            ?>
+                            
                         <?php if ($_SESSION['usuario']['tipo'] != 'dono'): ?>
                             <form action="../CRUD/read-prod.php" method="POST">
                                 <input type="hidden" name="id_mercado" value="<?= $mercado['id_mercado']; ?>">
@@ -90,9 +86,8 @@ require_once '../inc/cabecalho.php';//mostra o cabeçalho
 
                             </form>
                         <?php endif ?>
-                    </div><?php }    
-                    
-            } ?>
+                    </div><?php endforeach ?>
+                    <?php } ?>
             <hr>
             <!--// Fechamento postagem -->
 

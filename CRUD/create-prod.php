@@ -58,19 +58,15 @@ if ($_FILES['imgprod']['error'] === UPLOAD_ERR_OK) {
 }
 
 // i
-if (usuarioEstaLogado()) {
+if (mercadoEstaLogado()) {
     $userlog = ucwords($_SESSION['usuario']['nome']);
 
-    if ($_SESSION['usuario']['tipo'] == 'dono') {
-        $mercName = $_SESSION['usuario']['id_usuario'];
-        $mercado = $conn->prepare("SELECT * FROM mercado WHERE id_dono = :id_dono");
-        $mercado->bindValue(':id_dono', $mercName, PDO::PARAM_STR);
-        $mercado->execute();
-        $infmercado = $mercado->fetch();
+       $mercadoDAO = new mercadoDAO($conn);
+       $infmercado = $mercadoDAO->getMercadoByIdUsuario($_SESSION['usuario']['id_usuario']);
+        
 
-    }
+
 }
-
 $nome = $_POST['nomeprod'];
 $preco = $_POST['preco'];
 $fotoProduto = $_FILES['imgprod']['name'];
