@@ -5,52 +5,49 @@ echo"<pre>";
 echo"</pre>";
 require_once '../func/func.php';
 require_once '../cadastro/cadastro.php';
+require_once '../model/usuarioDAO.php';
 
 if (usuarioEstaLogado()) {
     $userlog = $_SESSION['usuario']['nome'];
 }
 
+$usuarioDAO = new usuarioDAO($conn);
 if(isset($_POST['updateperfil'])){
+
+    
     $id_usuario = $_POST['updateperfil'];
-$stmt = $conn->prepare("SELECT * FROM usuario WHERE id_usuario = :id_usuario");
-$stmt->bindValue(':id_usuario',$id_usuario,PDO::PARAM_INT);
-if($stmt->execute()){
-    $infusuario = $stmt->fetch();    
-}}
+ 
+    $infusuario = $usuarioDAO->getUsuarioById($id_usuario);    
+}
     
 require_once '../inc/cabecalho.php';//mostra o cabeçalhos
 if(isset($_POST['nome'] , $_POST['email'] , $_POST['senha'])){
-    $stmtverify=$conn->prepare("SELECT * FROM usuario WHERE email = :email");//verifica se existe um usuario com esse email na tabela
-    $stmtverify->bindValue(':email',$_POST['email'],PDO::PARAM_STR);
+   $nome = $_POST['nome']  !=null ?$_POST['nome']   : "erro" ;
+   $email = $_POST['email']!=null ?$_POST['email'] : "erro" ;
+   $senha = $_POST['senha']!=null ?$_POST['senha'] : "erro" ;
+   
 
-    if($stmtverify->execute() && $stmtverify->rowCount()>0){
-        $verify = $stmtverify->fetch();
-        // var_dump($verify['email']);exit;
-        // $verify2=$conn->prepare("SELECT * FROM ")        ;
-        if($verify['email']!=$_SESSION['usuario']['email'])
+    
+        if($usuarioDAO->verificaEmailExisteAtt($email,$_SESSION['usuario']['email']))
         echo "<script>
 
             alert('O email inserido já está em uso');
                 window.location.href='../cadastro/verMeuCliente.php';
             
         </script>";
-    }
-$stmt = $conn->prepare("UPDATE usuario SET nome = :nome , email = :email ,senha = :senha WHERE id_usuario = :id_usuario ");
-$stmt->bindValue(':nome',$_POST['nome'],PDO::PARAM_STR);
-$stmt->bindValue(':email',$_POST['email'],PDO::PARAM_STR);
-$stmt->bindValue(':senha',$_POST['senha'],PDO::PARAM_STR);
-$stmt->bindValue(':id_usuario',$_SESSION['usuario']['id_usuario'],PDO::PARAM_INT);
-if($stmt->execute()){
+    $id_usuario = $_SESSION['usuario']['id_usuario'];
+if($usuarioDAO->atualizarUsuario($nome , $email , $senha , $id_usuario)){
     $_SESSION['usuario']['nome']=$_POST['nome'];
     $_SESSION['usuario']['email']=$_POST['email'];
-    $_SESSION['usuario']['senha']=$_POST['senha'];
     echo "<script>alert('Perfil alterado com sucesso')</script>";
     echo "<script>window.location.href='../cadastro/verMeuCliente.php'</script>";
-    
+     
+}
+   
 }else{
     echo"alert('Ocorreu um erro')";
 }
-}?>
+?>
 <div id="area-principal">
     <div id="area-postagens">
         <!--Aberturac -->
@@ -74,7 +71,7 @@ if($stmt->execute()){
 
                         <div class="input-group">
                             <label for="senha">Senha:</label>
-                            <input type="password" id="senha" name="senha" value="<?= $infusuario['senha'] ?>"
+                            <input type="password" id="senha" name="senha" value="<?= $usuarioDAO->getSenhaById($infusuario['id_usuario']) ?>"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
                             <button type="button" id="mostrarSenha" onclick="mostrarsenha()">Mostrar Senha</button>
                         </div>

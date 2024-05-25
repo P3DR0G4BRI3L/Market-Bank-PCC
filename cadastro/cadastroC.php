@@ -1,6 +1,14 @@
 <?php
+/*
+esta pagina é responsavel por receber os dados do formulário inserido em 
+cadastrarCliente.php, após receber os dados do formulário esses dados são
+inseridos no banco de dados.
+clienteDAO lida com a tabela cliente,e usuarioDAO lida com a tabela usuario
+*/
 // Conexão com o banco de dados
 require_once 'cadastro.php' ;
+require_once '../model/clienteDAO.php' ;
+require_once '../model/usuarioDAO.php' ;
 
 // Obtem os dados do formulário
 $nome = $_POST['nome'];
@@ -8,51 +16,30 @@ $email = $_POST['email'];
 $senha = $_POST['senha'];
 
 
+$usuarioDAO = new usuarioDAO($conn);
+
 //verifica se o email inserido na hora do cadastro já está cadastrado no sistema, se estiver retorna erro
-$sqlverify = "SELECT * FROM usuario WHERE email = :email;";
-$result = $conn->prepare($sqlverify);
-$result->bindValue(':email', $email,PDO::PARAM_STR);
-$result->execute();
-if ($result->rowCount() > 0) {
+if($usuarioDAO->verificaEmailExiste($email)){
     echo "<script>
-             alert('O email inserido já está em uso');
-             window.location.href = 'cadastrarCliente.php';
-           </script>";
-    exit;
+            alert('O email inserido já está em uso');
+            window.location.href = '../cadastro/cadastrarCliente.php';
+          </script>";
+                exit;
 }
 
 // Insere os dados na tabela de usuários
-$sql = "INSERT INTO usuario (nome, email, senha, tipo) VALUES (:nome, :email, :senha, 'cliente');";
-
-$stmt=$conn->prepare($sql);
-$stmt->bindValue(':nome',$nome,PDO::PARAM_STR);
-$stmt->bindValue(':email',$email,PDO::PARAM_STR);
-$stmt->bindValue(':senha',$senha,PDO::PARAM_STR);
-$stmt->execute();
-
-if ($stmt) {
-
+if ($usuarioDAO->inserirUsuario($nome,$email,$senha,'cliente')) {
+    $clienteDAO = new clienteDAO($conn);
     
-    $infusuario = $conn->prepare("SELECT * FROM usuario WHERE email = :email ");
-    $infusuario->bindValue(':email',$email,PDO::PARAM_STR);
-    $infusuario->execute();
-    $id_usuario = $infusuario->fetch();
-    $id_cliente = $id_usuario['id_usuario'];
-    
-    $sqlcliente = "INSERT INTO cliente (id_usuario) VALUES (:id_cliente);";
-   
-    $stmtc = $conn->prepare($sqlcliente);
-    $stmtc->bindValue(':id_cliente',$id_cliente,PDO::PARAM_INT);
-    $stmtc->execute();
-    if ($stmtc){
-        // Usuário autenticado com sucesso
-        echo "<script>alert('Cadastro realizado com sucesso!');</script>";
-    echo "<script>window.location.href = 'login.php';</script>";
-    exit; // Certifique-se de sair do script após o redirecionamento
-} else {
-    echo "Erro ao cadastrar: " . $stmt->errorInfo();
+    $clienteDAO->inserirCliente($usuarioDAO->getIdUsuarioByEmail($email));//este trecho insere o usuario cliente na tabela cliente 
+    echo "<script>
+    alert('Cadastro realizado com sucesso');
+    window.location.href = '../cadastro/login.php';
+    </script>";exit;
+}else{
+    echo "Erro ao cadastrar" . $stmt->errorInfo();
 }
 
-}
+
+
 $conn = null;
-

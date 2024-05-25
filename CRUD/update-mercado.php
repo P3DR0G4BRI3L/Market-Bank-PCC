@@ -2,19 +2,20 @@
 session_start();
 require_once '../func/func.php';
 require_once '../cadastro/cadastro.php';
+require_once '../model/mercadoDAO.php';
+require_once '../model/usuarioDAO.php';
 if(!usuarioEstaLogado()){
     header('location:../index.php');
     exit;
 }
+$usuarioDAO = new usuarioDAO($conn);
 
-if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'dono') {
+if (mercadoEstaLogado()) {
+    $userlog = ucwords($_SESSION['usuario']['nome']);
 
-    //armazena todas as informações do mercado logado em $infmercado
-    $mercName = $_SESSION['usuario']['id_usuario'];
-    $mercado = $conn->prepare("SELECT * FROM mercado WHERE id_dono = :mercName;");
-    $mercado->bindValue(':mercName', $mercName, PDO::PARAM_INT);
-    $mercado->execute();
-    $infmercado = $mercado->fetch();
+       $mercadoDAO = new mercadoDAO($conn);
+       $infmercado = $mercadoDAO->getMercadoByIdUsuario($_SESSION['usuario']['id_usuario']);
+
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'], $_POST['nome'], $_POST['nome_mercado'], $_POST['cnpj'], $_POST['endereco'], $_POST['horarioAbert'], $_POST['horarioFecha'],
  $_POST['telefone'], $_POST['senha'],$_POST['regiaoadm'],$_POST['compras'])) {
@@ -56,12 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'], $_POST['nome
     }
 
     
-    $stmt = $conn->prepare("UPDATE usuario SET nome = :nome , email = :email , senha = :senha WHERE id_usuario = :id_dono");//atualiza a tabela usuario
-    $stmt->bindValue(':nome',$nome,PDO::PARAM_STR);
-    $stmt->bindValue(':email',$email,PDO::PARAM_STR);
-    $stmt->bindValue(':senha',$senha,PDO::PARAM_STR);
-    $stmt->bindValue(':id_dono',$infmercado['id_dono'],PDO::PARAM_INT);
-
+    $attUser = $usuarioDAO->atualizarUsuario($nome,$email,$senha,$id_usuario);
+    
 
     $stmt2 = $conn->prepare("UPDATE mercado SET nomeMerc = :nomeMerc , endereco = :endereco , horarioAbert = :horarioAbert , horarioFecha = :horarioFecha , telefone = :telefone , cnpj = :cnpj , imagem = :imagem, regiaoadm = :regiaoadm, compras = :compras, descricao = :descricao WHERE id_mercado = :id_mercado ");//atualiza a tabela mercado
     $stmt2->bindValue(':nomeMerc',$nomeMerc,PDO::PARAM_STR);
@@ -208,7 +205,7 @@ require_once '../inc/cabecalho.php';
 
                         <div class="input-group">
                             <label for="senha">Senha:</label>
-                            <input type="password" id="senha" name="senha" value="<?= $_SESSION['usuario']['senha'] ?>"
+                            <input type="password" id="senha" name="senha" value="<?= $usuarioDAO->getSenhaById($_SESSION['usuario']['id_usuario']) ?>"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()" required
                                 placeholder="Insira sua senha">
                             <button type="button" id="mostrarSenha" onclick="mostrarsenha()">Mostrar Senha</button>

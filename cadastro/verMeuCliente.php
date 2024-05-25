@@ -9,39 +9,31 @@ session_start();
 
 
 
-if (!usuarioEstaLogado()) {
+if (!clienteEstaLogado()) {
     echo "<script>alert('Você não tem permissão para acessar essa página');</script>";
     echo "<script>window.location.href='../index.php';</script>";
 }
 
 
-if (usuarioEstaLogado()) { //USUARIO
+if (clienteEstaLogado()) { //USUARIO
     $userlog = $_SESSION['usuario']['nome'];
-    if ($_SESSION['usuario']['tipo'] == 'cliente') {
-        $id_usuario = $_SESSION['usuario']['id_usuario'];
-        $usuarioDAO = new usuarioDAO($conn);//cria um objeto cliente 
-        $usuarioDAO->getById($id_usuario);
-        $usuario = $conn->prepare("SELECT * FROM usuario WHERE id_usuario = :id_usuario");
-        $usuario->bindValue(':id_usuario',$id_usuario,PDO::PARAM_INT);
-        $usuario->execute();
-        $infusuario = $usuario->fetch();
-        //armazena todas as informações do usuario logado na variavel $infusuario 
-    }
+
+    $id_usuario = $_SESSION['usuario']['id_usuario'];
+    $usuarioDAO = new usuarioDAO($conn);//cria um objeto cliente 
+    $usuarioDAO->getUsuarioById($id_usuario);
+    $infusuario = $usuarioDAO->getUsuarioById($id_usuario);//retorna um array associativo com o nome das colunas
+    //armazena todas as informações do usuario logado na variavel $infusuario 
+
+
+    $id_cliente = $_SESSION['usuario']['id_usuario'];
+    $clienteDAO = new clienteDAO($conn);
+    $infcliente = $clienteDAO->getClienteById($id_cliente);
+    // armazena todas as informações do cliente logado na variavel $infcliente 
+
+
 }
 
-if (usuarioEstaLogado()) { //  CLIENTE
-    $userlog = $_SESSION['usuario']['nome'];
-    if ($_SESSION['usuario']['tipo'] == 'cliente') {
-        $id_cliente = $_SESSION['usuario']['id_usuario'];
-        $cliente = $conn->prepare("SELECT * FROM cliente WHERE id_usuario = :id_cliente");
-        $cliente->bindValue(':id_cliente',$id_cliente,PDO::PARAM_INT);
-        $infcliente = $cliente->fetch();
-        // armazena todas as informações do cliente logado na variavel $infusuario 
-    
-    }
-}
-
-require_once '../inc/cabecalho.php' ;
+require_once '../inc/cabecalho.php';
 ?>
 
 <div id="area-principal">
@@ -52,8 +44,8 @@ require_once '../inc/cabecalho.php' ;
 
             <h2>Seu nome: <?= ucwords($infusuario['nome']) ?></h2>
             <?php
-                echo "<p>Seu email logado: " . $infusuario['email'] . "</p>";
-                ?>
+            echo "<p>Seu email logado: " . $infusuario['email'] . "</p>";
+            ?>
 
             <!-- redireciona  o usuario para para editar o perfil -->
             <form action="../CRUD/update-cliente.php" method="POST">

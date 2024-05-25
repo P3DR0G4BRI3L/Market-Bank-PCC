@@ -2,6 +2,8 @@
 session_start();
 require_once 'cadastro.php';
 require_once '../func/func.php';
+require_once '../model/mercadoDAO.php';
+require_once '../model/usuarioDAO.php';
 // Conexão com o banco de dados
 
 
@@ -11,59 +13,44 @@ $senha = $_POST['senha'];
 
 
 
-$resultado = $conn->prepare("SELECT * FROM `usuario` WHERE email = :email AND senha = :senha;");
-$resultado->bindValue(':email',$email,PDO::PARAM_STR);
-$resultado->bindValue(':senha',$senha,PDO::PARAM_STR);
-$resultado->execute();
+$usuarioDAO = new usuarioDAO($conn);
+if ($usuarioDAO->login($email, $senha)) {
+    
+    $infoUser = $usuarioDAO->getUsuarioById($usuarioDAO->getIdUsuarioByEmail($email));
 
-if($resultado && $resultado->rowCount()>0 ){//se a query der certo E resultado (que se torna um objeto se a query der certo) tiver mais de 0 linhas, 
+    switch ($infoUser['tipo']) {
 
-$infoUser = $resultado->fetch(); //atribua todas as informações do usuario a variavel $infoUser, após isso, essa variavel se torna um array associativo com todas as informações do usuario
-    $tipo= $infoUser['tipo']; //variavel $tipo, recebe o tipo do usuario
-switch ($tipo) {
-
-    case "cliente":
-        if ($resultado->rowCount() > 0) {
+        case "cliente":
             echo "<script>alert('Login realizado com sucesso');</script>";
             $_SESSION['usuario'] = $infoUser;//atribui todas as informações do usuario ao usuario de sessão
-            header("Location:../index.php");
+            echo"<script>window.location.href='../index.php'</script>";
             exit;
-        } else {
-            $default = "Usuário ou senha incorretos";
-        }
         break;
 
 
 
 
 
-    case "dono":
-        if ($resultado->rowCount() > 0) {
-            echo "<script>alert('Login realizado com sucesso');</script>";
-            $_SESSION['usuario'] = $infoUser;//atribui todas as informações do usuario ao usuario de sessão
-            header("Location:../index.php");
-            exit;
-        } else {
-            $default = "Usuário ou senha incorretos";
-        }
-        break;
+            case "dono":
+                echo "<script>alert('Login realizado com sucesso');</script>";
+                $_SESSION['usuario'] = $infoUser;//atribui todas as informações do usuario ao usuario de sessão
+                echo"<script>window.location.href='../index.php'</script>";
+                exit;
+            break;
 
 
 
 
 
-    case "administrador":
-        if ($resultado->rowCount() > 0) {
-            echo "<script>alert('Login realizado com sucesso');</script>";
-            $_SESSION['usuario'] = $infoUser;//atribui todas as informações do usuario ao usuario de sessão
-            header("Location:../index.php");
-            exit;
-        } else {
-            $default = "Usuário ou senha incorretos";
-        }
-        break;
+        case "administrador":
+                echo "<script>alert('Login realizado com sucesso');</script>";
+                $_SESSION['usuario'] = $infoUser;//atribui todas as informações do usuario ao usuario de sessão
+                echo"<script>window.location.href='../index.php'</script>";
+                exit;
+            break;
 
-}}else{
+    }
+} else {
 
     $default = "Usuário ou senha incorretos";
 
@@ -115,10 +102,11 @@ switch ($tipo) {
 
         <div id="area-postagens">
             <!--Aberturac -->
-            
+
             <div class="postagem">
                 <h2>
-                 <?php if(isset($default)) echo"$default";//mostra usuario ou senha incorretos ?>
+                    <?php if (isset($default))
+                        echo "$default";//mostra usuario ou senha incorretos ?>
                 </h2>
                 <p>
                 <div class="cadastro_option">
@@ -135,7 +123,7 @@ switch ($tipo) {
                 </div>
                 </p>
             </div>
-            
+
             <!--// Fechamento postagem -->
 
             <!--Abertura postagem -->

@@ -16,7 +16,7 @@
     <div id="area-cabecalho">
         <?php if (usuarioEstaLogado()): ?>
 
-        <p class="aviso-login">Seja bem vindo&nbsp;<?= ucwords($userlog); ?></p>
+        <p class="aviso-login">Seja bem vindo&nbsp;<?= (usuarioEstaLogado()) ? ucwords($userlog) : ''; ?></p>
 
         <?php if (mercadoEstaLogado()): ?>
 

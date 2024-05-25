@@ -1,6 +1,8 @@
 <?php
 require_once 'cadastro.php';
 require_once '../func/func.php';
+require_once '../model/mercadoDAO.php';
+require_once '../model/usuarioDAO.php';
 
 
 session_start();
@@ -9,21 +11,19 @@ session_start();
 
 
 if (!usuarioEstaLogado()) {
-    echo "<script>alert(Você não tem permissão para acessar essa página);</script>";
+    echo "<script>alert('Você não tem permissão para acessar essa página');</script>";
     echo "<script>window.location.href='../index.php';</script>";
 }
+$usuarioDAO = new usuarioDAO($conn);
 
-if (usuarioEstaLogado()) {
+if (mercadoEstaLogado()) {
     $userlog = ucwords($_SESSION['usuario']['nome']);
 
-    if ($_SESSION['usuario']['tipo'] == 'dono') {
-        $mercName = $_SESSION['usuario']['id_usuario'];
-        $mercado=$conn->prepare("SELECT * FROM mercado WHERE id_dono = :id_dono");
-        $mercado->bindValue(':id_dono',$mercName,PDO::PARAM_STR);
-        $mercado->execute();
-        $infmercado = $mercado->fetch();
+       $mercadoDAO = new mercadoDAO($conn);
+       $infmercado = $mercadoDAO->getMercadoByIdUsuario($_SESSION['usuario']['id_usuario']);
+        
 
-    }
+
 }
 
 require_once '../inc/cabecalho.php' ;
