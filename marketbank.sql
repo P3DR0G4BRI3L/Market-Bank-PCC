@@ -73,11 +73,11 @@ DEFAULT CHARSET = utf8mb4;
 
 -- Criação da tabela `filtroProduto`
 CREATE TABLE filtroProduto (
-  id_sessao INT(11) NOT NULL AUTO_INCREMENT,
-  nomeSessao VARCHAR(45) NOT NULL,
+  id_filtro INT(11) NOT NULL AUTO_INCREMENT,
+  nomeFiltro VARCHAR(45) NOT NULL,
   id_mercado INT(11) NOT NULL,
   id_produto INT(11) NOT NULL,
-  PRIMARY KEY (id_sessao),
+  PRIMARY KEY (id_filtro),
   INDEX (id_mercado),
   INDEX (id_produto),
   CONSTRAINT filtroProduto_ibfk_1 FOREIGN KEY (id_mercado) REFERENCES mercado (id_mercado),
