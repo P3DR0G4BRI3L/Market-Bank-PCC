@@ -7,7 +7,6 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
 
 
 <div id="area-principal">
-
     <div id="area-postagens">
         <!--Aberturac -->
         <div class="postagem">
@@ -31,7 +30,7 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
                         <div class="input-group">
                             <label for="senha">Senha:</label>
                             <input type="password" id="senha" name="senha"
-                                onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+                                onkeydown="if(event.keyCode === 13) event.preventDefault()" required maxlength="16">
                         </div>
                         <button class="btn_left" onclick="window.history.back()">Voltar</button>
                         <button type="submit">Entrar</button>
@@ -53,4 +52,4 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
         <!--// Fechamento postagem -->
     </div>
 
-    < <?php require_once '../inc/rodape.php'; ?>
+     <?php require_once '../inc/rodape.php'; ?>

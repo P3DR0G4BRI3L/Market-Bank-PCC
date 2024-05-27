@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'], $_POST['nome
     $stmt2->bindValue(':descricao',$descricao,PDO::PARAM_STR);
     $stmt2->bindValue(':id_mercado',$infmercado['id_mercado'],PDO::PARAM_INT);
 
-    if($stmt->execute() && $stmt2->execute()){
+    if( $stmt2->execute()){
         $stmt3 = $conn->prepare("SELECT * FROM usuario WHERE id_usuario = :id_dono ");
         $stmt3->bindValue(':id_dono',$infmercado['id_dono'],PDO::PARAM_INT);
         $stmt3->execute();

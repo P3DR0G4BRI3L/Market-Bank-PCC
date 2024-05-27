@@ -11,10 +11,15 @@ require_once '../model/clienteDAO.php' ;
 require_once '../model/usuarioDAO.php' ;
 
 // Obtem os dados do formulário
+
+if(isset($_POST['senha']) && strlen($_POST['senha'])>16){
+    echo "<script>alert('Senha muito extensa, no maximo 16 caracteres');
+    window.location.href='cadastrarCliente.php';
+    </script>";
+}
 $nome = $_POST['nome'];
 $email = $_POST['email'];
 $senha = $_POST['senha'];
-
 
 $usuarioDAO = new usuarioDAO($conn);
 
