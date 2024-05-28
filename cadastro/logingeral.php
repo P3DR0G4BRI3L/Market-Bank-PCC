@@ -32,8 +32,32 @@ if ($usuarioDAO->login($email, $senha)) {
 
 
             case "dono":
+                $mercadoDAO = new mercadoDAO($conn);
+                   $infmercado = $mercadoDAO->getMercadoByIdUsuario($infoUser['id_usuario']);
+                $_SESSION['usuario'] = [
+                    'id_usuario' => $infoUser['id_usuario'],
+                    'email' => $infoUser['email'],
+                    'nome' => $infoUser['nome'],
+                    'tipo' => $infoUser['tipo'],
+
+                        'mercado' => [
+                            'horarioAbert' => $infmercado['horarioAbert'],
+                            'horarioFecha' => $infmercado['horarioFecha'],
+                            'id_mercado' => $infmercado['id_mercado'],
+                            'regiaoadm' => $infmercado['regiaoadm'],
+                            'descricao' => $infmercado['descricao'],
+                            'nomeMerc' => $infmercado['nomeMerc'],
+                            'endereco' => $infmercado['endereco'],
+                            'telefone' => $infmercado['telefone'],
+                            'id_dono' => $infmercado['id_dono'],
+                            'compras' => $infmercado['compras'],
+                            'imagem' => $infmercado['imagem'],
+                            'cnpj' => $infmercado['cnpj']
+                        ]
+                ];
+                $infoUser;//atribui todas as informações do usuario ao usuario de sessão
+
                 echo "<script>alert('Login realizado com sucesso');</script>";
-                $_SESSION['usuario'] = $infoUser;//atribui todas as informações do usuario ao usuario de sessão
                 echo"<script>window.location.href='../index.php'</script>";
                 exit;
             break;

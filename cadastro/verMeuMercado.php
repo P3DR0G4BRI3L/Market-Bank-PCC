@@ -35,26 +35,26 @@ require_once '../inc/cabecalho.php' ;
         <!--Abertura postagem -->
         <div class="postagem">
             <?php
-            echo "<h2> " . ucwords($infmercado['nomeMerc']) . " </h2>"; //nome do mercado
+            echo "<h2> " . ucwords($_SESSION['usuario']['mercado']['nomeMerc']) . " </h2>"; //nome do mercado
                 
-                echo '<img src="uploads/' . $infmercado['imagem'] . '" alt="Imagem do mercado" width="620px">';
+                echo '<img src="uploads/' . $_SESSION['usuario']['mercado']['imagem'] . '" alt="Imagem do mercado" width="620px">';
 
 
-                echo "<h2>" . ucwords($infmercado['regiaoadm']) . "</h2>"; //endereço do mercado
+                echo "<h2>" . ucwords($_SESSION['usuario']['mercado']['regiaoadm']) . "</h2>"; //endereço do mercado
 
-                echo "<h2>" . ucwords($infmercado['endereco']) . "</h2>"; //endereço do mercado
+                echo "<h2>" . ucwords($_SESSION['usuario']['mercado']['endereco']) . "</h2>"; //endereço do mercado
 
-                echo "<h2>Aberto das " . date('H:i', strtotime($infmercado['horarioAbert'])) . "</h2>"; //endereço do mercado
+                echo "<h2>Aberto das " . date('H:i', strtotime($_SESSION['usuario']['mercado']['horarioAbert'])) . "</h2>"; //endereço do mercado
 
-                echo "<h2> Até as " . date('H:i', strtotime($infmercado['horarioFecha'])) . "</h2>"; //endereço do mercado
+                echo "<h2> Até as " . date('H:i', strtotime($_SESSION['usuario']['mercado']['horarioFecha'])) . "</h2>"; //endereço do mercado
                 
-                echo "<h2> telefone para contato: " . formatarTelefone($infmercado['telefone']) . "</h2>";
+                echo "<h2> telefone para contato: " . formatarTelefone($_SESSION['usuario']['mercado']['telefone']) . "</h2>";
   
-                echo "<h2> CNPJ: " . formatarCNPJ($infmercado['cnpj']) . "</h2>";
+                echo "<h2> CNPJ: " . formatarCNPJ($_SESSION['usuario']['mercado']['cnpj']) . "</h2>";
 
-                echo "<h2> Descrição: " . $infmercado['descricao'] . "</h2>";
+                echo "<h2> Descrição: " . $_SESSION['usuario']['mercado']['descricao']. "</h2>";
 
-                echo "<h2> Compras: " . ucwords($infmercado['compras']) . "</h2>";
+                echo "<h2> Compras: " . ucwords(($_SESSION['usuario']['mercado']['compras'])=='nao'?'não':'sim') . "</h2>";
 ?>
             <button class="btn_ud" onclick="window.location.href='../CRUD/update-mercado.php'">Editar</button>
             <button class="btn_ud" onclick="confirmarExclusaoMercado();">Excluir</button>

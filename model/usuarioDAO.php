@@ -116,4 +116,11 @@ class usuarioDAO
         }
 
     }
+    public function getUsuarioByDono($id_dono){
+        $query = "SELECT * FROM usuario WHERE id_dono = :id_dono ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_dono', $id_dono,PDO::PARAM_INT);
+        if($stmt->execute()) {
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
