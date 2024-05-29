@@ -15,15 +15,7 @@ if(!usuarioEstaLogado()){
 
 
 
-if (mercadoEstaLogado()) {
-    $userlog = ucwords($_SESSION['usuario']['nome']);
 
-       $mercadoDAO = new mercadoDAO($conn);
-       $infmercado = $mercadoDAO->getMercadoByIdUsuario($_SESSION['usuario']['id_usuario']);
-        
-
-
-}
 
 
  require_once '../inc/cabecalho.php'; 
@@ -38,7 +30,7 @@ if (mercadoEstaLogado()) {
             <!--Abertura postagem -->
             <div class="postagem">
 
-                <h2>Adicionar produto no mercado:&nbsp;<?= $infmercado['nomeMerc'] ?></h2>
+                <h2>Adicionar produto no mercado:&nbsp;<?= $_SESSION['usuario']['mercado']['nomeMerc'] ?></h2>
                
 
                 <div class="container">

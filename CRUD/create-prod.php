@@ -2,10 +2,10 @@
 session_start();
 require_once '../func/func.php';
 require_once '../cadastro/cadastro.php';
+require_once '../inc/cabecalho.php';
+require_once '../model/produtoDAO.php.php';
 // o cabeçalho é mostrado em cima normal, porem, se a pessoa não estiver logada é criado uma div postagem e mostra pro usuário que ele não pode acessar essa pagina 
-if (!usuarioEstaLogado()) {
-    require_once '../inc/cabecalho.php';
-
+if ($_SESSION['usuario']['tipo']!='dono') {
     ?>
 
 
@@ -24,66 +24,21 @@ if (!usuarioEstaLogado()) {
                 onclick="window.location.href='../../index.php' ">Voltar</button></div>
 
     </div>
-    <?php require_once '../inc/rodape.php'; ?>
-    <?php
+    <?php require_once '../inc/rodape.php'; 
     exit;
 }
 
 
 
 
-
-
-
-
-
-if ($_FILES['imgprod']['error'] === UPLOAD_ERR_OK) {
-    // Diretório onde você deseja armazenar as imagens
-    $diretorioDestino = 'C:\xampp\htdocs\Market-Bank\cadastro\uploads\\';
-
-    // Nome do arquivo original
-    $imagem = $_FILES['imgprod']['name'];
-
-    // Caminho completo para onde o arquivo será movido
-    $caminhoDestino = $diretorioDestino . $imagem;
-
-    // Move o arquivo enviado para o diretório de destino
-    if (move_uploaded_file($_FILES['imgprod']['tmp_name'], $caminhoDestino)) {
-
-    } else {
-        echo "Erro ao mover o arquivo para o diretório de destino.";
-    }
-} else {
-    echo "Erro no envio do arquivo: " . $_FILES['imgprod']['error'];
-}
-
-// i
-if (mercadoEstaLogado()) {
-    $userlog = ucwords($_SESSION['usuario']['nome']);
-
-       $mercadoDAO = new mercadoDAO($conn);
-       $infmercado = $mercadoDAO->getMercadoByIdUsuario($_SESSION['usuario']['id_usuario']);
-        
-
-
-}
 $nome = $_POST['nomeprod'];
 $preco = $_POST['preco'];
-$fotoProduto = $_FILES['imgprod']['name'];
+$fotoProduto = $_FILES['imgprod'];
 $descricao = $_POST['descricao'] ?? null  ;
-$id_mercado = $infmercado['id_mercado'];
+$id_mercado = $_SESSION['usuario']['mercado']['id_mercado'];
 
-$sqlprod = "INSERT INTO produto (nome, preco, fotoProduto, descricao, id_mercado) VALUES (:nome, :preco, :fotoProduto, :descricao,:id_mercado);";
-
-$stmt = $conn->prepare($sqlprod);
-$stmt->bindValue(':nome', $nome, PDO::PARAM_STR);
-$stmt->bindValue(':preco', $preco, PDO::PARAM_INT);
-$stmt->bindValue(':fotoProduto', $fotoProduto, PDO::PARAM_STR);
-$stmt->bindValue(':descricao', $descricao, PDO::PARAM_STR);
-$stmt->bindValue(':id_mercado', $id_mercado, PDO::PARAM_INT);
-$stmt->execute();
-
-if ($stmt) {
+$produtoDAO = new ProdutoDAO($conn); 
+if ($produtoDAO->inserirProduto($nome, $preco, $fotoProduto,$descricao, $id_mercado)) {
 
     echo "<script>
     alert('Produto cadastrado com sucesso');
@@ -93,3 +48,4 @@ if ($stmt) {
     echo "Erro de conexão" . $stmt->errorInfo();
 }
 $conn = null;
+?>
