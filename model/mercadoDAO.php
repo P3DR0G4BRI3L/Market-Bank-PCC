@@ -72,6 +72,8 @@ class mercadoDAO
 
     public function lidarImagem($filesimagem)
     {
+        if(is_array($filesimagem) && isset($filesimagem['name']) && isset($filesimagem['type'])
+         && isset($filesimagem['tmp_name']) && isset($filesimagem['error']) && isset($filesimagem['size'])){
         if ($filesimagem['error'] === UPLOAD_ERR_OK) {
             //este trecho if cuida para que a imagem seja copiada para a pasta cadastro/uploads no servidor local e o caminho fique armazenado no banco de dados
 // Verifica se o arquivo foi enviado com sucesso
@@ -95,7 +97,11 @@ class mercadoDAO
         } else {
             echo "Erro no envio do arquivo: " . $_FILES['imagem']['error'];
         }
+    }else{
+        $imagem = $filesimagem;
+        return $imagem;
     }
+}
 
 
 }
