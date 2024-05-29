@@ -31,8 +31,9 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
                             <label for="senha">Senha:</label>
                             <input type="password" id="senha" name="senha"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()" required maxlength="16">
+                                <button type="button" id="mostrarSenha" onclick="mostrarsenha()"><span class="lnr lnr-eye"></span></button> 
                         </div>
-                        <button class="btn_left" onclick="window.history.back()">Voltar</button>
+                        <button class="btn_left" onclick="window.location.href='cadastrar.php'">Voltar</button>
                         <button type="submit">Entrar</button>
                     </form>
                 </div>

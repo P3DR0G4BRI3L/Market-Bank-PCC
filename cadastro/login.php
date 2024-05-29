@@ -24,6 +24,7 @@ require_once '../inc/cabecalhocadastro.php';
                             <label for="senha">Senha:</label>
                             <input type="password" id="senha" name="senha"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+                                <button type="button" id="mostrarSenha" onclick="mostrarsenha()"><span class="lnr lnr-eye"></span></button>
                         </div>
                         <button class="btn_left" onclick="window.location.href='../index.php'">Voltar</button>
                         <button type="submit">Entrar</button>

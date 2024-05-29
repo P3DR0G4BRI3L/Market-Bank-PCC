@@ -46,7 +46,7 @@ if (usuarioEstaLogado()) {
 
 			<!-- só mostra se for um mercado que estiver logado, mostra o nome do mercado -->
 			<?php if (mercadoEstaLogado()): ?>
-				<p class="aviso-login">Você está logado no mercado:&nbsp;<?= ucwords($infmercado['nomeMerc']); ?></p>
+				<p class="aviso-login">Você está logado no mercado:&nbsp;<?= ucwords($_SESSION['usuario']['mercado']['nomeMerc']); ?></p>
 			<?php endif ?>
 
 		<?php endif ?>

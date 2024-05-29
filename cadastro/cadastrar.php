@@ -18,7 +18,7 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
             <div class="cadastro_option">
                 <div class="login-box">
 
-                    <button class="btn_left" onclick="window.history.back()">Voltar</button>
+                    <button class="btn_left" onclick="window.location.href= '../index.php' ">Voltar</button>
 
 
                     <button onclick="window.location.href = 'cadastrarCliente.php'">Cliente</button>
