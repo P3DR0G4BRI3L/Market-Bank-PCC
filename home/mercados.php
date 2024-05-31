@@ -10,14 +10,7 @@ session_start();
 
 $mercadoDAO = new mercadoDAO($conn);
 
-if (mercadoEstaLogado()) {
-    $userlog = ucwords($_SESSION['usuario']['nome']);
 
-       $infmercado = $mercadoDAO->getMercadoByIdUsuario($_SESSION['usuario']['id_usuario']);
-        
-
-
-}
 require_once '../inc/cabecalho.php';//mostra o cabeçalho
 ?>
 
@@ -37,7 +30,7 @@ require_once '../inc/cabecalho.php';//mostra o cabeçalho
                     <h2>Você não tem permissão para acessar essa página</h2>
                     <h2>Realize o cadastro</h2>
 
-                    <div class="login-box"><button class='btn_left' onclick="window.location.href='../index.php'; ">Voltar</button></div>
+                    <div class="login-box"><button class='button_padrao' onclick="window.location.href='../index.php'; ">Voltar</button></div>
 
                 </div>
                 <div id="rodape">
@@ -69,20 +62,15 @@ require_once '../inc/cabecalho.php';//mostra o cabeçalho
                          <!-- <img src="../cadastro/uploads/ <?= $mercado['imagem'] ?>" alt="Imagem do mercado" width="620px"> -->
                          <?php echo '<img src="../cadastro/uploads/' . $mercado['imagem'] . '" alt="Imagem do mercado" width="620px">';?>
 
-                         <h2><?= $mercado['endereco'] ?> </h2>
+                         <h2><?= $mercado['regiaoadm'] ?> </h2>
 
-                         <h2>Aberto das <?= date('H:i', strtotime($mercado['horarioAbert'])) ?> </h2>
-
-                         <h2> Até as  <?= date('H:i', strtotime($mercado['horarioFecha'])) ?> </h2> 
-                        
-                         <h2> telefone para contato:  <?= formatarTelefone($mercado['telefone']) ?> </h2>
-                        
                 
                             
                         <?php if ($_SESSION['usuario']['tipo'] != 'dono'): ?>
-                            <form action="../CRUD/read-prod.php" method="POST">
+                            <form action="verPerfilMercado.php" method="POST">
                                 <input type="hidden" name="id_mercado" value="<?= $mercado['id_mercado']; ?>">
-                                <button class='btn_left' type="submit">Ver produtos</button>
+
+                                <button class='button_padrao' type="submit">Ver perfil</button>
 
                             </form>
                         <?php endif ?>

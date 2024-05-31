@@ -23,27 +23,30 @@ class produtoDAO
             return TRUE;
 
         } else {
-            return $stmt;
+            return "ocorreu um erro" . $stmt->errorInfo();
         }
     }
 
-    public function lidarImagem($filesimgprod)
+    public function lidarImagem($filesimagem)
     {
-        if ($filesimgprod['error'] === UPLOAD_ERR_OK) {
+        if(is_array($filesimagem) && isset($filesimagem['name']) && isset($filesimagem['type'])
+         && isset($filesimagem['tmp_name']) && isset($filesimagem['error']) && isset($filesimagem['size'])){
+        if ($filesimagem['error'] === UPLOAD_ERR_OK) {
             //este trecho if cuida para que a imagem seja copiada para a pasta cadastro/uploads no servidor local e o caminho fique armazenado no banco de dados
 // Verifica se o arquivo foi enviado com sucesso
 
             // Diretório onde você deseja armazenar as imagens
             $diretorioDestino = 'C:\xampp\htdocs\Market-Bank\cadastro\uploads\\';
-
+            $fileInfo = pathinfo($filesimagem['name']);
             // Nome do arquivo original
-            $imagem = $filesimgprod['name'];
+            $filesimagem['name'] = uniqid();
+            $imagem = $filesimagem['name'] . '.' . $fileInfo['extension'];
 
             // Caminho completo para onde o arquivo será movido
             $caminhoDestino = $diretorioDestino . $imagem;
 
             // Move o arquivo enviado para o diretório de destino
-            if (move_uploaded_file($filesimgprod['tmp_name'], $caminhoDestino)) {
+            if (move_uploaded_file($filesimagem['tmp_name'], $caminhoDestino)) {
                 //Arquivo enviado com sucesso.
                 return $imagem;
             } else {
@@ -52,6 +55,11 @@ class produtoDAO
         } else {
             echo "Erro no envio do arquivo: " . $_FILES['imagem']['error'];
         }
+    }else{
+        $imagem = $filesimagem;
+        return $imagem;
     }
+
+}
 }
 

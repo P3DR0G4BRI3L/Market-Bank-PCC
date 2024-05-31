@@ -11,33 +11,35 @@ class clienteDAO
 
     public function getClienteById($id_usuario)
     {
-        try {
-            $query = "SELECT * FROM cliente WHERE id_usuario = :id_usuario ";
-            $stmt = $this->conn->prepare($query);
-            $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
-            if ($stmt->execute()) {
-                return $stmt->fetch(PDO::FETCH_ASSOC);
-            } else {
-                return "ocorreu um erro{$stmt->errorInfo()}";
-            }
-
-        } catch (PDOException $erro) {
-            return "ocorreu um erro" . $erro->getMessage() . "<br>arquivo" . $erro->getFile();
+        $query = "SELECT * FROM cliente WHERE id_usuario = :id_usuario ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return "ocorreu um erro " . $stmt->errorInfo();
         }
     }
-    public function inserirCliente($id_usuario) 
+    public function inserirCliente($id_usuario)
     {
         $query = "INSERT INTO cliente(id_usuario) VALUES (:id_cliente)";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(':id_cliente', $id_usuario, PDO::PARAM_INT);
-        if($stmt->execute()){
-            
+        if ($stmt->execute()) {
+            return TRUE;
+        } else {
+            return "ocorreu um erro " . $stmt->errorInfo();
         }
-
     }
 
+    public function deletarCliente($id_usuario){
+        $query = "DELETE  FROM cliente WHERE  id_usuario = :id_usuario ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        if($stmt->execute()){
+            return TRUE;
+        }else{
+            return "ocorreu um erro " . $stmt->errorInfo();
+        }
+    }
 }
-
-
-
-

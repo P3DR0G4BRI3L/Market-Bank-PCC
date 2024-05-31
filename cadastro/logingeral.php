@@ -14,52 +14,51 @@ $senha = $_POST['senha'];
 
 
 $usuarioDAO = new usuarioDAO($conn);
-if ($usuarioDAO->login($email, $senha)) {
-    
+if ($usuarioDAO->login($email, md5($senha))) {
+
     $infoUser = $usuarioDAO->getUsuarioById($usuarioDAO->getIdUsuarioByEmail($email));
 
     switch ($infoUser['tipo']) {
 
         case "cliente":
             echo "<script>alert('Login realizado com sucesso');</script>";
-            $_SESSION['usuario'] = $infoUser;//atribui todas as informações do usuario ao usuario de sessão
-            echo"<script>window.location.href='../index.php'</script>";
+            $_SESSION['usuario'] = $infoUser; //atribui todas as informações do usuario ao usuario de sessão
+            echo "<script>window.location.href='../index.php'</script>";
             exit;
-        break;
+            break;
 
 
 
 
 
-            case "dono":
-                $mercadoDAO = new mercadoDAO($conn);
-                   $infmercado = $mercadoDAO->getMercadoByIdUsuario($infoUser['id_usuario']);
-                $_SESSION['usuario'] = [
-                    'id_usuario' => $infoUser['id_usuario'],
-                    'email' => $infoUser['email'],
-                    'nome' => $infoUser['nome'],
-                    'tipo' => $infoUser['tipo'],
+        case "dono":
+            $mercadoDAO = new mercadoDAO($conn);
+            $infmercado = $mercadoDAO->getMercadoByIdUsuario($infoUser['id_usuario']);
+            $_SESSION['usuario'] = [
+                'id_usuario' => $infoUser['id_usuario'],
+                'email' => $infoUser['email'],
+                'nome' => $infoUser['nome'],
+                'tipo' => $infoUser['tipo'],
 
-                        'mercado' => [
-                            'horarioAbert' => $infmercado['horarioAbert'],
-                            'horarioFecha' => $infmercado['horarioFecha'],
-                            'id_mercado' => $infmercado['id_mercado'],
-                            'regiaoadm' => $infmercado['regiaoadm'],
-                            'descricao' => $infmercado['descricao'],
-                            'nomeMerc' => $infmercado['nomeMerc'],
-                            'endereco' => $infmercado['endereco'],
-                            'telefone' => $infmercado['telefone'],
-                            'id_dono' => $infmercado['id_dono'],
-                            'compras' => $infmercado['compras'],
-                            'imagem' => $infmercado['imagem'],
-                            'cnpj' => $infmercado['cnpj']
-                        ]
-                ];
-                $infoUser;//atribui todas as informações do usuario ao usuario de sessão
+                'mercado' => [
+                    'horarioAbert' => $infmercado['horarioAbert'],
+                    'horarioFecha' => $infmercado['horarioFecha'],
+                    'id_mercado' => $infmercado['id_mercado'],
+                    'regiaoadm' => $infmercado['regiaoadm'],
+                    'descricao' => $infmercado['descricao'],
+                    'nomeMerc' => $infmercado['nomeMerc'],
+                    'endereco' => $infmercado['endereco'],
+                    'telefone' => $infmercado['telefone'],
+                    'id_dono' => $infmercado['id_dono'],
+                    'compras' => $infmercado['compras'],
+                    'imagem' => $infmercado['imagem'],
+                    'cnpj' => $infmercado['cnpj']
+                ]
+            ];
 
-                echo "<script>alert('Login realizado com sucesso');</script>";
-                echo"<script>window.location.href='../index.php'</script>";
-                exit;
+            echo "<script>alert('Login realizado com sucesso');</script>";
+            echo "<script>window.location.href='../index.php'</script>";
+            exit;
             break;
 
 
@@ -67,17 +66,15 @@ if ($usuarioDAO->login($email, $senha)) {
 
 
         case "administrador":
-                echo "<script>alert('Login realizado com sucesso');</script>";
-                $_SESSION['usuario'] = $infoUser;//atribui todas as informações do usuario ao usuario de sessão
-                echo"<script>window.location.href='../index.php'</script>";
-                exit;
+            echo "<script>alert('Login realizado com sucesso');</script>";
+            $_SESSION['usuario'] = $infoUser; //atribui todas as informações do usuario ao usuario de sessão
+            echo "<script>window.location.href='../index.php'</script>";
+            exit;
             break;
-
     }
 } else {
 
     $default = "Usuário ou senha incorretos";
-
 }
 
 
@@ -112,7 +109,7 @@ if ($usuarioDAO->login($email, $senha)) {
         <div id="area-menu">
             <a href="../index.php">Home</a>
 
-            <?php if (usuarioEstaLogado()): ?>
+            <?php if (usuarioEstaLogado()) : ?>
                 <a href="mercados.php">Mercados</a>
             <?php endif ?>
 
@@ -130,7 +127,8 @@ if ($usuarioDAO->login($email, $senha)) {
             <div class="postagem">
                 <h2>
                     <?php if (isset($default))
-                        echo "$default";//mostra usuario ou senha incorretos ?>
+                        echo "$default"; //mostra usuario ou senha incorretos 
+                    ?>
                 </h2>
                 <p>
                 <div class="cadastro_option">

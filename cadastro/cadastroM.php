@@ -35,7 +35,7 @@ if($usuarioDAO->verificaEmailExiste($email)){
 
 
 
-if ($usuarioDAO->inserirUsuario($nome , $email, $senha, 'dono')) {
+if ($usuarioDAO->inserirUsuario($nome , $email, md5($senha), 'dono')) {
     
     $id_dono = $usuarioDAO->getIdUsuarioByEmail($email);
 

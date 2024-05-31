@@ -33,7 +33,7 @@ if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'dono') {
 
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nomeprod'], $_POST['preco'],$_POST['descricao'])) {
+if (/*$_SERVER['REQUEST_METHOD'] === 'POST' &&*/ isset($_POST['nomeprod'], $_POST['preco'],$_POST['descricao'])) {
 
     $fotoProduto = $_POST['imgprod2'];//se não for inserida nenhuma imagem no formulario a antiga permanece, caso contrario a nova entra
     $nomeprod = $_POST['nomeprod'];
@@ -116,7 +116,7 @@ require_once '../inc/cabecalho.php';
                                 <img src="../cadastro/uploads/<?= $infproduto['fotoProduto'] ?>" alt="foto do produto" width="100px" >
                                 <legend>Imagem atual</legend>
                             </picture>
-                            <label for="foto">Foto do produto: <h6 style="color:red">* escolha uma nova imagem se quiser trocar a atual</h6></label>
+                            <label for="foto">Foto do produto: <h6>* escolha uma nova imagem se quiser trocar a atual</h6></label>
                             <input type="file" id="foto" name="imgprod"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()">
 
@@ -130,8 +130,7 @@ require_once '../inc/cabecalho.php';
 								<input type="text" id="descricao" name="descricao" value="<?= $infproduto['descricao'] ?>" onkeydown="if(event.keyCode === 13) event.preventDefault()">
 							</div>
 
-                        <button class="btn_left" onclick="window.history.back()'">Voltar</button>
-                        <button type="submit">Salvar</button>
+                        <button type="submit" class="button_padrao btn_edit" >Salvar</button>
                     </form>
                 </div>
             </div>

@@ -210,6 +210,7 @@ input[type="text"],
 input[type="time"],
 input[type="tel"],
 input[type="file"],
+input[type="date"],
 input[type="number"] {
     width: 100%; /* Faz os inputs ocuparem 100% da largura */
     padding: 10px;
@@ -218,7 +219,7 @@ input[type="number"] {
     box-sizing: border-box; /* Garante que o padding não afete a largura total */
 }
 
-button[type="submit"] {
+.button_padrao {
 	font-size: 18px;
     width: 25%;
     padding: 10px;
@@ -229,7 +230,7 @@ button[type="submit"] {
     cursor: pointer;
 	margin-bottom: 5px;
 }
-button{
+.button_padrao{
 	font-size: 18px;
     padding: 10px;
     background-color: #F7800F;
@@ -240,7 +241,7 @@ button{
 	margin-bottom: 5px;
 }
 
-button:hover {
+.button_padrao:hover {
     background-color: #d66800;
 	color: black;
 }
@@ -248,8 +249,28 @@ button:hover {
 	justify-content: left;
 }
 
-.postagem .btn_ud{
-margin: 30px auto;
+.postagem .button_padrao{
+	flex-wrap: wrap;
+	/* display: block; */
+margin: 10px ;
 align-items: center;
 justify-content: center;
+}
+
+ .btn_delete{
+	
+background-color: rgb(255, 47, 47);
+}
+.btn_delete:hover{
+	color:black;
+	background-color: rgb(219, 33, 0);
+}
+
+.btn_edit{
+	background-color: rgb(0, 211, 35);
+	
+}
+.btn_edit:hover{
+	color:black;
+	background-color: rgb(7, 133, 70);
 }

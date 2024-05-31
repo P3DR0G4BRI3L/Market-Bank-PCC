@@ -27,8 +27,8 @@ class mercadoDAO
         VALUES
                             ( :nomeMerc, :regiaoadm, :endereco, :horarioAbert, :horarioFecha, :telefone, :cnpj, :imagem, :descricao , :compras, :id_dono );";
 
-        $stmt = $this->conn->prepare($query);// salva/prepara a consulta sql para ser executada
-        $stmt->bindValue(':nomeMerc', $nomeMerc, PDO::PARAM_STR);//substitui os parametros pelo valor inserido em bindValue
+        $stmt = $this->conn->prepare($query); // salva/prepara a consulta sql para ser executada
+        $stmt->bindValue(':nomeMerc', $nomeMerc, PDO::PARAM_STR); //substitui os parametros pelo valor inserido em bindValue
         $stmt->bindValue(':regiaoadm', $regiaoadm, PDO::PARAM_STR);
         $stmt->bindValue(':endereco', $endereco, PDO::PARAM_STR);
         $stmt->bindValue(':horarioAbert', $horarioAbert);
@@ -38,22 +38,19 @@ class mercadoDAO
         $stmt->bindValue(':imagem', $img, PDO::PARAM_STR);
         $stmt->bindValue(':descricao', $descricao, PDO::PARAM_STR);
         $stmt->bindValue(':compras', $compras, PDO::PARAM_STR);
-        $stmt->bindValue(':id_dono', $id_dono, PDO::PARAM_INT);//id_dono referencia id_usuario na tabela usuario
+        $stmt->bindValue(':id_dono', $id_dono, PDO::PARAM_INT); //id_dono referencia id_usuario na tabela usuario
         if ($stmt->execute()) {
             return TRUE;
         } else {
             return $stmt;
         }
-
-
-
     }
 
     public function getAllMercados()
     {
         $stmt = $this->conn->prepare("SELECT * FROM mercado;");
         if ($stmt->execute() && $stmt->rowCount() > 0) {
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);//vai retornar um array de indice com arrays associativos com os nome das colunas
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); //vai retornar um array de indice com arrays associativos com os nome das colunas
         } else {
             return FALSE;
         }
@@ -70,38 +67,100 @@ class mercadoDAO
         }
     }
 
+    public function getMercadoById($id_mercado){
+        $query = "SELECT * FROM mercado WHERE id_mercado = :id_mercado";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }else{
+            return "ocorreu um erro " . $stmt->errorInfo();
+        }
+        
+    }
+
     public function lidarImagem($filesimagem)
     {
-        if(is_array($filesimagem) && isset($filesimagem['name']) && isset($filesimagem['type'])
-         && isset($filesimagem['tmp_name']) && isset($filesimagem['error']) && isset($filesimagem['size'])){
-        if ($filesimagem['error'] === UPLOAD_ERR_OK) {
-            //este trecho if cuida para que a imagem seja copiada para a pasta cadastro/uploads no servidor local e o caminho fique armazenado no banco de dados
-// Verifica se o arquivo foi enviado com sucesso
+        if (
+            is_array($filesimagem) && isset($filesimagem['name']) && isset($filesimagem['type'])
+            && isset($filesimagem['tmp_name']) && isset($filesimagem['error']) && isset($filesimagem['size'])
+        ) {
+            if ($filesimagem['error'] === UPLOAD_ERR_OK) {
+                //este trecho if cuida para que a imagem seja copiada para a pasta cadastro/uploads no servidor local e o caminho fique armazenado no banco de dados
+                // Verifica se o arquivo foi enviado com sucesso
 
-            // Diretório onde você deseja armazenar as imagens
-            $diretorioDestino = 'C:\xampp\htdocs\Market-Bank\cadastro\uploads\\';
+                // Diretório onde você deseja armazenar as imagens
+                $diretorioDestino = 'C:\xampp\htdocs\Market-Bank\cadastro\uploads\\';
+                $fileInfo = pathinfo($filesimagem['name']);
+                // Nome do arquivo original
+                $filesimagem['name'] = uniqid();
+                $imagem = $filesimagem['name'] . '.' . $fileInfo['extension'];
 
-            // Nome do arquivo original
-            $imagem = $filesimagem['name'];
+                // Caminho completo para onde o arquivo será movido
+                $caminhoDestino = $diretorioDestino . $imagem;
 
-            // Caminho completo para onde o arquivo será movido
-            $caminhoDestino = $diretorioDestino . $imagem;
-
-            // Move o arquivo enviado para o diretório de destino
-            if (move_uploaded_file($filesimagem['tmp_name'], $caminhoDestino)) {
-                //Arquivo enviado com sucesso.
-                return $imagem;
+                // Move o arquivo enviado para o diretório de destino
+                if (move_uploaded_file($filesimagem['tmp_name'], $caminhoDestino)) {
+                    //Arquivo enviado com sucesso.
+                    return $imagem;
+                } else {
+                    echo "Erro ao mover o arquivo para o diretório de destino.";
+                }
             } else {
-                echo "Erro ao mover o arquivo para o diretório de destino.";
+                echo "Erro no envio do arquivo: " . $_FILES['imagem']['error'];
             }
         } else {
-            echo "Erro no envio do arquivo: " . $_FILES['imagem']['error'];
+            $imagem = $filesimagem;
+            return $imagem;
         }
-    }else{
-        $imagem = $filesimagem;
-        return $imagem;
     }
-}
 
+    public function atualizarMercado(
+        $nomeMerc,
+        $regiaoadm,
+        $endereco,
+        $horarioAbert,
+        $horarioFecha,
+        $telefone,
+        $cnpj,
+        $imagem,
+        $descricao,
+        $compras,
+        $id_mercado) 
+        {
+        $query = "UPDATE mercado SET nomeMerc = :nomeMerc , endereco = :endereco , horarioAbert = :horarioAbert , horarioFecha = :horarioFecha
+         , telefone = :telefone , cnpj = :cnpj , imagem = :imagem, regiaoadm = :regiaoadm, compras = :compras, descricao = :descricao
+          WHERE id_mercado = :id_mercado ";
 
+        $stmt = $this->conn->prepare($query); //atualiza a tabela mercado
+        $stmt->bindValue(':nomeMerc', $nomeMerc, PDO::PARAM_STR);
+        $stmt->bindValue(':endereco', $endereco, PDO::PARAM_STR);
+        $stmt->bindValue(':horarioAbert', $horarioAbert);
+        $stmt->bindValue(':horarioFecha', $horarioFecha);
+        $stmt->bindValue(':telefone', $telefone, PDO::PARAM_STR);
+        $stmt->bindValue(':cnpj', $cnpj, PDO::PARAM_STR);
+        $stmt->bindValue(':imagem', $imagem, PDO::PARAM_STR);
+        $stmt->bindValue(':regiaoadm', $regiaoadm, PDO::PARAM_STR);
+        $stmt->bindValue(':compras', $compras, PDO::PARAM_STR);
+        $stmt->bindValue(':descricao', $descricao, PDO::PARAM_STR);
+        $stmt->bindValue(':id_mercado', $id_mercado, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+         return TRUE;  
+        } else {
+            echo "ocorreu um erro" . $stmt->errorInfo();
+        }
+    }
+    public function deleteMercadoById($id_mercado){
+        
+        $query = "DELETE FROM mercado WHERE id_mercado = :id_mercado";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return TRUE;
+        }else{
+            return "ocorreu um erro " . $stmt->errorInfo();
+        }
+
+    }
 }

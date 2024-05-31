@@ -33,7 +33,7 @@ if($usuarioDAO->verificaEmailExiste($email)){
 }
 
 // Insere os dados na tabela de usuários
-if ($usuarioDAO->inserirUsuario($nome,$email,$senha,'cliente')) {
+if ($usuarioDAO->inserirUsuario($nome,$email,md5($senha),'cliente')) {
     $clienteDAO = new clienteDAO($conn);
     
     $clienteDAO->inserirCliente($usuarioDAO->getIdUsuarioByEmail($email));//este trecho insere o usuario cliente na tabela cliente 

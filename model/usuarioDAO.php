@@ -67,6 +67,19 @@ class usuarioDAO
         }
     }
 
+    public function deletarUsuario($id_usuario){
+        $query = "DELETE FROM usuario WHERE id_usuario = :id_usuario;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_usuario',$id_usuario,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return TRUE;
+        }else{
+            return "ocorreu um erro " . $stmt->errorInfo();
+        }
+        
+    }
+
+
     public function atualizarUsuario($nome, $email, $senha, $id_usuario)
     {
         $stmt = $this->conn->prepare("UPDATE usuario SET nome = :nome , email = :email , senha = :senha WHERE id_usuario = :id_usuario");//atualiza a tabela usuario
@@ -117,7 +130,7 @@ class usuarioDAO
 
     }
     public function getUsuarioByDono($id_dono){
-        $query = "SELECT * FROM usuario WHERE id_dono = :id_dono ";
+        $query = "SELECT * FROM usuario WHERE id_usuario = :id_dono ";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(':id_dono', $id_dono,PDO::PARAM_INT);
         if($stmt->execute()) {

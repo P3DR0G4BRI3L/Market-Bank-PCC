@@ -57,8 +57,7 @@ if(!usuarioEstaLogado()){
 								<input type="text" id="descricao" name="descricao" onkeydown="if(event.keyCode === 13) event.preventDefault()">
 							</div>
 
-							<button class="btn_left" onclick="window.location.href='../CRUD/read-prod.php'">Voltar</button>
-							<button type="submit">Adicionar</button>
+							<button type="submit" class="button_padrao btn_edit">Adicionar</button>
 						</form>
 					</div>
 				</div>

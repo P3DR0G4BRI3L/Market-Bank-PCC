@@ -62,13 +62,13 @@ require_once '../inc/cabecalho.php'; ?>
 
             <div class="login-box">
                 <?php if (mercadoEstaLogado()): ?>
-                <button class='btn_left' onclick="window.location.href='../cadastro/verMeuMercado.php' ">Voltar</button>
-                <button class='btn_left' onclick="window.location.href='../cadastro/addprod.php' ">Adicionar
-                    produto</button>
+                    <button class='button_padrao' onclick="window.location.href='../cadastro/addprod.php' ">Adicionar produto</button>
+                    <button class='button_padrao' onclick="window.location.href='../cadastro/verMeuMercado.php' ">Voltar</button>
+
                 <?php endif ?>
 
-                <?php if (usuarioEstaLogado()): ?>
-                <button class='btn_left' onclick="window.location.href='../home/mercados.php' ">Voltar</button>
+                <?php if (clienteEstaLogado()): ?>
+                <button class='button_padrao' onclick="window.location.href='../home/mercados.php' ">Voltar</button>
                 <?php endif ?>
 
             </div>
@@ -99,13 +99,13 @@ require_once '../inc/cabecalho.php'; ?>
 
                 <form action="update-prod.php" method="POST">
                     <input type="hidden" name="updateprod" value="<?= $produto['id_produto']; ?>">
-                    <button class='btn_left' type="submit">Editar</button>
+                    <button class='button_padrao' type="submit">Editar</button>
                 </form>
 
                 <form action="delete-prod.php" method="POST" onsubmit="return confirmarExclusaoProduto()">
                     <input type="hidden" name="deleteprod" value="<?= $produto['id_produto']; ?>">
                     <input type="hidden" name="deletefile" value="<?= $produto['fotoProduto']; ?>">
-                    <button class='btn_left' type="submit">Excluir</button>
+                    <button class='button_padrao' type="submit">Excluir</button>
                 </form>
             </div>
 
@@ -144,7 +144,7 @@ require_once '../inc/cabecalho.php'; ?>
                         echo "<h2>Descrição:" . $produto['descricao'] . "</h2>"; //descrição do produto
                             ?>
             <div class="login-box">
-                <button class='btn_left' onclick="window.location.href='../home/mercados.php' ">Voltar</button>
+                <button class='button_padrao' onclick="window.location.href='../home/mercados.php' ">Voltar</button>
             </div>
 
 
