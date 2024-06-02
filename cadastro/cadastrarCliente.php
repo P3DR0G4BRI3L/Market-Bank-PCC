@@ -2,7 +2,7 @@
 require_once '../func/func.php';
 
 
-require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
+require_once '../inc/cabecalhocadastro.php'; //mostra o cabeçalho
 ?>
 
 
@@ -17,24 +17,23 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
 
                         <div class="input-group">
                             <label for="nome">Nome:</label>
-                            <input type="text" id="nome" name="nome"
-                                onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+                            <input type="text" id="nome" name="nome" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
                         </div>
 
                         <div class="input-group">
                             <label for="email">Email:</label>
-                            <input type="email" id="email" name="email"
-                                onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+                            <input type="email" id="email" name="email" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
                         </div>
 
                         <div class="input-group">
                             <label for="senha">Senha:</label>
-                            <input type="password" id="senha" name="senha"
-                                onkeydown="if(event.keyCode === 13) event.preventDefault()" required maxlength="16">
-                                <button type="button" id="mostrarSenha" onclick="mostrarsenha()"><span class="lnr lnr-eye"></span></button> 
+                            <input type="password" id="senha" name="senha" onkeydown="if(event.keyCode === 13) event.preventDefault()" required maxlength="16">
+                            <button type="button" id="mostrarSenha" onclick="mostrarsenha()"><span class="lnr lnr-eye"></span></button>
                         </div>
-                        <button class="btn_left" onclick="window.location.href='cadastrar.php'">Voltar</button>
-                        <button type="submit">Entrar</button>
+                        <button class="button_padrao" onclick="window.location.href='cadastrar.php'">Voltar</button>
+
+                        <button class="button_padrao" type="submit">Cadastrar</button>
+
                     </form>
                 </div>
             </div>
@@ -53,4 +52,4 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
         <!--// Fechamento postagem -->
     </div>
 
-     <?php require_once '../inc/rodape.php'; ?>
+    <?php require_once '../inc/rodape.php'; ?>

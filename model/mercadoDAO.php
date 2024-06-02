@@ -151,9 +151,23 @@ class mercadoDAO
             echo "ocorreu um erro" . $stmt->errorInfo();
         }
     }
-    public function deleteMercadoById($id_mercado){
+    public function deleteMercadoById($id_dono){
         
-        $query = "DELETE FROM mercado WHERE id_mercado = :id_mercado";
+        $query = "DELETE FROM mercado WHERE id_dono = :id_dono";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_dono',$id_dono,PDO::PARAM_INT);
+        if( $stmt->execute() ){
+            
+            return TRUE;
+        }else{
+            return "ocorreu um erro " . $stmt->errorInfo();
+        }
+
+    }
+    
+
+    public function deleteAllProdutosByMercado($id_mercado){
+        $query = "DELETE FROM produto WHERE id_mercado = :id_mercado";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
         if($stmt->execute()){
@@ -162,5 +176,40 @@ class mercadoDAO
             return "ocorreu um erro " . $stmt->errorInfo();
         }
 
+
     }
+
+    public function deleteAllPanfletosByMercado($id_mercado){
+        $query = "DELETE FROM panfleto WHERE id_mercado = :id_mercado";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return TRUE;
+        }else{
+            return "ocorreu um erro " . $stmt->errorInfo();
+        }
+
+
+    }
+    public function deleteAllfiltroProdutoByMercado($id_mercado){
+        $query = "DELETE FROM filtroProduto WHERE  id_mercado = :id_mercado;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return TRUE;
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo();
+        }
+    }
+
+
+    public function getImagemById($id_mercado){
+        $query = "SELECT imagem FROM mercado WHERE id_mercado=:id_mercado;" ;
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return $stmt->fetch(PDO::FETCH_COLUMN);
+        }
+    }
+
 }

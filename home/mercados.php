@@ -23,22 +23,7 @@ require_once '../inc/cabecalho.php';//mostra o cabeçalho
 
             <?php
             // o cabeçalho é mostrado em cima normal, porem, se a pessoa não estiver logada é criado uma div postagem e mostra pro usuário que ele não pode acessar essa pagina 
-            if (!usuarioEstaLogado()) {
-                ?>
-                <div class="postagem">
-                    <link rel="stylesheet" href="../css/cadastro.css">
-                    <h2>Você não tem permissão para acessar essa página</h2>
-                    <h2>Realize o cadastro</h2>
-
-                    <div class="login-box"><button class='button_padrao' onclick="window.location.href='../index.php'; ">Voltar</button></div>
-
-                </div>
-                <div id="rodape">
-                    &copy Todos os direitos reservados
-                </div>
-                <?php
-                exit;
-            }
+           voceNaoTemPermissao();
 
             ?>
 

@@ -38,7 +38,7 @@ class panfletoDAO
         }
     }
 
-    public function getPanfletoByIdMercado($id_mercado)
+    public function getAllPanfletoByIdMercado($id_mercado)
     {
         $query = "SELECT * FROM panfleto WHERE id_mercado = :id_mercado;";
         $stmt = $this->conn->prepare($query);
@@ -99,4 +99,16 @@ class panfletoDAO
             $imagem = $filesimagem;
             return $imagem;
         }}
+
+        public function excluirPanfleto($id_panfleto){
+            $query = "DELETE FROM panfleto WHERE id_panfleto = :id_panfleto ;";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(':id_panfleto',$id_panfleto,PDO::PARAM_INT);
+            if($stmt->execute()){
+                return TRUE;
+            }else{
+                return "ocorreu um erro" . $stmt->errorInfo();
+            }
+        }
+    
 }

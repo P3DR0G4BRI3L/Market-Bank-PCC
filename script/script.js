@@ -19,27 +19,13 @@ function mostrarsenha() {
 }
 function confirmarExclusaoMercado() {
     // Exibe uma mensagem de confirmação
-    if (confirm("Tem certeza que deseja excluir seu mercado?\n Todos os seus produtos também vão ser excluídos")) {
-        // Se o usuário confirmar, redireciona para a página de exclusão
-        window.location.href = '../CRUD/delete-mercado.php';
-        return true;
-    } else {
-        // Se o usuário cancelar, retorna false
-        return false;
-    }
+    return confirm("Tem certeza que deseja excluir seu mercado?\n Todos os seus produtos também vão ser excluídos");
 }
-
 function confirmarExclusaoCliente() {
     // Exibe uma mensagem de confirmação
-    if (confirm("Tem certeza que deseja excluir seu perfil?")) {
-        // Se o usuário confirmar, redireciona para a página de exclusão
-        window.location.href = '../CRUD/delete-cliente.php';
-        return true;
-    } else {
-        // Se o usuário cancelar, retorna false
-        return false;
-    }
+    return confirm("Tem certeza que deseja excluir seu perfil?");
 }
+
 
 function confirmarExclusaoClienteadm() {
     // Exibe uma mensagem de confirmação
@@ -63,6 +49,11 @@ function confirmarExclusaoProduto() {
         // Se o usuário cancelar, retorna false
         return false;
     }
+}
+
+function confirmarExclusaoPanfleto() {
+    // Exibe uma mensagem de confirmação
+    return confirm("Tem certeza que deseja excluir esse panfleto?"); 
 }
 
 

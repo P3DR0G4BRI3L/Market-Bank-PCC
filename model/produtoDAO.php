@@ -61,5 +61,28 @@ class produtoDAO
     }
 
 }
+    public function getAllProdutoByIdMercado($id_mercado){
+            $stmt = $this->conn->prepare("SELECT * FROM produto WHERE id_mercado = :id_mercado ;");
+            $stmt->bindValue(':id_mercado', $id_mercado, PDO::PARAM_INT);
+            if($stmt->execute()){
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }else{
+                return "ocorreu um erro " . $stmt->errorInfo();
+            }
+
+    }
+
+    public function excluirproduto($id_produto){
+        $query = "DELETE FROM produto WHERE id_produto = :id_produto ;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_produto',$id_produto,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return TRUE;
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo();
+        }
+    }
+
+
 }
 

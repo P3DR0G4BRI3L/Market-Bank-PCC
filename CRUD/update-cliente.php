@@ -7,14 +7,11 @@ require_once '../func/func.php';
 require_once '../cadastro/cadastro.php';
 require_once '../model/usuarioDAO.php';
 
-if (usuarioEstaLogado()) {
-    $userlog = $_SESSION['usuario']['nome'];
-}
 
 $usuarioDAO = new usuarioDAO($conn);
 
     
-require_once '../inc/cabecalho.php';//mostra o cabeçalhos
+require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalhos
 if(isset($_POST['nome'] , $_POST['email'])){
    $nome = $_POST['nome']   ;
    $email = $_POST['email'] ;
@@ -46,7 +43,7 @@ if($usuarioDAO->atualizarUsuario($nome , $email , $senha , $id_usuario)){
         <div class="postagem">
             <h2>Editar perfil</h2>
             <div class="container">
-                <div class="login-box">
+                <div class="login-box largura_menor">
                     <form action="" method="POST">
 
                         <div class="input-group">
@@ -65,10 +62,10 @@ if($usuarioDAO->atualizarUsuario($nome , $email , $senha , $id_usuario)){
                             <label for="senha">Senha:</label>
                             <input type="password" id="senha" name="senha" value="<?= $usuarioDAO->getSenhaById($_SESSION['usuario']['id_usuario']) ?>"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
-                            <button type="button" id="mostrarSenha" onclick="mostrarsenha()">Mostrar Senha</button>
+                                <button type="button" id="mostrarSenha"  onclick="mostrarsenha()"><span class="lnr lnr-eye"></span></button>
                         </div>
-                        <button class="btn_left" onclick="window.history.back()">Voltar</button>
-                        <button type="submit">Alterar</button>
+                        <button type="button"class="button_padrao" onclick="window.location.href='../index.php'">Voltar</button>
+                        <button class="button_padrao btn_edit" type="submit">Alterar</button>
                     </form>
                 </div>
             </div>

@@ -1,22 +1,14 @@
 <?php
 require_once '../func/func.php';
 require_once '../cadastro/cadastro.php';
+require_once '../model/produtoDAO.php';
+require_once '../model/mercadoDAO.php';
 session_start();
+$produtoDAO = new produtoDAO($conn);
+$mercadoDAO = new mercadoDAO($conn);
+$id_mercado = $_POST['id_mercado'] ?? NULL;
+$infmercado = $mercadoDAO->getMercadoById($id_mercado);
 
-
-//armazena as informações do mercado em $infmercado
-if (usuarioEstaLogado()) {
-    $userlog = ucwords($_SESSION['usuario']['nome']);
-
-    if ($_SESSION['usuario']['tipo'] == 'dono') {
-        $mercName = $_SESSION['usuario']['id_usuario'];
-        $mercado = $conn->prepare("SELECT * FROM mercado WHERE id_dono = :id_dono");
-        $mercado->bindValue(':id_dono', $mercName, PDO::PARAM_STR);
-        $mercado->execute();
-        $infmercado = $mercado->fetch();
-
-    }
-}
 require_once '../inc/cabecalho.php'; ?>
 
 
@@ -27,34 +19,10 @@ require_once '../inc/cabecalho.php'; ?>
 
         <?php
         // o cabeçalho é mostrado em cima normal, porem, se a pessoa não estiver logada é criado uma div postagem e mostra pro usuário que ele não pode acessar essa pagina 
-        if (!usuarioEstaLogado()) {
-            ?>
-        <div class="postagem">
-            <link rel="stylesheet" href="../../css/cadastro.css">
-            <h2>Você não tem permissão para acessar essa página</h2>
-            <h2>Realize o cadastro</h2>
-
-            <div class="login-box"><button class='btn_left'
-                    onclick="window.location.href='../index.php' ">Voltar</button></div>
-
-        </div>
-        <div id="rodape">
-            &copy Todos os direitos reservados
-        </div>
-        <?php
-            exit;
-        }
-
-        ?>
+        voceNaoTemPermissao();
 
 
-        <?php
-        if (mercadoEstaLogado()) {
-            $id_mercado = $infmercado['id_mercado'];
-            $result = $conn->prepare("SELECT * FROM produto WHERE id_mercado = :id_mercado ;");
-            $result->bindValue(':id_mercado', $id_mercado, PDO::PARAM_INT);
-            $result->execute();
-        }
+        
         ?>
 
         <!--Abertura postagem -->
@@ -68,33 +36,38 @@ require_once '../inc/cabecalho.php'; ?>
                 <?php endif ?>
 
                 <?php if (clienteEstaLogado()): ?>
-                <button class='button_padrao' onclick="window.location.href='../home/mercados.php' ">Voltar</button>
+                    <h1>Produtos do mercado: <br><?=ucwords($infmercado['nomeMerc']);?></h1>
+<form action="../home/verPerfilMercado.php"method="POST">
+    <input type="hidden" name="id_mercado" value="<?= $id_mercado ?>">
+                    <button class='button_padrao' onclick="window.location.href='../home/verPerfilMercado.php' ">Voltar</button>
+    
+</form>
                 <?php endif ?>
 
             </div>
         </div>
         <!--lista os produtos, cada vez que o metodo fetch_all() é chamado ele armazena uma linha em $row e mostra dentro do laço while  -->
         <?php
-        $tipo = $_SESSION['usuario']['tipo'];
-        switch($tipo){
+        switch($_SESSION['usuario']['tipo']){
         //se for um mercado que estiver logado vai listar os produtos e disponibilizar exclusão e edição
-        case 'dono'; 
-            if ($result->rowCount() > 0) {
-                $produtos = $result->fetchAll();
+        case 'dono':
+            $produtos = $produtoDAO->getAllProdutoByIdMercado($_SESSION['usuario']['mercado']['id_mercado']);
+            if (!empty($produtos)) {
                 foreach ($produtos as $produto) { ?>
         <div class="postagem">
 
-            <?php
-                        echo "<h2> " . $produto['nome'] . " </h2>"; //nome do produto
+                         <div class="view_produto">
+                            
+                             <h2>  <?= ucwords($produto['nome']); ?> </h2>
+
+                            <?php echo "<img src='../cadastro/uploads/" . $produto['fotoProduto'] . "  ' alt='Imagem do produto' width='300px'>"?>
+
+                             <p> <?= number_format($produto['preco'], 2, ',', '.'); ?> reais</p>
+
+                         </div>
+
+                         <h2>Descrição: <?= $produto['descricao'] ?></h2>
             
-                        echo '<img src="../cadastro/uploads/' . $produto['fotoProduto'] . '" alt="Imagem do produto" width="300px">';
-
-
-                        echo "<p>" . number_format($produto['preco'], 2, ',', '.') . " reais</p>"; //preço do produto
-
-                        echo "<h2>Descrição:" . $produto['descricao'] . "</h2>"; //descrição do produto
-            
-                            ?>
             <div class="login-box">
 
                 <form action="update-prod.php" method="POST">
@@ -102,7 +75,7 @@ require_once '../inc/cabecalho.php'; ?>
                     <button class='button_padrao' type="submit">Editar</button>
                 </form>
 
-                <form action="delete-prod.php" method="POST" onsubmit="return confirmarExclusaoProduto()">
+                <form action="delete.php" method="POST" onsubmit="return confirmarExclusaoProduto()">
                     <input type="hidden" name="deleteprod" value="<?= $produto['id_produto']; ?>">
                     <input type="hidden" name="deletefile" value="<?= $produto['fotoProduto']; ?>">
                     <button class='button_padrao' type="submit">Excluir</button>

@@ -67,7 +67,7 @@ class usuarioDAO
         }
     }
 
-    public function deletarUsuario($id_usuario){
+    public function excluirUsuario($id_usuario){
         $query = "DELETE FROM usuario WHERE id_usuario = :id_usuario;";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(':id_usuario',$id_usuario,PDO::PARAM_INT);

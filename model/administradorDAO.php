@@ -38,4 +38,17 @@ class administradorDAO
 
     }
 
+    public function deleteAdministradorById($id_usuario){
+        
+        $query = "DELETE FROM administrador WHERE id_usuario = :id_usuario";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_usuario',$id_usuario,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return TRUE;
+        }else{
+            return "ocorreu um erro " . $stmt->errorInfo();
+        }
+
+    }
+
 }

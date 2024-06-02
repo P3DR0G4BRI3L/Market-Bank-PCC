@@ -205,7 +205,7 @@ require_once '../inc/cabecalho.php';
                             <input type="password" id="senha" name="senha" value="<?= $usuarioDAO->getSenhaById($_SESSION['usuario']['id_usuario']) ?>"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()" required
                                 placeholder="Insira sua senha">
-                            <button type="button" id="mostrarSenha" onclick="mostrarsenha()">Mostrar Senha</button>
+                            <button type="button" class="button_padrao" id="mostrarSenha" onclick="mostrarsenha()">Mostrar Senha</button>
                         </div>
 
                         <div class="input-group">

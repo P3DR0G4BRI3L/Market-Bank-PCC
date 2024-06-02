@@ -25,12 +25,12 @@ if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'administrador') {
 
 require_once '../inc/cabecalhocadastro.php';
 ?>
-<div id="area-principal">
+<div id="area-principal2">
 
 <div id="area-postagens">
     <!--Aberturac -->
-    <div class="postagem" >
-        <h2>Administração Mercados</h2>
+    <div class="postagem_adm" >
+        <h2  class="postagem_admtit">Administração Mercados</h2>
         <!-- <div class="cadastro_option">
         <div class="login-box"> -->
         <table>
@@ -39,7 +39,7 @@ require_once '../inc/cabecalhocadastro.php';
 
 
             <thead>
-                <tr>
+                <tr class="table_adm">
                     <th>Nome</th>
                     <th>Email</th>
                     <th>Nome do Mercado</th>

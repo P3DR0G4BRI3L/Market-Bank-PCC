@@ -22,13 +22,7 @@ function admEstaLogado()
     return isset($_SESSION['usuario']) && $_SESSION['usuario']['tipo'] == 'administrador';
 }
 
-// redireciona  o usuario caso ele não esteja logado
-function redirecionamento()
-{
-    if (!mercadoEstaLogado()) {
-        echo "<script>window.history.back()</script>";
-    }
-}
+
 
 function formatarTelefone($numero) {
    
@@ -62,3 +56,26 @@ function formatarCNPJ($cnpj) {
 
     return $cnpjFormatado;
 }
+
+function voceNaoTemPermissao(){
+if (!usuarioEstaLogado()){//essa função mostra de forma mais amigavel pro usuario que ele não pode acessar essa página, essa função deve estar dentro das divs area-principal e area-postagens
+    echo "
+<div id='area-principal'>
+    <div id='area-postagens'>
+            
+        <div class='postagem'>
+        <link rel='stylesheet' href='../../css/cadastro.css'>
+        <h2>Você não tem permissão para acessar essa página</h2>
+        <h2>Realize o cadastro</h2>
+        <div class='login-box'><button  class='button_padrao'
+                onclick=\"window.location.href='../index.php' \">Voltar</button></div>
+        
+        </div>
+        <div id='rodape'>
+        &copy Todos os direitos reservados
+        </div>
+    </div>
+</div>";
+exit;
+
+}}

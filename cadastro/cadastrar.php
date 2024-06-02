@@ -18,16 +18,15 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
             <div class="cadastro_option">
                 <div class="login-box">
 
-                    <button class="btn_left" onclick="window.location.href= '../index.php' ">Voltar</button>
+                    <button class="button_padrao" onclick="window.location.href= '../index.php' ">Voltar</button>
 
 
-                    <button onclick="window.location.href = 'cadastrarCliente.php'">Cliente</button>
-                    <button onclick="window.location.href = 'cadastrarMercado.php'">Mercado</button>
+                    <button class="button_padrao" onclick="window.location.href = 'cadastrarCliente.php'">Cliente</button>
+                    <button class="button_padrao" onclick="window.location.href = 'cadastrarMercado.php'">Mercado</button>
 
                     <br>
 
 
-                    </form>
                 </div>
             </div>
             </p>

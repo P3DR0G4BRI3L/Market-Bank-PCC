@@ -141,9 +141,9 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
 
                         </div>
 
-                        <button class="btn_left" onclick="window.location.href='cadastrar.php'">Voltar</button>
+                        <button class="button_padrao" onclick="window.location.href='cadastrar.php'">Voltar</button>
 
-                        <button type="submit">Cadastrar</button>
+                        <button class="button_padrao" type="submit">Cadastrar</button>
 
                     </form>
                 </div>

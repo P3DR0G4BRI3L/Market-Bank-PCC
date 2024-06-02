@@ -18,6 +18,9 @@ body {
 	padding: 15px;
 	text-align: center;
 }
+#area-cabecalho .aviso-login{
+	color:white;
+}
 
 #area-logo, #area-menu {
 	
@@ -79,7 +82,6 @@ body {
 	text-decoration: none;
 	
 }
-
 
 .postagem-lateral {
 	font-size: 0.8em;
@@ -150,7 +152,7 @@ a{
 .login-box {
 	margin: 0 auto;
     background-color: #fff;
-    /* padding: 0px 0px; */
+    padding: 2px 0px;
     border-radius: 5px;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     text-align: center; /* Centraliza o texto */
@@ -224,6 +226,20 @@ input[type="number"] {
 	justify-content: start;
 
 }
+.largura_menor{
+	width: 40% ;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+
+}
+.largura_menor .input-group{
+	margin: 20px ;
+}
+
+.container .login-box .input-group .inline {
+	display: flex;
+	flex-direction: row;
+}
+
 .input-name {
 	display: flex;
 	margin-bottom: 15px;
@@ -257,6 +273,7 @@ input[type="number"] {
 }
 
 
+
 input[type="number"]::-webkit-inner-spin-button,/*oculta as setas de incremento no chrome*/
 input[type="number"]::-webkit-outer-spin-button {/*oculta as setas de incremento no firefox*/
     display: none;
@@ -266,9 +283,8 @@ input[type="number"] {
     appearance: textfield;
 }
 
-button[type="submit"] {
+.button_padrao {
 	font-size: 18px;
-    width: 25%;
     padding: 10px;
     background-color: #F7800F;
     color: #fff;
@@ -277,7 +293,7 @@ button[type="submit"] {
     cursor: pointer;
 	margin-bottom: 5px;
 }
-button{
+.button_padrao{
 	font-size: 18px;
     padding: 10px;
     background-color: #F7800F;
@@ -288,7 +304,7 @@ button{
 	margin-bottom: 5px;
 }
 
-button:hover {
+.button_padrao:hover {
     background-color: #d66800;
 	color: black;
 }
@@ -344,4 +360,38 @@ table,tr,th,thead{
 .imagem:hover{
 	width: 500px;
 	
+}
+table,tr,thead,caption{
+	border: 1px solid black;
+	height: 20px;
+	align-items: center;
+	background-color:#ccc;
+	border-radius: 5px;
+
+}
+th{
+	width: 100px;
+	height: 30px;
+	border: 1px solid black;
+	padding: 20px;
+	background-color: #d66800;
+}
+.postagem_adm{
+	padding: 650px;
+	padding-top: 20px;
+	margin-bottom: 20px;
+	padding-left:10px;
+	background: white;
+    width: 880px;
+	align-items: left;
+	flex-wrap: wrap;
+	border-left: 300px;
+	text-align: left;
+}
+.postagem_admtit{
+	text-align: center;
+}
+.area_principal12{
+	padding: 1200px;
+    padding-right: 300px;
 }

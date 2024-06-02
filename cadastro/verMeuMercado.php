@@ -48,7 +48,11 @@ require_once '../inc/cabecalho.php' ;
                 echo "<h2> Compras: " . ucwords(($_SESSION['usuario']['mercado']['compras'])=='nao'?'não':'sim') . "</h2>";
 ?>
             <button class="button_padrao btn_edit" onclick="window.location.href='../CRUD/update-mercado.php'">Editar</button>
-            <button class="button_padrao btn_delete" onclick="confirmarExclusaoMercado();">Excluir</button>
+
+            <form action="../CRUD/delete.php" method="POST" onsubmit="return confirmarExclusaoMercado();">
+                <input type="hidden" name="deletemercado" value="<?= $_SESSION['usuario']['mercado']['id_mercado'] ?>">
+                <button type="submit" class="button_padrao btn_delete">Excluir</button>
+            </form>
 
             <button class="button_padrao" onclick="window.location.href = '../CRUD/read-prod.php'">Produtos</button>
 

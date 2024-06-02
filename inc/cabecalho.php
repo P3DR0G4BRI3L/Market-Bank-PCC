@@ -10,13 +10,12 @@
     <script src="../script/script.js"></script>
 
 </head>
-<?php if(usuarioEstaLogado()){$userlog=$_SESSION['usuario']['nome'];} ?>
 
 <body>
     <div id="area-cabecalho">
         <?php if (usuarioEstaLogado()): ?>
 
-        <p class="aviso-login">Seja bem vindo&nbsp;<?= (usuarioEstaLogado()) ? ucwords($userlog) : ''; ?></p>
+        <p class="aviso-login">Seja bem vindo&nbsp;<?= (usuarioEstaLogado()) ? ucwords($_SESSION['usuario']['nome']) : ''; ?></p>
 
         <?php if (mercadoEstaLogado()): ?>
 
