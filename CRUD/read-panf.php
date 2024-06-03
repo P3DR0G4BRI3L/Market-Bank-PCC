@@ -4,7 +4,7 @@ require_once '../cadastro/cadastro.php';
 require_once '../model/mercadoDAO.php';
 require_once '../model/panfletoDAO.php';
 session_start();
-$id_mercado = $_POST['id_mercado'] ?? '';
+$id_mercado = $_SESSION['usuario']['verMercado'] ?? '';
 
 
 //armazena as informações do mercado em $infmercado
@@ -44,10 +44,9 @@ require_once '../inc/cabecalho.php'; ?>
         </div>
         <!--lista os produtos, cada vez que o metodo fetch_all() é chamado ele armazena uma linha em $row e mostra dentro do laço while  -->
         <?php
-        $tipo = $_SESSION['usuario']['tipo'];
         $panfletoDAO = new panfletoDAO($conn);
 
-        switch ($tipo) {
+        switch ($_SESSION['usuario']['tipo']) {
                 //se for um mercado que estiver logado vai listar os produtos e disponibilizar exclusão e edição
             case 'dono':
                 $panfletos = $panfletoDAO->getAllPanfletoByIdMercado($_SESSION['usuario']['mercado']['id_mercado']);
@@ -95,7 +94,9 @@ require_once '../inc/cabecalho.php'; ?>
 
             case 'cliente':
             case 'administrador':
-
+                if(empty($id_mercado) || isset($id_mercado)){
+                    voceNaoTemPermissao();
+                }
                 $panfletos = $panfletoDAO->getAllpanfletoByIdMercado($id_mercado);
                 if (!empty($panfletos)) {
                     foreach ($panfletos as $panfleto) { ?>

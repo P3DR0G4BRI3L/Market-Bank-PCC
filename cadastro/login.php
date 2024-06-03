@@ -24,8 +24,19 @@ if ($usuarioDAO->login($email, md5($senha))) {
     switch ($infoUser['tipo']) {
 
         case "cliente":
-            echo "<script>alert('Login realizado com sucesso');</script>";
-            $_SESSION['usuario'] = $infoUser; //atribui todas as informações do usuario ao usuario de sessão
+            $_SESSION['usuario'] = [
+                'id_usuario' => $infoUser['id_usuario'],
+                'email' => $infoUser['email'],
+                'nome' => $infoUser['nome'],
+                'tipo' => $infoUser['tipo'], //atribui todas as informações do usuario ao usuario de sessão
+                'verMercado' => '',
+                    'carrinho' => [
+                        'id_produto'=> '',
+                        'quantidade'=> ''
+                    ]
+                    ];
+                
+                echo "<script>alert('Login realizado com sucesso');</script>";
             echo "<script>window.location.href='../index.php'</script>";
             exit;
             break;

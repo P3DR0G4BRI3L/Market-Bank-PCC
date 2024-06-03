@@ -6,7 +6,7 @@ require_once '../model/mercadoDAO.php';
 session_start();
 $produtoDAO = new produtoDAO($conn);
 $mercadoDAO = new mercadoDAO($conn);
-$id_mercado = $_POST['id_mercado'] ?? NULL;
+$id_mercado = $_SESSION['usuario']['verMercado'] ?? '';
 $infmercado = $mercadoDAO->getMercadoById($id_mercado);
 
 require_once '../inc/cabecalho.php'; ?>
@@ -95,14 +95,12 @@ require_once '../inc/cabecalho.php'; ?>
 
         case 'cliente' : 
         case 'administrador' : 
-            $id_mercado = $_POST['id_mercado'];
+            if(empty($id_mercado) || isset($id_mercado)){
+                voceNaoTemPermissao();
+            }
+            $produtos= $produtoDAO->getAllProdutoByIdMercado($id_mercado);
 
-            $result = $conn->prepare("SELECT * FROM produto WHERE id_mercado = :id_mercado ");
-            $result->bindValue(':id_mercado', $id_mercado, PDO::PARAM_INT);
-            $result->execute();
-
-            if ($result->rowCount() > 0) {
-                $produtos = $result->fetchAll();
+            if (!empty($produtos)) {
                 foreach ($produtos as $produto) { ?>
         <div class="postagem">
 

@@ -5,6 +5,11 @@ require_once 'cadastro.php';
 require_once '../model/usuarioDAO.php';
 require_once '../model/mercadoDAO.php';
 
+if(isset($_POST['senha']) && strlen($_POST['senha'])>16){
+    echo "<script>alert('Senha muito extensa, no máximo 16 caracteres');
+    window.location.href='cadastrarCliente.php';
+    </script>";
+}
 
 $nomeMerc = $_POST['nome_mercado'];
 $regiaoadm = $_POST['regiaoadm'] ;

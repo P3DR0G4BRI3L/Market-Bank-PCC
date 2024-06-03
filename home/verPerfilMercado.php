@@ -7,13 +7,13 @@ session_start();
 
 //verifica se tem algum usuário logado retorna true ou false
 
-
+$_SESSION['usuario']['verMercado'] = $_POST['id_mercado']  ; 
 $mercadoDAO = new mercadoDAO($conn);
 
 if (usuarioEstaLogado()) {
     $userlog = ucwords($_SESSION['usuario']['nome']);
 
-    $infmercado = $mercadoDAO->getMercadoById($_POST['id_mercado']);
+    $infmercado = $mercadoDAO->getMercadoById($_SESSION['usuario']['verMercado']);
 }
 require_once '../inc/cabecalho.php'; //mostra o cabeçalho
 

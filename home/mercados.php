@@ -52,12 +52,12 @@ require_once '../inc/cabecalho.php';//mostra o cabeçalho
                 
                             
                         <?php if ($_SESSION['usuario']['tipo'] != 'dono'): ?>
+                            
                             <form action="verPerfilMercado.php" method="POST">
                                 <input type="hidden" name="id_mercado" value="<?= $mercado['id_mercado']; ?>">
-
                                 <button class='button_padrao' type="submit">Ver perfil</button>
-
                             </form>
+
                         <?php endif ?>
                     </div><?php endforeach ?>
                     <?php } ?>

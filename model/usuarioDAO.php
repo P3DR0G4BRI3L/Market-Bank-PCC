@@ -32,7 +32,7 @@ class usuarioDAO
             $query = "SELECT * FROM usuario WHERE email = :email;";
             $stmt = $this->conn->prepare($query);
             $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-            if ($stmt->execute() && $stmt->rowCount() < 0) {
+            if ($stmt->execute() && $stmt->rowCount() > 0) {
                 return TRUE;
             }
         } catch (PDOException $erro) {
