@@ -7,13 +7,20 @@ class filtroProduto{
         $this->conn = $conn;
     }
 
-    public function inserirFiltro($nomeFiltro,$id_mercado){
-        $query = "INSERT INTO filtroproduto(nomeFiltro , id_mercado , id_produto) VALUES(:nomeFiltro,:id_mercado);";
+    public function inserirFiltro($nomeFiltro,$id_mercado,$id_produto){
+        $query = "INSERT INTO filtroproduto(nomeFiltro , id_mercado) VALUES(:nomeFiltro,:id_mercado);";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(':nomeFiltro',$nomeFiltro,PDO::PARAM_STR); 
         $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT); 
         if($stmt->execute()){
-            return TRUE;
+            $id_filtro = $this->conn->lastInsertId();
+            $query = "UPDATE produto SET id_filtro = :id_filtro WHERE id_produto = :id_produto  ;";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(':id_filtro',$id_filtro,PDO::PARAM_INT);
+            $stmt->bindValue(':id_produto',$id_produto,PDO::PARAM_INT);
+            if($stmt->execute()){
+                return TRUE;
+            }
         }else{
             return "ocorreu um erro " . $stmt->errorInfo();
         }
@@ -29,6 +36,7 @@ class filtroProduto{
             return "ocorreu um erro" . $stmt->errorInfo();
         }
     }
+    public function getIdFiltroByNome
    
 
 }

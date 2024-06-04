@@ -9,7 +9,9 @@ require_once '../model/mercadoDAO.php';
 require_once '../model/usuarioDAO.php';
 // Conexão com o banco de dados
 
-
+if(usuarioEstaLogado()){
+    header('location:../index.php');
+}
 if(isset($_POST['email'],$_POST['senha'])){
 $email = $_POST['email'];
 $senha = $_POST['senha'];

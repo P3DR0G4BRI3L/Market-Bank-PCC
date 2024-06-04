@@ -56,7 +56,7 @@ require_once '../inc/cabecalho.php' ;
 
             <button class="button_padrao" onclick="window.location.href = '../CRUD/read-prod.php'">Produtos</button>
 
-            <button class="button_padrao" onclick="window.location.href = '' ">Categoria de produtos</button>
+            <button class="button_padrao" onclick="window.location.href = '../CRUD/read-filtro.php' ">Categoria de produtos</button>
 
             <button class="button_padrao" onclick="window.location.href = '../CRUD/read-panf.php' ">Panfletos</button>
             

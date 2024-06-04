@@ -5,7 +5,6 @@ require_once '../model/mercadoDAO.php';
 require_once '../model/usuarioDAO.php';
 session_start();
 
-//verifica se tem algum usuário logado retorna true ou false
 
 $_SESSION['usuario']['verMercado'] = $_POST['id_mercado']  ; 
 $mercadoDAO = new mercadoDAO($conn);
