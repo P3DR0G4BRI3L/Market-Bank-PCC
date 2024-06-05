@@ -64,14 +64,7 @@ require_once '../inc/cabecalho.php'; //mostra o cabeçalho
         </div>
     </div>
 
-    <div id="area-lateral">
-
-        <div class="conteudo-lateral">
-            <h3>Carrinho</h3>
-        </div>
-
-    </div>
-
+    <?php require_once 'carrinho.php'; ?>
 
 
 

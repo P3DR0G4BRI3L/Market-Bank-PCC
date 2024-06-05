@@ -82,6 +82,16 @@ class produtoDAO
             return "ocorreu um erro" . $stmt->errorInfo();
         }
     }
+    public function getProdutoById($id_produto){
+        $query = "SELECT * FROM produto WHERE id_produto = :id_produto";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_produto',$id_produto,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo();
+        }
+    }
 
 
 }

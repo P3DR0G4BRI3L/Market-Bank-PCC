@@ -29,17 +29,21 @@ require_once '../inc/cabecalho.php'; ?>
         <div class="postagem">
 
             <div class="login-box">
-                <?php if (mercadoEstaLogado()) : ?>
-                    <button class='button_padrao' onclick="window.location.href='../cadastro/addprod.php' ">Adicionar produto</button>
-                    <button class='button_padrao' onclick="window.location.href='../cadastro/verMeuMercado.php' ">Voltar</button>
+                <?php if (mercadoEstaLogado()): ?>
+                    <button class='button_padrao' onclick="window.location.href='../cadastro/addprod.php' ">Adicionar
+                        produto</button>
+                    <button class='button_padrao'
+                        onclick="window.location.href='../cadastro/verMeuMercado.php' ">Voltar</button>
 
                 <?php endif ?>
 
-                <?php if (clienteEstaLogado()) : ?>
-                    <h1>Produtos do mercado: <br><?= ucwords($infmercado['nomeMerc']); ?></h1>
+                <?php if (clienteEstaLogado()): ?>
+                    <h1>Produtos do mercado: <br><?= ucwords($infmercado['nomeMerc']); ?>
+                    </h1>
                     <form action="../home/verPerfilMercado.php" method="POST">
                         <input type="hidden" name="id_mercado" value="<?= $id_mercado ?>">
-                        <button class='button_padrao' onclick="window.location.href='../home/verPerfilMercado.php' ">Voltar</button>
+                        <button class='button_padrao'
+                            onclick="window.location.href='../home/verPerfilMercado.php' ">Voltar</button>
 
                     </form>
                 <?php endif ?>
@@ -49,7 +53,7 @@ require_once '../inc/cabecalho.php'; ?>
         <!--lista os produtos, cada vez que o metodo fetch_all() é chamado ele armazena uma linha em $row e mostra dentro do laço while  -->
         <?php
         switch ($_SESSION['usuario']['tipo']) {
-                //se for um mercado que estiver logado vai listar os produtos e disponibilizar exclusão e edição
+            //se for um mercado que estiver logado vai listar os produtos e disponibilizar exclusão e edição
             case 'dono':
                 $produtos = $produtoDAO->getAllProdutoByIdMercado($_SESSION['usuario']['mercado']['id_mercado']);
                 if (!empty($produtos)) {
@@ -58,15 +62,21 @@ require_once '../inc/cabecalho.php'; ?>
 
                             <div class="view_produto">
 
-                                <h2> <?= ucwords($produto['nome']); ?> </h2>
+                                <h2>
+                                    <?= ucwords($produto['nome']); ?>
+                                </h2>
 
                                 <?php echo "<img src='../cadastro/uploads/" . $produto['fotoProduto'] . "  ' alt='Imagem do produto' width='300px'>" ?>
 
-                                <p> <?= number_format($produto['preco'], 2, ',', '.'); ?> reais</p>
+                                <p>
+                                    <?= number_format($produto['preco'], 2, ',', '.'); ?> reais
+                                </p>
 
                             </div>
 
-                            <h2>Descrição: <?= $produto['descricao'] ?></h2>
+                            <h2>Descrição:
+                                <?= $produto['descricao'] ?>
+                            </h2>
 
                             <div class="login-box">
 
@@ -106,38 +116,35 @@ require_once '../inc/cabecalho.php'; ?>
 
                             <?php
                             echo "<h2> " . $produto['nome'] . " </h2>"; //nome do produto
-
+            
                             echo '<img src="../cadastro/uploads/' . $produto['fotoProduto'] . '" alt="Imagem do mercado" width="300px">';
 
 
                             echo "<h2>" . number_format($produto['preco'], 2, ',', '.') . " R$ </h2>"; //preço do produto
-
+            
                             echo "<h2>Descrição:" . $produto['descricao'] . "</h2>"; //descrição do produto
                             ?>
                             <div class="login-box">
                                 <a href="add_carrinho.php?id_produto=<?= $produto['id_produto'] ?>">Adicionar ao carrinho</a>
 
-                                <button class='button_padrao' onclick="window.location.href='../home/verPerfilMercado.php' ">Voltar</button>
+                                <button class='button_padrao'
+                                    onclick="window.location.href='../home/verPerfilMercado.php' ">Voltar</button>
                             </div>
 
-</div>
-                        </div>
-                        <div id="area-lateral">
-
-                            <div class="conteudo-lateral">
-                                <h3>Carrinho</h3>
-                            </div>
 
                         </div>
-        <?php }
-                } else {
+                    <?php } ?>
+
+                    <?php require_once '../inc/rodape.php'; ?>
+
+                    <?php require_once '../home/carrinho.php'; ?>
+                    
+            <?php } else {
                     echo "<div class='postagem'>
                     <h2>Ainda não foram inseridos produtos</h2>
                 </div>";
                 }
                 break;
         } ?>
-        <!--// Fechamento postagem -->
+    <!--// Fechamento postagem -->
 
-
-        <?php require_once '../inc/rodape.php'; ?>

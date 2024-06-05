@@ -8,10 +8,7 @@ session_start();
 
 // se o usuario estiver logado, armazena o nome dele em $userlog, //se o tipo for dono, armazena o nome do mercado dentro de $mercName
 
-if (usuarioEstaLogado()) {
-    $userlog = ucwords($_SESSION['usuario']['nome']);
 
-}
 
 // require 'inc/cabecalho.php';
 ?>
@@ -33,7 +30,7 @@ if (usuarioEstaLogado()) {
 		<!-- só é mostrado se o usuario estiver logado -->
 		<?php if (usuarioEstaLogado()): ?>
 
-			<p class="aviso-login">Seja bem vindo&nbsp;<?= $userlog; ?></p>
+			<p class="aviso-login">Seja bem vindo&nbsp;<?= $_SESSION['usuario']['nome']; ?></p>
 
 			<!-- só mostra se for um mercado que estiver logado, mostra o nome do mercado -->
 			<?php if (mercadoEstaLogado()): ?>
