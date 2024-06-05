@@ -22,11 +22,11 @@ require_once '../inc/cabecalhocadastro.php';
         <div class="cadastro_option">
             <div class="login-box">
 
-                <button class="btn_left" onclick="window.history.back()">Voltar</button>
+                <button class="button_padrao" onclick="window.history.back()">Voltar</button>
 
 
-                <button onclick="window.location.href = 'admcliente.php'">Cliente</button>
-                <button onclick="window.location.href = 'admmercado.php'">Mercado</button>
+                <button class="button_padrao" onclick="window.location.href = 'admcliente.php'">Cliente</button>
+                <button class="button_padrao" onclick="window.location.href = 'admmercado.php'">Mercado</button>
 
                 
 

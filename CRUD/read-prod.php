@@ -22,114 +22,121 @@ require_once '../inc/cabecalho.php'; ?>
         voceNaoTemPermissao();
 
 
-        
+
         ?>
 
         <!--Abertura postagem -->
         <div class="postagem">
 
             <div class="login-box">
-                <?php if (mercadoEstaLogado()): ?>
+                <?php if (mercadoEstaLogado()) : ?>
                     <button class='button_padrao' onclick="window.location.href='../cadastro/addprod.php' ">Adicionar produto</button>
                     <button class='button_padrao' onclick="window.location.href='../cadastro/verMeuMercado.php' ">Voltar</button>
 
                 <?php endif ?>
 
-                <?php if (clienteEstaLogado()): ?>
-                    <h1>Produtos do mercado: <br><?=ucwords($infmercado['nomeMerc']);?></h1>
-<form action="../home/verPerfilMercado.php"method="POST">
-    <input type="hidden" name="id_mercado" value="<?= $id_mercado ?>">
-                    <button class='button_padrao' onclick="window.location.href='../home/verPerfilMercado.php' ">Voltar</button>
-    
-</form>
+                <?php if (clienteEstaLogado()) : ?>
+                    <h1>Produtos do mercado: <br><?= ucwords($infmercado['nomeMerc']); ?></h1>
+                    <form action="../home/verPerfilMercado.php" method="POST">
+                        <input type="hidden" name="id_mercado" value="<?= $id_mercado ?>">
+                        <button class='button_padrao' onclick="window.location.href='../home/verPerfilMercado.php' ">Voltar</button>
+
+                    </form>
                 <?php endif ?>
 
             </div>
         </div>
         <!--lista os produtos, cada vez que o metodo fetch_all() é chamado ele armazena uma linha em $row e mostra dentro do laço while  -->
         <?php
-        switch($_SESSION['usuario']['tipo']){
-        //se for um mercado que estiver logado vai listar os produtos e disponibilizar exclusão e edição
-        case 'dono':
-            $produtos = $produtoDAO->getAllProdutoByIdMercado($_SESSION['usuario']['mercado']['id_mercado']);
-            if (!empty($produtos)) {
-                foreach ($produtos as $produto) { ?>
-        <div class="postagem">
+        switch ($_SESSION['usuario']['tipo']) {
+                //se for um mercado que estiver logado vai listar os produtos e disponibilizar exclusão e edição
+            case 'dono':
+                $produtos = $produtoDAO->getAllProdutoByIdMercado($_SESSION['usuario']['mercado']['id_mercado']);
+                if (!empty($produtos)) {
+                    foreach ($produtos as $produto) { ?>
+                        <div class="postagem">
 
-                         <div class="view_produto">
-                            
-                             <h2>  <?= ucwords($produto['nome']); ?> </h2>
+                            <div class="view_produto">
 
-                            <?php echo "<img src='../cadastro/uploads/" . $produto['fotoProduto'] . "  ' alt='Imagem do produto' width='300px'>"?>
+                                <h2> <?= ucwords($produto['nome']); ?> </h2>
 
-                             <p> <?= number_format($produto['preco'], 2, ',', '.'); ?> reais</p>
+                                <?php echo "<img src='../cadastro/uploads/" . $produto['fotoProduto'] . "  ' alt='Imagem do produto' width='300px'>" ?>
 
-                         </div>
+                                <p> <?= number_format($produto['preco'], 2, ',', '.'); ?> reais</p>
 
-                         <h2>Descrição: <?= $produto['descricao'] ?></h2>
-            
-            <div class="login-box">
+                            </div>
 
-                <form action="update-prod.php" method="POST">
-                    <input type="hidden" name="updateprod" value="<?= $produto['id_produto']; ?>">
-                    <button class='button_padrao' type="submit">Editar</button>
-                </form>
+                            <h2>Descrição: <?= $produto['descricao'] ?></h2>
 
-                <form action="delete.php" method="POST" onsubmit="return confirmarExclusaoProduto()">
-                    <input type="hidden" name="deleteprod" value="<?= $produto['id_produto']; ?>">
-                    <input type="hidden" name="deletefile" value="<?= $produto['fotoProduto']; ?>">
-                    <button class='button_padrao' type="submit">Excluir</button>
-                </form>
-            </div>
+                            <div class="login-box">
+
+                                <form action="update-prod.php" method="POST">
+                                    <input type="hidden" name="updateprod" value="<?= $produto['id_produto']; ?>">
+                                    <button class='button_padrao' type="submit">Editar</button>
+                                </form>
+
+                                <form action="delete.php" method="POST" onsubmit="return confirmarExclusaoProduto()">
+                                    <input type="hidden" name="deleteprod" value="<?= $produto['id_produto']; ?>">
+                                    <input type="hidden" name="deletefile" value="<?= $produto['fotoProduto']; ?>">
+                                    <button class='button_padrao' type="submit">Excluir</button>
+                                </form>
+                            </div>
 
 
-        </div>
-        <?php }
-            } else {
-                echo "<div class='postagem'>
+                        </div>
+                    <?php }
+                } else {
+                    echo "<div class='postagem'>
                     <h2>Ainda não foram inseridos produtos</h2>
                 </div>";
-            }
-        break;
+                }
+                break;
 
 
-        case 'cliente' : 
-        case 'administrador' : 
-            if(empty($id_mercado) || isset($id_mercado)){
-                voceNaoTemPermissao();
-            }
-            $produtos= $produtoDAO->getAllProdutoByIdMercado($id_mercado);
+            case 'cliente':
+            case 'administrador':
+                if (empty($id_mercado) || isset($id_mercado)) {
+                    voceNaoTemPermissao();
+                }
+                $produtos = $produtoDAO->getAllProdutoByIdMercado($id_mercado);
 
-            if (!empty($produtos)) {
-                foreach ($produtos as $produto) { ?>
-        <div class="postagem">
+                if (!empty($produtos)) {
+                    foreach ($produtos as $produto) { ?>
+                        <div class="postagem">
 
-            <?php
-                        echo "<h2> " . $produto['nome'] . " </h2>"; //nome do produto
-            
-                        echo '<img src="../cadastro/uploads/' . $produto['fotoProduto'] . '" alt="Imagem do mercado" width="300px">';
+                            <?php
+                            echo "<h2> " . $produto['nome'] . " </h2>"; //nome do produto
+
+                            echo '<img src="../cadastro/uploads/' . $produto['fotoProduto'] . '" alt="Imagem do mercado" width="300px">';
 
 
-                        echo "<h2>" . number_format($produto['preco'], 2, ',', '.') . " R$ </h2>" ;//preço do produto
+                            echo "<h2>" . number_format($produto['preco'], 2, ',', '.') . " R$ </h2>"; //preço do produto
 
-                        echo "<h2>Descrição:" . $produto['descricao'] . "</h2>"; //descrição do produto
+                            echo "<h2>Descrição:" . $produto['descricao'] . "</h2>"; //descrição do produto
                             ?>
-            <div class="login-box">
-                <button class='button_padrao' onclick="window.location.href='../home/mercados.php' ">Voltar</button>
-            </div>
+                            <div class="login-box">
+                                <a href="add_carrinho.php?id_produto=<?= $produto['id_produto'] ?>">Adicionar ao carrinho</a>
 
+                                <button class='button_padrao' onclick="window.location.href='../home/verPerfilMercado.php' ">Voltar</button>
+                            </div>
 
-        </div>
+</div>
+                        </div>
+                        <div id="area-lateral">
+
+                            <div class="conteudo-lateral">
+                                <h3>Carrinho</h3>
+                            </div>
+
+                        </div>
         <?php }
-            } else {
-                echo "<div class='postagem'>
+                } else {
+                    echo "<div class='postagem'>
                     <h2>Ainda não foram inseridos produtos</h2>
                 </div>";
-
-            }
-        break;
-    }?>
-        <hr>
+                }
+                break;
+        } ?>
         <!--// Fechamento postagem -->
 
 

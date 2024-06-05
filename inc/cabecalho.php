@@ -17,12 +17,14 @@
 
         <p class="aviso-login">Seja bem vindo&nbsp;<?= (usuarioEstaLogado()) ? ucwords($_SESSION['usuario']['nome']) : ''; ?></p>
 
+        <?php endif ?>
+
         <?php if (mercadoEstaLogado()): ?>
 
         <p class="aviso-login">Você está logado no mercado:&nbsp;<?= ucwords($_SESSION['usuario']['mercado']['nomeMerc']); ?></p>
 
         <?php endif ?>
-        <?php endif ?>
+        
         <!-- abertura postagem -->
         <div id="area-logo">
             <img src="../home/img/logo.png" alt="logo">

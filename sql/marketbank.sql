@@ -156,6 +156,7 @@ CREATE TABLE IF NOT EXISTS `produto` (
 CREATE TABLE IF NOT EXISTS `itens` (
   `id_itens` INT(11) NOT NULL AUTO_INCREMENT,
   `id_carrinho` INT(11) NOT NULL,
+  `quantidade` INT(11) NOT NULL,
   `id_produto` INT(11) NOT NULL,
   PRIMARY KEY (`id_itens`),
   INDEX `fk_itens_carrinho1_idx` (`id_carrinho` ASC),

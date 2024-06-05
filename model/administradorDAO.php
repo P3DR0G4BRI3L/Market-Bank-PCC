@@ -26,29 +26,52 @@ class administradorDAO
         }
     }
 
-    public function inserirAdministrador($id_usuario){
+    public function inserirAdministrador($id_usuario)
+    {
         $query = "INSERT INTO administrador(id_usuario) VALUES (:id_admin)";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(':id_admin',$id_usuario,PDO::PARAM_INT);
-        if($stmt->execute()){
+        $stmt->bindValue(':id_admin', $id_usuario, PDO::PARAM_INT);
+        if ($stmt->execute()) {
             return TRUE;
-        }else{
+        } else {
             return $stmt->errorInfo();
         }
-
     }
 
-    public function deleteAdministradorById($id_usuario){
-        
+    public function deleteAdministradorById($id_usuario)
+    {
+
         $query = "DELETE FROM administrador WHERE id_usuario = :id_usuario";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(':id_usuario',$id_usuario,PDO::PARAM_INT);
-        if($stmt->execute()){
+        $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        if ($stmt->execute()) {
             return TRUE;
-        }else{
+        } else {
             return "ocorreu um erro " . $stmt->errorInfo();
         }
-
     }
+    public function getAllUsuarioByTipo($tipo)
+    {
+        switch ($tipo) {
+            case "cliente":
+                $query = "SELECT * FROM usuario WHERE tipo = :tipo;";
+                $stmt = $this->conn->prepare($query);
+                $stmt->bindValue(':tipo', $tipo, PDO::PARAM_STR);
+                if ($stmt->execute()) {
+                    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                } else {
+                    return "ocorreu um erro" . $stmt->errorInfo();
+                }
+                break;
 
+                case "dono"://nessa consulta sql será selecionado todos os mercados combinados com a tabela usuario, onde id_dono for igual id_usuario
+                $query = "SELECT * FROM mercado JOIN usuario ON mercado.id_dono = usuario.id_usuario;";
+                $stmt = $this->conn->prepare($query);
+                if ($stmt->execute()){
+                    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                } else {
+                    return "ocorreu um erro" . $stmt->errorInfo();
+                }break;
+        }
+    }
 }

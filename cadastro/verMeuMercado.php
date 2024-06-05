@@ -25,28 +25,28 @@ require_once '../inc/cabecalho.php' ;
 
         <!--Abertura postagem -->
         <div class="postagem">
-            <?php
-            echo "<h2> " . ucwords($_SESSION['usuario']['mercado']['nomeMerc']) . " </h2>"; //nome do mercado
+            
+            <h2>Nome do mercado: <?=ucwords($_SESSION['usuario']['mercado']['nomeMerc'])?> </h2>
                 
-                echo '<img src="uploads/' . $_SESSION['usuario']['mercado']['imagem'] . '" alt="Imagem do mercado" width="620px">';
+               <?php echo '<img src="uploads/' . $_SESSION['usuario']['mercado']['imagem'] . '" alt="Imagem do mercado" width="620px">';?>
 
 
-                echo "<h2>" . ucwords($_SESSION['usuario']['mercado']['regiaoadm']) . "</h2>"; //endereço do mercado
+                 <h2>Endereço: <?=ucwords($_SESSION['usuario']['mercado']['regiaoadm'])?>  
 
-                echo "<h2>" . ucwords($_SESSION['usuario']['mercado']['endereco']) . "</h2>"; //endereço do mercado
+                 <?=ucwords($_SESSION['usuario']['mercado']['endereco'])?> </h2>
 
-                echo "<h2>Aberto das " . date('H:i', strtotime($_SESSION['usuario']['mercado']['horarioAbert'])) . "</h2>"; //endereço do mercado
+                 <h2>Horário de abertura: <?=date('H:i', strtotime($_SESSION['usuario']['mercado']['horarioAbert']))?> </h2> 
 
-                echo "<h2> Até as " . date('H:i', strtotime($_SESSION['usuario']['mercado']['horarioFecha'])) . "</h2>"; //endereço do mercado
-                
-                echo "<h2> telefone para contato: " . formatarTelefone($_SESSION['usuario']['mercado']['telefone']) . "</h2>";
-  
-                echo "<h2> CNPJ: " . formatarCNPJ($_SESSION['usuario']['mercado']['cnpj']) . "</h2>";
+                 <h2> Horário de fechamento: <?=date('H:i', strtotime($_SESSION['usuario']['mercado']['horarioFecha']))?> </h2> 
 
-                echo "<h2> Descrição: " . $_SESSION['usuario']['mercado']['descricao']. "</h2>";
+                 <h2> telefone para contato:  <?=formatarTelefone($_SESSION['usuario']['mercado']['telefone'])?> </h2>
 
-                echo "<h2> Compras: " . ucwords(($_SESSION['usuario']['mercado']['compras'])=='nao'?'não':'sim') . "</h2>";
-?>
+                 <h2> CNPJ:  <?=formatarCNPJ($_SESSION['usuario']['mercado']['cnpj'])?> </h2>
+
+                 <h2> Descrição:  <?=$_SESSION['usuario']['mercado']['descricao']?> </h2>
+
+                 <h2> Compras:  <?=ucwords(($_SESSION['usuario']['mercado']['compras'])=='nao'?'não':'sim')?> </h2>
+
             <button class="button_padrao btn_edit" onclick="window.location.href='../CRUD/update-mercado.php'">Editar</button>
 
             <form action="../CRUD/delete.php" method="POST" onsubmit="return confirmarExclusaoMercado();">

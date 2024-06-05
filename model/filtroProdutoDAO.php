@@ -36,7 +36,6 @@ class filtroProduto{
             return "ocorreu um erro" . $stmt->errorInfo();
         }
     }
-    public function getIdFiltroByNome
    
 
 }

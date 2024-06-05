@@ -60,7 +60,7 @@ require_once '../inc/cabecalhocadastro.php';
 
                 <?php endforeach ?>
             </table>
-            <button class="btn_left" onclick="window.history.back()">Voltar</button>
+            <button class="button_padrao"onclick="window.history.back()">Voltar</button>
 
 
 

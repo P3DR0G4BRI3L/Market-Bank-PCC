@@ -48,6 +48,22 @@ body {
 	border-radius: 5px;
 }
 
+#area-principal #area-postagens .postagem  .login-box a{
+	border-radius: 5px;
+	background-color: #F7800F;
+	padding: 10px;
+	text-decoration: none;
+	color: whitesmoke;
+
+}
+#area-principal #area-postagens .postagem  .login-box a:hover{
+	background-color: #d66800;
+	border-radius: 5px;
+	text-decoration: none;
+	padding: 10px;
+	color: black;
+}
+
 .postagem h2{
 	color: rgb(2, 102, 2);
 }
@@ -154,6 +170,10 @@ h3 {
 .postagem2{
 	color: rgb(9, 82, 9);
 	padding: 20px;
+	text-align: center;
+}
+.postagem img{
+	justify-content: center;
 	text-align: center;
 }
 html{

@@ -5,8 +5,12 @@ require_once '../model/mercadoDAO.php';
 require_once '../model/usuarioDAO.php';
 session_start();
 
+if(isset($_POST['id_mercado'])){
 
 $_SESSION['usuario']['verMercado'] = $_POST['id_mercado']  ; 
+
+}
+        
 $mercadoDAO = new mercadoDAO($conn);
 
 if (usuarioEstaLogado()) {

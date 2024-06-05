@@ -374,7 +374,7 @@ th{
 	height: 30px;
 	border: 1px solid black;
 	padding: 20px;
-	background-color: #d66800;
+	background-color: #e6e6e6;
 }
 .postagem_adm{
 	padding: 650px;
@@ -391,7 +391,7 @@ th{
 .postagem_admtit{
 	text-align: center;
 }
-.area_principal12{
+#area_principal2{
 	padding: 1200px;
-    padding-right: 300px;
+    padding-right: 3000px;
 }

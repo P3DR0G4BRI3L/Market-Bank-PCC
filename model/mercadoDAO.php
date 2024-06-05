@@ -67,16 +67,16 @@ class mercadoDAO
         }
     }
 
-    public function getMercadoById($id_mercado){
+    public function getMercadoById($id_mercado)
+    {
         $query = "SELECT * FROM mercado WHERE id_mercado = :id_mercado";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
-        if($stmt->execute()){
+        $stmt->bindValue(':id_mercado', $id_mercado, PDO::PARAM_INT);
+        if ($stmt->execute()) {
             return $stmt->fetch(PDO::FETCH_ASSOC);
-        }else{
+        } else {
             return "ocorreu um erro " . $stmt->errorInfo();
         }
-        
     }
 
     public function lidarImagem($filesimagem)
@@ -126,8 +126,8 @@ class mercadoDAO
         $imagem,
         $descricao,
         $compras,
-        $id_mercado) 
-        {
+        $id_mercado
+    ) {
         $query = "UPDATE mercado SET nomeMerc = :nomeMerc , endereco = :endereco , horarioAbert = :horarioAbert , horarioFecha = :horarioFecha
          , telefone = :telefone , cnpj = :cnpj , imagem = :imagem, regiaoadm = :regiaoadm, compras = :compras, descricao = :descricao
           WHERE id_mercado = :id_mercado ";
@@ -146,70 +146,96 @@ class mercadoDAO
         $stmt->bindValue(':id_mercado', $id_mercado, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
-         return TRUE;  
+            return TRUE;
         } else {
             echo "ocorreu um erro" . $stmt->errorInfo();
         }
     }
-    public function deleteMercadoById($id_dono){
-        
+    public function deleteMercadoById($id_dono)
+    {
+
         $query = "DELETE FROM mercado WHERE id_dono = :id_dono";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(':id_dono',$id_dono,PDO::PARAM_INT);
-        if( $stmt->execute() ){
-            
+        $stmt->bindValue(':id_dono', $id_dono, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+
             return TRUE;
-        }else{
+        } else {
             return "ocorreu um erro " . $stmt->errorInfo();
         }
-
     }
-    
 
-    public function deleteAllProdutosByMercado($id_mercado){
+
+    public function deleteAllProdutosByMercado($id_mercado)
+    {
         $query = "DELETE FROM produto WHERE id_mercado = :id_mercado";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
-        if($stmt->execute()){
+        $stmt->bindValue(':id_mercado', $id_mercado, PDO::PARAM_INT);
+        if ($stmt->execute()) {
             return TRUE;
-        }else{
+        } else {
             return "ocorreu um erro " . $stmt->errorInfo();
         }
-
-
     }
 
-    public function deleteAllPanfletosByMercado($id_mercado){
+    public function deleteAllPanfletosByMercado($id_mercado)
+    {
         $query = "DELETE FROM panfleto WHERE id_mercado = :id_mercado";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
-        if($stmt->execute()){
+        $stmt->bindValue(':id_mercado', $id_mercado, PDO::PARAM_INT);
+        if ($stmt->execute()) {
             return TRUE;
-        }else{
+        } else {
             return "ocorreu um erro " . $stmt->errorInfo();
         }
-
-
     }
-    public function deleteAllfiltroProdutoByMercado($id_mercado){
+    public function deleteAllfiltroProdutoByMercado($id_mercado)
+    {
         $query = "DELETE FROM filtroProduto WHERE  id_mercado = :id_mercado;";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
-        if($stmt->execute()){
+        $stmt->bindValue(':id_mercado', $id_mercado, PDO::PARAM_INT);
+        if ($stmt->execute()) {
             return TRUE;
-        }else{
+        } else {
             return "ocorreu um erro" . $stmt->errorInfo();
         }
     }
 
 
-    public function getImagemById($id_mercado){
-        $query = "SELECT imagem FROM mercado WHERE id_mercado=:id_mercado;" ;
+    public function getImagemById($id_mercado)
+    {
+        $query = "SELECT imagem FROM mercado WHERE id_mercado=:id_mercado;";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
-        if($stmt->execute()){
+        $stmt->bindValue(':id_mercado', $id_mercado, PDO::PARAM_INT);
+        if ($stmt->execute()) {
             return $stmt->fetch(PDO::FETCH_COLUMN);
         }
     }
 
+    public function verificaCNPJexiste($cnpj)
+    {
+        try {
+            $query = "SELECT * FROM mercado WHERE cnpj = :cnpj;";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(':cnpj', $cnpj);
+            if ($stmt->execute() && $stmt->rowCount() > 0) {
+                return TRUE;
+            }
+        } catch (PDOException $erro) {
+            echo "ocorreu um erro" . $erro->getMessage() . "<br>arquivo" . $erro->getFile();
+        }
+    }
+
+    public function verificaCNPJexisteAtt($cnpjAtt,$cnpjsessao){
+        $query = "SELECT * FROM mercado WHERE cnpj = :cnpj" ;
+        $stmt = $this->conn->prepare($query);//verifica se existe um usuario com esse cnpj na tabela, att para update
+        $stmt->bindValue(':cnpj',$cnpjAtt,PDO::PARAM_STR);
+    
+        if($stmt->execute() && $stmt->rowCount()>0){
+            $verify = $stmt->fetch(PDO::FETCH_ASSOC);
+            // var_dump($verify['cnpj']);exit;
+            // $verify2=$conn->prepare("SELECT * FROM ")        ;
+            if($verify['cnpj']!=$cnpjsessao){
+            return TRUE;}
+    }}
 }

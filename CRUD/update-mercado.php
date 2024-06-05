@@ -4,7 +4,7 @@ require_once '../func/func.php';
 require_once '../cadastro/cadastro.php';
 require_once '../model/mercadoDAO.php';
 require_once '../model/usuarioDAO.php';
-if(!usuarioEstaLogado()){
+if($_SESSION['usuario']['tipo']!='dono'){
     header('location:../index.php');
     exit;
 }
@@ -34,6 +34,15 @@ if (/*$_SERVER['REQUEST_METHOD'] === 'POST' &&*/ isset($_POST['email'], $_POST['
 
 
 
+
+    if($mercadoDAO->verificaCNPJexisteAtt($cnpj,$_SESSION['usuario']['mercado']['cnpj'])){
+        echo "<script>
+
+        alert('O CNPJ inserido já está cadastrado no sistema');
+            window.location.href='update-mercado.php';
+        
+    </script>";
+    }
 
     if($usuarioDAO->verificaEmailExisteAtt($email,$_SESSION['usuario']['email'])){
         echo "<script>

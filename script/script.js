@@ -28,15 +28,9 @@ function confirmarExclusaoCliente() {
 
 
 function confirmarExclusaoClienteadm() {
-    // Exibe uma mensagem de confirmação
-    if (confirm("Tem certeza que deseja excluir esse perfil?")) {
-        // Se o usuário confirmar, redireciona para a página de exclusão
-        window.location.href = '../CRUD/delclienteadm.php';
-        return true;
-    } else {
-        // Se o usuário cancelar, retorna false
-        return false;
-    }
+    
+    return  confirm("Tem certeza que deseja excluir esse perfil?")
+      
 }
 
 function confirmarExclusaoProduto() {
