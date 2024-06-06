@@ -2,6 +2,8 @@
 session_start();
 require_once '../func/func.php';
 require_once '../cadastro/cadastro.php';
+require_once '../model/mercadoDAO.php';
+require_once '../model/produtoDAO.php';
 
 if (usuarioEstaLogado()) {
     $userlog = $_SESSION['usuario']['nome'];
@@ -9,20 +11,17 @@ if (usuarioEstaLogado()) {
 if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'dono') {
 
     //armazena todas as informações do mercado logado em $infmercado
-    $mercName = $_SESSION['usuario']['id_usuario'];
-    $mercado = $conn->prepare("SELECT * FROM mercado WHERE id_dono = :mercName;");
-    $mercado->bindValue(':mercName', $mercName, PDO::PARAM_INT);
-    $mercado->execute();
-    $infmercado = $mercado->fetch();
+    $mercadoDAO = new mercadoDAO($conn);
+
+    $infmercado = $mercadoDAO->getMercadoById($_SESSION['usuario']['mercado']['id_mercado']);
+
     
-
-
+    
+    
     $id_produto = $_POST['updateprod'];
-
-    $stmt = $conn->prepare("SELECT * FROM produto WHERE id_produto = :id_produto");
-    $stmt->bindValue(':id_produto', $id_produto, PDO::PARAM_INT);
-    $stmt->execute();
-    $infproduto = $stmt->fetch();
+    
+    $produtoDAO = new produtoDAO($conn);
+    $infproduto = $produtoDAO->getProdutoById($id_produto);
 
 }
 // var_dump($infmercado , $infproduto);

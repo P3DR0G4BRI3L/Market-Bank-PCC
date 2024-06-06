@@ -32,10 +32,7 @@ if ($usuarioDAO->login($email, md5($senha))) {
                 'nome' => $infoUser['nome'],
                 'tipo' => $infoUser['tipo'], //atribui todas as informações do usuario ao usuario de sessão
                 'verMercado' => '',
-                    'carrinho' => [
-                        'id_produto'=> '',
-                        'quantidade'=> ''
-                    ]
+                    'carrinho' => []
                     ];
                 
                 echo "<script>alert('Login realizado com sucesso');</script>";

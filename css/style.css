@@ -32,9 +32,10 @@ body {
 	justify-content: center;
 }
 #area-principal {
-	width: 920px;
+	width: 1200px;
 	margin: 0 auto;
 	padding: 15px;
+	
 }
 #area-menu .cadastro_login_right{
 	display: flex;
@@ -81,8 +82,10 @@ body {
 
 .postagem {
 	padding: 20px;
-	margin-bottom: 50px;
 	background: white;
+	margin-bottom: 7px;
+	/* border: 2.5px solid black; */
+	/* border-radius: 5px; */
 }
 .conteudo-lateral {
 	background: white;
@@ -96,13 +99,22 @@ body {
 	
 }
 
-
 .postagem-lateral {
 	font-size: 0.8em;
 	padding: 5px;
 	border-bottom: 1px dotted #CCC;
 }
+.carrinho{
+	width: auto;
+	background: white;
+	padding: 10px;
+}
+.produto{
 
+}
+.prod_none{
+	opacity: 0.7;
+}
 #rodape {
 	clear: both;
 	text-align: center;

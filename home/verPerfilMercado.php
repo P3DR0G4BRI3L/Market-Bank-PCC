@@ -63,8 +63,8 @@ require_once '../inc/cabecalho.php'; //mostra o cabeçalho
 
         </div>
     </div>
+    <?php    require_once 'carrinho.php'; ?>
 
-    <?php require_once 'carrinho.php'; ?>
 
 
 
