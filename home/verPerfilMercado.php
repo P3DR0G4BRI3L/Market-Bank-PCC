@@ -59,7 +59,7 @@ require_once '../inc/cabecalho.php'; //mostra o cabeçalho
 
             
 
-
+</div>
 
         </div>
 <div id="area-lateral">

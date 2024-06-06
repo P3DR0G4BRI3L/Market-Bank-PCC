@@ -8,9 +8,8 @@ if($_SESSION['usuario']['tipo']!= 'dono'){
 }
 $filtroProdutoDAO = new filtroProdutoDAO($conn);
 $filtro = $filtroProdutoDAO->getFiltroById($_POST['updatefiltro']);
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nomeFiltro'])){
-    $nomeFiltro = $_POST['nomeFiltro'];
-    if($filtroProdutoDAO->updateFiltro($nomeFiltro,$_POST['updatefiltro'])){
+if(isset($_POST['nomeFiltro'])){
+    if($filtroProdutoDAO->updateFiltro($_POST['nomeFiltro'],$_POST['updatefiltro'])){
         
             echo "<script>
             alert('Categoria editada com sucesso!');

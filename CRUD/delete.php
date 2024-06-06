@@ -7,6 +7,7 @@ require_once '../model/mercadoDAO.php';
 require_once '../model/panfletoDAO.php';
 require_once '../model/usuarioDAO.php';
 require_once '../model/clienteDAO.php';
+require_once '../model/filtroProdutoDAO.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $panfletoDAO = new panfletoDAO($conn);
@@ -14,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $clienteDAO = new clienteDAO($conn);
     $mercadoDAO = new mercadoDAO($conn);
     $produtoDAO = new produtoDAO($conn);
+    $filtroProdutoDAO = new filtroProdutoDAO($conn);
 
     switch ($_SESSION['usuario']['tipo']) {
 
@@ -68,6 +70,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo "<script>
                     alert('Panfleto excluído com sucesso');
                     window.location.href='../CRUD/read-panf.php';
+                    </script>";
+                    exit;
+                }
+            }elseif(isset($_POST['deletefiltro'])){
+                $id_filtro = $_POST['deletefiltro'];
+                if($filtroProdutoDAO->deleteFiltro($id_filtro)){
+                    echo "<script>
+                    alert('Filtro excluído com sucesso');
+                    window.location.href='../CRUD/read-filtro.php';
                     </script>";
                     exit;
                 }

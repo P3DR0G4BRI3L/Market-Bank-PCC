@@ -13,14 +13,7 @@ class filtroProdutoDAO{
         $stmt->bindValue(':nomeFiltro',$nomeFiltro,PDO::PARAM_STR); 
         $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT); 
         if($stmt->execute()){
-           // $id_filtro = $this->conn->lastInsertId();
-           // $query = "UPDATE produto SET id_filtro = :id_filtro WHERE id_produto = :id_produto  ;";
-           // $stmt = $this->conn->prepare($query);
-           // $stmt->bindValue(':id_filtro',$id_filtro,PDO::PARAM_INT);
-           // $stmt->bindValue(':id_produto',$id_produto,PDO::PARAM_INT);
-           // if($stmt->execute())//{
-                return TRUE;
-            //}
+            return TRUE;
         }else{
             return "ocorreu um erro " . $stmt->errorInfo();
         }
@@ -45,6 +38,16 @@ class filtroProdutoDAO{
             return "ocorreu um erro" . $stmt->errorInfo();
         }
     }
+    public function getFiltroByIdMercado($id_mercado){
+        $query = "SELECT * FROM filtroproduto WHERE id_mercado = :id_mercado;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo();
+        }
+    }
     public function getFiltroById($id_filtro){
         $query = "SELECT * FROM  filtroproduto WHERE id_filtro = :id_filtro";
         $stmt = $this->conn->prepare($query);
@@ -62,6 +65,14 @@ class filtroProdutoDAO{
             return TRUE;
         }else{
             return "ocorreu um erro" . $stmt->errorInfo();
+        }
+    }
+    public function deleteFiltro($id_filtro){
+        $query = "DELETE FROM filtroproduto WHERE id_filtro = :id_filtro";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_filtro',$id_filtro,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return TRUE;
         }
     }
    

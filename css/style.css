@@ -37,10 +37,7 @@ body {
 	padding: 15px;
 	
 }
-#area-principal .postagem{
-	display: block;
-	margin: 0 auto;
-}
+
 
 #area-menu .cadastro_login_right{
 	display: flex;
