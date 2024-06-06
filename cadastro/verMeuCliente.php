@@ -34,10 +34,14 @@ require_once '../inc/cabecalho.php';
             ?>
 
             <!-- redireciona  o usuario para para editar o perfil -->
-            <button class='button_padrao' type="submit" onclick="window.location.href='../CRUD/update-cliente.php'">Editar Perfil</button>
+            <form action="../CRUD/update-cliente.php">
+                <input type="hidden" name="editperfil" value="editperfil">
+                <button class='button_padrao' type="submit" >Editar Perfil</button>
+            </form>
 
             <form action="../CRUD/update-cliente.php">
-                <button class='button_padrao' type="submit" onclick="window.location.href='../CRUD/update-cliente.php'">Alterar Senha</button>
+                <input type="hidden" name="alterarsenha">
+                <button class='button_padrao' type="submit">Alterar Senha</button>
             </form>
 
 
@@ -53,5 +57,5 @@ require_once '../inc/cabecalho.php';
             <button class='button_padrao' type="submit" onclick="window.location.href='../index.php'">Voltar</button>
 
         </div>
-
+</div>
         <?php require_once '../inc/rodape.php'; ?>

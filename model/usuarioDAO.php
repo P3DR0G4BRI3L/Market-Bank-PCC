@@ -19,7 +19,7 @@ class usuarioDAO
             if ($stmt->execute()) {
                 return $stmt->fetch(PDO::FETCH_ASSOC);
             } else {
-                return "ocorreu um erro{$stmt->errorInfo()}";
+                return "ocorreu um erro" . $stmt->errorInfo();
             }
 
         } catch (PDOException $erro) {
@@ -80,12 +80,12 @@ class usuarioDAO
     }
 
 
-    public function atualizarUsuario($nome, $email, $senha, $id_usuario)
+    public function atualizarUsuario($nome, $email, $id_usuario)
     {
-        $stmt = $this->conn->prepare("UPDATE usuario SET nome = :nome , email = :email , senha = :senha WHERE id_usuario = :id_usuario");//atualiza a tabela usuario
+        $query = "UPDATE usuario SET nome = :nome , email = :email  WHERE id_usuario = :id_usuario;";
+        $stmt = $this->conn->prepare($query);//atualiza a tabela usuario
         $stmt->bindValue(':nome', $nome, PDO::PARAM_STR);
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-        $stmt->bindValue(':senha', $senha, PDO::PARAM_STR);
         $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
         if($stmt->execute()){
             return TRUE;
@@ -107,7 +107,8 @@ class usuarioDAO
     }
     public function login($email, $senha)
     {
-        $stmt = $this->conn->prepare("SELECT id_usuario,nome,email,tipo FROM `usuario` WHERE email = :email AND senha = :senha;");
+        $query = "SELECT id_usuario,nome,email,tipo FROM `usuario` WHERE email = :email AND senha = :senha;";
+        $stmt = $this->conn->prepare($query);
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
         $stmt->bindValue(':senha', $senha, PDO::PARAM_STR);
         if ($stmt->execute() && $stmt->rowCount() == 1) {
@@ -136,4 +137,20 @@ class usuarioDAO
         if($stmt->execute()) {
             return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-}}
+
+}
+    public function alterarSenha($email,$senhaAntiga,$novaSenha){
+        $query = "UPDATE usuario SET senha= novaSenha: WHERE email = :email AND senha = :senhaAntiga;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':novaSenha',$novaSenha,PDO::PARAM_STR);
+        $stmt->bindValue(':senhaAntiga',$senhaAntiga,PDO::PARAM_STR);
+        if($stmt->execute()){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+
+    }
+
+
+}

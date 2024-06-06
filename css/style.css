@@ -32,11 +32,16 @@ body {
 	justify-content: center;
 }
 #area-principal {
-	width: 1200px;
+	width: 1100px;
 	margin: 0 auto;
 	padding: 15px;
 	
 }
+#area-principal .postagem{
+	display: block;
+	margin: 0 auto;
+}
+
 #area-menu .cadastro_login_right{
 	display: flex;
 	color: #FFF;

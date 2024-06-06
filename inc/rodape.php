@@ -3,14 +3,15 @@
 </div>
 
 </div>
-<?php
-echo"<pre>";print_r($_SESSION);
-
-?>
+</div>
 
 </body>
 
 </html>
+<?php
+//echo"<pre>";print_r($_SESSION);
+
+?>
 <?php
 
 $conn = null;

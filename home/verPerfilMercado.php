@@ -62,11 +62,13 @@ require_once '../inc/cabecalho.php'; //mostra o cabeçalho
 
 
         </div>
-    </div>
-    <?php    require_once 'carrinho.php'; ?>
+<div id="area-lateral">
+    
+            <?php    require_once 'carrinho.php'; ?>
+    
+</div>
 
 
 
 
-
-    <?php require_once '../inc/rodape.php'; ?>
+        <?php require_once '../inc/rodape.php'; ?>  

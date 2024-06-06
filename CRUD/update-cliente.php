@@ -58,12 +58,7 @@ if($usuarioDAO->atualizarUsuario($nome , $email , $senha , $id_usuario)){
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
                         </div>
 
-                        <div class="input-group">
-                            <label for="senha">Senha:</label>
-                            <input type="password" id="senha" name="senha" value="<?= $usuarioDAO->getSenhaById($_SESSION['usuario']['id_usuario']) ?>"
-                                onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
-                                <button type="button" id="mostrarSenha"  onclick="mostrarsenha()"><span class="lnr lnr-eye"></span></button>
-                        </div>
+                        
                         <button type="button"class="button_padrao" onclick="window.location.href='../index.php'">Voltar</button>
                         <button class="button_padrao btn_edit" type="submit">Alterar</button>
                     </form>
