@@ -139,11 +139,11 @@ class usuarioDAO
     }
 
 }
-    public function alterarSenha($email,$senhaAntiga,$novaSenha){
-        $query = "UPDATE usuario SET senha= novaSenha: WHERE email = :email AND senha = :senhaAntiga;";
+    public function alterarSenha($id_usuario,$novaSenha){
+        $query = "UPDATE usuario SET senha= :novaSenha WHERE id_usuario = :id_usuario;";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(':novaSenha',$novaSenha,PDO::PARAM_STR);
-        $stmt->bindValue(':senhaAntiga',$senhaAntiga,PDO::PARAM_STR);
+        $stmt->bindValue(':id_usuario',$id_usuario,PDO::PARAM_INT);
+        $stmt->bindValue(':novaSenha',md5($novaSenha),PDO::PARAM_STR);
         if($stmt->execute()){
             return TRUE;
         }else{

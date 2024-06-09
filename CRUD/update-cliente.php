@@ -27,7 +27,7 @@ if(isset($_POST['nome'] , $_POST['email'])){
             
         </script>";
     $id_usuario = $_SESSION['usuario']['id_usuario'];
-if($usuarioDAO->atualizarUsuario($nome , $email , $senha , $id_usuario)){
+if($usuarioDAO->atualizarUsuario($nome , $email, $id_usuario)){
     $_SESSION['usuario']['nome']=$_POST['nome'];
     $_SESSION['usuario']['email']=$_POST['email'];
     echo "<script>alert('Perfil alterado com sucesso')</script>";
@@ -59,7 +59,7 @@ if($usuarioDAO->atualizarUsuario($nome , $email , $senha , $id_usuario)){
                         </div>
 
                         
-                        <button type="button"class="button_padrao" onclick="window.location.href='../index.php'">Voltar</button>
+                        <button type="button"class="button_padrao" onclick="window.location.href='../cadastro/verMeuCliente.php'">Voltar</button>
                         <button class="button_padrao btn_edit" type="submit">Alterar</button>
                     </form>
                 </div>

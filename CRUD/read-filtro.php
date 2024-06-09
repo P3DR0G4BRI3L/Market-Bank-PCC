@@ -82,6 +82,11 @@ require_once '../inc/cabecalho.php'; ?>
                                     <input type="hidden" name="deletefiltro" value="<?= $filtro['id_filtro']; ?>">
                                     <button class='button_padrao' type="submit">Excluir</button>
                                 </form>
+
+                                <form action="read-prod-filtro.php" method="POST">
+                                    <input type="hidden" name="verprodutosfiltro" value="<?= $filtro['id_filtro']; ?>">
+                                    <button class='button_padrao' type="submit">Ver produtos da categoria</button>
+                                </form>
                             </div>
 
 

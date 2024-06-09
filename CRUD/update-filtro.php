@@ -6,9 +6,10 @@ require_once '../cadastro/cadastro.php';
 if($_SESSION['usuario']['tipo']!= 'dono'){
     header('location:../index.php');
 }
+var_dump($_POST['updatefiltro']);
 $filtroProdutoDAO = new filtroProdutoDAO($conn);
 $filtro = $filtroProdutoDAO->getFiltroById($_POST['updatefiltro']);
-if(isset($_POST['nomeFiltro'])){
+if($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['nomeFiltro'])){
     if($filtroProdutoDAO->updateFiltro($_POST['nomeFiltro'],$_POST['updatefiltro'])){
         
             echo "<script>

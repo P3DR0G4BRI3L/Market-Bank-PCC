@@ -17,22 +17,22 @@ body {
 	color: #e6e6e6;
 }
 #area-cabecalho {
-	background-color: rgb(34, 141, 34);
+	background-color: #2ebd2e;
 	padding: 15px;
 	text-align: center;
 }
 
 #area-logo, #area-menu {
-	
 	padding: 10px;
 }
+
 #area-menu{
 	display: flex;
 	gap: 5px;
 	justify-content: center;
 }
 #area-principal {
-	width: 1100px;
+	width: 950px;
 	margin: 0 auto;
 	padding: 15px;
 	
@@ -46,21 +46,27 @@ body {
 	gap: 5px;
 	justify-content: end;
 }
+
+#area-cabecalho #area-menu a{
+	color: #D3D3D3;
+}
+
 #area-cabecalho #area-menu a:hover{
-	background-color: #F7800F;
+	background-color: #005f6b;
 	border-radius: 5px;
+	color: #FFF;
 }
 
 #area-principal #area-postagens .postagem  .login-box a{
 	border-radius: 5px;
-	background-color: #F7800F;
+	background-color: #005f6b;
 	padding: 10px;
 	text-decoration: none;
-	color: whitesmoke;
+	color: #3086e9;
 
 }
 #area-principal #area-postagens .postagem  .login-box a:hover{
-	background-color: #d66800;
+	background-color: #005f6b;
 	border-radius: 5px;
 	text-decoration: none;
 	padding: 10px;
@@ -75,10 +81,11 @@ body {
 	margin: 0 auto;
 	width: 660px;
 	float: left;
+	margin-bottom: 15px;
 }
 
 #area-lateral {
-	width: 240px;
+	width: 250px;
 	float: right;
 }
 
@@ -86,8 +93,9 @@ body {
 	padding: 20px;
 	background: white;
 	margin-bottom: 7px;
-	/* border: 2.5px solid black; */
-	/* border-radius: 5px; */
+	word-wrap: break-word;
+	border: 2.5px solid black;
+	border-radius: 5px;
 }
 .conteudo-lateral {
 	background: white;
@@ -101,15 +109,29 @@ body {
 	
 }
 
+.carrinho .postagem-lateral  table, tr,th{
+	border: 1px solid black;
+}
+
+.carrinho .postagem-lateral th{
+padding: 2px 5px 5px 2px;
+}
+
 .postagem-lateral {
 	font-size: 0.8em;
 	padding: 5px;
 	border-bottom: 1px dotted #CCC;
 }
 .carrinho{
-	width: auto;
+	width: 400px;
 	background: white;
 	padding: 10px;
+}
+.carrinho table{
+	margin: 0 auto;
+}
+.carrinho h3{
+	text-align: center;
 }
 .produto{
 
@@ -202,7 +224,7 @@ html{
 
 
 /*basjabdiabdsuijdhsuids*/
-cadastro_option {
+.cadastro_option {
     display: flex;
     justify-content: center;
     align-items: start;
@@ -253,21 +275,16 @@ input[type="number"] {
     box-sizing: border-box; /* Garante que o padding não afete a largura total */
 }
 
-.button_padrao {
-	font-size: 18px;
-    width: 25%;
-    padding: 10px;
-    background-color: #F7800F;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-	margin-bottom: 5px;
+#unset{
+	all:unset;
+	width: 40px;
+	margin: 0;
 }
 .button_padrao{
 	font-size: 18px;
     padding: 10px;
-    background-color: #F7800F;
+	width: 25%;
+    background-color: #005f6b;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -276,7 +293,7 @@ input[type="number"] {
 }
 
 .button_padrao:hover {
-    background-color: #d66800;
+    background-color: #4682B4;
 	color: black;
 }
 .cadastro_option .login-box .btn_left{
@@ -313,3 +330,18 @@ background-color: rgb(255, 47, 47);
 	
 
 }	
+
+.button_carrinho{
+	margin: 10px auto;
+	display: block;
+	margin-top: 5px;
+	padding: 5px;
+	background-color: #005f6b;
+	border-radius: 5px;
+	color: #D3D3D3;
+}
+.button_carrinho:hover{
+	background-color: #3086e9;
+	color: white;
+	cursor: pointer;
+}

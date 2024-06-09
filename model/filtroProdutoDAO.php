@@ -25,6 +25,9 @@ class filtroProdutoDAO{
         $stmt->bindValue(':id_produto',$id_produto,PDO::PARAM_INT);
         if($stmt->execute()){
             return TRUE;
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo();
+
         }
     }
 
@@ -57,10 +60,10 @@ class filtroProdutoDAO{
         }
     }
     public function updateFiltro($nomeFiltro,$id_filtro){
-        $query =  "UPDATE filtroproduto SET nomeFiltro = :nomeFiltro  WHERE id_filtro = :id_filtro";
+        $query =  "UPDATE filtroproduto SET nomeFiltro = :nomeFiltro  WHERE id_filtro = :id_filtro;";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(':nomeFiltro',$nomeFiltro,PDO::PARAM_STR);
         $stmt->bindValue(':id_filtro',$id_filtro,PDO::PARAM_INT);
+        $stmt->bindValue(':nomeFiltro',$nomeFiltro,PDO::PARAM_STR);
         if($stmt->execute()){
             return TRUE;
         }else{

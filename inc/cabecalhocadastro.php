@@ -1,3 +1,6 @@
+<?php
+require_once '../func/func.php';
+?>
 <!DOCTYPE html>
 <html>
 

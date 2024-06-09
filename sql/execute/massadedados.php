@@ -46,7 +46,7 @@ if ($usuarioDAO->inserirUsuario('mercado ', 'mercado@gmail.com', md5('123'), 'do
         'QNH 13 Conjunto 3 Lote 10',
         '07:00:00',
         '23:30:00',
-        '61990062014',
+        '61996062014',
         '12345678912345',
         $imagem,
         'Esta é a descrição do mercado  ',

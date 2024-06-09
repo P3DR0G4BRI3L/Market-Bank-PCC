@@ -9,6 +9,17 @@ class mercadoDAO
         $this->conn = $conn;
     }
 
+    public function getIdMercadoByIdDono($id_dono_OU_id_usuario){
+        $query = "SELECT id_mercado FROM mercado WHERE id_dono = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id',$id_dono_OU_id_usuario,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return $stmt->fetch(PDO::FETCH_COLUMN);
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo();
+        }
+    }
+
     public function inserirMercado(
         $nomeMerc,
         $regiaoadm,

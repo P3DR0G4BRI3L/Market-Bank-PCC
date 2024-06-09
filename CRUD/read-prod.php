@@ -3,12 +3,17 @@ require_once '../func/func.php';
 require_once '../cadastro/cadastro.php';
 require_once '../model/produtoDAO.php';
 require_once '../model/mercadoDAO.php';
+require_once '../model/filtroProdutoDAO.php';
 session_start();
+$filtroProdutoDAO = new filtroProdutoDAO($conn);
 $produtoDAO = new produtoDAO($conn);
 $mercadoDAO = new mercadoDAO($conn);
 $id_mercado = $_SESSION['usuario']['verMercado'] ?? '';
 $infmercado = $mercadoDAO->getMercadoById($id_mercado);
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filtroproduto'], $_POST['id_produto'])) {
+    $filtroProdutoDAO->inserirFiltroProduto($_POST['filtroproduto'], $_POST['id_produto']);
+}
 require_once '../inc/cabecalho.php'; ?>
 
 
@@ -29,33 +34,42 @@ require_once '../inc/cabecalho.php'; ?>
         <div class="postagem">
 
             <div class="login-box">
-                <?php if (mercadoEstaLogado()): ?>
+                <?php if (mercadoEstaLogado()) : ?>
                     <button class='button_padrao' onclick="window.location.href='../cadastro/addprod.php' ">Adicionar
                         produto</button>
-                    <button class='button_padrao'
-                        onclick="window.location.href='../cadastro/verMeuMercado.php' ">Voltar</button>
+                    <button class='button_padrao' onclick="window.location.href='../cadastro/verMeuMercado.php' ">Voltar</button>
 
                 <?php endif ?>
 
-                <?php if (clienteEstaLogado()): ?>
+                <?php if (clienteEstaLogado()) : ?>
                     <h1>Produtos do mercado: <br><?= ucwords($infmercado['nomeMerc']); ?>
                     </h1>
                     <form action="../home/verPerfilMercado.php" method="POST">
                         <input type="hidden" name="id_mercado" value="<?= $id_mercado ?>">
-                        <button class='button_padrao'
-                            onclick="window.location.href='../home/verPerfilMercado.php' ">Voltar</button>
+                        <button class='button_padrao' onclick="window.location.href='../home/verPerfilMercado.php' ">Voltar</button>
+
+                    </form>
+                <?php endif ?>
+
+                <?php if (admEstaLogado()) : ?>
+                    <h1>Produtos do mercado: <br><?= ucwords($infmercado['nomeMerc']); ?>
+                    </h1>
+                    <form action="../home/verPerfilMercado.php" method="POST">
+                        <input type="hidden" name="id_mercado" value="<?= $id_mercado ?>">
+                        <button class='button_padrao' onclick="window.location.href='../home/verPerfilMercado.php' ">Voltar</button>
 
                     </form>
                 <?php endif ?>
 
             </div>
         </div>
-        <!--lista os produtos, cada vez que o metodo fetch_all() é chamado ele armazena uma linha em $row e mostra dentro do laço while  -->
+        
         <?php
         switch ($_SESSION['usuario']['tipo']) {
-            //se for um mercado que estiver logado vai listar os produtos e disponibilizar exclusão e edição
+                //se for um mercado que estiver logado vai listar os produtos e disponibilizar exclusão e edição
             case 'dono':
                 $produtos = $produtoDAO->getAllProdutoByIdMercado($_SESSION['usuario']['mercado']['id_mercado']);
+                $allfiltros = $filtroProdutoDAO->getAllFiltroByIdMercado($_SESSION['usuario']['mercado']['id_mercado']);
                 if (!empty($produtos)) {
                     foreach ($produtos as $produto) { ?>
                         <div class="postagem">
@@ -66,7 +80,7 @@ require_once '../inc/cabecalho.php'; ?>
                                     <?= ucwords($produto['nome']); ?>
                                 </h2>
 
-                                <?php echo "<img src='../cadastro/uploads/" . $produto['fotoProduto'] . "  ' alt='Imagem do produto' width='300px'>" ?>
+                                <img src="../cadastro/uploads/<?= $produto['fotoProduto']; ?>" alt='Imagem do produto' width='300px'>
 
                                 <p>
                                     <?= number_format($produto['preco'], 2, ',', '.'); ?> reais
@@ -90,6 +104,24 @@ require_once '../inc/cabecalho.php'; ?>
                                     <input type="hidden" name="deletefile" value="<?= $produto['fotoProduto']; ?>">
                                     <button class='button_padrao' type="submit">Excluir</button>
                                 </form>
+
+
+                                <form action="" method="POST">
+                                    <input type="hidden" name="id_produto" value="<?= $produto['id_produto'] ?>">
+                                    <select name="filtroproduto" onchange="this.form.submit()">
+                                        <option value="" selected disabled>Selecione uma categoria</option>
+                                        <option value="" >Nenhuma</option>
+                                        <?php foreach ($allfiltros as $filtro) : ?>
+
+                                            <option value="<?= $filtro['id_filtro'] ?>" 
+                                            <?= ($filtro['id_filtro'] == $produto['id_filtro']) ? 'selected' : '' ?>>
+                                                <?= ucwords($filtro['nomeFiltro']) ?>
+                                            </option>
+
+                                        <?php endforeach ?>
+                                    </select>
+                                </form>
+
                             </div>
 
 
@@ -114,37 +146,35 @@ require_once '../inc/cabecalho.php'; ?>
                     foreach ($produtos as $produto) { ?>
                         <div class="postagem">
 
-                            <?php
-                            echo "<h2> " . $produto['nome'] . " </h2>"; //nome do produto
-            
-                            echo '<img src="../cadastro/uploads/' . $produto['fotoProduto'] . '" alt="Imagem do mercado" width="300px">';
+                            <h2> <?= $produto['nome'] ?> </h2>
+
+                            <img src="../cadastro/uploads/<?= $produto['fotoProduto'] ?>" alt="Imagem do mercado" width="300px">
 
 
-                            echo "<h2>" . number_format($produto['preco'], 2, ',', '.') . " R$ </h2>"; //preço do produto
-            
-                            echo "<h2>Descrição:" . $produto['descricao'] . "</h2>"; //descrição do produto
-                            ?>
-                            <div class="login-box">
-                                <a href="add_carrinho.php?id_produto=<?= $produto['id_produto'] ?>">Adicionar ao carrinho</a>
+                            <h2> <?= number_format($produto['preco'], 2, ',', '.') ?> R$ </h2>
 
-                                <button class='button_padrao'
-                                    onclick="window.location.href='../home/verPerfilMercado.php' ">Voltar</button>
-                            </div>
+                            <h2>Descrição: <?= $produto['descricao'] ?> </h2>
 
+                            <?php if (clienteEstaLogado()) : ?>
+                                <div class="login-box">
+                                    <a href="add_carrinho.php?id_produto=<?= $produto['id_produto'] ?>">Adicionar ao carrinho</a>
+                                </div>
+                            <?php endif ?>
 
                         </div>
                     <?php } ?>
 
                     <?php require_once '../inc/rodape.php'; ?>
+                    <div id="area-lateral">
 
-                    <?php require_once '../home/carrinho.php'; ?>
-                    
-            <?php } else {
+                        <?php require_once '../home/carrinho.php'; ?>
+                    </div>
+    </div>
+<?php } else {
                     echo "<div class='postagem'>
                     <h2>Ainda não foram inseridos produtos</h2>
                 </div>";
                 }
                 break;
         } ?>
-    <!--// Fechamento postagem -->
-
+<!--// Fechamento postagem -->

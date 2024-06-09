@@ -92,6 +92,16 @@ class produtoDAO
             return "ocorreu um erro" . $stmt->errorInfo();
         }
     }
+    public function getAllProdutoByIdFiltro($id_filtro){
+        $query = "SELECT * FROM produto WHERE id_filtro = :id_filtro;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_filtro',$id_filtro,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo();
+        }
+    }
 
 
 }

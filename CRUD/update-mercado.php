@@ -8,15 +8,10 @@ if($_SESSION['usuario']['tipo']!='dono'){
     header('location:../index.php');
     exit;
 }
-$usuarioDAO = new usuarioDAO($conn);
-       $mercadoDAO = new mercadoDAO($conn);
-       $mercadoDAO = new mercadoDAO($conn);
-       $infmercado = $mercadoDAO->getMercadoByIdUsuario($_SESSION['usuario']['id_usuario']);
 $mercadoDAO = new mercadoDAO($conn);
-       $infmercado = $mercadoDAO->getMercadoByIdUsuario($_SESSION['usuario']['id_usuario']);
-
-if (/*$_SERVER['REQUEST_METHOD'] === 'POST' &&*/ isset($_POST['email'], $_POST['nome'], $_POST['nomeMerc'], $_POST['cnpj'], $_POST['endereco'], $_POST['horarioAbert'], $_POST['horarioFecha'],
- $_POST['telefone'], $_POST['senha'],$_POST['regiaoadm'],$_POST['compras']) ) {
+$usuarioDAO = new usuarioDAO($conn);
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'], $_POST['nome'], $_POST['nomeMerc'], $_POST['cnpj'], $_POST['endereco'], $_POST['horarioAbert'], $_POST['horarioFecha'],
+$_POST['telefone'],$_POST['regiaoadm'],$_POST['compras']) ) {
 
     $email = $_POST['email'];
     $nome = $_POST['nome'];
@@ -26,7 +21,6 @@ if (/*$_SERVER['REQUEST_METHOD'] === 'POST' &&*/ isset($_POST['email'], $_POST['
     $horarioAbert = $_POST['horarioAbert'];
     $horarioFecha = $_POST['horarioFecha'];
     $telefone = $_POST['telefone'];
-    $senha = $_POST['senha'];
     $imagem = isset($_FILES['imagem']) && $_FILES['imagem']['error'] === 0  ? $mercadoDAO->lidarImagem($_FILES['imagem']) :$_SESSION['usuario']['mercado']['imagem'];
     $descricao = $_POST['descricao'] ?? null;
     $compras = $_POST['compras'];
@@ -52,7 +46,7 @@ if (/*$_SERVER['REQUEST_METHOD'] === 'POST' &&*/ isset($_POST['email'], $_POST['
         
     </script>";
     }
-    $attUser = $usuarioDAO->atualizarUsuario($nome,$email,$senha,$_SESSION['usuario']['id_usuario']);
+    $attUser = $usuarioDAO->atualizarUsuario($nome,$email,$_SESSION['usuario']['id_usuario']);
     
     $attMercado = $mercadoDAO->atualizarMercado($nomeMerc,$regiaoadm,$endereco,$horarioAbert,$horarioFecha,$telefone,$cnpj,$imagem,$descricao,$compras,$_SESSION['usuario']['mercado']['id_mercado']);
 
@@ -88,6 +82,11 @@ if (/*$_SERVER['REQUEST_METHOD'] === 'POST' &&*/ isset($_POST['email'], $_POST['
         
 
         echo " <script>alert('Mercado editado com sucesso');
+        window.location.href='../cadastro/verMeuMercado.php';
+        </script> ";
+    }else{
+        
+        echo " <script>alert('falha ao editar o mercado');
         window.location.href='../cadastro/verMeuMercado.php';
         </script> ";
     }
@@ -137,40 +136,41 @@ require_once '../inc/cabecalho.php';
                         </div>
 
                         <div class="input-endereco">
+                            <?php $regiaoadm = $_SESSION['usuario']['mercado']['regiaoadm']; ?>
                             <label for="regiaoadm">Região Administrativa:</label>
                             <select id="regiaoadm" name="regiaoadm" required>
                                 <option value="" disabled selected>Selecione a região administrativa</option>
-                                <option value="Brasília" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Brasília" ? 'selected':'' ?> >Brasília</option>
-                                <option value="Gama" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Gama" ? 'selected':'' ?> >Gama</option>
-                                <option value="Taguatinga" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Taguatinga" ? 'selected':'' ?> >Taguatinga</option>
-                                <option value="Brazlândia" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Brazlândia" ? 'selected':'' ?> >Brazlândia</option>
-                                <option value="Sobradinho" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Sobradinho" ? 'selected':'' ?> >Sobradinho</option>
-                                <option value="Planaltina" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Planaltina" ? 'selected':'' ?> >Planaltina</option>
-                                <option value="Paranoá" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Paranoá" ? 'selected':'' ?> >Paranoá</option>
-                                <option value="Núcleo Bandeirante" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Núcleo Bandeirante"? 'selected':'' ?>>Núcleo Bandeirante</option>
-                                <option value="Ceilândia" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Ceilândia" ? 'selected':'' ?> >Ceilândia</option>
-                                <option value="Guará" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Guará" ? 'selected':'' ?> >Guará</option>
-                                <option value="Cruzeiro" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Cruzeiro" ? 'selected':'' ?> >Cruzeiro</option>
-                                <option value="Samambaia" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Samambaia" ? 'selected':'' ?> >Samambaia</option>
-                                <option value="Santa Maria" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Santa Maria"? 'selected':'' ?> >Santa Maria</option>
-                                <option value="São Sebastião" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="São Sebastião"? 'selected':'' ?> >São Sebastião</option>
-                                <option value="Recanto das Emas"<?= $_SESSION['usuario']['mercado']['regiaoadm']=="Recanto das Emas" ? 'selected':'' ?> >Recanto das Emas</option>
-                                <option value="Lago Sul" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Lago Sul"? 'selected':'' ?> >Lago Sul</option>
-                                <option value="Riacho Fundo" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Riacho Fundo"? 'selected':'' ?> >Riacho Fundo</option>
-                                <option value="Lago Norte" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Lago Norte"? 'selected':'' ?> >Lago Norte</option>
-                                <option value="Candangolândia" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Candangolândia" ? 'selected':'' ?> >Candangolândia</option>
-                                <option value="Águas Claras" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Águas Claras"? 'selected':'' ?> >Águas Claras</option>
-                                <option value="Riacho Fundo II"  <?= $_SESSION['usuario']['mercado']['regiaoadm']== "Riacho Fundo II" ? 'selected':''== '' ?> >Riacho Fundo II</option>
-                                <option value="Sudoeste/Octogonal" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Sudoeste/Octogonal"? 'selected':'' ?> >Sudoeste/Octogonal</option>
-                                <option value="Varjão" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Varjão" ? 'selected':'' ?> >Varjão</option>
-                                <option value="Park Way" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Park Way"? 'selected':'' ?> >Park Way</option>
-                                <option value="Scia (Estrutural)" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Scia (Estrutural)"? 'selected':'' ?> >Scia (Estrutural)</option>
-                                <option value="Sobradinho II" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Sobradinho II"? 'selected':'' ?> >Sobradinho II</option>
-                                <option value="Jardim Botânico" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Jardim Botânico"? 'selected':'' ?> >Jardim Botânico</option>
-                                <option value="Itapoã" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Itapoã" ? 'selected':'' ?> >Itapoã</option>
-                                <option value="SIA" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="SIA" ? 'selected':'' ?> >SIA</option>
-                                <option value="Vicente Pires" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Vicente Pires"? 'selected':'' ?> >Vicente Pires</option>
-                                <option value="Fercal" <?= $_SESSION['usuario']['mercado']['regiaoadm']=="Fercal" ? 'selected':'' ?> >Fercal</option>
+                                <option value="Brasília" <?= $regiaoadm=="Brasília" ? 'selected':'' ?> >Brasília</option>
+                                <option value="Gama" <?= $regiaoadm=="Gama" ? 'selected':'' ?> >Gama</option>
+                                <option value="Taguatinga" <?= $regiaoadm=="Taguatinga" ? 'selected':'' ?> >Taguatinga</option>
+                                <option value="Brazlândia" <?= $regiaoadm=="Brazlândia" ? 'selected':'' ?> >Brazlândia</option>
+                                <option value="Sobradinho" <?= $regiaoadm=="Sobradinho" ? 'selected':'' ?> >Sobradinho</option>
+                                <option value="Planaltina" <?= $regiaoadm=="Planaltina" ? 'selected':'' ?> >Planaltina</option>
+                                <option value="Paranoá" <?= $regiaoadm=="Paranoá" ? 'selected':'' ?> >Paranoá</option>
+                                <option value="Núcleo Bandeirante" <?= $regiaoadm=="Núcleo Bandeirante"? 'selected':'' ?>>Núcleo Bandeirante</option>
+                                <option value="Ceilândia" <?= $regiaoadm=="Ceilândia" ? 'selected':'' ?> >Ceilândia</option>
+                                <option value="Guará" <?= $regiaoadm=="Guará" ? 'selected':'' ?> >Guará</option>
+                                <option value="Cruzeiro" <?= $regiaoadm=="Cruzeiro" ? 'selected':'' ?> >Cruzeiro</option>
+                                <option value="Samambaia" <?= $regiaoadm=="Samambaia" ? 'selected':'' ?> >Samambaia</option>
+                                <option value="Santa Maria" <?= $regiaoadm=="Santa Maria"? 'selected':'' ?> >Santa Maria</option>
+                                <option value="São Sebastião" <?= $regiaoadm=="São Sebastião"? 'selected':'' ?> >São Sebastião</option>
+                                <option value="Recanto das Emas"<?= $regiaoadm=="Recanto das Emas" ? 'selected':'' ?> >Recanto das Emas</option>
+                                <option value="Lago Sul" <?= $regiaoadm=="Lago Sul"? 'selected':'' ?> >Lago Sul</option>
+                                <option value="Riacho Fundo" <?= $regiaoadm=="Riacho Fundo"? 'selected':'' ?> >Riacho Fundo</option>
+                                <option value="Lago Norte" <?= $regiaoadm=="Lago Norte"? 'selected':'' ?> >Lago Norte</option>
+                                <option value="Candangolândia" <?= $regiaoadm=="Candangolândia" ? 'selected':'' ?> >Candangolândia</option>
+                                <option value="Águas Claras" <?= $regiaoadm=="Águas Claras"? 'selected':'' ?> >Águas Claras</option>
+                                <option value="Riacho Fundo II"  <?= $regiaoadm== "Riacho Fundo II" ? 'selected':''== '' ?> >Riacho Fundo II</option>
+                                <option value="Sudoeste/Octogonal" <?= $regiaoadm=="Sudoeste/Octogonal"? 'selected':'' ?> >Sudoeste/Octogonal</option>
+                                <option value="Varjão" <?= $regiaoadm=="Varjão" ? 'selected':'' ?> >Varjão</option>
+                                <option value="Park Way" <?= $regiaoadm=="Park Way"? 'selected':'' ?> >Park Way</option>
+                                <option value="Scia (Estrutural)" <?= $regiaoadm=="Scia (Estrutural)"? 'selected':'' ?> >Scia (Estrutural)</option>
+                                <option value="Sobradinho II" <?= $regiaoadm=="Sobradinho II"? 'selected':'' ?> >Sobradinho II</option>
+                                <option value="Jardim Botânico" <?= $regiaoadm=="Jardim Botânico"? 'selected':'' ?> >Jardim Botânico</option>
+                                <option value="Itapoã" <?= $regiaoadm=="Itapoã" ? 'selected':'' ?> >Itapoã</option>
+                                <option value="SIA" <?= $regiaoadm=="SIA" ? 'selected':'' ?> >SIA</option>
+                                <option value="Vicente Pires" <?= $regiaoadm=="Vicente Pires"? 'selected':'' ?> >Vicente Pires</option>
+                                <option value="Fercal" <?= $regiaoadm=="Fercal" ? 'selected':'' ?> >Fercal</option>
                             </select>
 
                         <div class="input-group">
@@ -209,13 +209,7 @@ require_once '../inc/cabecalho.php';
                                 oninput="restringirLetras(this)">
                         </div>
 
-                        <div class="input-group">
-                            <label for="senha">Senha:</label>
-                            <input type="password" id="senha" name="senha" value="<?= $usuarioDAO->getSenhaById($_SESSION['usuario']['id_usuario']) ?>"
-                                onkeydown="if(event.keyCode === 13) event.preventDefault()" required
-                                placeholder="Insira sua senha">
-                            <button type="button" class="button_padrao" id="mostrarSenha" onclick="mostrarsenha()">Mostrar Senha</button>
-                        </div>
+                        
 
                         <div class="input-group">
 

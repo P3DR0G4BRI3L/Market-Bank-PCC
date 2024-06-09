@@ -39,11 +39,12 @@ require_once '../inc/cabecalho.php';
                 <button class='button_padrao' type="submit" >Editar Perfil</button>
             </form>
 
-            <form action="../CRUD/update-cliente.php">
+            <form action="../CRUD/update-senha.php">
                 <input type="hidden" name="alterarsenha">
                 <button class='button_padrao' type="submit">Alterar Senha</button>
-            </form>
-
+                </form>
+                <button class='button_padrao' type="submit" onclick="window.location.href='gerenciarComprasCliente.php'">Gerenciar compras</button>
+                
 
 
             <!-- redireciona  o usuario para para deletar o perfil -->

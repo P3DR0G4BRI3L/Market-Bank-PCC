@@ -4,6 +4,7 @@
 require_once 'cadastro.php';
 require_once '../model/usuarioDAO.php';
 require_once '../model/mercadoDAO.php';
+require_once '../model/infopagDAO.php';
 
 if (isset($_POST['senha']) && strlen($_POST['senha']) > 16) {
     echo "<script>alert('Senha muito extensa, no máximo 16 caracteres');
@@ -27,17 +28,18 @@ $nome = $_POST['nome'];
 $email = $_POST['email'];
 $senha = $_POST['senha'];
 
-//verifica se ja existe esse email no banco de dados
 $usuarioDAO = new usuarioDAO($conn);
 $mercadoDAO = new mercadoDAO($conn);
+$infopagDAO = new infopagDAO($conn);
 
 if ($mercadoDAO->verificaCNPJexiste($cnpj)) {
     echo "<script>
     alert('O CNPJ inserido já está cadastrado no sistema');
     window.location.href = 'cadastrarMercado.php';
-  </script>";
+    </script>";
     exit;
 }
+//verifica se ja existe esse email no banco de dados
 if ($usuarioDAO->verificaEmailExiste($email)) {
     echo "<script>
             alert('O email inserido já está em uso');
@@ -45,8 +47,6 @@ if ($usuarioDAO->verificaEmailExiste($email)) {
           </script>";
     exit;
 }
-
-
 
 if ($usuarioDAO->inserirUsuario($nome, $email, md5($senha), 'dono')) {
 
@@ -57,14 +57,19 @@ if ($usuarioDAO->inserirUsuario($nome, $email, md5($senha), 'dono')) {
 
 
         if ($mercadoDAO->inserirMercado($nomeMerc, $regiaoadm, $endereco, $horarioAbert, $horarioFecha, $telefone, $cnpj, $imagem, $descricao, $compras, $id_dono)) {
-
-            echo "<script>alert('Cadastro realizado com sucesso!');</script>";
+            if($compras == 'sim'){
+                $id = $usuarioDAO->getIdUsuarioByEmail($email);
+                echo "<script>alert('Cadastro realizado com sucesso!\nAgora só falta inserir as informações de pagamento');</script>";
+                header("location:cadastroInfopag.php?id=$id");exit;
+            }
+            
+                echo "<script>alert('Cadastro realizado com sucesso!');</script>";
             echo "<script>window.location.href = 'login.php';</script>";
         } else {
             echo "erro ao cadastrar" . $stmt->errorInfo();
         }
         exit; // Certifique-se de sair do script após o redirecionamento
     }
-}
 
+}
 $conn = null;

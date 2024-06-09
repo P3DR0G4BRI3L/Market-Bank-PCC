@@ -48,17 +48,20 @@ require_once '../inc/cabecalho.php' ;
                  <h2> Compras:  <?=ucwords(($_SESSION['usuario']['mercado']['compras'])=='nao'?'não':'sim')?> </h2>
 
             <button class="button_padrao btn_edit" onclick="window.location.href='../CRUD/update-mercado.php'">Editar</button>
-
+            
             <form action="../CRUD/delete.php" method="POST" onsubmit="return confirmarExclusaoMercado();">
                 <input type="hidden" name="deletemercado" value="<?= $_SESSION['usuario']['mercado']['id_mercado'] ?>">
                 <button type="submit" class="button_padrao btn_delete">Excluir</button>
-            </form>
+                </form>
+            <button class="button_padrao " onclick="window.location.href='../CRUD/update-senha.php'">Alterar senha</button>
 
             <button class="button_padrao" onclick="window.location.href = '../CRUD/read-prod.php'">Produtos</button>
 
             <button class="button_padrao" onclick="window.location.href = '../CRUD/read-filtro.php' ">Categoria de produtos</button>
 
             <button class="button_padrao" onclick="window.location.href = '../CRUD/read-panf.php' ">Panfletos</button>
+
+            <button class="button_padrao" onclick="window.location.href = '../CRUD/read-infopag.php' ">Forma de pagamento</button>
             
             <button class='button_padrao btn_left' type="submit" onclick="window.location.href='../index.php'">Voltar</button>
 

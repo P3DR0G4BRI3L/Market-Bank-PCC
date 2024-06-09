@@ -47,8 +47,9 @@ body {
 }
 
 #area-cabecalho #area-menu a:hover{
-	background-color: #F7800F;
+	background-color: #005f6b;
 	border-radius: 5px;
+	color: #FFF;
 }
 
 .postagem h2{
@@ -284,41 +285,14 @@ input[type="number"] {
     appearance: textfield;
 }
 
-.button_padrao {
-	font-size: 18px;
-    padding: 10px;
-    background-color: #F7800F;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-	margin-bottom: 5px;
-}
-.button_padrao{
-	font-size: 18px;
-    padding: 10px;
-    background-color: #F7800F;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-	margin-bottom: 5px;
-}
 
-.button_padrao:hover {
-    background-color: #d66800;
-	color: black;
-}
-.cadastro_option .login-box .btn_left{
-	justify-content: left;
-}
 
 
 #mostrarSenha {
     position: relative;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #F7800F;
+    background-color: #005f6b;
     color: white;
     border: none;
     border-radius: 5px;
@@ -338,9 +312,38 @@ input[type="number"] {
     display: none; /* Inicialmente invisível */
 }
 
-#mostrarSenha.active::before {
-    display: block; /* Torna a linha visível quando a classe 'active' está presente */
+
+#mostrarSenha:hover{
+	background-color: #3086e9;
+	color:black;
+
 }
+
+
+
+
+
+.button_padrao{
+	font-size: 18px;
+    padding: 10px;
+    background-color: #005f6b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+	margin-bottom: 5px;
+}
+
+.button_padrao:hover {
+    background-color: #3086e9;
+	color: black;
+}
+
+.cadastro_option .login-box .btn_left{
+	justify-content: left;
+}
+
+
 table,tr,th,thead{
 	border: 1px solid black;
 	width: auto;
