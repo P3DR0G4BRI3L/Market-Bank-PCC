@@ -115,16 +115,13 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
                                 oninput="restringirLetras(this)">
                         </div>
 
-                        <div class="input-group">
-                            <label for="senha">Senha:</label>
+                        <label for="senha">Senha:</label>
+                        <div class="inline">
                             <input type="password" id="senha" name="senha"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()" required
                                 placeholder="Insira sua senha">
                             <button type="button" id="mostrarSenha" onclick="mostrarsenha()"><span class="lnr lnr-eye"></span></button>
                             
-                        </div>
-
-                        <div class="input-group">
                             <label for="imagem">Foto do supermercado:</label>
                             <input type="file" id="imagem" name="imagem"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()" required

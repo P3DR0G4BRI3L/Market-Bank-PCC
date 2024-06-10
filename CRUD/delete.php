@@ -4,6 +4,7 @@ require_once '../func/func.php';
 require_once '../cadastro/cadastro.php';
 require_once '../model/produtoDAO.php';
 require_once '../model/mercadoDAO.php';
+require_once '../model/infopagDAO.php';
 require_once '../model/panfletoDAO.php';
 require_once '../model/usuarioDAO.php';
 require_once '../model/clienteDAO.php';
@@ -14,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuarioDAO = new usuarioDAO($conn);
     $clienteDAO = new clienteDAO($conn);
     $mercadoDAO = new mercadoDAO($conn);
+    $infopagDAO = new infopagDAO($conn);
     $produtoDAO = new produtoDAO($conn);
     $filtroProdutoDAO = new filtroProdutoDAO($conn);
 
@@ -26,33 +28,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $deletefoto = "C:\xampp\htdocs\Market-Bank\cadastro\uploads\\";
                 $imagemPath = $deletefoto . $_SESSION['usuario']['mercado']['imagem'];
                 if (file_exists($imagemPath)) {
-                    unlink($imagemPath);}
+                    unlink($imagemPath);
+                }
 
                 $id_mercado = $_SESSION['usuario']['mercado']['id_mercado'];
-                if ($mercadoDAO->deleteAllProdutosByMercado($id_mercado) &&
-                
-                $mercadoDAO->deleteAllPanfletosByMercado($id_mercado) &&
+                if (
+                    $mercadoDAO->deleteAllProdutosByMercado($id_mercado) &&
 
-                        $mercadoDAO->deleteAllfiltroProdutoByMercado($id_mercado)){
+                    $mercadoDAO->deleteAllPanfletosByMercado($id_mercado) &&
 
-                            if($mercadoDAO->deleteMercadoById($_SESSION['usuario']['id_usuario'])) {
-                                if($usuarioDAO->excluirUsuario($_SESSION['usuario']['id_usuario'])){
-                            
+                    $mercadoDAO->deleteAllfiltroProdutoByMercado($id_mercado) &&
 
-                                    session_destroy();
-                                    echo "<script>
+                    $mercadoDAO->deleteAllInfoPagByIdMercado($id_mercado)
+                ) {
+
+                    if ($mercadoDAO->deleteMercadoById($_SESSION['usuario']['id_usuario'])) {
+                        if ($usuarioDAO->excluirUsuario($_SESSION['usuario']['id_usuario'])) {
+
+
+                            session_destroy();
+                            echo "<script>
                         alert('Mercado,produtos e panfletos excluídos com sucesso');
                         window.location.href='../index.php';
                         </script>";
-                                    exit;
-                      }          
-                     }       
-            }} elseif (isset($_POST['deleteprod'], $_POST['deletefile'])) {
+                            exit;
+                        }
+                    }
+                }
+            } elseif (isset($_POST['deleteprod'], $_POST['deletefile'])) {
 
                 $deletefoto = "C:\xampp\htdocs\Market-Bank\cadastro\uploads\\";
                 $imagemPath = $deletefoto . $_POST['deletefile'];
                 if (file_exists($imagemPath)) {
-                    unlink($imagemPath);}
+                    unlink($imagemPath);
+                }
 
                 $id_produto = $_POST['deleteprod'];
                 if ($produtoDAO->excluirproduto($id_produto)) {
@@ -73,9 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </script>";
                     exit;
                 }
-            }elseif(isset($_POST['deletefiltro'])){
+            } elseif (isset($_POST['deletefiltro'])) {
                 $id_filtro = $_POST['deletefiltro'];
-                if($filtroProdutoDAO->deleteFiltro($id_filtro)){
+                if ($filtroProdutoDAO->deleteFiltro($id_filtro)) {
                     echo "<script>
                     alert('Filtro excluído com sucesso');
                     window.location.href='../CRUD/read-filtro.php';
@@ -116,19 +125,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 unlink($deletefoto . $mercadoDAO->getImagemById($_POST['deletemercado']));
                 if (isset($_POST['deletemercado'])) {
                     if ($mercadoDAO->deleteAllProdutosByMercado($_SESSION['usuario']['id_usuario'])) {
-                        if ($mercadoDAO->deleteAllPanfletosByMercado($_SESSION['usuario']['id_usuario'])) { 
-                                if ($mercadoDAO->deleteAllfiltroProdutoByMercado($_SESSION['usuario']['id_usuario'])) {
-                                    if ($mercadoDAO->deleteMercadoById($_SESSION['usuario']['id_usuario'])) {
-                                        if ($usuarioDAO->excluirUsuario($_SESSION['usuario']['id_usuario'])){ //deleta o mercado e tudo relacionado a ele
+                        if ($mercadoDAO->deleteAllPanfletosByMercado($_SESSION['usuario']['id_usuario'])) {
+                            if ($mercadoDAO->deleteAllfiltroProdutoByMercado($_SESSION['usuario']['id_usuario'])) {
+                                if ($mercadoDAO->deleteMercadoById($_SESSION['usuario']['id_usuario'])) {
+                                    if ($usuarioDAO->excluirUsuario($_SESSION['usuario']['id_usuario'])) { //deleta o mercado e tudo relacionado a ele
 
-                                            echo "<script>
+                                        echo "<script>
                         alert('Mercado e produtos excluídos com sucesso');
                               window.location.href='../CRUD/read-prod.php';
                     </script>";
-                                        exit;}
+                                        exit;
                                     }
                                 }
-                            
+                            }
                         }
                     }
                 }

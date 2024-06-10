@@ -1,0 +1,23 @@
+<?php
+
+class itensDAO{
+    private $conn;
+
+    public function __construct($conn){
+        $this->conn = $conn;
+    }
+
+    public function inserirItens($quantidade, $id_carrinho, $id_produto){
+        $query = "INSERT INTO itens (quantidade, id_carrinho, id_produto) VALUES (:quantidade,:id_carrinho,:id_produto);";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':quantidade',$quantidade,PDO::PARAM_INT);
+        $stmt->bindValue(':id_carrinho',$id_carrinho,PDO::PARAM_INT);
+        $stmt->bindValue(':id_produto',$id_produto,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return TRUE;
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo(); 
+        }
+    }
+    
+}

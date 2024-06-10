@@ -8,51 +8,59 @@ body {
 	font-size: 1em;
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 	background: #e6e6e6;
-	overflow-y: scroll; /* Sempre mostra a barra de rolagem vertical */
+	overflow-y: scroll;
+	/* Sempre mostra a barra de rolagem vertical */
 }
 
 /* Layout */
 
 #area-cabecalho {
-	background-color: rgb(34, 141, 34);
+	background-color: #228d22;
 	padding: 15px;
 	text-align: center;
 }
-#area-cabecalho .aviso-login{
-	color:white;
+
+#area-cabecalho .aviso-login {
+	color: white;
 }
 
-#area-logo, #area-menu {
-	
+#area-logo,
+#area-menu {
+
 	padding: 10px;
 }
-#area-menu{
+
+#area-menu {
 	display: flex;
 	justify-content: center;
 }
+
 #area-principal {
 	width: 1100px;
 	margin: 0 auto;
 	padding: 15px;
 }
-#area-menu .cadastro_login_right{
+
+
+#area-menu .cadastro_login_right {
 	display: flex;
 	color: #FFF;
 	padding: 0;
 	gap: 5px;
 	justify-content: end;
 }
-#area-menu{
+
+#area-menu {
 	gap: 5px;
 }
 
-#area-cabecalho #area-menu a:hover{
+#area-cabecalho #area-menu a:hover {
 	background-color: #005f6b;
 	border-radius: 5px;
 	color: #FFF;
 }
 
-.postagem h2{
+.postagem h2 {
 	color: rgb(2, 102, 2);
 }
 
@@ -67,21 +75,24 @@ body {
 }
 
 .postagem {
+	margin: 0 auto;
 	padding: 20px;
 	margin-bottom: 20px;
 	background: white;
-    width: 880px;
+	width: 880px;
 }
+
 .conteudo-lateral {
 	background: white;
 	padding: 10px;
 	margin-bottom: 20px;
 }
 
-.conteudo-lateral , a{
+.conteudo-lateral,
+a {
 	color: rgb(9, 82, 9);
 	text-decoration: none;
-	
+
 }
 
 .postagem-lateral {
@@ -91,32 +102,35 @@ body {
 }
 
 #rodape {
+	width: 100%;
 	clear: both;
 	text-align: center;
 	padding: 15px;
 	background: #CCC;
-	width: 890px;
 }
-.postagem h2{
+
+.postagem h2 {
 	text-align: center;
 }
 
 
 /* Formatação do menu */
-a{
+a {
 	text-decoration: none;
 }
 
- a:link,  a:visited {
+a:link,
+a:visited {
 	color: green;
-	
+
 }
 
- a:hover {
+a:hover {
 	text-decoration: underline;
 }
 
-#area-cabecalho a:link, #area-cabecalho a:visited {
+#area-cabecalho a:link,
+#area-cabecalho a:visited {
 	color: #FFF;
 	padding: 8px 12px;
 }
@@ -138,58 +152,66 @@ a{
 	margin-bottom: 10px;
 	display: block;
 }
-.sugestao{
+
+.sugestao {
 	width: 100%;
 }
 
 .cadastro_option {
-    display: flex;
-    justify-content: center;
-    align-items: start;
-	
-    /* height: 100vh; */
+	display: flex;
+	justify-content: center;
+	align-items: start;
+
+	/* height: 100vh; */
 }
 
 .login-box {
 	margin: 0 auto;
-    background-color: #fff;
-    padding: 2px 0px;
-    border-radius: 5px;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-    text-align: center; /* Centraliza o texto */
+	background-color: #fff;
+	padding: 2px 0px;
+	border-radius: 5px;
+	/* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+	text-align: center;
+	/* Centraliza o texto */
 }
 
 h2 {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .input-group {
-    margin-bottom: 15px;
-    text-align: center; /* Centraliza o conteúdo do grupo */
+	margin-bottom: 15px;
+	text-align: center;
+	/* Centraliza o conteúdo do grupo */
 }
 
-.login-box input{
+.login-box input {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	
+
 }
-.login-box h6{
+
+.login-box h6 {
 	margin-top: 10px;
 	color: red;
 }
-.input-group #cnpj{
+
+.input-group #cnpj {
 	margin-bottom: 10px;
 }
-.input-endereco{
-	display:flex ;
+
+.input-endereco {
+	display: flex;
 	margin-bottom: 30px;
 }
 
-.input-endereco label{align-content: center;}
+.input-endereco label {
+	align-content: center;
+}
 
 label {
-    display: block;
-    font-weight: bold;
-    text-align: left;
+	display: block;
+	font-weight: bold;
+	text-align: left;
 }
 
 input[type="email"],
@@ -199,123 +221,175 @@ input[type="text"],
 input[type="tel"],
 input[type="file"],
 input[type="number"] {
-    width: 100%; /* Faz os inputs ocuparem 100% da largura */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box; /* Garante que o padding não afete a largura total */
+	width: 100%;
+	/* Faz os inputs ocuparem 100% da largura */
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
+	/* Garante que o padding não afete a largura total */
 }
-.login-box select{
-	width: 100%; /* Faz o select ocupar 100% da largura */
+
+.login-box select {
+	width: 100%;
+	/* Faz o select ocupar 100% da largura */
 	padding: 10px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	box-sizing: border-box;
 }
 
-.input-time{
+.input-time {
 	display: flex;
 	gap: 10px;
 	margin: 20px;
 
 }
-.input-time input[type="time"]{
+
+.input-time input[type="time"] {
 	width: 30%;
 	padding: 10px;
 	border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+	border-radius: 5px;
+	box-sizing: border-box;
 	justify-content: start;
 
 }
-.largura_menor{
-	width: 40% ;
+
+.largura_menor {
+	width: 40%;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 
 }
-.largura_menor .input-group{
-	margin: 20px ;
+
+.largura_menor .input-group {
+	margin: 20px;
 }
 
 .container .login-box .input-group .inline {
 	display: flex;
 	flex-direction: row;
 }
-
+.inline{
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 10px;
+}
 .input-name {
 	display: flex;
 	margin-bottom: 15px;
-    text-align: center; /* Centraliza o conteúdo do grupo */
+	text-align: center;
+	/* Centraliza o conteúdo do grupo */
 }
-.input-name input{
-	width:50%;
+
+.input-name input {
+	width: 50%;
 	margin-left: 0px;
 }
-.input-name label{
-	margin-right:0px ;
+
+.input-name label {
+	margin-right: 0px;
 }
-.input-group #senha{width:80%;}
-.input-group #senha , #mostrarSenha{
+
+.input-group #senha {
+	width: 80%;
+}
+
+.input-group #senha,
+#mostrarSenha {
 	display: flex;
 
 }
-.input-compra{
+
+.input-compra {
 	display: flex;
 	margin-bottom: 15px;
-    text-align: center;
+	text-align: center;
 }
+
 .input-compra p {
 	margin-right: 30px;
 }
-.input-compra label{
+
+.input-compra label {
 	width: block;
 
-}.input-compra input{
+}
+
+.input-compra input {
 	box-shadow: none;
 }
 
 
 
-input[type="number"]::-webkit-inner-spin-button,/*oculta as setas de incremento no chrome*/
-input[type="number"]::-webkit-outer-spin-button {/*oculta as setas de incremento no firefox*/
-    display: none;
+input[type="number"]::-webkit-inner-spin-button,
+/*oculta as setas de incremento no chrome*/
+input[type="number"]::-webkit-outer-spin-button {
+	/*oculta as setas de incremento no firefox*/
+	display: none;
 }
+
 input[type="number"] {
-    -moz-appearance: textfield;
-    appearance: textfield;
+	-moz-appearance: textfield;
+	appearance: textfield;
 }
 
 
 
 
 #mostrarSenha {
-    position: relative;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #005f6b;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    overflow: hidden; /* Garantir que a linha não saia dos limites do botão */
+	position: relative;
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #005f6b;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	overflow: hidden;
+	/* Garantir que a linha não saia dos limites do botão */
 }
 
 #mostrarSenha::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -10%; /* Ajusta a posição inicial para fora do botão */
-    width: 120%; /* Aumenta a largura para cobrir toda a diagonal */
-    height: 2px; /* Espessura da linha */
-    background-color: black; /* Cor da linha */
-    transform: rotate(-45deg); /* Rotaciona a linha para diagonal */
-    display: none; /* Inicialmente invisível */
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: -10%;
+	/* Ajusta a posição inicial para fora do botão */
+	width: 120%;
+	/* Aumenta a largura para cobrir toda a diagonal */
+	height: 2px;
+	/* Espessura da linha */
+	background-color: black;
+	/* Cor da linha */
+	transform: rotate(-45deg);
+	/* Rotaciona a linha para diagonal */
+	display: none;
+	/* Inicialmente invisível */
 }
 
 
-#mostrarSenha:hover{
+#mostrarSenha:hover {
 	background-color: #3086e9;
-	color:black;
+	color: black;
+
+}
+
+#area-principal_cliente {
+	justify-content: center;
+	display: flex;
+	width: 100%;
+	margin: 0 auto;
+	padding: 15px;
+}
+.postagem_cliente {
+	margin: 0 auto;
+	padding: 20px;
+	margin-bottom: 20px;
+	background: white;
+	width: 350px;
+	border: 1px solid black;
+	border-radius: 5px;
 
 }
 
@@ -323,79 +397,94 @@ input[type="number"] {
 
 
 
-.button_padrao{
+
+.button_padrao {
 	font-size: 18px;
-    padding: 10px;
-    background-color: #005f6b;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+	padding: 10px;
+	background-color: #005f6b;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
 	margin-bottom: 5px;
 }
 
 .button_padrao:hover {
-    background-color: #3086e9;
+	background-color: #3086e9;
 	color: black;
 }
 
-.cadastro_option .login-box .btn_left{
+.cadastro_option .login-box .btn_left {
 	justify-content: left;
 }
 
 
-table,tr,th,thead{
+table,
+tr,
+th,
+thead {
 	border: 1px solid black;
 	width: auto;
 }
-#btn_tabela{
+
+#btn_tabela {
 	font-size: 10px;
-    padding: 10px;
-    background-color: #F7800F;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+	padding: 10px;
+	background-color: #F7800F;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
 	margin-bottom: 5px;
 }
-.imagem{
+
+.imagem {
 	width: 60px;
 }
-.imagem:hover{
+
+.imagem:hover {
 	width: 500px;
-	
+
 }
-table,tr,thead,caption{
+
+table,
+tr,
+thead,
+caption {
 	border: 1px solid black;
 	height: 20px;
 	align-items: center;
-	background-color:#ccc;
+	background-color: #ccc;
 	border-radius: 5px;
 
 }
-th{
+
+th {
 	width: 100px;
 	height: 30px;
 	border: 1px solid black;
 	padding: 20px;
 	background-color: #e6e6e6;
 }
-.postagem_adm{
+
+.postagem_adm {
 	padding: 650px;
 	padding-top: 20px;
 	margin-bottom: 20px;
-	padding-left:10px;
+	padding-left: 10px;
 	background: white;
-    width: 880px;
+	width: 880px;
 	align-items: left;
 	flex-wrap: wrap;
 	border-left: 300px;
 	text-align: left;
 }
-.postagem_admtit{
+
+.postagem_admtit {
 	text-align: center;
 }
-#area_principal2{
+
+#area_principal2 {
 	padding: 1200px;
-    padding-right: 3000px;
+	padding-right: 3000px;
 }

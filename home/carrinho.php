@@ -20,6 +20,7 @@ $produtoDAO = new produtoDAO($conn);
         ?>
             <table>
                 <thead>
+                    
                     <tr>
                         <th>Nome</th>
                         <th>Quantidade</th>
@@ -27,41 +28,51 @@ $produtoDAO = new produtoDAO($conn);
                         <th>Preço total</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php foreach ($carrinhoshow as $cart) : ?>
-                        <tr>
-                            <th>
-                                <p><?= $cart['nome']  ?></p>
-                            </th>
+                <?php foreach ($carrinhoshow as $cart) : ?>
+                    <?php if ($cart['id_mercado'] == $_SESSION['usuario']['verMercado']) : ?>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    <p><?= $cart['nome']  ?></p>
+                                </th>
 
-                            <th>
-                                <?= $cart['quantidade'] ?>
-                            </th>
+                                <th>
+                                    <?= $cart['quantidade'] ?>
+                                </th>
 
-                            
 
-                            <th>
-                                <p><?= $cart['preco']  ?></p>
-                            </th>
 
-                            <th>
-                                <p><?= $cart['quantidade'] * $cart['preco']  ?></p>
-                            </th>
-                        </tr>
+                                <th>
+                                    <p><?= $cart['preco']  ?></p>
+                                </th>
+
+                                <th>
+                                    <p><?= $cart['quantidade'] * $cart['preco']  ?></p>
+                                </th>
+                            </tr>
+                        <?php else : ?>
+                            <p class="prod_none">Ainda não foram inseridos produtos</p>
+                        <?php exit;
+                    endif ?>
                     <?php endforeach ?>
-                </tbody>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th class="no-border"><button class='button_carrinho' onclick="window.location.href= '../CRUD/end_carrinho.php' ">Finalizar carrinho</button></th>
+                                <th class="no-border"><button class='button_carrinho' onclick="confirmarLimparCarrinho();">Limpar carrinho</button></th>
+
+                                <th class="no-border"></th>
+                                <th class="no-border"></th>
+                            </tr>
+                        </tfoot>
 
 
             </table>
-            <button class='button_carrinho' onclick="window.location.href= '' ">Finalizar carrinho</button>
+
 
         <?php else : ?>
 
             <p class="prod_none">Ainda não foram inseridos produtos</p>
-
-
-
-
 
         <?php endif ?>
     </div>

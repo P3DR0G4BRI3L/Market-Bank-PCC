@@ -6,30 +6,35 @@ echo"</pre>";
 require_once '../func/func.php';
 require_once '../cadastro/cadastro.php';
 require_once '../model/usuarioDAO.php';
+require_once '../model/clienteDAO.php';
 
 
 $usuarioDAO = new usuarioDAO($conn);
-
+$clienteDAO = new clienteDAO($conn);
+$id_usuario = $_SESSION['usuario']['id_usuario'];
     
+
 require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalhos
-if(isset($_POST['nome'] , $_POST['email'])){
+if(isset($_POST['nome'] , $_POST['email'], $_POST['telefone'])){
+    if(strlen($_POST['telefone'])!=11){
+        header('location:?bah=O número deve conter 11 dígitos');exit;
+    }
    $nome = $_POST['nome']   ;
    $email = $_POST['email'] ;
-   $senha = $_POST['senha'] ?? $usuarioDAO->getSenhaById($_SESSION['usuario']['id_usuario']);  ;
+   $telefone = $_POST['telefone'] ;
    
 
     
-        if($usuarioDAO->verificaEmailExisteAtt($email,$_SESSION['usuario']['email']))
-        echo "<script>
+        if($usuarioDAO->verificaEmailExisteAtt($email,$_SESSION['usuario']['email'])){
+        header('location:?mess=O email inserido ja está em uso');
+            exit;
+    }
 
-            alert('O email inserido já está em uso');
-                window.location.href='update-cliente.php';
-            
-        </script>";
-    $id_usuario = $_SESSION['usuario']['id_usuario'];
-if($usuarioDAO->atualizarUsuario($nome , $email, $id_usuario)){
+if($usuarioDAO->atualizarUsuario($nome , $email, $id_usuario) && $clienteDAO->atualizarCliente($id_usuario,$telefone)){
+    
     $_SESSION['usuario']['nome']=$_POST['nome'];
     $_SESSION['usuario']['email']=$_POST['email'];
+    $_SESSION['usuario']['telefone']=$_POST['telefone'];
     echo "<script>alert('Perfil alterado com sucesso')</script>";
     echo "<script>window.location.href='../cadastro/verMeuCliente.php'</script>";
      
@@ -53,9 +58,21 @@ if($usuarioDAO->atualizarUsuario($nome , $email, $id_usuario)){
                         </div>
 
                         <div class="input-group">
+                            <?php if(isset($_GET['mess'])): ?>
+                                <h6><?= $_GET['mess'] ?></h6>
+                            <?php endif ?>
                             <label for="email">Email:</label>
                             <input type="email" id="email" name="email" value="<?= $_SESSION['usuario']['email']?>"
                                 onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+                        </div>
+
+                        <div class="input-group">
+                        <?php if(isset($_GET['bah'])): ?>
+                                <h6><?= $_GET['bah'] ?></h6>
+                            <?php endif ?>
+                            <label for="email">Telefone:</label>
+                            <input type="tel" id="email" name="telefone" value="<?= $_SESSION['usuario']['telefone']?>"
+                                onkeydown="if(event.keyCode === 13) event.preventDefault()" maxlength="11" required>
                         </div>
 
                         

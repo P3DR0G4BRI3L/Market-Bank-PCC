@@ -22,7 +22,7 @@ $achouItemCarrinho = false;
 foreach($carrinho as $key => $item) {
     if ($item['id_produto'] == $id_produto) {
         $produto = $item;
-        $produto['quantidade'] = $item['quantidade'] + 1;        
+        $produto['quantidade'] += 1;        
         $achouItemCarrinho = true;
         unset($carrinho[$key]);
         break;

@@ -51,6 +51,18 @@ function confirmarExclusaoPanfleto() {
     return confirm("Tem certeza que deseja excluir esse panfleto?"); 
 }
 
+function confirmarLimparCarrinho() {
+    // Exibe uma mensagem de confirmação
+    if (confirm("Tem certeza que deseja limpar o carrinho?")) {
+        // Se o usuário confirmar, redireciona para a página de exclusão
+        window.location.href = '../CRUD/limpar_carrinho.php';
+        return true;
+    } else {
+        // Se o usuário cancelar, retorna false
+        return false;
+    }
+}
+
 
 function restringirLetras(input) {
     input.value = input.value.replace(/\D/g, ''); // Remove tudo que não é dígito
@@ -99,4 +111,13 @@ function validarquant() {
     }
     
     return true; // Permite o envio do formulário
+}
+
+function validartel(){
+    var tel = document.getElementById("tel");
+    if(tel.value.length !== 11){
+        alert("O telefone deve conter 11 digitos.");
+        return false; // Impede o envio do formulário
+        
+    }return true;
 }

@@ -56,9 +56,15 @@
                 <a href="../cadastro/verMeuMercado.php">Visualizar perfil</a>
                 <?php endif ?>
 
-                <?php if (usuarioEstaLogado()): ?>
-                <a href="../cadastro/logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
-                <?php endif ?>
+                <?php if (usuarioEstaLogado()) : ?>
+				<?php $aviso ='Deseja realizar logout?'?>
+				<?php if (clienteEstaLogado() && !empty($_SESSION['usuario']['carrinho'])): ?>
+				<?php $aviso ='Deseja realizar logout?\nTudo que está no carrinho vai ser excluído '?>
+				<?php endif ?>
+
+				<a href="../cadastro/logout.php" onclick='return confirm("<?=$aviso?>");'>Logout</a>
+
+			<?php endif ?>
 
                 <?php if(admEstaLogado()): ?>
                     <a href="../CRUD/administrador.php">ADM</a>

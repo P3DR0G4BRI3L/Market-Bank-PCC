@@ -90,6 +90,7 @@ body {
 }
 
 .postagem {
+	margin: 0 auto;
 	padding: 20px;
 	background: white;
 	margin-bottom: 7px;
@@ -98,10 +99,15 @@ body {
 	border-radius: 5px;
 }
 .conteudo-lateral {
+	border: 2px solid black;
+	border-radius: 15px;
 	background: white;
 	padding: 10px;
 	margin-bottom: 20px;
-}
+	box-shadow: 0 0 10px #033aa099;}
+	.conteudo-lateral h3{
+		border-radius: 5px;
+	}
 
 .conteudo-lateral , a{
 	color: rgb(9, 82, 9);
@@ -140,6 +146,7 @@ padding: 2px 5px 5px 2px;
 	opacity: 0.7;
 }
 #rodape {
+	width: 100%;
 	clear: both;
 	text-align: center;
 	padding: 15px;
@@ -332,8 +339,8 @@ background-color: rgb(255, 47, 47);
 }	
 
 .button_carrinho{
-	margin: 10px auto;
-	display: block;
+	margin: 0px auto;
+	display: flex;
 	margin-top: 5px;
 	padding: 5px;
 	background-color: #005f6b;
@@ -344,4 +351,7 @@ background-color: rgb(255, 47, 47);
 	background-color: #3086e9;
 	color: white;
 	cursor: pointer;
+}
+.no-border{
+	border:none;
 }

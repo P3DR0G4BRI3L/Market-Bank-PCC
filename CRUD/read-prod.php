@@ -63,7 +63,7 @@ require_once '../inc/cabecalho.php'; ?>
 
             </div>
         </div>
-        
+
         <?php
         switch ($_SESSION['usuario']['tipo']) {
                 //se for um mercado que estiver logado vai listar os produtos e disponibilizar exclusão e edição
@@ -110,11 +110,10 @@ require_once '../inc/cabecalho.php'; ?>
                                     <input type="hidden" name="id_produto" value="<?= $produto['id_produto'] ?>">
                                     <select name="filtroproduto" onchange="this.form.submit()">
                                         <option value="" selected disabled>Selecione uma categoria</option>
-                                        <option value="" >Nenhuma</option>
+                                        <option value="">Nenhuma</option>
                                         <?php foreach ($allfiltros as $filtro) : ?>
 
-                                            <option value="<?= $filtro['id_filtro'] ?>" 
-                                            <?= ($filtro['id_filtro'] == $produto['id_filtro']) ? 'selected' : '' ?>>
+                                            <option value="<?= $filtro['id_filtro'] ?>" <?= ($filtro['id_filtro'] == $produto['id_filtro']) ? 'selected' : '' ?>>
                                                 <?= ucwords($filtro['nomeFiltro']) ?>
                                             </option>
 
@@ -145,15 +144,17 @@ require_once '../inc/cabecalho.php'; ?>
                 if (!empty($produtos)) {
                     foreach ($produtos as $produto) { ?>
                         <div class="postagem">
+                            <div class="view_produto">
 
-                            <h2> <?= $produto['nome'] ?> </h2>
+                                <h2> <?= $produto['nome'] ?> </h2>
 
-                            <img src="../cadastro/uploads/<?= $produto['fotoProduto'] ?>" alt="Imagem do mercado" width="300px">
+                                <img src="../cadastro/uploads/<?= $produto['fotoProduto'] ?>" alt="Imagem do mercado" width="300px">
 
 
-                            <h2> <?= number_format($produto['preco'], 2, ',', '.') ?> R$ </h2>
+                                <h2> <?= number_format($produto['preco'], 2, ',', '.') ?> R$ </h2>
 
-                            <h2>Descrição: <?= $produto['descricao'] ?> </h2>
+                                <h2>Descrição: <?= $produto['descricao'] ?> </h2>
+                            </div>
 
                             <?php if (clienteEstaLogado()) : ?>
                                 <div class="login-box">
@@ -163,14 +164,15 @@ require_once '../inc/cabecalho.php'; ?>
 
                         </div>
                     <?php } ?>
+                    </div>
 
-                    <?php require_once '../inc/rodape.php'; ?>
                     <div id="area-lateral">
-
+                
                         <?php require_once '../home/carrinho.php'; ?>
                     </div>
-    </div>
-<?php } else {
+                    <?php require_once '../inc/rodape.php'; ?>
+                    </div>
+                    <?php } else {
                     echo "<div class='postagem'>
                     <h2>Ainda não foram inseridos produtos</h2>
                 </div>";

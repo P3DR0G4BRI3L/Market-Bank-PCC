@@ -42,5 +42,15 @@ class infopagDAO{
             return "ocorreu um erro" . $stmt->errorInfo();
         }
     }
+    public function deleteInfoPagById($id_mercado){
+        $query = "DELETE FROM infopag WHERE id_mercado = :id_mercado;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return TRUE;
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo();
+        }
+    }
 
 }

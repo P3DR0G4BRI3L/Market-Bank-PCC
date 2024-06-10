@@ -1,3 +1,4 @@
+-- MySQL Workbench Forward Engineering
 DROP DATABASE IF EXISTS marketbank;
 CREATE DATABASE marketbank;
 USE marketbank;
@@ -10,6 +11,11 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema marketbank
 -- -----------------------------------------------------
 
+-- -----------------------------------------------------
+-- Schema marketbank
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `marketbank` DEFAULT CHARACTER SET utf8mb4 ;
+USE `marketbank` ;
 
 -- -----------------------------------------------------
 -- Table `marketbank`.`usuario`
@@ -22,7 +28,9 @@ CREATE TABLE IF NOT EXISTS `marketbank`.`usuario` (
   `tipo` ENUM('cliente', 'administrador', 'dono') NOT NULL,
   PRIMARY KEY (`id_usuario`),
   UNIQUE INDEX `email` (`email` ASC) )
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
 
 -- -----------------------------------------------------
 -- Table `marketbank`.`administrador`
@@ -35,37 +43,9 @@ CREATE TABLE IF NOT EXISTS `marketbank`.`administrador` (
   CONSTRAINT `administrador_ibfk_1`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `marketbank`.`usuario` (`id_usuario`))
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
--- -----------------------------------------------------
--- Table `marketbank`.`cliente`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `marketbank`.`cliente` (
-  `id_cliente` INT(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` INT(11) NOT NULL,
-  PRIMARY KEY (`id_cliente`),
-  INDEX `id_usuario` (`id_usuario` ASC) ,
-  CONSTRAINT `cliente_ibfk_1`
-    FOREIGN KEY (`id_usuario`)
-    REFERENCES `marketbank`.`usuario` (`id_usuario`))
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- -----------------------------------------------------
--- Table `marketbank`.`carrinho`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `marketbank`.`carrinho` (
-  `id_carrinho` INT(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` INT(11) NOT NULL,
-  `status` ENUM('aberto', 'fechado') NOT NULL DEFAULT 'aberto',
-  `descricao` TEXT NULL,
-  PRIMARY KEY (`id_carrinho`),
-  INDEX `id_usuario_idx` (`id_usuario` ASC) ,
-  CONSTRAINT `id_usuario`
-    FOREIGN KEY (`id_usuario`)
-    REFERENCES `marketbank`.`cliente` (`id_usuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `marketbank`.`mercado`
@@ -88,7 +68,51 @@ CREATE TABLE IF NOT EXISTS `marketbank`.`mercado` (
   CONSTRAINT `mercado_ibfk_1`
     FOREIGN KEY (`id_dono`)
     REFERENCES `marketbank`.`usuario` (`id_usuario`))
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `marketbank`.`cliente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `marketbank`.`cliente` (
+  `id_cliente` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` INT(11) NOT NULL,
+  `telefone` VARCHAR(11) NOT NULL,
+  PRIMARY KEY (`id_cliente`),
+  INDEX `id_usuario` (`id_usuario` ASC) ,
+  CONSTRAINT `cliente_ibfk_1`
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `marketbank`.`usuario` (`id_usuario`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `marketbank`.`carrinho`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `marketbank`.`carrinho` (
+  `id_carrinho` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_mercado` INT(11) NOT NULL,
+  `id_cliente` INT(11) NOT NULL,
+  `status` ENUM('aberto', 'fechado') NOT NULL DEFAULT 'aberto',
+  `descricao` TEXT NULL,
+  PRIMARY KEY (`id_carrinho`),
+  INDEX `id_mercado_idx` (`id_mercado` ASC) ,
+  INDEX `fk_carrinho_cliente1_idx` (`id_cliente` ASC) ,
+  CONSTRAINT `id_mercado`
+    FOREIGN KEY (`id_mercado`)
+    REFERENCES `marketbank`.`mercado` (`id_mercado`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_carrinho_cliente1`
+    FOREIGN KEY (`id_cliente`)
+    REFERENCES `marketbank`.`cliente` (`id_cliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
 
 -- -----------------------------------------------------
 -- Table `marketbank`.`filtroproduto`
@@ -102,7 +126,9 @@ CREATE TABLE IF NOT EXISTS `marketbank`.`filtroproduto` (
   CONSTRAINT `filtroProduto_ibfk_1`
     FOREIGN KEY (`id_mercado`)
     REFERENCES `marketbank`.`mercado` (`id_mercado`))
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
 
 -- -----------------------------------------------------
 -- Table `marketbank`.`infopag`
@@ -117,7 +143,9 @@ CREATE TABLE IF NOT EXISTS `marketbank`.`infopag` (
   CONSTRAINT `infoPag_ibfk_1`
     FOREIGN KEY (`id_mercado`)
     REFERENCES `marketbank`.`mercado` (`id_mercado`))
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
 
 -- -----------------------------------------------------
 -- Table `marketbank`.`panfleto`
@@ -133,7 +161,9 @@ CREATE TABLE IF NOT EXISTS `marketbank`.`panfleto` (
   CONSTRAINT `panfleto_ibfk_1`
     FOREIGN KEY (`id_mercado`)
     REFERENCES `marketbank`.`mercado` (`id_mercado`))
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
 
 -- -----------------------------------------------------
 -- Table `marketbank`.`produto`
@@ -157,7 +187,8 @@ CREATE TABLE IF NOT EXISTS `marketbank`.`produto` (
     REFERENCES `marketbank`.`filtroproduto` (`id_filtro`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `marketbank`.`itens`

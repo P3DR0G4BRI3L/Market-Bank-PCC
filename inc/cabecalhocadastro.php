@@ -42,7 +42,13 @@ require_once '../func/func.php';
 			<a href="../home/fale.php">Fale Conosco</a>
 
 			<?php if (usuarioEstaLogado()) : ?>
-				<a href="../cadastro/logout.php" onclick="return confirm('Deseja realizar logout?');">Logout</a>
+				<?php $aviso ='Deseja realizar logout?'?>
+				<?php if (clienteEstaLogado() && !empty($_SESSION['usuario']['carrinho'])): ?>
+				<?php $aviso ='Deseja realizar logout?\Tudo que está no carrinho vai ser excluído '?>
+				<?php endif ?>
+
+				<a href="../cadastro/logout.php" onclick='return confirm("<?=$aviso?>");'>Logout</a>
+
 			<?php endif ?>
 
 			<?php if (admEstaLogado()) : ?>

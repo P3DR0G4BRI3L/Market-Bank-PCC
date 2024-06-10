@@ -26,7 +26,7 @@ if ($usuarioDAO->inserirUsuario('Administrador', 'admin@gmail.com', md5('123'), 
 
 if ($usuarioDAO->inserirUsuario('usuario cliente', 'usuario@gmail.com', md5('123'), 'cliente')) { //se  a inserção do usuário do tipo cliente for bem sucedida
 
-    $clienteDAO->inserirCliente($usuarioDAO->getIdUsuarioByEmail('usuario@gmail.com')); //adiciona o usuario do tipo cliente na tabela cliente
+    $clienteDAO->inserirCliente($usuarioDAO->getIdUsuarioByEmail('usuario@gmail.com'),'61996062014'); //adiciona o usuario do tipo cliente na tabela cliente
 }
 
 

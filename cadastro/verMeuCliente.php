@@ -29,9 +29,10 @@ require_once '../inc/cabecalho.php';
             <h2>Seu nome:
                 <?= ucwords($_SESSION['usuario']['nome']) ?>
             </h2>
-            <?php
-            echo "<p>Seu email logado: " . $_SESSION['usuario']['email'] . "</p>";
-            ?>
+            
+            <p>Seu email logado: <?= $_SESSION['usuario']['email'] ?> </p>
+
+            <p>Seu telefone : <?= $_SESSION['usuario']['telefone'] ?> </p>
 
             <!-- redireciona  o usuario para para editar o perfil -->
             <form action="../CRUD/update-cliente.php">

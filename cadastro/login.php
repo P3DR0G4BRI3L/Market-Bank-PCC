@@ -6,6 +6,7 @@ session_start();
 require_once 'cadastro.php';
 require_once '../func/func.php';
 require_once '../model/mercadoDAO.php';
+require_once '../model/clienteDAO.php';
 require_once '../model/usuarioDAO.php';
 // Conexão com o banco de dados
 
@@ -19,15 +20,18 @@ $default=null;
 
 
 $usuarioDAO = new usuarioDAO($conn);
+$clienteDAO = new clienteDAO($conn);
 if ($usuarioDAO->login($email, md5($senha))) {
 
     $infoUser = $usuarioDAO->getUsuarioById($usuarioDAO->getIdUsuarioByEmail($email));
+    $infoCliente = $clienteDAO->getClienteById($usuarioDAO->getIdUsuarioByEmail($email));
 
     switch ($infoUser['tipo']) {
 
         case "cliente":
             $_SESSION['usuario'] = [
                 'id_usuario' => $infoUser['id_usuario'],
+                'telefone' => $infoCliente['telefone'],
                 'email' => $infoUser['email'],
                 'nome' => $infoUser['nome'],
                 'tipo' => $infoUser['tipo'], //atribui todas as informações do usuario ao usuario de sessão
@@ -97,7 +101,6 @@ if ($usuarioDAO->login($email, md5($senha))) {
         <!--Aberturac -->
         <div class="postagem">
             <h2>Login</h2>
-            <p>
                 <div class="container">
                     <div class="login-box largura_menor">
                         <?php if(isset($default)): ?>
@@ -127,11 +130,12 @@ if ($usuarioDAO->login($email, md5($senha))) {
                     </form>
                 </div>
             </div>
-            </p>
         </div>
         <!--// Fechamento postagem -->
 
 
+    </div>
+    
     </div>
 
 
