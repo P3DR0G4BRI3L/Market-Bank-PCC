@@ -61,14 +61,14 @@ require_once '../inc/cabecalho.php'; ?>
                     foreach ($filtros as $filtro) { ?>
                         <div class="postagem">
 
-                            <div class="view_produto">
+                            
 
-                                <h2>
+                                <h2 style="text-align:center;">
                                     <?= ucwords($filtro['nomeFiltro']); ?>
                                 </h2>
 
 
-                            </div>
+                            
                             
                             
                             <div class="login-box">

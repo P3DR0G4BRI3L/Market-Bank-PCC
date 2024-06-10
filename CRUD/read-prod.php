@@ -139,9 +139,9 @@ require_once '../inc/cabecalho.php'; ?>
                     voceNaoTemPermissao();
                 }
                 $produtos = $produtoDAO->getAllProdutoByIdMercado($id_mercado);
-
+                $mercado = $mercadoDAO->getMercadoById($id_mercado);
                 if (!empty($produtos)) {?>
-                    <div class="postagem">
+                    <div class="postagem flex">
                     <?php foreach ($produtos as $produto) : ?>
                             <div class="view_produto">
 
@@ -155,7 +155,7 @@ require_once '../inc/cabecalho.php'; ?>
                                 <h2>Descrição: <?= $produto['descricao'] ?> </h2>
                             </div>
 
-                            <?php if (clienteEstaLogado()) : ?>
+                            <?php if (clienteEstaLogado() && $mercado['compras']=='sim') : ?>
                                 <div class="login-box">
                                     <a href="add_carrinho.php?id_produto=<?= $produto['id_produto'] ?>">Adicionar ao carrinho</a>
                                 </div>

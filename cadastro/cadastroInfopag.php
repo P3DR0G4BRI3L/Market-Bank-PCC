@@ -21,8 +21,8 @@
         
 
                 if ($infopagDAO->inserirInfoPag($mercado['id_mercado'], $_POST['infopag'], $chavepix)){
-                    echo "<script>alert('Cadastro concluído com sucesso');</script>";
-                    header('location:login.php');
+                    echo "<script>alert('Cadastro concluído com sucesso');window.location.href='login.php'</script>";
+                    
                     exit;
                 }
             }

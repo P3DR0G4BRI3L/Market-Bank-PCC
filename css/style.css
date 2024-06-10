@@ -332,12 +332,22 @@ background-color: rgb(255, 47, 47);
 	color:black;
 	background-color: rgb(7, 133, 70);
 }
-#area-principal #area-postagens .postagem .view_produto{
-	justify-content: center;
-	
+	.view_produto img{
+		width: 200px;
+	}
+.view_produto{
+	flex-direction: row;
+	width: 50%;
+	margin: 10px;
+	border: 2px solid black;
+	border-radius: 5px;
+	padding:10px;
+	margin-bottom:5px ;
+	text-align: center;
 
-}	
-
+}	.flex{
+	display: flex;
+}
 .button_carrinho{
 	margin: 0px auto;
 	display: flex;
