@@ -110,7 +110,6 @@ require_once '../inc/cabecalho.php'; ?>
                                     <input type="hidden" name="id_produto" value="<?= $produto['id_produto'] ?>">
                                     <select name="filtroproduto" onchange="this.form.submit()">
                                         <option value="" selected disabled>Selecione uma categoria</option>
-                                        <option value="">Nenhuma</option>
                                         <?php foreach ($allfiltros as $filtro) : ?>
 
                                             <option value="<?= $filtro['id_filtro'] ?>" <?= ($filtro['id_filtro'] == $produto['id_filtro']) ? 'selected' : '' ?>>
@@ -141,9 +140,9 @@ require_once '../inc/cabecalho.php'; ?>
                 }
                 $produtos = $produtoDAO->getAllProdutoByIdMercado($id_mercado);
 
-                if (!empty($produtos)) {
-                    foreach ($produtos as $produto) { ?>
-                        <div class="postagem">
+                if (!empty($produtos)) {?>
+                    <div class="postagem">
+                    <?php foreach ($produtos as $produto) : ?>
                             <div class="view_produto">
 
                                 <h2> <?= $produto['nome'] ?> </h2>
@@ -162,8 +161,8 @@ require_once '../inc/cabecalho.php'; ?>
                                 </div>
                             <?php endif ?>
 
+                            <?php endforeach ?>
                         </div>
-                    <?php } ?>
                     </div>
 
                     <div id="area-lateral">

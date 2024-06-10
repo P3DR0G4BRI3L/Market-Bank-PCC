@@ -175,10 +175,9 @@ CREATE TABLE IF NOT EXISTS `marketbank`.`produto` (
   `fotoProduto` VARCHAR(120) NOT NULL,
   `descricao` TEXT NULL DEFAULT NULL,
   `id_mercado` INT(11) NOT NULL,
-  `id_filtro` INT(11) NULL,
+  `id_filtro` INT(11) NULL DEFAULT NULL, -- Permitindo NULL
   PRIMARY KEY (`id_produto`),
-  INDEX `id_mercado` (`id_mercado` ASC) ,
-  INDEX `fk_produto_filtroproduto1_idx` (`id_filtro` ASC) ,
+  INDEX `id_mercado` (`id_mercado` ASC),
   CONSTRAINT `produto_ibfk_1`
     FOREIGN KEY (`id_mercado`)
     REFERENCES `marketbank`.`mercado` (`id_mercado`),
@@ -186,9 +185,11 @@ CREATE TABLE IF NOT EXISTS `marketbank`.`produto` (
     FOREIGN KEY (`id_filtro`)
     REFERENCES `marketbank`.`filtroproduto` (`id_filtro`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
+
 
 -- -----------------------------------------------------
 -- Table `marketbank`.`itens`
@@ -212,6 +213,7 @@ CREATE TABLE IF NOT EXISTS `marketbank`.`itens` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

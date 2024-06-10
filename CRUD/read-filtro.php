@@ -94,7 +94,7 @@ require_once '../inc/cabecalho.php'; ?>
                     <?php }
                 } else {
                     echo "<div class='postagem'>
-                    <h2>Ainda não foram inseridos produtos</h2>
+                    <h2>Ainda não foram inseridos categorias</h2>
                 </div>";
                 }
                ?>

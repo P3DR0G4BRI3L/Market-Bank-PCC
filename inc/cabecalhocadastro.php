@@ -39,7 +39,6 @@ require_once '../func/func.php';
 			<?php endif ?>
 
 			<a href="../home/contato.php">Contato</a>
-			<a href="../home/fale.php">Fale Conosco</a>
 
 			<?php if (usuarioEstaLogado()) : ?>
 				<?php $aviso ='Deseja realizar logout?'?>
