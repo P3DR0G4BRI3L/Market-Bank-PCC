@@ -1,7 +1,7 @@
 <?php
 session_start();
-echo "<pre>";
-print_r($_SESSION['usuario']['carrinho']);
+// echo "<pre>";
+// print_r($_SESSION['usuario']['carrinho']);
 
 require_once '../model/carrinhoDAO.php';
 require_once '../model/itensDAO.php';
@@ -45,6 +45,16 @@ $id_mercadocart = $_GET['id_mercado'] ?? 0;
                         echo number_format($total, 2, ',', '.') . " R$";
                         ?>
                     </td>
+                </tr>
+                <tr>
+                    <td class="no-border">
+                        <form action="end_carrinho_form.php" method="POST">
+                        <br>
+                        <label for="descricao">Informações adicionais: <h6>Opcional</h6></label>
+                        <input type="text" name="descricao">
+                        <button class="button_padrao" type="submit">Finalizar</button>
+
+                    </form></td>
                 </tr>
             </tfoot>
         </table>

@@ -451,6 +451,11 @@ input[type="number"] {
 .end_carrinho th{
 	padding: 0px 30px;
 }
-.end_carrinho{
+.end_carrinho {
 	flex-wrap: wrap;
+}
+.home{
+	width: 650px;
+	padding: 0 auto ;
+	text-align: center;
 }

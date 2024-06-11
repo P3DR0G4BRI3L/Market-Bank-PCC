@@ -31,6 +31,7 @@ if (isset($_POST['email'], $_POST['senha'])) {
             case "cliente":
                 $_SESSION['usuario'] = [
                     'id_usuario' => $infoUser['id_usuario'],
+                    'id_cliente' => $infoCliente['id_cliente'],
                     'telefone' => $infoCliente['telefone'],
                     'email' => $infoUser['email'],
                     'nome' => $infoUser['nome'],

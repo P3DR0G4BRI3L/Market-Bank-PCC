@@ -94,58 +94,28 @@ session_start();
 
 	<div id="area-principal">
 
-		<div id="area-postagens">
 			<!--Abertura postagem -->
-			<div class="postagem">
+			<div class="postagem home">
 				<h2>Bem vindo ao MarketBank, fique a vontade para descobrir os produtos em diferentes mercados de sua
 					região.</h2>
-				<span class="data-postagem">postado 20 março 2022</span>
 				<img width="620px" src="home/img/img1.jpg">
 				<p>
 					Melhores mercados da região para seu conhecimento de produtos e diversos outras utilidades.
 				</p>
-				<a href="">Ver mais</a>
 			</div>
 			<!--// Fechamento postagem -->
 
 			<!--Abertura postagem -->
-			<div class="postagem">
+			<div class="postagem home">
 				<h2>Explore.</h2>
-				<span class="data-postagem">postado 10 março 2022</span>
 				<img width="620px" src="home/img/img2.jpg">
 				<p>
 					O Market Bank foi criado na intenção de informar os clientes de produtos que os mesmos desejam.
 				</p>
-				<a href="">Ver mais</a>
 			</div>
 			<!--// Fechamento postagem -->
-		</div>
 
-		<div id="area-lateral">
-
-			<div class="conteudo-lateral">
-				<h3>Postagens recentes</h3>
-				<div class="postagem-lateral">
-					<p>O Market Bank é para você ter </p>
-					<a href="">Ver mais</a>
-				</div>
-
-				<div class="postagem-lateral" style="border-bottom: none;">
-					<p>Produtos em destaque</p>
-					<a href="">Ver mais</a>
-				</div>
-			</div>
-
-			<div class="conteudo-lateral">
-				<h3>substituir</h3>
-
-				<a href="">substituir</a><br>
-				<a href="">substituir</a><br>
-				<a href="">substituir</a><br>
-				<a href="">substituir</a><br>
-				<a href="">substituir</a><br>
-
-			</div>
+		
 
 
 

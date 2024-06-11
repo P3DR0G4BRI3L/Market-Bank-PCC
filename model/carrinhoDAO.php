@@ -14,7 +14,9 @@ class carrinhoDAO{
         $stmt->bindValue(':status',$status,PDO::PARAM_STR);
         $stmt->bindValue(':descricao',$descricao,PDO::PARAM_STR);
         if($stmt->execute()){
-            return TRUE;
+            $array[0] = $this->conn->lastInsertId();
+            $array[1] = TRUE;
+            return $array;
         }else{
             return "ocorreu um erro" . $stmt->errorInfo();
         }
