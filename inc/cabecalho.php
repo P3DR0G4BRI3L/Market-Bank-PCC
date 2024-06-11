@@ -1,4 +1,8 @@
-<?php require_once '../func/func.php' ; ?>
+<?php require_once '../func/func.php' ; 
+// echo "<pre>";
+// print_r($_SESSION);
+// echo "</pre>";
+?>
 <!DOCTYPE html>
 
 <html>
@@ -34,6 +38,11 @@
 
             <?php if (usuarioEstaLogado()): ?>
             <a href="../home/mercados.php">Mercados</a>
+            <?php endif ?>
+
+            <?php if (!usuarioEstaLogado()): ?>
+                <a href="../home/mercados.php" onclick="alert('Realize o login primero');return false;">Mercados</a>
+
             <?php endif ?>
 
             <a href="../home/contato.php">Contato</a>

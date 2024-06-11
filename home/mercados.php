@@ -9,7 +9,7 @@ session_start();
 
 
 $mercadoDAO = new mercadoDAO($conn);
-
+$_SESSION['usuario']['verMercado']=null;
 
 require_once '../inc/cabecalho.php';//mostra o cabeçalho
 ?>
@@ -44,8 +44,7 @@ require_once '../inc/cabecalho.php';//mostra o cabeçalho
                 
 
                          
-                         <!-- <img src="../cadastro/uploads/ <?= $mercado['imagem'] ?>" alt="Imagem do mercado" width="620px"> -->
-                         <?php echo '<img src="../cadastro/uploads/' . $mercado['imagem'] . '" alt="Imagem do mercado" width="620px">';?>
+                         <img src="../cadastro/uploads/<?= $mercado['imagem'] ?>" alt="Imagem do mercado" width="620px">
 
                          <h2><?= $mercado['regiaoadm'] ?> </h2>
 

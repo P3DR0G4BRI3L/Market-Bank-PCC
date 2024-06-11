@@ -21,19 +21,18 @@ $produto = $produtoDAO->getProdutoById($id_produto);
 $achouItemCarrinho = false;
 foreach($carrinho as $key => $item) {
     if ($item['id_produto'] == $id_produto) {
-        $produto = $item;
-        $produto['quantidade'] += 1;        
+        $carrinho[$key]['quantidade'] += 1;
         $achouItemCarrinho = true;
-        unset($carrinho[$key]);
         break;
     }
 }    
 if ($achouItemCarrinho == false) {
     $produto['quantidade'] = 1;
+    $carrinho[] = $produto;
+header("Location: read-prod.php?#$id_produto");
 }
-$carrinho[] = $produto;
 $_SESSION['usuario']['carrinho'] = $carrinho;
-header('Location: read-prod.php?message=Produto adicionado com sucesso.');
+header("Location: read-prod.php");
 exit;
 
 // header('location:../CRUD/read-prod.php?message=produto adicionado com sucesso');

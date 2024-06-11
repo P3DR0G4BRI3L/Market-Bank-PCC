@@ -32,3 +32,5 @@ Realizar Pedidos: O cliente poderá fazer seu pedido que será enviado ao mercad
 Gerenciar Produtos: O dono do mercado pode alterar,excluir  e adicionar novos produtos ao seu mercado.
 
 Gerenciar Clientes: O administrador  geral gerencia, exclui, altera ou atualizar os clientes.
+
+

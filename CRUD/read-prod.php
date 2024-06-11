@@ -140,10 +140,10 @@ require_once '../inc/cabecalho.php'; ?>
                 }
                 $produtos = $produtoDAO->getAllProdutoByIdMercado($id_mercado);
                 $mercado = $mercadoDAO->getMercadoById($id_mercado);
-                if (!empty($produtos)) {?>
-                    <div class="postagem flex">
-                    <?php foreach ($produtos as $produto) : ?>
-                            <div class="view_produto">
+                if (!empty($produtos)) { ?>
+                    <div class="postagem postagem_produto flex">
+                        <?php foreach ($produtos as $produto) : ?>
+                            <div class="view_produto" id="<?= $produto['id_produto'] ?>" >
 
                                 <h2> <?= $produto['nome'] ?> </h2>
 
@@ -151,27 +151,33 @@ require_once '../inc/cabecalho.php'; ?>
 
 
                                 <h2> <?= number_format($produto['preco'], 2, ',', '.') ?> R$ </h2>
+                                <?php if (!empty($produto['descricao'])) : ?>
+                                    <h3 class="descricao">Descrição
+                                        <span class="mostrar"><?= $produto['descricao'] ?></span>
+                                    </h3>
+                                <?php else: ?>
+                                    <h3 class="descricao ">Descrição
+                                        <span class="mostrar">Este produto não possui descrição</span>
+                                    </h3>
+                                <?php endif ?>
 
-                                <h2>Descrição: <?= $produto['descricao'] ?> </h2>
+                                <?php if (clienteEstaLogado() && $mercado['compras'] == 'sim') : ?>
+                                    <a href="add_carrinho.php?id_produto=<?= $produto['id_produto'] ?>">Adicionar ao carrinho</a>
+                                <?php endif ?>
                             </div>
 
-                            <?php if (clienteEstaLogado() && $mercado['compras']=='sim') : ?>
-                                <div class="login-box">
-                                    <a href="add_carrinho.php?id_produto=<?= $produto['id_produto'] ?>">Adicionar ao carrinho</a>
-                                </div>
-                            <?php endif ?>
 
-                            <?php endforeach ?>
-                        </div>
+                        <?php endforeach ?>
                     </div>
+    </div>
 
-                    <div id="area-lateral">
-                
-                        <?php require_once '../home/carrinho.php'; ?>
-                    </div>
-                    <?php require_once '../inc/rodape.php'; ?>
-                    </div>
-                    <?php } else {
+    <div id="area-lateral">
+
+        <?php require_once '../home/carrinho.php'; ?>
+    </div>
+    <?php require_once '../inc/rodape.php'; ?>
+</div>
+<?php } else {
                     echo "<div class='postagem'>
                     <h2>Ainda não foram inseridos produtos</h2>
                 </div>";
