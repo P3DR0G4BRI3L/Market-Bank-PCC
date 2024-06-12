@@ -50,14 +50,13 @@ class panfletoDAO
         }
     }
 
-    public function atualizarPanfleto($foto, $validade, $descricao, $id_mercado)
+    public function atualizarPanfleto( $validade, $descricao, $id_panfleto)
     {
-        $query = "UPDATE panfleto SET foto = :foto, validade = :validade , descricao = :descricao WHERE id_mercado = :id_mercado;";
+        $query = "UPDATE panfleto SET  validade = :validade , descricao = :descricao WHERE id_panfleto = :id_panfleto;";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(':foto',$foto,PDO::PARAM_STR);
-        $stmt->bindValue(':validade',$validade,PDO::PARAM_STR);
+        $stmt->bindValue(':validade',$validade);
         $stmt->bindValue(':descricao',$descricao,PDO::PARAM_STR);
-        $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
+        $stmt->bindValue(':id_panfleto',$id_panfleto,PDO::PARAM_INT);
         if($stmt->execute()){
             return TRUE;
         }else{
@@ -106,6 +105,16 @@ class panfletoDAO
             $stmt->bindValue(':id_panfleto',$id_panfleto,PDO::PARAM_INT);
             if($stmt->execute()){
                 return TRUE;
+            }else{
+                return "ocorreu um erro" . $stmt->errorInfo();
+            }
+        }
+        public function getPanfById($id_panfleto){
+            $query = "SELECT * FROM panfleto WHERE id_panfleto = :id_panfleto;";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(':id_panfleto',$id_panfleto,PDO::PARAM_INT);
+            if($stmt->execute()){
+                return $stmt->fetch(PDO::FETCH_ASSOC);
             }else{
                 return "ocorreu um erro" . $stmt->errorInfo();
             }

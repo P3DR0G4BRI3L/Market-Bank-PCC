@@ -15,7 +15,7 @@ class produtoDAO
         $query = "INSERT INTO produto (nome, preco, fotoProduto, descricao, id_mercado) VALUES (:nome, :preco, :fotoProduto, :descricao,:id_mercado);";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(':nome', $nome, PDO::PARAM_STR);
-        $stmt->bindValue(':preco', $preco, PDO::PARAM_INT);
+        $stmt->bindValue(':preco', $preco);
         $stmt->bindValue(':fotoProduto', $img, PDO::PARAM_STR);
         $stmt->bindValue(':descricao', $descricao, PDO::PARAM_STR);
         $stmt->bindValue(':id_mercado', $id_mercado, PDO::PARAM_INT);

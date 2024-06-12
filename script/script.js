@@ -122,3 +122,43 @@ function validartel(){
     }return true;
 }
 
+function formatarPreco(input) {
+    var valor = input.value.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
+    valor = valor.replace(/(\d{2})$/, ',$1'); // Adiciona vírgula antes das duas últimas casas decimais
+    valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.'); // Adiciona ponto a cada três dígitos, da direita para a esquerda
+    input.value = valor;
+}
+
+
+function displayFileName() {
+    var input = document.getElementById('foto');
+    var fileNameDisplay = document.getElementById('fileNameDisplay');
+
+    if (input.files.length > 0) {
+        var fileName = input.files[0].name;
+        fileNameDisplay.textContent = 'Arquivo selecionado: ' + fileName;
+    } else {
+        fileNameDisplay.textContent = '';
+    }
+}
+
+function compras() {
+    var inputSim = document.getElementById("compras");
+    var formularioAdicional = document.getElementById("formulario-adicional");
+
+    if (inputSim.checked) {
+        // Carregar o conteúdo do arquivo PHP com o formulário adicional
+        fetch('../cadastro/cadastroInfopag.php')
+            .then(response => response.text())
+            .then(data => {
+                formularioAdicional.innerHTML = data;
+            });
+
+        // Exibir o formulário adicional
+        formularioAdicional.style.display = "block";
+    } else {
+        // Ocultar o formulário adicional
+        formularioAdicional.style.display = "none";
+    }
+}
+

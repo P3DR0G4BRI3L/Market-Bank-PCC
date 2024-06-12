@@ -94,11 +94,10 @@ $_POST['telefone'],$_POST['regiaoadm'],$_POST['compras']) ) {
 }
 require_once '../inc/cabecalho.php';
 ?>
-<div id="area-principal">
+<div id="area-principal ">
 
-    <div id="area-postagens">
         <!--Aberturac -->
-        <div class="postagem">
+        <div class="postagem home">
             <h2>Editar mercado</h2>
             
             <div class="container">
@@ -246,6 +245,6 @@ require_once '../inc/cabecalho.php';
             </div>
             
         </div>
+        </div>
 
-    </div>
     <?php require_once '../inc/rodape.php'; ?>

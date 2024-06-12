@@ -22,4 +22,26 @@ class carrinhoDAO{
         }
     }
 
+    public function getAllCarrinhoByIdCliente($id_cliente){
+        $query = "SELECT * FROM carrinho WHERE id_cliente = :id_cliente;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_cliente',$id_cliente,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo();
+        }
+    }
+
+    public function getAllCarrinhoByIdMercado($id_mercado){
+        $query = "SELECT * FROM carrinho WHERE id_mercado = :id_mercado;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo();
+        }
+    }
+
 }

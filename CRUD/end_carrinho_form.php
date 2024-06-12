@@ -14,10 +14,21 @@ $carrinhoDAO = new carrinhoDAO($conn);
 $clienteDAO = new clienteDAO($conn);
 $itensDAO = new itensDAO($conn);
 
-$trueorfalse = $carrinhoDAO->inserirCarrinho($id_mercado,$id_cliente,'aberto',$descricao);
-if($trueorfalse[1]===TRUE){
-    
+$boolANDid_mercado = $carrinhoDAO->inserirCarrinho($id_mercado, $id_cliente, 'aberto', $descricao);
+if ($boolANDid_mercado[1] === TRUE) {
+
     foreach ($carrinho as $key => $item) {
-        $itensDAO->inserirItens($item['quantidade'],$trueorfalse[0],$item['id_produto']);
-    
-}}
+        $true[] = $itensDAO->inserirItens($item['quantidade'], $boolANDid_mercado[0], $item['id_produto']);
+    }
+    foreach($true as $t){
+
+        if($t){
+            $count+=1;
+        }
+    }
+    if($count === count($true)){
+        $carrinho = [];
+        $_SESSION['usuario']['carrinho'] = $carrinho;
+        echo "<script>alert('Compra realizada com sucesso!');window.location.href='gerenciarComprasCliente.php';</script>";
+    }
+}

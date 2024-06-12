@@ -1,28 +1,30 @@
 <?php
+session_start();
 require_once '../cadastro/cadastro.php';
 require_once '../func/func.php';
 require_once '../model/mercadoDAO.php';
 require_once '../model/panfletoDAO.php';
 
-session_start();
+
+$id_panfleto = $_POST['id_panfleto'];
+$panfletoDAO = new panfletoDAO($conn);
+$panfleto = $panfletoDAO->getPanfById($id_panfleto);
 
 
 if(!mercadoEstaLogado()){
     header('location:../index.php');
     exit;
 }
-if(isset($_FILES['foto'],$_POST['validade'],$_POST['descricao'])){
+if($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['validade'],$_POST['descricao'])){
 
-    $foto=$_FILES['foto'];
     $validade=$_POST['validade'];
     $descricao=$_POST['descricao'];
     $id_mercado = $_SESSION['usuario']['mercado']['id_mercado'];
 
-    $panfletoDAO = new panfletoDAO($conn);
-    if($panfletoDAO->inserirPanfleto($foto,$validade,$descricao,$id_mercado)){
+    if($panfletoDAO->atualizarPanfleto($validade,$descricao,$id_panfleto)){
         echo "<script>
             alert('Produto postado com sucesso');
-            window.location.href = '../cadastro/verMeumercado.php';
+            window.location.href = 'read-panf.php';
         </script>";
     }
 
@@ -52,19 +54,15 @@ if(isset($_FILES['foto'],$_POST['validade'],$_POST['descricao'])){
 						<form action="" method="POST" enctype="multipart/form-data">
 							
 							
-							<div class="input-group">
-								<label for="foto">Foto do panfleto:</label>
-								<input type="file" id="foto" name="foto" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
-							</div>
 							
-							<div class="input-group data">
+							<div class="input-group">
 								<label for="validade">Validade:</label>
-								<input type="date" id="validade" name="validade" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+								<input type="date" id="validade" name="validade" value="<?= $panfleto['validade'] ?>" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
 							</div>
 
 							<div class="input-group">
 								<label for="descricao">Descrição: <h6>*opcional</h6></label>
-								<input type="text" id="descricao" name="descricao" onkeydown="if(event.keyCode === 13) event.preventDefault()">
+								<input type="text" id="descricao" name="descricao" value="<?= $panfleto['descricao'] ?>" onkeydown="if(event.keyCode === 13) event.preventDefault()">
 							</div>
 
 							<button type="submit" class="button_padrao btn_edit">Adicionar</button>
@@ -73,7 +71,6 @@ if(isset($_FILES['foto'],$_POST['validade'],$_POST['descricao'])){
 				</div>
             </div>
             </div>
-            </>
             <!--// Fechamento postagem -->
 
             <!--Abertura postagem -->

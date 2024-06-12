@@ -9,11 +9,12 @@
     $usuarioDAO = new usuarioDAO($conn);
     $id = $_GET['id'];
     $mercado = $mercadoDAO->getMercadoByIdUsuario($id);
+    $email = $usuarioDAO->getUsuarioByDono($mercado['id_dono']);
     if(isset($_POST['infopag'])){
         switch ($_POST['infopag']) {
             case 'telefone':$chavepix = $mercado['telefone'];break;
                 
-            case 'email':$chavepix = $usuarioDAO->getUsuarioByDono($mercado['id_dono']);break;
+            case 'email':$chavepix = $email['email'];break;
                 
             case 'cnpj':$chavepix = $mercado['cnpj'];break;
                 
@@ -28,8 +29,7 @@
             }
 ?>
     <div id="area-principal">
-        <div id="area-postagens">
-            <div class="postagem">
+            <div class="postagem infopag">
                 <h2>No momento só estamos trabalhando com pix</h2>
                 <div class="login-box">
                     <h3>Escolha a forma de receber pagamento </h3>
@@ -46,6 +46,5 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
     <?php 

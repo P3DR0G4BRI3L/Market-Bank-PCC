@@ -151,6 +151,18 @@ class usuarioDAO
         }
 
     }
+    public function getUsuarioEclienteByIdCliente($id_cliente){
+        $query = 'SELECT cliente.* , usuario.nome,email FROM cliente JOIN usuario ON cliente.id_usuario = usuario.id_usuario WHERE cliente.id_cliente = :id_cliente;';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_cliente',$id_cliente,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo();
+
+        }
+
+    }
 
 
 }

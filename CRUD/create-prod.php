@@ -30,9 +30,8 @@ if ($_SESSION['usuario']['tipo']!='dono') {
 
 
 
-
 $nome = $_POST['nomeprod'];
-$preco = $_POST['preco'];
+$preco = str_replace(',','.',$_POST['preco']);
 $fotoProduto = $_FILES['imgprod'];
 $descricao = $_POST['descricao'] ?? null  ;
 $id_mercado = $_SESSION['usuario']['mercado']['id_mercado'];

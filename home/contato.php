@@ -4,75 +4,43 @@ require_once '../func/func.php';
 
 session_start();
 
-if (usuarioEstaLogado()) {
-    $userlog = ucwords($_SESSION['usuario']['nome']);
 
-    if ($_SESSION['usuario']['tipo'] == 'dono') {
-        $mercName = $_SESSION['usuario']['id_usuario'];
-        $mercado=$conn->prepare("SELECT * FROM mercado WHERE id_dono = :id_dono");
-        $mercado->bindValue(':id_dono',$mercName,PDO::PARAM_INT);
-        $mercado->execute();
-        $infmercado = $mercado->fetch();
 
-    }
-}
-
-require_once '../inc/cabecalho.php';//mostra o cabeçalho
+require_once '../inc/cabecalho.php'; //mostra o cabeçalho
 ?>
 
 
 
 <div id="area-principal">
 
-    <div id="area-postagens">
-        <!--Abertura postagem -->
-        <div class="postagem">
-            <h2>Nos visite nas nossas redes sociais.
-                <br>
-                Telefone : 6195392-8374
-            </h2>
-            <span class="data-postagem">postado 20 março 2022</span>
-            <img width="620px" src="img/img12.jpg">
-            <p>
-                Nossas redes sociais
-            </p>
-            <a href="">Ver mais</a>
-            <br>
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">E-mail</a>
+    <!--Abertura postagem -->
+    <div class="postagem home">
+        <h2>Nos visite nas nossas redes sociais.</h2>
+        <img src="img/img12.jpg" width="620px" alt="">
+        <div class="social-links">
+            <!-- Links para as redes sociais -->
+            <a href="#" class="social-link">
+                <img width="45px" src="img/facebook.jpeg" alt="Facebook">
+            </a>
+            <a href="#" class="social-link">
+                <img width="45px" src="img/instagram.jpeg" alt="Instagram">
+            </a>
+            <a href="#" class="social-link">
+                <img width="45px" src="img/twitter.jpeg" alt="Twitter">
+            </a>
+            <a href="#" class="social-link">
+                <img width="45px" src="img/linkedin.jpeg" alt="LinkedIn">
+            </a>
+
+            <a href="#" class="social-link">
+                <img width="45px" src="img/whatsapp.jpeg" alt="LinkedIn">
+            </a>
         </div>
-        <!--// Fechamento postagem -->
-
-
+        <p>Siga-nos nas redes sociais para ficar por dentro das últimas novidades e atualizações.</p>
     </div>
-
-    <div id="area-lateral">
-        <div class="conteudo-lateral">
-            <h3>Postagens recentes</h3>
-            <div class="postagem-lateral">
-                <p>O Market Bank é para você ter </p>
-                <a href="">Ver mais</a>
-            </div>
-
-            <div class="postagem-lateral" style="border-bottom: none;">
-                <p>Produtos em destaque</p>
-                <a href="">Ver mais</a>
-            </div>
-        </div>
-
-        <div class="conteudo-lateral">
-            <h3>substituir</h3>
-
-            <a href="">substituir</a><br>
-            <a href="">substituir</a><br>
-            <a href="">substituir</a><br>
-            <a href="">substituir</a><br>
-            <a href="">substituir</a><br>
-
-        </div>
-
-    </div>
+</div>
+<!--// Fechamento postagem -->
 
 
-    <?php require_once '../inc/rodape.php'; ?>
+
+<?php require_once '../inc/rodape.php'; ?>

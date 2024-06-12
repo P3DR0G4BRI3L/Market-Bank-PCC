@@ -79,3 +79,14 @@ if (!usuarioEstaLogado()){//essa função mostra de forma mais amigavel pro usua
 exit;
 
 }}
+function formatarData($data) {
+    // Converte a data para o formato timestamp
+    $timestamp = strtotime($data);
+    
+    // Formata a data para o formato desejado
+    $data_formatada = date('d/m/Y', $timestamp);
+    
+    return $data_formatada;
+}
+
+

@@ -16,13 +16,12 @@ $produtos = $produtoDAO->getAllProdutoByIdFiltro($_POST['verprodutosfiltro']);
 require_once '../inc/cabecalho.php';
 ?>
 <div id="area-principal">
-    <div id="area-postagens">
 
-        <div class="postagem">
+        <div class="postagem home">
             <h2>Categoria: <?= $filtro['nomeFiltro'] ?></h2>
             <button type="button" class="button_padrao" onclick="window.location.href='read-filtro.php'">Voltar</button>
         </div>
-        <div class="postagem">
+        <div class="postagem postagem_produto flex home">
             
             <?php
             if(!empty($produtos)){
@@ -47,5 +46,5 @@ require_once '../inc/cabecalho.php';
             ?>
         </div>
 
-    </div>
 </div>
+<?php require_once '../inc/rodape.php'; ?>

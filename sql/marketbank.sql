@@ -14,8 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema marketbank
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `marketbank` DEFAULT CHARACTER SET utf8mb4 ;
-USE `marketbank` ;
+
 
 -- -----------------------------------------------------
 -- Table `marketbank`.`usuario`
@@ -95,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `marketbank`.`carrinho` (
   `id_carrinho` INT(11) NOT NULL AUTO_INCREMENT,
   `id_mercado` INT(11) NOT NULL,
   `id_cliente` INT(11) NOT NULL,
-  `status` ENUM('aberto', 'fechado') NOT NULL DEFAULT 'aberto',
+  `status` ENUM('aberto', 'fechado','cancelado') NOT NULL DEFAULT 'aberto',
   `descricao` TEXT NULL,
   PRIMARY KEY (`id_carrinho`),
   INDEX `id_mercado_idx` (`id_mercado` ASC) ,
@@ -195,7 +194,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `marketbank`.`itens`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `marketbank`.`itens` (
-  `id_itens` INT(11) NOT NULL,
+  `id_itens` INT(11) NOT NULL AUTO_INCREMENT,
   `quantidade` INT(11) NOT NULL,
   `id_carrinho` INT(11) NOT NULL,
   `id_produto` INT(11) NOT NULL,

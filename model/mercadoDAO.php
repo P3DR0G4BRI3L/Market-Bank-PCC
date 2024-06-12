@@ -259,4 +259,18 @@ class mercadoDAO
             if($verify['cnpj']!=$cnpjsessao){
             return TRUE;}
     }}
+
+    public function getMercadoByRegiaoADM($regiaoadm){
+        if(empty($regiaoadm)){
+            exit;
+        }
+        $query = "SELECT * FROM mercado WHERE regiaoadm = :regiaoadm";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':regiaoadm',$regiaoadm,PDO::PARAM_STR);
+        if($stmt->execute()){
+            $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo();
+        }
+    }
 }

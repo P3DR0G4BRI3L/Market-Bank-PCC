@@ -10,7 +10,7 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
 
 <div id="area-principal">
 
-        <div class="postagem">
+        <div class="postagem cadastro">
             <h2>Área de cadastro</h2>
             <div class="cadastro_option">
                 <div class="login-box">
@@ -26,6 +26,7 @@ require_once '../inc/cabecalhocadastro.php';//mostra o cabeçalho
 
                 </div>
             </div>
+        </div>
         </div>
 
         

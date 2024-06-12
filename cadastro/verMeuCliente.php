@@ -22,9 +22,8 @@ require_once '../inc/cabecalho.php';
 
 <div id="area-principal">
 
-    <div id="area-postagens">
         <!--Abertura postagem -->
-        <div class="postagem">
+        <div class="postagem home">
 
             <h2>Seu nome:
                 <?= ucwords($_SESSION['usuario']['nome']) ?>
@@ -44,7 +43,7 @@ require_once '../inc/cabecalho.php';
                 <input type="hidden" name="alterarsenha">
                 <button class='button_padrao' type="submit">Alterar Senha</button>
                 </form>
-                <button class='button_padrao' type="submit" onclick="window.location.href='gerenciarComprasCliente.php'">Gerenciar compras</button>
+                <button class='button_padrao' type="submit" onclick="window.location.href='../CRUD/gerenciarComprasCliente.php'">Gerenciar compras</button>
                 
 
 
@@ -59,5 +58,5 @@ require_once '../inc/cabecalho.php';
             <button class='button_padrao' type="submit" onclick="window.location.href='../index.php'">Voltar</button>
 
         </div>
-</div>
+        </div>
         <?php require_once '../inc/rodape.php'; ?>

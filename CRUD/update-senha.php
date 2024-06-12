@@ -41,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require_once '../inc/cabecalhocadastro.php';
 ?>
 <div id="area-principal">
-    <div id="area-postagens">
         <!--Aberturac -->
         <div class="postagem">
             <h2>Alterar senha</h2>
@@ -91,4 +90,5 @@ require_once '../inc/cabecalhocadastro.php';
                 </div>
             </div>
         </div>
-    </div>
+        </div>
+        <?php require_once '../inc/rodape.php'; ?>

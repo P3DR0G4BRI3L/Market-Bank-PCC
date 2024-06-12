@@ -5,9 +5,9 @@ require_once '../model/mercadoDAO.php';
 require_once '../model/usuarioDAO.php';
 session_start();
 
-if (isset($_POST['id_mercado'])) {
+if (isset($_GET['id_mercado'])) {
 
-    $_SESSION['usuario']['verMercado'] = $_POST['id_mercado'];
+    $_SESSION['usuario']['verMercado'] = $_GET['id_mercado'];
 }
 
 $mercadoDAO = new mercadoDAO($conn);
@@ -62,10 +62,12 @@ require_once '../inc/cabecalho.php'; //mostra o cabeçalho
 
         </div>
     </div>
+    <?php if($infmercado['compras']=='sim'): ?>
     <div id="area-lateral">
         <?php require_once 'carrinho.php'; ?>
-
-    </div>
+        
+        </div>
+    <?php endif ?>
 
 
 

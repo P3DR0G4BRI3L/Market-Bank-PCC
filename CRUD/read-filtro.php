@@ -16,7 +16,6 @@ require_once '../inc/cabecalho.php'; ?>
 
 <div id="area-principal">
 
-    <div id="area-postagens">
 
 
         <?php
@@ -28,7 +27,7 @@ require_once '../inc/cabecalho.php'; ?>
         ?>
 
         <!--Abertura postagem -->
-        <div class="postagem">
+        <div class="postagem home">
 
             <div class="login-box">
                 <?php if (mercadoEstaLogado()): ?>
@@ -59,7 +58,7 @@ require_once '../inc/cabecalho.php'; ?>
                 $filtros = $filtroProdutoDAO->getAllFiltroByIdMercado($_SESSION['usuario']['mercado']['id_mercado']);
                 if (!empty($filtros)) {
                     foreach ($filtros as $filtro) { ?>
-                        <div class="postagem">
+                        <div class="postagem home">
 
                             
 
@@ -98,5 +97,5 @@ require_once '../inc/cabecalho.php'; ?>
                 </div>";
                 }
                ?>
-    <!--// Fechamento postagem -->
-
+</div>
+<?php require_once '../inc/rodape.php'; ?>

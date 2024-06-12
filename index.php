@@ -20,7 +20,11 @@ session_start();
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="script/script.js"></script>
-
+<style>
+	img{
+		border-radius: 5px;
+	}
+</style>
 </head>
 
 <body>
@@ -53,7 +57,7 @@ session_start();
             <?php endif ?>
 
             <?php if (!usuarioEstaLogado()): ?>
-                <a href="home/mercados.php" onclick="alert('Realize o login primero');return false;">Mercados</a>
+                <a href="home/mercados.php" onclick="alert('Realize o login primeiro');return false;">Mercados</a>
 
             <?php endif ?>
 
@@ -93,33 +97,24 @@ session_start();
 	</div>
 
 	<div id="area-principal">
-
-			<!--Abertura postagem -->
-			<div class="postagem home">
-				<h2>Bem vindo ao MarketBank, fique a vontade para descobrir os produtos em diferentes mercados de sua
-					região.</h2>
-				<img width="620px" src="home/img/img1.jpg">
-				<p>
-					Melhores mercados da região para seu conhecimento de produtos e diversos outras utilidades.
-				</p>
-			</div>
-			<!--// Fechamento postagem -->
-
-			<!--Abertura postagem -->
-			<div class="postagem home">
-				<h2>Explore.</h2>
-				<img width="620px" src="home/img/img2.jpg">
-				<p>
-					O Market Bank foi criado na intenção de informar os clientes de produtos que os mesmos desejam.
-				</p>
-			</div>
-			<!--// Fechamento postagem -->
-
-		
-
-
-
+		<div class="postagem home">
+			<h2>Bem-vindo ao MarketBank</h2>
+			<img width="620px" height="550px" src="home/img/img_home.jpg" alt="Exploração de Mercados">
+			<p class="intro">
+				Descubra os produtos mais frescos e as melhores ofertas nos mercados da sua região. 
+				O MarketBank é o seu guia para explorar as diversas opções de compras perto de você, trazendo sempre o melhor em qualidade e preço.
+			</p>
 		</div>
+
+		<div class="postagem home">
+			<h2>Explore Novos Horizontes</h2>
+			<img width="620px" src="home/img/img_home2.jpg" alt="Exploração de Produtos">
+			<p class="intro">
+				No MarketBank, você tem o poder de explorar uma vasta gama de produtos e serviços oferecidos pelos mercados locais.
+				 Seja para encontrar aquele ingrediente especial ou as melhores promoções, estamos aqui para ajudar você a fazer compras inteligentes e convenientes.
+			</p>
+		</div>
+	</div>
 
 
 		

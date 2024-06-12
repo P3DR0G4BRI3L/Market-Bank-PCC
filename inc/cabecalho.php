@@ -41,7 +41,7 @@
             <?php endif ?>
 
             <?php if (!usuarioEstaLogado()): ?>
-                <a href="../home/mercados.php" onclick="alert('Realize o login primero');return false;">Mercados</a>
+                <a href="../home/mercados.php" onclick="alert('Realize o login primeiro');return false;">Mercados</a>
 
             <?php endif ?>
 

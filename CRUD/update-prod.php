@@ -36,7 +36,7 @@ if (/*$_SERVER['REQUEST_METHOD'] === 'POST' &&*/ isset($_POST['nomeprod'], $_POS
 
     $fotoProduto = $_POST['imgprod2'];//se não for inserida nenhuma imagem no formulario a antiga permanece, caso contrario a nova entra
     $nomeprod = $_POST['nomeprod'];
-    $preco = $_POST['preco'];
+    $preco = str_replace(',','.',$_POST['preco']);
     $descricao = $_POST['descricao'];
 
     if (isset($_FILES['imgprod']) &&  $_FILES['imgprod']['error'] === UPLOAD_ERR_OK) {
@@ -63,7 +63,7 @@ if (/*$_SERVER['REQUEST_METHOD'] === 'POST' &&*/ isset($_POST['nomeprod'], $_POS
     // var_dump($infproduto['id_produto'], $fotoProduto, $nomeprod, $preco);exit;
     $stmt = $conn->prepare("UPDATE produto SET nome = :nome , preco = :preco , fotoProduto = :fotoProduto, descricao = :descricao  WHERE id_produto = :id_produto");
     $stmt->bindValue(":nome",$nomeprod,PDO::PARAM_STR);
-    $stmt->bindValue(":preco",$preco,PDO::PARAM_STR);
+    $stmt->bindValue(":preco",$preco);
     $stmt->bindValue(":fotoProduto",$fotoProduto,PDO::PARAM_STR);
     $stmt->bindValue(":descricao",$descricao,PDO::PARAM_STR);
     $stmt->bindValue(":id_produto",$infproduto['id_produto'],PDO::PARAM_INT);
@@ -104,9 +104,10 @@ require_once '../inc/cabecalho.php';
 
                         <div class="input-group">
                             <label for="preco">Preço:</label>
-                            <input type="text" id="preco" name="preco" value="<?= $infproduto['preco'] ?>"
-                                onkeydown="if(event.keyCode === 13) event.preventDefault()" required maxlength="7"
-                                oninput="restringirLetras(this)">
+                          
+                                <input type="text" id="preco" name="preco" value="<?= str_replace('.',',',$infproduto['preco']) ?>"
+                                 onkeyup="formatarPreco(this)" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+
                         </div>
 
                         <div class="input-group">

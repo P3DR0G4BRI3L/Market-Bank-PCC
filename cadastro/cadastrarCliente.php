@@ -93,7 +93,7 @@ require_once '../inc/cabecalhocadastro.php'; //mostra o cabeçalho
                             <label for="email">Email:</label>
                             <input type="email" id="email" name="email" placeholder="Insira seu email" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
                         </div>
-
+<br>
                         <label for="senha">Senha:</label>
                         <div class="inline">
                             <input type="password" id="senha" name="senha" placeholder="Insira sua senha " onkeydown="if(event.keyCode === 13) event.preventDefault()" oninput="restringirLetras(this)" required maxlength="16">
@@ -116,5 +116,6 @@ require_once '../inc/cabecalhocadastro.php'; //mostra o cabeçalho
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <?php require_once '../inc/rodape.php'; ?>

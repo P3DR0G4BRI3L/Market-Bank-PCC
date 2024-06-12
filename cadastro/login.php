@@ -99,44 +99,44 @@ if (isset($_POST['email'], $_POST['senha'])) {
 
 <div id="area-principal">
 
-    
-        <!--Aberturac -->
-        <div class="postagem">
-            <h2>Login</h2>
-            <div class="container">
-                <div class="login-box largura_menor">
-                    <?php if (isset($default)) : ?>
-                        <h6><?= $default ?></h6>
-                    <?php endif ?>
-                    <form action="" method="POST">
 
-                        <div class="input-group email">
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" onkeydown="if(event.keyCode === 13) event.preventDefault()" required autofocus>
+    <!--Aberturac -->
+    <div class="postagem">
+        <h2>Login</h2>
+        <div class="container">
+            <div class="login-box largura_menor">
+                <?php if (isset($default)) : ?>
+                    <h6><?= $default ?></h6>
+                <?php endif ?>
+                <form action="" method="POST">
+
+                    <div class="input-group email">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" onkeydown="if(event.keyCode === 13) event.preventDefault()" required autofocus>
+                    </div>
+
+                    <div class="input-group senha">
+                        <label for="senha">Senha:</label>
+
+                        <div class="inline">
+                            <input type="password" id="senha" name="senha" onkeydown="if(event.keyCode === 13) event.preventDefault()" maxlength="16" required>
+                            <button type="button" id="mostrarSenha" onclick="mostrarsenha()"><span class="lnr lnr-eye"></span></button>
+
                         </div>
+                    </div>
+                    <button type="button" class="button_padrao" onclick="window.location.href='../index.php'">Voltar</button>
+                    <button class="button_padrao" type="submit">Entrar</button>
 
-                        <div class="input-group senha">
-                            <label for="senha">Senha:</label>
-
-                            <div class="inline">
-                                <input type="password" id="senha" name="senha" onkeydown="if(event.keyCode === 13) event.preventDefault()" maxlength="16" required>
-                                <button type="button" id="mostrarSenha" onclick="mostrarsenha()"><span class="lnr lnr-eye"></span></button>
-
-                            </div>
-                        </div>
-                        <button type="button" class="button_padrao" onclick="window.location.href='../index.php'">Voltar</button>
-                        <button class="button_padrao" type="submit">Entrar</button>
-
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
-        <!--// Fechamento postagem -->
+    </div>
+    <!--// Fechamento postagem -->
 
 
-   
 
-</>
+
+</div>
 
 
 
