@@ -29,10 +29,10 @@ foreach($carrinho as $key => $item) {
 if ($achouItemCarrinho == false) {
     $produto['quantidade'] = 1;
     $carrinho[] = $produto;
-header("Location: read-prod.php?#$id_produto");
+header("Location: read-prodCliente.php#$id_produto");
 }
 $_SESSION['usuario']['carrinho'] = $carrinho;
-header("Location: read-prod.php");
+header("Location: read-prodCliente.php#$id_produto");
 exit;
 
 // header('location:../CRUD/read-prod.php?message=produto adicionado com sucesso');

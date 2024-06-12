@@ -43,7 +43,6 @@ if($usuarioDAO->atualizarUsuario($nome , $email, $id_usuario) && $clienteDAO->at
 }
 ?>
 <div id="area-principal">
-    <div id="area-postagens">
         <!--Aberturac -->
         <div class="postagem">
             <h2>Editar perfil</h2>

@@ -8,9 +8,9 @@ body {
 	font-size: 1em;
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 	background: #e6e6e6;
-	overflow-y: scroll;
 	/* Sempre mostra a barra de rolagem vertical */
 }
+html{width:100%;}
 
 /* Layout */
 .aviso-login {
@@ -22,6 +22,7 @@ body {
 	background-color: #2ebd2e;
 	padding: 15px;
 	text-align: center;
+	width: 100%;
 }
 
 #area-logo,
@@ -96,18 +97,20 @@ body {
 	padding: 10px;
 	margin-bottom: 20px;
 	box-shadow: 0 0 10px #033aa099;
+	width: 300px;
 }
 
 .conteudo-lateral h3 {
 	border-radius: 5px;
+	margin-bottom: 10px;
 }
 
-.conteudo-lateral,
-a {
-	color: rgb(9, 82, 9);
+.conteudo-lateral a {
+	padding: 10px;
 	text-decoration: none;
 
 }
+
 
 .carrinho .postagem-lateral table,
 tr,
@@ -146,7 +149,8 @@ p.intro {
 	width: 400px;
 	background: white;
 	padding: 10px;
-	border: 1px solid green;
+	border: 2px solid black;
+	border-radius: 10px;
 }
 
 .carrinho table {
@@ -155,6 +159,8 @@ p.intro {
 
 .carrinho h3 {
 	text-align: center;
+	border-radius:5px ;
+	border: 1px solid black;
 }
 
 .produto {}
@@ -164,7 +170,7 @@ p.intro {
 }
 
 #rodape {
-	width: 98.4%;
+	width: 100%;
 	clear: both;
 	text-align: center;
 	padding: 15px;
@@ -563,7 +569,13 @@ input[type="number"] {
 	text-align: left;
   }
   .center{
-	justify-content: center;
+	margin: 0 auto;
   }
+   select{
+	width: 100%;
+	padding: 10px;
+	margin: 0 auto;
+	border-radius: 10px;
+   }
   
 /*input file*/

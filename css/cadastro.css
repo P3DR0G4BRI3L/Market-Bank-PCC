@@ -3,7 +3,9 @@
   margin: 0;
   padding: 0;
 }
-
+html{
+  width: 100%;
+}
 body {
   font-size: 1em;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
@@ -14,7 +16,7 @@ body {
 
 /* Layout */
 #area-cabecalho {
-
+  width: 100%;
   background-color: #2ebd2e;
   padding: 15px;
   text-align: center;
@@ -102,7 +104,7 @@ a {
 }
 
 #rodape {
-  width: 98.4%;
+  width: 100%;
   clear: both;
   text-align: center;
   padding: 15px;

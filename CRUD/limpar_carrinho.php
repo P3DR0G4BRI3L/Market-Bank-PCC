@@ -13,5 +13,5 @@ $_SESSION['usuario']['carrinho'] = $carrinho;
 //    }
 //}
 //
-header('location:read-prod.php');
+header('location:read-prodCliente.php');
 exit;

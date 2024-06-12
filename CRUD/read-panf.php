@@ -84,7 +84,7 @@ require_once '../inc/cabecalho.php'; ?>
                 <?php endforeach ?>
                 <?php
             } else {
-                echo "<div class='postagem'>
+                echo "<div class='postagem home'>
                     <h2>Ainda não foram inseridos panfletos</h2>
                 </div>";
             }
@@ -121,7 +121,7 @@ require_once '../inc/cabecalho.php'; ?>
                     </div>
     <?php }
             } else {
-                echo "<div class='postagem'>
+                echo "<div class='postagem home'>
                     <h2>Ainda não foram inseridos panfletos</h2>
                     </div>";
             }

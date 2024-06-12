@@ -92,7 +92,7 @@ require_once '../inc/cabecalho.php'; ?>
                         </div>
                     <?php }
                 } else {
-                    echo "<div class='postagem'>
+                    echo "<div class='postagem home'>
                     <h2>Ainda não foram inseridos categorias</h2>
                 </div>";
                 }

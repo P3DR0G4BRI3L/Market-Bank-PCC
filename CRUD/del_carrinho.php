@@ -18,6 +18,6 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 
-header('location:read-prod.php');
+header('location:read-prodCliente.php');
 exit;
 

@@ -47,7 +47,7 @@ require_once '../inc/cabecalho.php'; //mostra o cabeçalho
             <h2>Descrição: <?= ($infmercado['descricao']) ?></h2>
 
 
-            <form action="../CRUD/read-prod.php" method="POST">
+            <form action="../CRUD/read-prodCliente.php" method="POST">
                 <input type="hidden" name="id_mercado" value="<?= $infmercado['id_mercado'] ?>">
                 <button type="submit" class="button_padrao">Ver produtos</button>
             </form>
