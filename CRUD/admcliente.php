@@ -3,7 +3,7 @@ session_start();
 require_once '../cadastro/cadastro.php';
 require_once '../func/func.php';
 
-if ($_SESSION['usuario']['tipo'] != 'administrador') {
+if(!admEstaLogado()) {
     header('location:../index.php');
 }
 if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'administrador') {
