@@ -41,7 +41,7 @@ require_once '../inc/cabecalho.php';
         <!--Abertura postagem -->
         <div class="postagem ">
             <h2>Histórico de compras</h2>
-            <button class='button_padrao' type="submit" onclick="window.location.href='../cadastro/verMeuCliente.php'">Voltar</button>
+            <button class='button_padrao' type="submit" onclick="window.location.href='../cadastro/verMeuMercado.php'">Voltar</button>
             <?php if(isset($_GET['mess'])): ?>
                 <h4><?= $_GET['mess'] ?></h4><h2><a href="?">X</a></h2>
             <?php endif ?>

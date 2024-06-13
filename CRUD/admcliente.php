@@ -27,39 +27,47 @@ require_once '../inc/cabecalhocadastro.php';
             <!-- <div class="cadastro_option">
             <div class="login-box"> -->
             <table>
-                <caption>Clientes</caption>
+            <caption>Mercados</caption>
 
 
 
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Email</th>
-                        <th>Excluir</th>
-                        <th>Editar</th>
-                    </tr>
-                </thead>
+            <thead>
+                <tr class="table_adm">
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Nome do Mercado</th>
+                    <th>Região Administrativa</th>
+                    <th>Imagem</th>
+                    <th>Excluir</th>
+                    <th>Editar</th>
+                </tr>
+            </thead>
 
-                <?php foreach ($allcliente as $cliente): ?>
-                    <tr>
-                        <th><?= $cliente['nome']; ?></th>
-                        <th><?= $cliente['email']; ?></th>
-                        <th>
-                            <form action="delclienteadm.php" method="post"><input type="hidden" name="id_usuario"> <button
-                                    type="submit" id="btn_tabela" onclick="confirmarExclusaoClienteadm()">Excluir</button>
-                            </form>
-                        </th>
-                        <th>
-                            <form action="delclienteadm.php" method="post"><input type="hidden" name="id_usuario"> <button
-                                    type="submit" id="btn_tabela" >Editar</button>
-                            </form>
-                        </th>
-                    </tr>
+            <?php foreach ($allMercadoDono as $mercadoDono): ?>
+                <tr>
+                    <th><?= $mercadoDono['nome']; ?></th>
+                    <th><?= $mercadoDono['email']; ?></th>
+                    <th><?= $mercadoDono['nomeMerc']; ?></th>
+                    <th><?= $mercadoDono['regiaoadm']; ?></th>
+                    <th><img src="../cadastro/uploads/<?= $mercadoDono['imagem']; ?>" class="imagem" alt="foto mercadoDono"></th>
+
+                    <th>
+
+                    <a href="delclienteadm.php?id_usuario=<?= $mercadoDono['id_dono'] ?>">Excluir</a>
+                    
+                    </th>
+                    <th>
+                        
+                        <a href="editclienteadm.php?id_usuario=<?= $mercadoDono['id_dono'] ?>" onclick="confirmarExclusaoClienteadm();">Editar</a>
+
+                        
+                    </th>
+                </tr>
 
 
 
-                <?php endforeach ?>
-            </table>
+            <?php endforeach ?>
+        </table>
             <button class="button_padrao"onclick="window.history.back()">Voltar</button>
 
 

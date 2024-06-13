@@ -273,4 +273,31 @@ class mercadoDAO
             return "ocorreu um erro" . $stmt->errorInfo();
         }
     }
-}
+    public function deleteAllItensByIdProdutos($produtos){
+        $query = "DELETE FROM itens WHERE id_produto = :id_produto;";
+        $stmt = $this->conn->prepare($query);
+        foreach($produtos as $produto){
+            $stmt->bindValue(':id_produto',$produto['id_produto'],PDO::PARAM_INT);
+            if(!$stmt->execute()){
+                return "ocorreu um erro" . $stmt->errorInfo();
+            }
+            }
+            
+    return TRUE;
+    }
+
+    public function deleteAllCarrinhosByIdMercado($id_mercado){
+        $query = "DELETE FROM carrinho WHERE id_mercado = :id_mercado;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
+                if($stmt->execute()){
+                    return TRUE;
+
+                }else{
+                    return "ocorreu um erro" . $stmt->errorInfo();
+                }
+            }
+    }
+    
+
+

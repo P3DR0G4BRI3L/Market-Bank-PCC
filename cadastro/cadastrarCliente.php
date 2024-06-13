@@ -63,7 +63,7 @@ $conn = null;
 require_once '../inc/cabecalhocadastro.php'; //mostra o cabeçalho
 ?>
 
-
+<div class="wrapper">
 <div id="area-principal_cliente">
     <div id="area-postagens">
         <!--Aberturac -->

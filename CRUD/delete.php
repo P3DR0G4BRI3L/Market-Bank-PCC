@@ -33,13 +33,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $id_mercado = $_SESSION['usuario']['mercado']['id_mercado'];
                 if (
+                    $mercadoDAO->deleteAllItensByIdProdutos($produtoDAO->getAllProdutoByIdMercado($id_mercado)) &&
+                    
+                    $mercadoDAO->deleteAllCarrinhosByIdMercado($id_mercado) &&
+
                     $mercadoDAO->deleteAllProdutosByMercado($id_mercado) &&
 
                     $mercadoDAO->deleteAllPanfletosByMercado($id_mercado) &&
 
                     $mercadoDAO->deleteAllfiltroProdutoByMercado($id_mercado) &&
 
-                    $mercadoDAO->deleteAllInfoPagByIdMercado($id_mercado)
+                    $mercadoDAO->deleteAllInfoPagByIdMercado($id_mercado) 
+
                 ) {
 
                     if ($mercadoDAO->deleteMercadoById($_SESSION['usuario']['id_usuario'])) {

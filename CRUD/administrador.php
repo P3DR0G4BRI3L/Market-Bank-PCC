@@ -12,9 +12,10 @@ if($_SESSION['usuario']['tipo'] != 'administrador'){
 
 require_once '../inc/cabecalhocadastro.php';
 ?>
+
+<div class="wrapper">
 <div id="area-principal">
 
-<div id="area-postagens">
     <!--Aberturac -->
     <div class="postagem">
         <h2>Visualizar perfis</h2>
@@ -47,8 +48,8 @@ require_once '../inc/cabecalhocadastro.php';
         </p>
         <a href="">Ver mais</a>
     </div>
+    </div>
     <!--// Fechamento postagem -->
-</div>
 
 
 
