@@ -20,7 +20,7 @@ class infopagDAO{
     }
 
     public function atualizarInfoPag($id_mercado,$tipo,$chavepix){
-        $query = "UPDATE infopag SET tipo = :tipo , pix = :chavepix) WHERE id_mercado = :id_mercado";
+        $query = "UPDATE infopag SET tipo = :tipo , pix = :chavepix WHERE id_mercado = :id_mercado";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
         $stmt->bindValue(':chavepix',$chavepix,PDO::PARAM_STR);

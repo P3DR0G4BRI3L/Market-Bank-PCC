@@ -60,7 +60,9 @@ require_once '../inc/cabecalho.php';
 
         <button class="button_padrao" onclick="window.location.href = '../CRUD/read-panf.php' ">Panfletos</button>
 
-        <button class="button_padrao" onclick="window.location.href = '../CRUD/read-infopag.php' ">Forma de pagamento</button>
+        <?php if ($_SESSION['usuario']['mercado']['compras'] == 'sim') : ?>
+            <button class="button_padrao" onclick="window.location.href = '../CRUD/read-infopag.php' ">Forma de pagamento</button>
+        <?php endif ?>
 
         <button class="button_padrao" onclick="window.location.href = '../CRUD/gerenciarComprasMercado.php' ">Gerenciar vendas</button>
 

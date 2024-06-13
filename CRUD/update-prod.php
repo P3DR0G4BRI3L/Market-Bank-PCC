@@ -85,9 +85,8 @@ require_once '../inc/cabecalho.php';
 
 <div id="area-principal">
 
-    <div id="area-postagens">
         <!--Abertura postagem -->
-        <div class="postagem">
+        <div class="postagem home">
 
             <h2>Editar produto <?= $infproduto['nome'] ?> :&nbsp;<?= $infmercado['nomeMerc'] ?></h2>
 

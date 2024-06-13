@@ -18,11 +18,10 @@ if (admEstaLogado()) {
 
 require_once '../inc/cabecalhocadastro.php';
 ?>
-<div id="area-principal2">
+<div id="area-principal">
 
-<div id="area-postagens">
     <!--Aberturac -->
-    <div class="postagem_adm" >
+    <div class="postagem home" >
         <h2  class="postagem_admtit">Administração Mercados</h2>
         <!-- <div class="cadastro_option">
         <div class="login-box"> -->
@@ -37,14 +36,7 @@ require_once '../inc/cabecalhocadastro.php';
                     <th>Email</th>
                     <th>Nome do Mercado</th>
                     <th>Região Administrativa</th>
-                    <th>Endereço</th>
-                    <th>Horário de abertura</th>
-                    <th>Horário de fechamento</th>
-                    <th>Telefone</th>
-                    <th>CNPJ</th>
                     <th>Imagem</th>
-                    <th>Descrição</th>
-                    <th>Compras</th>
                     <th>Excluir</th>
                     <th>Editar</th>
                 </tr>
@@ -56,24 +48,18 @@ require_once '../inc/cabecalhocadastro.php';
                     <th><?= $mercadoDono['email']; ?></th>
                     <th><?= $mercadoDono['nomeMerc']; ?></th>
                     <th><?= $mercadoDono['regiaoadm']; ?></th>
-                    <th><?= $mercadoDono['endereco']; ?></th>
-                    <th><?= $mercadoDono['horarioAbert']; ?></th>
-                    <th><?= $mercadoDono['horarioFecha']; ?></th>
-                    <th><?= $mercadoDono['telefone']; ?></th>
-                    <th><?= $mercadoDono['cnpj']; ?></th>
                     <th><img src="../cadastro/uploads/<?= $mercadoDono['imagem']; ?>" class="imagem" alt="foto mercadoDono"></th>
-                    <th><?= $mercadoDono['descricao']; ?></th>
-                    <th><?= $mercadoDono['compras']; ?></th>
 
                     <th>
-                        <form action="delclienteadm.php" method="post"><input type="hidden" name="id_usuario" value="<?= $mercado['id_dono'] ?>"> <button
-                                type="submit" id="btn_tabela" onclick="return confirmarExclusaoClienteadm()">Excluir</button>
-                        </form>
+
+                    <a href="delclienteadm.php?id_usuario=<?= $mercadoDono['id_dono'] ?>">Excluir</a>
+                    
                     </th>
                     <th>
-                        <form action="editclienteadm.php" method="post"><input type="hidden" name="id_usuario" value="<?= $mercado['id_dono'] ?>"> <button
-                                type="submit" id="btn_tabela" >Editar</button>
-                        </form>
+                        
+                        <a href="editclienteadm.php?id_usuario=<?= $mercadoDono['id_dono'] ?>">Editar</a>
+
+                        
                     </th>
                 </tr>
 
@@ -85,6 +71,7 @@ require_once '../inc/cabecalhocadastro.php';
 
 
     <!--// Fechamento postagem -->
+</div>
 </div>
 
 

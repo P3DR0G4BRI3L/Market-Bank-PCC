@@ -44,4 +44,18 @@ class carrinhoDAO{
         }
     }
 
+    public function atualizarStatusByIdCarrinho($status,$id_carrinho){
+        $query = "UPDATE carrinho SET status = :status WHERE id_carrinho = :id_carrinho;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':status',$status,PDO::PARAM_STR);
+        $stmt->bindValue(':id_carrinho',$id_carrinho,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return TRUE;
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo();
+        }
+
+
+    }
+
 }

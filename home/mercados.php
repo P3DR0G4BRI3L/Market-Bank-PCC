@@ -24,7 +24,7 @@ require_once '../inc/cabecalho.php'; //mostra o cabeçalho
 ?>
 
 
-
+<div class="wrapper">
 <div id="area-principal">
 
     <div id="area-postagens">
@@ -61,7 +61,7 @@ require_once '../inc/cabecalho.php'; //mostra o cabeçalho
                 <?php endforeach; ?>
             </div>
         <?php else : ?>
-            <h2>Ainda não foram inseridos mercados</h2>
+            <h1>Ainda não foram inseridos mercados</h1>
         <?php endif; ?>
     </div>
     

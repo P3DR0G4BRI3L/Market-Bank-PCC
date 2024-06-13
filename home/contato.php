@@ -10,7 +10,7 @@ require_once '../inc/cabecalho.php'; //mostra o cabeçalho
 ?>
 
 
-
+<div class="wrapper">
 <div id="area-principal">
 
     <!--Abertura postagem -->

@@ -88,5 +88,19 @@ function formatarData($data) {
     
     return $data_formatada;
 }
+function unidade($quantidade){
+    if($quantidade>1){
+        return "s" ;
+    }
+}
 
+function formatarDataHora($dataHoraString) {
+    // Converter para timestamp Unix usando strtotime()
+    $timestamp = strtotime($dataHoraString);
+
+    // Formatando a data e hora conforme necessário
+    $formatted_date = date("d/m/Y H:i:s", $timestamp);
+
+    return $formatted_date;
+}
 

@@ -7,7 +7,7 @@ require_once '../model/usuarioDAO.php';
 session_start();
 
 
-if($_SESSION['usuario']['tipo']!='dono'){
+if ($_SESSION['usuario']['tipo'] != 'dono') {
     header('location:../index.php');
     exit;
 }
@@ -18,39 +18,39 @@ if($_SESSION['usuario']['tipo']!='dono'){
 
 
 
- require_once '../inc/cabecalho.php'; 
+require_once '../inc/cabecalho.php';
 ?>
 
-    <?php
-   
-    ?>
-    <div id="area-principal">
+<?php
 
-        <div id="area-postagens">
-            <!--Abertura postagem -->
-            <div class="postagem">
+?>
+<div id="area-principal">
 
-                <h2>Adicionar categoria no mercado:&nbsp;<?= $_SESSION['usuario']['mercado']['nomeMerc'] ?></h2>
-               
+    <!--Abertura postagem -->
+    <div class="postagem categoria">
 
-                <div class="container">
-					<div class="login-box">
-						<form action="../CRUD/create-filt.php" method="POST">
-							
-							<div class="input-group">
-								<label for="nome">Nome da categoria:</label>
-								<input type="text" id="nome" name="nomeFiltro" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
-							</div>
-							
+        <h2>Adicionar categoria no mercado:&nbsp;<?= $_SESSION['usuario']['mercado']['nomeMerc'] ?></h2>
 
-							<button type="submit" class="button_padrao btn_edit">Adicionar</button>
-						</form>
-					</div>
-				</div>
+
+        <div class="container">
+            <div class="login-box">
+                <form action="../CRUD/create-filt.php" method="POST">
+
+                    <div class="input-group inline center">
+                        <label for="nome">Nome da categoria:</label>
+                        <input type="text" id="nome" name="nomeFiltro" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
+                    </div>
+
+
+                    <button type="submit" class="button_padrao btn_edit">Adicionar</button>
+                </form>
             </div>
-            <!--// Fechamento postagem -->
+        </div>
+    </div>
+</div>
+<!--// Fechamento postagem -->
 
-            <!--Abertura postagem -->
-           
-            
-            <?php require_once '../inc/rodape.php'; ?>
+<!--Abertura postagem -->
+
+
+<?php require_once '../inc/rodape.php'; ?>

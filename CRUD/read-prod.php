@@ -19,11 +19,14 @@ require_once '../inc/cabecalho.php'; ?>
 
 <div id="area-principal">
 
+    <div class="postagem home">
+        <button type="button" class="button_padrao" onclick="window.location.href='../cadastro/addprod.php'">Adicionar produto</button>
+        <button type="button" class="button_padrao" onclick="window.location.href='../cadastro/verMeuMercado.php'">Voltar</button>
+    </div>
 
     <?php
     // o cabeçalho é mostrado em cima normal, porem, se a pessoa não estiver logada é criado uma div postagem e mostra pro usuário que ele não pode acessar essa pagina 
     voceNaoTemPermissao();
-
 
 
     
@@ -71,6 +74,7 @@ require_once '../inc/cabecalho.php'; ?>
                                 <input type="hidden" name="id_produto" value="<?= $produto['id_produto'] ?>">
                                 <select name="filtroproduto" onchange="this.form.submit()">
                                     <option value="" selected disabled>Selecione uma categoria</option>
+                                    <!-- <option value="" >Nenhuma</option> -->
                                     <?php foreach ($allfiltros as $filtro) : ?>
 
                                         <option value="<?= $filtro['id_filtro'] ?>" <?= ($filtro['id_filtro'] == $produto['id_filtro']) ? 'selected' : '' ?>>

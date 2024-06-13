@@ -93,7 +93,7 @@ $_POST['telefone'],$_POST['regiaoadm'],$_POST['compras']) ) {
 
 }
 require_once '../inc/cabecalho.php';
-?>
+?><br>
 <div id="area-principal ">
 
         <!--Aberturac -->
@@ -226,14 +226,14 @@ require_once '../inc/cabecalho.php';
                         </div>
 
 
-                        <div class="input-compra">
+                        <div class="input-compra inline">
                             <label for="compras">Deseja fornecer compras pelo site?&nbsp;&nbsp;&nbsp;</label>
                             <input type="radio" id="compras" name="compras" value="sim" onkeydown="if(event.keyCode === 13) event.preventDefault()" required
                             <?=$_SESSION['usuario']['mercado']['compras'] == 'sim' ?'checked' : ''?>>
-                            <p>Sim</p>
+                            <p>Sim</p> &nbsp;&nbsp;&nbsp;
 
                             <input type="radio" id="compras" name="compras" value="nao" onkeydown="if(event.keyCode === 13) event.preventDefault()" required <?=$_SESSION['usuario']['mercado']['compras'] == 'nao' ?'checked' : ''?> >
-                            <p>Não</p>
+                            <p> Não </p>
 
                         </div>
 

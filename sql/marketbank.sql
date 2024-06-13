@@ -31,20 +31,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
 
--- -----------------------------------------------------
--- Table `marketbank`.`administrador`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `marketbank`.`administrador` (
-  `id_administrador` INT(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` INT(11) NOT NULL,
-  PRIMARY KEY (`id_administrador`),
-  INDEX `id_usuario` (`id_usuario` ASC) ,
-  CONSTRAINT `administrador_ibfk_1`
-    FOREIGN KEY (`id_usuario`)
-    REFERENCES `marketbank`.`usuario` (`id_usuario`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
-
 
 -- -----------------------------------------------------
 -- Table `marketbank`.`mercado`
@@ -94,7 +80,8 @@ CREATE TABLE IF NOT EXISTS `marketbank`.`carrinho` (
   `id_carrinho` INT(11) NOT NULL AUTO_INCREMENT,
   `id_mercado` INT(11) NOT NULL,
   `id_cliente` INT(11) NOT NULL,
-  `status` ENUM('aberto', 'fechado','cancelado') NOT NULL DEFAULT 'aberto',
+  `data_criacao`TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `status` ENUM('pendente', 'finalizado') NOT NULL DEFAULT 'pendente',
   `descricao` TEXT NULL,
   PRIMARY KEY (`id_carrinho`),
   INDEX `id_mercado_idx` (`id_mercado` ASC) ,
@@ -135,7 +122,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE IF NOT EXISTS `marketbank`.`infopag` (
   `id_infoPag` INT(11) NOT NULL AUTO_INCREMENT,
   `id_mercado` INT(11) NOT NULL,
-  `tipo` ENUM('telefone', 'cnpj', 'email') NOT NULL,
+  `tipo` ENUM('telefone', 'cnpj', 'email') NOT NULL DEFAULT 'cnpj',
   `pix` VARCHAR(70) NOT NULL,
   PRIMARY KEY (`id_infoPag`),
   INDEX `id_mercado` (`id_mercado` ASC) ,

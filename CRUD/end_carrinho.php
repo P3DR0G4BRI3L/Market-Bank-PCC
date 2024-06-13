@@ -10,9 +10,9 @@ require_once '../inc/cabecalho.php';
 $carrinho = $_SESSION['usuario']['carrinho'];
 $id_mercadocart = $_GET['id_mercado'] ?? 0;
 ?>
-
-<div id="area-principal" style="width:700px">
-    <div class="postagem end_carrinho">
+<div class="wrapper">
+<div id="area-principal">
+    <div class="postagem home end_carrinho">
         <table>
             <thead>
                 <tr>
@@ -47,7 +47,7 @@ $id_mercadocart = $_GET['id_mercado'] ?? 0;
                     </td>
                 </tr>
                 <tr>
-                    <td class="no-border">
+                    <td colspan="3" class="no-border">
                         <form action="end_carrinho_form.php" method="POST">
                         <br>
                         <label for="descricao">Informações adicionais: <h6>Opcional</h6></label>
@@ -60,3 +60,4 @@ $id_mercadocart = $_GET['id_mercado'] ?? 0;
         </table>
     </div>
 </div>
+<?php require_once '../inc/rodape.php';?>

@@ -14,7 +14,7 @@ $carrinhoDAO = new carrinhoDAO($conn);
 $clienteDAO = new clienteDAO($conn);
 $itensDAO = new itensDAO($conn);
 
-$boolANDid_mercado = $carrinhoDAO->inserirCarrinho($id_mercado, $id_cliente, 'aberto', $descricao);
+$boolANDid_mercado = $carrinhoDAO->inserirCarrinho($id_mercado, $id_cliente, 'pendente', $descricao);
 if ($boolANDid_mercado[1] === TRUE) {
 
     foreach ($carrinho as $key => $item) {

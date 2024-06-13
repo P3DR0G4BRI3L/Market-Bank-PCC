@@ -21,54 +21,54 @@ $produtoDAO = new produtoDAO($conn);
 
 if ($usuarioDAO->inserirUsuario('Administrador', 'admin@gmail.com', md5('123'), 'administrador')) { //se  a inserção do usuário do tipo administrador for bem sucedida
 
-    $administradorDAO->inserirAdministrador($usuarioDAO->getIdUsuarioByEmail('admin@gmail.com')); //adiciona o usuario do tipo administrador na tabela administrador
-}
-
-if ($usuarioDAO->inserirUsuario('usuario cliente', 'usuario@gmail.com', md5('123'), 'cliente')) { //se  a inserção do usuário do tipo cliente for bem sucedida
-
-    $clienteDAO->inserirCliente($usuarioDAO->getIdUsuarioByEmail('usuario@gmail.com'),'61996062014'); //adiciona o usuario do tipo cliente na tabela cliente
-}
 
 
-if ($usuarioDAO->inserirUsuario('mercado ', 'mercado@gmail.com', md5('123'), 'dono')) { //se  a inserção do usuário do tipo dono/mercado for bem sucedida
+    if ($usuarioDAO->inserirUsuario('usuario cliente', 'usuario@gmail.com', md5('123'), 'cliente')) { //se  a inserção do usuário do tipo cliente for bem sucedida
 
-    $id_dono = $usuarioDAO->getIdUsuarioByEmail('mercado@gmail.com'); //armazena o id do dono para o mercado referenciar a tabela usuario
+        $clienteDAO->inserirCliente($usuarioDAO->getIdUsuarioByEmail('usuario@gmail.com'), '61996062014'); //adiciona o usuario do tipo cliente na tabela cliente
+    }
 
-    $imagem = 'mercado.jpg'; //imagem do mercado
 
-    $caminho = 'C:\xampp\htdocs\Market-Bank\cadastro\uploads\\'; //lugar para onde a imagem vai ser copiada
+    if ($usuarioDAO->inserirUsuario('mercado ', 'mercado@gmail.com', md5('123'), 'dono')) { //se  a inserção do usuário do tipo dono/mercado for bem sucedida
 
-    copy($imagem, $caminho . $imagem); //copia a imagem pra pasta uploads em cadastro/uploads
+        $id_dono = $usuarioDAO->getIdUsuarioByEmail('mercado@gmail.com'); //armazena o id do dono para o mercado referenciar a tabela usuario
 
-    if ($mercadoDAO->inserirMercado(
-        ' mercado',
-        'Ceilandia Sul',
-        'QNH 13 Conjunto 3 Lote 10',
-        '07:00:00',
-        '23:30:00',
-        '61996062014',
-        '12345678912345',
-        $imagem,
-        'Esta é a descrição do mercado  ',
-        'sim',
-        $id_dono
-    )) { //se a inserção desse mercado for bem sucedida um produto desse mercado vai ser criado
+        $imagem = 'mercado.jpg'; //imagem do mercado
 
-        $imagem = 'banana.jpg'; //imagem do produto
+        $caminho = 'C:\xampp\htdocs\Market-Bank\cadastro\uploads\\'; //lugar para onde a imagem vai ser copiada
 
-        copy($imagem, $caminho . $imagem);
+        copy($imagem, $caminho . $imagem); //copia a imagem pra pasta uploads em cadastro/uploads
 
-        $id_mercado = $mercadoDAO->getMercadoByIdUsuario($id_dono); //armazena o id do mercado que vai adicionar  um produto
+        if ($mercadoDAO->inserirMercado(
+            ' mercado',
+            'Ceilandia Sul',
+            'QNH 13 Conjunto 3 Lote 10',
+            '07:00:00',
+            '23:30:00',
+            '61996062014',
+            '12345678912345',
+            $imagem,
+            'Esta é a descrição do mercado  ',
+            'sim',
+            $id_dono
+        )) { //se a inserção desse mercado for bem sucedida um produto desse mercado vai ser criado
 
-        if ($produtoDAO->inserirProduto('banana', 5, $imagem, 'essa descrição representa o produto banana', $id_mercado)){//se a inserção do produto for bem sucedida adiciona um panfleto
+            $imagem = 'banana.jpg'; //imagem do produto
 
-            $imagem = 'panfleto.webp';
-            
             copy($imagem, $caminho . $imagem);
 
-            if ($panfletoDAO->inserirPanfleto($imagem, '2024-06-10', 'descricao do panfleto', $id_mercado)) {//se a inserção do panfleto for bem sucedida redireciona para o index
+            $id_mercado = $mercadoDAO->getMercadoByIdUsuario($id_dono); //armazena o id do mercado que vai adicionar  um produto
 
-                echo "<script>alert('Executado com sucesso!');window.location.href='../../index.php';</script> ";
+            if ($produtoDAO->inserirProduto('banana', 5, $imagem, 'essa descrição representa o produto banana', $id_mercado)) { //se a inserção do produto for bem sucedida adiciona um panfleto
+
+                $imagem = 'panfleto.webp';
+
+                copy($imagem, $caminho . $imagem);
+
+                if ($panfletoDAO->inserirPanfleto($imagem, '2024-06-10', 'descricao do panfleto', $id_mercado)) { //se a inserção do panfleto for bem sucedida redireciona para o index
+
+                    echo "<script>alert('Executado com sucesso!');window.location.href='../../index.php';</script> ";
+                }
             }
         }
     }

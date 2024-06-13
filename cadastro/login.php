@@ -96,7 +96,7 @@ if (isset($_POST['email'], $_POST['senha'])) {
     }
 }
 ?>
-
+<div class="wrapper">
 <div id="area-principal">
 
 

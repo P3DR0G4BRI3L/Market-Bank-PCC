@@ -3,17 +3,21 @@
   margin: 0;
   padding: 0;
 }
-html{
+html, body {
   width: 100%;
-}
-body {
+  height: 100%;
   font-size: 1em;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   background: #e6e6e6;
   overflow-y: scroll;
-  /* Sempre mostra a barra de rolagem vertical */
+  overflow-x: hidden;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 60vh;
+}
 /* Layout */
 #area-cabecalho {
   width: 100%;
@@ -38,6 +42,7 @@ body {
 }
 
 #area-principal {
+  flex: 1;
   width: 1100px;
   margin: 0 auto;
   padding: 15px;
@@ -104,11 +109,11 @@ a {
 }
 
 #rodape {
-  width: 100%;
-  clear: both;
+  background-color: #ccc;
   text-align: center;
   padding: 15px;
-  background: #ccc;
+  width: 100%;
+  clear: both;
 }
 
 .postagem h2 {
