@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $carrinhoDAO = new carrinhoDAO($conn);
     $itensDAO = new itensDAO($conn);
     $usuarioDAO = new usuarioDAO($conn);
-    $usuarioDAO = new usuarioDAO($conn);
+    $panfletoDAO = new panfletoDAO($conn);
     $clienteDAO = new clienteDAO($conn);
     $mercadoDAO = new mercadoDAO($conn);
     $infopagDAO = new infopagDAO($conn);

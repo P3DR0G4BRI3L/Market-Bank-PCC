@@ -57,6 +57,7 @@ class panfletoDAO
         $stmt->bindValue(':validade',$validade);
         $stmt->bindValue(':descricao',$descricao,PDO::PARAM_STR);
         $stmt->bindValue(':id_panfleto',$id_panfleto,PDO::PARAM_INT);
+
         if($stmt->execute()){
             return TRUE;
         }else{

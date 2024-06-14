@@ -232,8 +232,8 @@ INSERT INTO cliente (`id_cliente`,`id_usuario`,`telefone`)VALUES
 
 INSERT INTO `mercado` (`id_mercado`, `nomeMerc`, `regiaoadm`, `endereco`, `horarioAbert`, `horarioFecha`, `telefone`, `cnpj`, `imagem`, `descricao`, `id_dono`, `compras`) VALUES
 (1, 'Supresko', 'Recanto das Emas', 'QNH 8 Conjunto H ', '08:30:00', '22:00:00', '25452424242', '12313333131129', '666ae7c84abe4.jpg', 'Fechado nos feriados', 1, 'sim'),
-(2, 'Fineno', 'Recanto das Emas', 'QNH 85 Conjunto Y Rua dos Ares', '09:00:00', '22:50:00', '84789884897', '95943135861786', '666ae88cb0ae7.jpg', '', 2, 'sim'),
-(3, 'Baratissimo', 'Santa Maria', 'QRT 70 Conjunto Z Rua do  Arouche', '08:50:00', '22:00:00', '74394939834', '61751651464558', '666ae9efeabf6.jpg', '', 3, 'sim'),
+(2, 'Fineno', 'Recanto das Emas', 'QNH 85 Conjunto Y Rua dos Ares', '09:00:00', '22:50:00', '84789884897', '95943135861786', '666ae88cb0ae7.jpg', 'nos finais de semana fechamos às 20 hrs', 2, 'sim'),
+(3, 'Baratissimo', 'Santa Maria', 'QRT 70 Conjunto Z Rua do  Arouche', '08:50:00', '22:00:00', '74394939834', '61751651464558', '666ae9efeabf6.jpg', 'entre o periodo de 12:30 e 13:00 hrs fechamos para o almoço', 3, 'sim'),
 (4, 'Carlinhos supermercado', 'Ceilândia', 'HSR 70 Conjunto J Rua do  Matagal', '08:00:00', '22:00:00', '20502050205', '67189771879749', '666af0cdef4d9.jfif', '', 4, 'sim');
 
 

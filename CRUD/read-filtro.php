@@ -17,7 +17,6 @@ require_once '../inc/cabecalho.php'; ?>
 <div id="area-principal">
 
 
-
         <?php
         // o cabeçalho é mostrado em cima normal, porem, se a pessoa não estiver logada é criado uma div postagem e mostra pro usuário que ele não pode acessar essa pagina 
         voceNaoTemPermissao();

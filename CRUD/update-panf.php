@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['validade'],$_POST['descr
 
     if($panfletoDAO->atualizarPanfleto($validade,$descricao,$id_panfleto)){
         echo "<script>
-            alert('Produto postado com sucesso');
+            alert('Panfleto editado com sucesso');
             window.location.href = 'read-panf.php';
         </script>";
     }
@@ -53,7 +53,7 @@ if($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['validade'],$_POST['descr
 					<div class="login-box">
 						<form action="" method="POST" enctype="multipart/form-data">
 							
-							
+							<input type="hidden" name="id_panfleto" value="<?= $id_panfleto;?>">
 							
 							<div class="input-group">
 								<label for="validade">Validade:</label>

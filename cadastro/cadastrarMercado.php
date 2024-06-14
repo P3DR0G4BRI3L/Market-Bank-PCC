@@ -190,12 +190,13 @@ require_once '../inc/cabecalhocadastro.php'; //mostra o cabeçalho
                     <label for="foto">Foto do mercado</label>
                     <label for="foto">
                         <img class="icon_prod" src="../home/img/download-icon.jpeg" width="50px" title="Faça upload da foto do mercado"></label>
-                    <div class="custom-file-upload">
-                        <input type="file" id="foto" name="imagem" onkeydown="if(event.keyCode === 13) event.preventDefault()" onchange="displayFileName()" required>
+
+                        <div class="custom-file-upload">
+                            <input type="file" id="foto" name="imagem" onchange="displayFileName()" required>
+                        </div>
                     </div>
 
 
-                </div>
 
                 <div class="input-compra">
                     <label for="compras">Deseja fornecer compras pelo site?&nbsp;&nbsp;&nbsp;</label>
