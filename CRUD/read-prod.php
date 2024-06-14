@@ -12,7 +12,7 @@ $id_mercado = $_SESSION['usuario']['verMercado'] ?? '';
 $infmercado = $mercadoDAO->getMercadoById($id_mercado);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filtroproduto'], $_POST['id_produto'])) {
-    $filtroProdutoDAO->inserirFiltroProduto($_POST['filtroproduto'], $_POST['id_produto']);
+    $filtroProdutoDAO->inserirFiltroProduto(($_POST['filtroproduto']=="NULL")?NULL:$_POST['filtroproduto'], $_POST['id_produto']);
 }
 require_once '../inc/cabecalho.php'; ?>
 
@@ -76,6 +76,7 @@ require_once '../inc/cabecalho.php'; ?>
                                     <option value="" selected disabled>Selecione uma categoria</option>
                                     <!-- <option value="" >Nenhuma</option> -->
                                     <?php foreach ($allfiltros as $filtro) : ?>
+                                    <option value="NULL" <?= (empty($produto['id_filtro']))?'selected':'' ?> >Nenhuma</option>
 
                                         <option value="<?= $filtro['id_filtro'] ?>" <?= ($filtro['id_filtro'] == $produto['id_filtro']) ? 'selected' : '' ?>>
                                             <?= ucwords($filtro['nomeFiltro']) ?>

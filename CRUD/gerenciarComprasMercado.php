@@ -43,7 +43,9 @@ require_once '../inc/cabecalho.php';
             <h2>Histórico de compras</h2>
             <button class='button_padrao' type="submit" onclick="window.location.href='../cadastro/verMeuMercado.php'">Voltar</button>
             <?php if(isset($_GET['mess'])): ?>
-                <h4><?= $_GET['mess'] ?></h4><h2><a href="?">X</a></h2>
+                
+                <div class="inline center align ">  <h2><a class="button_padrao" href="?">&times;</a></h2>  <h4><?= $_GET['mess'] ?></h4></div>
+                
             <?php endif ?>
         </div>
         <?php if (!empty($carrinhos)) :  ?>
@@ -89,7 +91,7 @@ require_once '../inc/cabecalho.php';
                     </table>
 
                     <br>
-
+                        <h3>Produtos</h3>
                     <ul>
                         <?php foreach ($itens as $key => $item) :
                             $total = 0;
@@ -99,7 +101,7 @@ require_once '../inc/cabecalho.php';
 
                                 <?= $produto['nome'] ?> - <?= $item['quantidade'] ?>
                                 unidade<?= unidade($item['quantidade']) ?> - R$
-                                <?= number_format($produto['preco'], 2, ',', '.'); ?> cada - Subtotal:R$ <?= $item['quantidade'] * $produto['preco'] ?>
+                                <?= number_format($produto['preco'], 2, ',', '.'); ?> cada - Subtotal:R$ <?= number_format($item['quantidade'] * $produto['preco'],2,',','.') ?>
                                 <?php $total += $produto['preco'] * $item['quantidade']; ?>
 
                             </li>
@@ -109,7 +111,7 @@ require_once '../inc/cabecalho.php';
 
                     <table>
                         <tr>
-                            <th>Status</th>
+                            <th>Status do pagamento</th>
 
                             <td>
                                 <form action="" method="post">

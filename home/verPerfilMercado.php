@@ -20,7 +20,7 @@ if (usuarioEstaLogado()) {
 require_once '../inc/cabecalho.php'; //mostra o cabeçalho
 
 ?>
-
+<div class="wrapper"> 
 <div id="area-principal">
 
     <div id="area-postagens">
@@ -62,13 +62,13 @@ require_once '../inc/cabecalho.php'; //mostra o cabeçalho
 
         </div>
     </div>
-    <?php if($infmercado['compras']=='sim'): ?>
+    <?php if($infmercado['compras']=='sim' && clienteEstaLogado()): ?>
     <div id="area-lateral">
         <?php require_once 'carrinho.php'; ?>
         
         </div>
     <?php endif ?>
 
-
+</div>
 
     <?php require_once '../inc/rodape.php'; ?>

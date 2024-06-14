@@ -16,6 +16,7 @@ $regioes = array(
 $mercadoDAO = new mercadoDAO($conn);
 if (usuarioEstaLogado()) {
     $_SESSION['usuario']['verMercado'] = null;
+    $_SESSION['usuario']['carrinho'] = null;
 } else {
     header('location:../index.php');
 }
@@ -80,7 +81,9 @@ require_once '../inc/cabecalho.php'; //mostra o cabeçalho
                 </select>
 
             </form>
-            <a href="?">limpar filtro</a>
+            
+            <div class="margin"><a class="button_padrao btn_delete center" href="?">limpar filtro</a></div>
+
         </div>
 
     </div>

@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+
+</html>
 <?php
 
 if (session_status() == PHP_SESSION_NONE) {
@@ -6,7 +18,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
 require_once '../model/produtoDAO.php';
 require_once '../cadastro/cadastro.php';
-
 $produtoDAO = new produtoDAO($conn);
 ?>
 
@@ -38,9 +49,11 @@ $produtoDAO = new produtoDAO($conn);
                                     
                                     
                                     <td>
-                                    <a href="../CRUD/del_carrinho.php?id_produto=<?= $cart['id_produto'] ?>">-</a>
-                                    <?= $cart['quantidade'] ?>
-                                    <a href="../CRUD/add_carrinho.php?id_produto=<?= $cart['id_produto'] ?>">+</a>
+    
+                                            <a href="../CRUD/del_carrinho.php?id_produto=<?= $cart['id_produto'] ?>"><i class="fas fa-minus"></i></a><!--deletar-->
+                                            <?= $cart['quantidade'] ?>
+                                            <a href="../CRUD/add_carrinho.php?id_produto=<?= $cart['id_produto'] ?>"><i class="fas fa-plus"></i></a><!--adicionar-->
+    
                                 </td>
 
 

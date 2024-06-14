@@ -55,6 +55,9 @@ html, body {
 	max-width: 200px;
 }
 
+a{
+	text-decoration: none;
+}
 
 #area-menu .cadastro_login_right {
 	display: flex;
@@ -331,7 +334,7 @@ input[type="number"] {
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
-	margin-bottom: 5px;
+	margin:10px;
 }
 
 .button_padrao:hover {
@@ -371,6 +374,9 @@ input[type="number"] {
 	background-color: rgb(7, 133, 70);
 }
 
+.margin{
+	margin: 20px;
+}
 .view_produto {
 	justify-content: center;
 	width: 40%;
@@ -454,6 +460,11 @@ input[type="number"] {
 	flex-wrap: wrap;
 }
 
+.incdec img{
+	/*incremento e decremento*/
+	width: 15px;
+	height: 15px;
+}
 .postagem_produto {
 	justify-content: center;
 
@@ -604,6 +615,9 @@ input[type="number"] {
   }
   .center{
 	margin: 0 auto;
+  }
+  .align{
+	align-content: center;
   }
    select{
 	width: 100%;

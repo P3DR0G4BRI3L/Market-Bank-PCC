@@ -54,9 +54,8 @@ class administradorDAO
     {
         switch ($tipo) {
             case "cliente":
-                $query = "SELECT * FROM usuario WHERE tipo = :tipo;";
+                $query = "SELECT usuario.* , cliente.telefone,id_cliente FROM usuario JOIN cliente ON usuario.id_usuario = cliente.id_usuario;";
                 $stmt = $this->conn->prepare($query);
-                $stmt->bindValue(':tipo', $tipo, PDO::PARAM_STR);
                 if ($stmt->execute()) {
                     return $stmt->fetchAll(PDO::FETCH_ASSOC);
                 } else {

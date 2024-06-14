@@ -41,5 +41,15 @@ class itensDAO{
             return "ocorreu um erro" . $stmt->errorInfo();
         }
     }
+    public function deleteItensByidCarrinho($id_carrinho){
+        $query = "DELETE FROM itens WHERE id_carrinho = :id_carrinho;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_carrinho',$id_carrinho,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return TRUE;
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo();
+        }
+    }
     
 }

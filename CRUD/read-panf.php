@@ -106,7 +106,7 @@ require_once '../inc/cabecalho.php'; ?>
 
                         <img src="../cadastro/uploads/<?= $panfleto['foto'] ?>" alt="Imagem do panfleto" width="300px">
 
-                        <h2> <?= formatarData($panfleto['validade']) ?> </h2>
+                        <h2>Validade: <?= formatarData($panfleto['validade']) ?> </h2>
 
 
 

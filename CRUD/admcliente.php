@@ -2,31 +2,42 @@
 session_start();
 require_once '../cadastro/cadastro.php';
 require_once '../func/func.php';
+require_once '../model/usuarioDAO.php';
+require_once '../model/clienteDAO.php';
+require_once '../model/administradorDAO.php';
 
-if ($_SESSION['usuario']['tipo'] != 'administrador') {
+if (!admEstaLogado()) {
     header('location:../index.php');
 }
-if (usuarioEstaLogado() && $_SESSION['usuario']['tipo'] == 'administrador') {
-    $stmt = $conn->prepare("SELECT * FROM usuario WHERE tipo = :tipo ");
-    $stmt->bindValue(':tipo', 'cliente', PDO::PARAM_STR);
-    if ($stmt->execute()) {
-        $allcliente = $stmt->fetchAll();
+$usuarioDAO = new usuarioDAO($conn);
+$clienteDAO = new clienteDAO($conn);
+$administradorDAO = new administradorDAO($conn);
+$allcliente = $administradorDAO->getAllUsuarioByTipo('cliente');
+
+if(isset($_GET['id_usuario'])){
+    $id_usuario = $_GET['id_usuario'];
+    
+    if($clienteDAO->deleteClienteById($id_usuario)){
+        if($usuarioDAO->excluirUsuario($id_usuario)){
+            echo "<script>
+            alert('usuário excluído com sucesso');
+            </script>";
+        }
     }
-
-
 }
+
 
 require_once '../inc/cabecalhocadastro.php';
 ?>
+<div class="wrapper">
 <div id="area-principal">
 
-    <div id="area-postagens">
         <!--Aberturac -->
         <div class="postagem">
             <h2>Administração clientes</h2>
             <!-- <div class="cadastro_option">
             <div class="login-box"> -->
-            <table>
+            <table class="center">
             <caption>Mercados</caption>
 
 
@@ -35,30 +46,27 @@ require_once '../inc/cabecalhocadastro.php';
                 <tr class="table_adm">
                     <th>Nome</th>
                     <th>Email</th>
-                    <th>Nome do Mercado</th>
-                    <th>Região Administrativa</th>
-                    <th>Imagem</th>
+                    <th>Telefone</th>
                     <th>Excluir</th>
                     <th>Editar</th>
                 </tr>
             </thead>
 
-            <?php foreach ($allMercadoDono as $mercadoDono): ?>
+            <?php foreach ($allcliente as $cliente): ?>
                 <tr>
-                    <th><?= $mercadoDono['nome']; ?></th>
-                    <th><?= $mercadoDono['email']; ?></th>
-                    <th><?= $mercadoDono['nomeMerc']; ?></th>
-                    <th><?= $mercadoDono['regiaoadm']; ?></th>
-                    <th><img src="../cadastro/uploads/<?= $mercadoDono['imagem']; ?>" class="imagem" alt="foto mercadoDono"></th>
+                    <th><?= $cliente['nome']; ?></th>
+                    <th><?= $cliente['email']; ?></th>
+                    <th><?= $cliente['telefone']; ?></th>
 
                     <th>
 
-                    <a href="delclienteadm.php?id_usuario=<?= $mercadoDono['id_dono'] ?>">Excluir</a>
+                    <a class="button_padrao btn_delete" href="?id_usuario=<?= $cliente['id_usuario'] ?>" onclick="confirmarExclusaoClienteadm();">Excluir</a>
                     
                     </th>
+
                     <th>
                         
-                        <a href="editclienteadm.php?id_usuario=<?= $mercadoDono['id_dono'] ?>" onclick="confirmarExclusaoClienteadm();">Editar</a>
+                        <a class="button_padrao btn_edit" href="editclienteadm.php?id_cliente=<?= $cliente['id_cliente'] ?>">Editar</a>
 
                         
                     </th>
@@ -68,7 +76,7 @@ require_once '../inc/cabecalhocadastro.php';
 
             <?php endforeach ?>
         </table>
-            <button class="button_padrao"onclick="window.history.back()">Voltar</button>
+            <button class="button_padrao" onclick="window.location.href='administrador.php'">Voltar</button>
 
 
 
@@ -78,19 +86,8 @@ require_once '../inc/cabecalhocadastro.php';
             <!-- </div>
         </div> -->
         </div>
-        <!--// Fechamento postagem -->
-
-        <!--Abertura postagem -->
-        <div class="postagem">
-            <h2>Explore.</h2>
-            <span class="data-postagem">postado 10 março 2022</span>
-            <p>
-                O Market Bank foi criado na intenção de informar os clientes de produtos que os mesmos desejam.
-            </p>
-            <a href="">Ver mais</a>
         </div>
         <!--// Fechamento postagem -->
-    </div>
 
 
 

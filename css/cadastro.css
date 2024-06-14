@@ -525,4 +525,27 @@ th {
 .merc #senha{
   width:30%;
 }
-/*input file*/
+
+.btn_delete {
+
+	background-color: rgb(255, 47, 47);
+}
+
+.btn_delete:hover {
+	color: black;
+	background-color: rgb(219, 33, 0);
+}
+
+.btn_edit {
+	background-color: rgb(0, 211, 35);
+
+}
+
+.btn_edit:hover {
+	color: black;
+	background-color: rgb(7, 133, 70);
+}
+
+.center{
+  margin: 0 auto;
+}

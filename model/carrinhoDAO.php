@@ -57,5 +57,18 @@ class carrinhoDAO{
 
 
     }
+    public function deleteAllCarrinhoByIdCliente($id_cliente){
+        $query = "DELETE FROM carrinho WHERE id_cliente = :id_cliente;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_cliente',$id_cliente,PDO::PARAM_INT);
+        if($stmt->execute()){
+            return TRUE;
+
+        }else{
+            return "ocorreu um erro" . $stmt->errorInfo();
+        }
+    }
+
+
 
 }

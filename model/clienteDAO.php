@@ -34,7 +34,7 @@ class clienteDAO
     }
 
     public function deleteClienteById($id_usuario){
-        $query = "DELETE  FROM cliente WHERE  id_usuario = :id_usuario ";
+        $query = "DELETE FROM cliente WHERE  id_usuario = :id_usuario ";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
         if($stmt->execute()){

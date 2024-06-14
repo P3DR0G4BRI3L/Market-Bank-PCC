@@ -14,7 +14,7 @@ $filtroproduto = $_GET['filtroproduto']??'';
 $allfiltros = $filtroProdutoDAO->getAllFiltroByIdMercado($id_mercado);
 require_once '../inc/cabecalho.php'; ?>
 
-
+<div class="wrapper">
 <div id="area-principal">
     <div id="area-postagens">
 
@@ -50,19 +50,12 @@ require_once '../inc/cabecalho.php'; ?>
                                     <?php endforeach ?>
                                 </select>
                             </form>
-                            <a href="?">Limpar filtro</a>
+
+                            <div class="margin"><a class="button_padrao btn_delete" href="?">Limpar filtro</a></div>
+
             <?php endif ?>
 
-            <?php if (admEstaLogado()) : ?>
-                <h1>Produtos do mercado: <br><?= ucwords($infmercado['nomeMerc']); ?>
-                </h1>
-                <form action="../home/verPerfilMercado.php" method="POST">
-                    <input type="hidden" name="id_mercado" value="<?= $id_mercado ?>">
-                    <button class='button_padrao' onclick="window.location.href='../home/verPerfilMercado.php' ">Voltar</button>
-
-                </form>
-            <?php endif ?>
-
+           
         </div>
     </div>
 
@@ -115,7 +108,7 @@ if (empty($id_mercado) || isset($id_mercado)) {
                 </div>
 
 
-                <?php if($mercado['compras']=='sim'): ?>
+                <?php if($mercado['compras']=='sim' && clienteEstaLogado()): ?>
 
                 <div id="area-lateral">
                     <?php require_once '../home/carrinho.php'; ?>

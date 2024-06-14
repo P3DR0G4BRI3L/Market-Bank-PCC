@@ -82,6 +82,7 @@ require_once '../inc/cabecalho.php';
                             </picture>
                         </div>
                     </div>
+                    <h3>Produtos</h3>
                     <ul>
                         <?php foreach ($itens as $key => $item) :
                         $total = 0;

@@ -5,6 +5,8 @@ require_once '../func/func.php';
 require_once '../model/administradorDAO.php';
 require_once '../model/mercadoDAO.php';
 require_once '../model/usuarioDAO.php';
+require_once '../model/produtoDAO.php';
+$produtoDAO = new produtoDAO($conn);
 $usuarioDAO = new usuarioDAO($conn);
 $mercadoDAO = new mercadoDAO($conn);
 if ($_SESSION['usuario']['tipo'] != 'administrador') {
@@ -31,12 +33,12 @@ if (isset($_GET['id_mercado'])) {
 
     ) {
 
-        if ($mercadoDAO->deleteMercadoById($_SESSION['usuario']['id_usuario'])) {
-            if ($usuarioDAO->excluirUsuario($_SESSION['usuario']['id_usuario'])) {
+        if ($mercadoDAO->deleteMercadoByIdMercado($id_mercado)) {
+            if ($usuarioDAO->excluirUsuario($mercadoDAO->getIdUsuarioByIdMercado($id_mercado))) {
 
 
                 echo "<script>
-                    alert('Mercado,produtos e panfletos excluídos com sucesso');
+                    alert('Mercado,produtos e panfletos excluídos com sucesso');window.location.href='admmercado.php'
                     </script>";
                 exit;
             }
@@ -53,7 +55,7 @@ require_once '../inc/cabecalhocadastro.php';
 
         <div class="postagem home"><button class="button_padrao" onclick="window.location.href='administrador.php'">Voltar</button></div>
         <!--Aberturac -->
-        <div class="postagem home">
+        <div class="postagem2">
             <h2 class="postagem_admtit">Administração Mercados</h2>
             <!-- <div class="cadastro_option">
         <div class="login-box"> -->
