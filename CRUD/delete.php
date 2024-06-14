@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $id_mercado = $_SESSION['usuario']['mercado']['id_mercado'];
                 if (
                     $mercadoDAO->deleteAllItensByIdProdutos($produtoDAO->getAllProdutoByIdMercado($id_mercado)) &&
-                    
+
                     $mercadoDAO->deleteAllCarrinhosByIdMercado($id_mercado) &&
 
                     $mercadoDAO->deleteAllProdutosByMercado($id_mercado) &&
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     $mercadoDAO->deleteAllfiltroProdutoByMercado($id_mercado) &&
 
-                    $mercadoDAO->deleteAllInfoPagByIdMercado($id_mercado) 
+                    $mercadoDAO->deleteAllInfoPagByIdMercado($id_mercado)
 
                 ) {
 
@@ -105,36 +105,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         case 'cliente':
             if (isset($_POST['deleteperfil'])) {
-                $allCarrinho = $carrinhoDAO->getAllCarrinhoByIdCliente($_SESSION['usuario']['id_cliente']);
+                if ($itensDAO->deleteAllItensByidCarrinho($carrinhoDAO->getAllCarrinhoByIdCliente($_SESSION['usuario']['id_cliente']))) {
 
-                if(!empty($allCarrinho)){foreach($allCarrinho as $carrinho){
-                $true[] = $itensDAO->deleteItensByidCarrinho($carrinho['id_carrinho']);
 
-                }}
 
-                foreach($true as $t){
-                    if($t==TRUE){
-                        return TRUE;
-                    }else{
-                        echo "<script>alert('Ocorreu um erro');window.location.href='../verMeuCliente.php'</script>";
-                    }
-                }
-                if($carrinhoDAO->deleteAllCarrinhoByIdCliente($_SESSION['usuario']['id_cliente'])){
+                    if ($carrinhoDAO->deleteAllCarrinhoByIdCliente($_SESSION['usuario']['id_cliente'])) {
 
-                    if ($clienteDAO->deleteClienteById($_SESSION['usuario']['id_usuario'])) {
+                        if ($clienteDAO->deleteClienteById($_SESSION['usuario']['id_usuario'])) {
 
-                        if ($usuarioDAO->excluirUsuario($_SESSION['usuario']['id_usuario'])) {
-                            session_destroy();
-                            echo "<script>
-                                alert('Perfil excluído com sucesso');
-                                window.location.href='../index.php';
-                                </script>";
-                            exit;
+                            if ($usuarioDAO->excluirUsuario($_SESSION['usuario']['id_usuario'])) {
+                                session_destroy();
+                                echo "<script>
+                    alert('Perfil excluído com sucesso');
+                    window.location.href='../index.php';
+                    </script>";
+                                exit;
+                            }
                         }
                     }
                 }
-                }
-                break;
+            }
+            break;
 
         case 'administrador':
             if (isset($_POST['deletecliente'])) {
