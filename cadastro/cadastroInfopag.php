@@ -32,7 +32,8 @@
             <div class="postagem infopag">
                 <h2>No momento só estamos trabalhando com pix</h2>
                 <div class="login-box">
-                    <h3>Escolha a forma de receber pagamento </h3>
+                    <h3>Escolha o tipo da chave pix </h3>
+                    <h6>A chave pix é baseada nas informações adicionadas no mercado</h6>
                     <div class="input-group">
 
                         <form action="" method="POST">

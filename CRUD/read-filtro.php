@@ -77,7 +77,7 @@ require_once '../inc/cabecalho.php'; ?>
                                     <button class='button_padrao' type="submit">Editar</button>
                                 </form>
 
-                                <form action="delete.php" method="POST" onsubmit="return confirmarExclusaoProduto()">
+                                <form action="delete.php" method="POST" onsubmit="return confirmarExclusaoFiltro()">
                                     <input type="hidden" name="deletefiltro" value="<?= $filtro['id_filtro']; ?>">
                                     <button class='button_padrao' type="submit">Excluir</button>
                                 </form>
@@ -93,7 +93,7 @@ require_once '../inc/cabecalho.php'; ?>
                     <?php }
                 } else {
                     echo "<div class='postagem home'>
-                    <h2>Ainda não foram inseridos categorias</h2>
+                    <h2>Ainda não foram inseridas categorias</h2>
                 </div>";
                 }
                ?>

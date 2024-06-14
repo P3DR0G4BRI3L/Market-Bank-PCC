@@ -8,7 +8,6 @@ if(!admEstaLogado()){
     header('location:../index.php');
     exit;
 }
-var_dump($_SESSION);
 $mercadoDAO = new mercadoDAO($conn);
 $usuarioDAO = new usuarioDAO($conn);
 $mercado = $mercadoDAO->getMercadoById($_GET['id_mercado']);

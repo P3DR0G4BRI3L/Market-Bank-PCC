@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['infopag'])) {
             <button type="button" class="button_padrao" onclick="window.location.href='../cadastro/verMeuMercado.php'">Voltar</button>
         </div>
         <div class="postagem home">
-            <h2>Forma de pagamento</h2>
+            <h2>Escolha a Chave pix</h2>
             <form action="" method="POST">
                 <select name="infopag" id="infopag">
 

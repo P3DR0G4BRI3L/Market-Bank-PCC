@@ -18,6 +18,11 @@ function mostrarsenha() {
     }
 }
 
+function confirmarExclusaoFiltro() {
+    // Exibe uma mensagem de confirmação
+    return confirm("Tem certeza que deseja excluir?");
+}
+
 function confirmarExclusaoMercado() {
     // Exibe uma mensagem de confirmação
     return confirm("Tem certeza que deseja excluir seu mercado?\n Todos os seus produtos também vão ser excluídos");
