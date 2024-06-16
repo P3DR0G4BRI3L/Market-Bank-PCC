@@ -342,5 +342,15 @@ class mercadoDAO
             return "ocorreu um erro" . $stmt->errorInfo();
         }
     }
+    public function getAllregioes(){
+        $query = "SELECT DISTINCT regiaoadm FROM mercado;";
+        $stmt = $this->conn->prepare($query);
+        if ($stmt->execute()) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return "ocorreu um erro" . $stmt->errorInfo();
+        }
+        
+    }
     
 }

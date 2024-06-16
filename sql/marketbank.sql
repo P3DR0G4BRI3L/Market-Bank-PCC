@@ -179,27 +179,18 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 -- Table `marketbank`.`itens`
 -- -----------------------------------------------------
+-- Tabela itens
 CREATE TABLE IF NOT EXISTS `marketbank`.`itens` (
   `id_itens` INT(11) NOT NULL AUTO_INCREMENT,
   `quantidade` INT(11) NOT NULL,
   `id_carrinho` INT(11) NOT NULL,
   `id_produto` INT(11) NOT NULL,
   PRIMARY KEY (`id_itens`),
-  INDEX `fk_itens_carrinho1_idx` (`id_carrinho` ASC) ,
-  INDEX `fk_itens_produto1_idx` (`id_produto` ASC) ,
-  CONSTRAINT `fk_itens_carrinho1`
-    FOREIGN KEY (`id_carrinho`)
-    REFERENCES `marketbank`.`carrinho` (`id_carrinho`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_itens_produto1`
-    FOREIGN KEY (`id_produto`)
-    REFERENCES `marketbank`.`produto` (`id_produto`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
+  INDEX `fk_itens_carrinho1_idx` (`id_carrinho` ASC),
+  INDEX `fk_itens_produto1_idx` (`id_produto` ASC),
+  CONSTRAINT `fk_itens_carrinho1` FOREIGN KEY (`id_carrinho`) REFERENCES `carrinho` (`id_carrinho`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_itens_produto1` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id_produto`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -231,10 +222,10 @@ INSERT INTO cliente (`id_cliente`,`id_usuario`,`telefone`)VALUES
 (5, 10,'61923432434');
 
 INSERT INTO `mercado` (`id_mercado`, `nomeMerc`, `regiaoadm`, `endereco`, `horarioAbert`, `horarioFecha`, `telefone`, `cnpj`, `imagem`, `descricao`, `id_dono`, `compras`) VALUES
-(1, 'Supresko', 'Recanto das Emas', 'QNH 8 Conjunto H ', '08:30:00', '22:00:00', '25452424242', '12313333131129', '666ae7c84abe4.jpg', 'Fechado nos feriados', 1, 'sim'),
-(2, 'Fineno', 'Recanto das Emas', 'QNH 85 Conjunto Y Rua dos Ares', '09:00:00', '22:50:00', '84789884897', '95943135861786', '666ae88cb0ae7.jpg', 'nos finais de semana fechamos às 20 hrs', 2, 'sim'),
-(3, 'Baratissimo', 'Santa Maria', 'QRT 70 Conjunto Z Rua do  Arouche', '08:50:00', '22:00:00', '74394939834', '61751651464558', '666ae9efeabf6.jpg', 'entre o periodo de 12:30 e 13:00 hrs fechamos para o almoço', 3, 'sim'),
-(4, 'Carlinhos supermercado', 'Ceilândia', 'HSR 70 Conjunto J Rua do  Matagal', '08:00:00', '22:00:00', '20502050205', '67189771879749', '666af0cdef4d9.jfif', '', 4, 'sim');
+(1, 'Supresko', 'Recanto das Emas', 'Quadra 8 Conjunto 13 lote 4', '08:30:00', '22:00:00', '25452424242', '12313333131129', '666ae7c84abe4.jpg', 'Fechado nos feriados', 1, 'sim'),
+(2, 'Fineno', 'Recanto das Emas', 'Quadra 14 Conjunto 22 lote 10', '09:00:00', '22:50:00', '84789884897', '95943135861786', '666ae88cb0ae7.jpg', 'nos finais de semana fechamos às 20 hrs', 2, 'sim'),
+(3, 'Baratissimo', 'Santa Maria', 'QRT 70 Conjunto Z Lote 13', '08:50:00', '22:00:00', '74394939834', '61751651464558', '666ae9efeabf6.jpg', 'entre o periodo de 12:30 e 13:00 hrs fechamos para o almoço', 3, 'sim'),
+(4, 'Carlinhos supermercado', 'Ceilândia', 'HSR 70 Conjunto J Rua do  Matagal', '08:00:00', '22:00:00', '20502050205', '67189771879749', '666af0cdef4d9.jfif', 'não abrimos no domingo', 4, 'sim');
 
 
 INSERT INTO `infopag` (`id_infoPag`, `id_mercado`, `tipo`, `pix`) VALUES
@@ -247,17 +238,18 @@ INSERT INTO `filtroproduto` (`id_filtro`, `nomeFiltro`, `id_mercado`) VALUES
 (1, 'Frios', 2),
 (2, 'Verduras', 2),
 (3, 'Laticínios', 1),
-(4, 'Açogue', 1),
-(6, 'Frutas', 3);
+(6, 'Frutas', 3),
+(7, 'Limpeza', 1);
 
 
 INSERT INTO `produto` (`id_produto`, `nome`, `preco`, `fotoProduto`, `descricao`, `id_mercado`, `id_filtro`) VALUES
-(1, 'Laranja-pera', '3.00', '666aead6bdc5b.jpg', 'Por Kg', 3, 6),
-(2, 'Pacote de bala 7 Belo ', '14.00', '666aebcde259c.webp', '600g', 2, 1),
-(3, 'Leite Piracanjuba', '2.00', '666aecce63099.webp', '1 Litro', 1, 3),
-(4, 'Queijo President', '20.00', '666aed797cb37.webp', '', 1, 3),
-(5, 'Carne de Vitela', '12.00', '666aee882bd96.png', 'Por Kg', 1, 4),
-(6, 'Creme Nívea', '10.00', '666af1275ba24.jpg', '', 4, NULL);
+(1, 'Laranja-pera', 3.00, '666aead6bdc5b.jpg', 'Por Kg', 3, 6),
+(2, 'Pacote de bala 7 Belo ', 14.00, '666aebcde259c.webp', '600g', 2, 1),
+(3, 'Leite Piracanjuba', 2.00, '666aecce63099.webp', '1 Litro', 1, 3),
+(4, 'Queijo President', 20.00, '666aed797cb37.webp', '', 1, 3),
+(6, 'Creme Nívea', 10.00, '666af1275ba24.jpg', '', 4, NULL),
+(7, 'detergente Ypê', 2.19, '666f774ebddc5.webp', '', 1, 7),
+(8, 'Esponja de limpeza', 2.99, '666f77ef66797.webp', '', 1, 7);
 
 
 

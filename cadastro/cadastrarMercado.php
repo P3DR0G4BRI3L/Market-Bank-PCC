@@ -194,6 +194,7 @@ require_once '../inc/cabecalhocadastro.php'; //mostra o cabeçalho
                         <div class="custom-file-upload">
                             <input type="file" id="foto" name="imagem" onchange="displayFileName()" required>
                         </div>
+                        <div id="fileNameDisplay"></div>
                     </div>
 
 

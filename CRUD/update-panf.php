@@ -46,7 +46,7 @@ if($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['validade'],$_POST['descr
             <!--Abertura postagem -->
             <div class="postagem home">
 
-                <h2>Postar panfleto no mercado:&nbsp;<?= $_SESSION['usuario']['mercado']['nomeMerc'] ?></h2>
+                <h2>Editar panfleto no mercado:&nbsp;<?= $_SESSION['usuario']['mercado']['nomeMerc'] ?></h2>
                
 
                 <div class="container">
@@ -65,7 +65,7 @@ if($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['validade'],$_POST['descr
 								<input type="text" id="descricao" name="descricao" value="<?= $panfleto['descricao'] ?>" onkeydown="if(event.keyCode === 13) event.preventDefault()">
 							</div>
 
-							<button type="submit" class="button_padrao btn_edit">Adicionar</button>
+							<button type="submit" class="button_padrao btn_edit">Salvar</button>
 						</form>
 					</div>
 				</div>

@@ -7,14 +7,14 @@ if($_SESSION['usuario']['tipo']!= 'dono'){
     header('location:../index.php');
 }
 $filtroProdutoDAO = new filtroProdutoDAO($conn);
-$id_filtro = $_POST['updatefiltro'];
+$id_filtro = $_POST['updatefiltro'] ?? 0;
 $filtro = $filtroProdutoDAO->getFiltroById($id_filtro);
 if(isset($_POST['nomeFiltro'],$_POST['id_filtro'])){
     if($filtroProdutoDAO->updateFiltro($_POST['nomeFiltro'],$_POST['id_filtro'])){
-        //    echo "<script>
-        //    alert('Categoria editada com sucesso!');
-        //    window.location.href='read-filtro.php';
-        //    </script>";
+           echo "<script>
+           alert('Categoria editada com sucesso!');
+           window.location.href='read-filtro.php';
+           </script>";
         
         }}
 
@@ -32,7 +32,7 @@ if(isset($_POST['nomeFiltro'],$_POST['id_filtro'])){
             <div class="login-box">
                 <form action="" method="POST">
                     
-                    <input type="hidden" name="id_filtro" value="<?=$id_filtro?>">
+                    <input type="hidden" name="id_filtro" value="<?=$filtro['id_filtro']?>">
 
                     <div class="input-group">
                         <label for="nome">Nome da categoria:</label>

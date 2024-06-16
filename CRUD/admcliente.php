@@ -16,11 +16,10 @@ $allcliente = $administradorDAO->getAllUsuarioByTipo('cliente');
 
 if(isset($_GET['id_usuario'])){
     $id_usuario = $_GET['id_usuario'];
-    
     if($clienteDAO->deleteClienteById($id_usuario)){
         if($usuarioDAO->excluirUsuario($id_usuario)){
             echo "<script>
-            alert('usuário excluído com sucesso');
+            alert('usuário excluído com sucesso');window.location.href='admcliente.php';
             </script>";
         }
     }

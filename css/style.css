@@ -478,7 +478,7 @@ input[type="number"] {
 	padding: 5px;
 	background-color: #005f6b;
 	border-radius: 5px;
-	color: #D3D3D3;
+	color: white;
 }
 
 .button_carrinho:hover {
@@ -486,6 +486,25 @@ input[type="number"] {
 	color: white;
 	cursor: pointer;
 }
+.cart_del{
+	
+	background-color: #ff2f2f;
+}
+.cart_del:hover{
+	color: black;
+	background-color:  #db2100;
+}
+
+.cart_end{
+	background-color:#00d323;
+}
+.cart_end:hover{
+	color: black;
+	background-color:  #078546;
+}
+
+
+
 
 .no-border {
 	border: none;

@@ -69,14 +69,14 @@ require_once '../inc/cabecalho.php'; ?>
                                 <button class='button_padrao' type="submit">Excluir</button>
                             </form>
 
-
+<h3 style="border-radius: 10px;">Adicionar categoria no produto</h3>
                             <form action="" method="POST">
                                 <input type="hidden" name="id_produto" value="<?= $produto['id_produto'] ?>">
                                 <select name="filtroproduto" onchange="this.form.submit()">
                                     <option value="" selected disabled>Selecione uma categoria</option>
                                     <!-- <option value="" >Nenhuma</option> -->
-                                    <?php foreach ($allfiltros as $filtro) : ?>
                                     <option value="NULL" <?= (empty($produto['id_filtro']))?'selected':'' ?> >Nenhuma</option>
+                                    <?php foreach ($allfiltros as $filtro) : ?>
 
                                         <option value="<?= $filtro['id_filtro'] ?>" <?= ($filtro['id_filtro'] == $produto['id_filtro']) ? 'selected' : '' ?>>
                                             <?= ucwords($filtro['nomeFiltro']) ?>

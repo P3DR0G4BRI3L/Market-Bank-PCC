@@ -10,7 +10,7 @@
 </head>
 
 </html>
-<?php
+<a?php
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -50,9 +50,9 @@ $produtoDAO = new produtoDAO($conn);
                                     
                                     <td>
     
-                                            <a href="../CRUD/del_carrinho.php?id_produto=<?= $cart['id_produto'] ?>"><i class="fas fa-minus"></i></a><!--deletar-->
+                                            <a href="../CRUD/del_carrinho.php?id_produto=<?= $cart['id_produto'] ?>"><i style="color:red;cursor:pointer;" class=" fas fa-minus"></i></a><!--deletar-->
                                             <?= $cart['quantidade'] ?>
-                                            <a href="../CRUD/add_carrinho.php?id_produto=<?= $cart['id_produto'] ?>"><i class="fas fa-plus"></i></a><!--adicionar-->
+                                            <a href="../CRUD/add_carrinho.php?id_produto=<?= $cart['id_produto'] ?>"><i style="color:green;cursor:pointer;" class="fas fa-plus"></i></a><!--adicionar-->
     
                                 </td>
 
@@ -74,8 +74,8 @@ $produtoDAO = new produtoDAO($conn);
                 <?php endforeach ?>
                 <tfoot>
                     <tr>
-                        <th class="no-border"><a class='button_carrinho' href= "../CRUD/end_carrinho.php?id_mercado?<?=$_SESSION['usuario']['verMercado']?>" >Finalizar carrinho</></th>
-                        <th class="no-border"><a class='button_carrinho' onclick="confirmarLimparCarrinho();">Limpar carrinho</></th>
+                        <th class="no-border"><a class='cart_end button_carrinho' href= "../CRUD/end_carrinho.php?id_mercado?<?=$_SESSION['usuario']['verMercado']?>" >Finalizar carrinho</a></th>
+                        <th class="no-border"><a class='cart_del button_carrinho ' onclick="confirmarLimparCarrinho();">Limpar carrinho</a></th>
 
                         <th class="no-border"></th>
                         <th class="no-border"></th>
@@ -90,6 +90,6 @@ $produtoDAO = new produtoDAO($conn);
 
             <p class="prod_none">Ainda não foram inseridos produtos</p>
 
-        <?php endif ?>
+        <?php endif  ?>
     </div>
 </div>

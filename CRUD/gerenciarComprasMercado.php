@@ -40,14 +40,17 @@ require_once '../inc/cabecalho.php';
 
         <!--Abertura postagem -->
         <div class="postagem ">
+
             <h2>Histórico de compras</h2>
             <button class='button_padrao' type="submit" onclick="window.location.href='../cadastro/verMeuMercado.php'">Voltar</button>
+            
             <?php if(isset($_GET['mess'])): ?>
                 
                 <div class="inline center align ">  <h2><a class="button_padrao" href="?">&times;</a></h2>  <h4><?= $_GET['mess'] ?></h4></div>
                 
             <?php endif ?>
         </div>
+        
         <?php if (!empty($carrinhos)) :  ?>
             <?php foreach ($carrinhos as $key => $carrinho) :
                 $itens = $itensDAO->getAllItensByIdCarrinho($carrinho['id_carrinho']);
@@ -131,7 +134,7 @@ require_once '../inc/cabecalho.php';
                 </div>
             <?php endforeach ?>
         <?php else : ?>
-            <div class="postagem home">
+            <div class="postagem ">
                 <h1>O histórico está vazio</h1>
             </div>
         <?php endif ?>

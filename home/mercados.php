@@ -14,6 +14,7 @@ $regioes = array(
 );
 
 $mercadoDAO = new mercadoDAO($conn);
+$regioes = $mercadoDAO->getAllregioes();
 if (usuarioEstaLogado()) {
     $_SESSION['usuario']['verMercado'] = null;
     $_SESSION['usuario']['carrinho'] = null;
@@ -76,7 +77,7 @@ require_once '../inc/cabecalho.php'; //mostra o cabeçalho
                 <select name="filtroRegiao" id="filtroRegiao" onchange="this.form.submit()">
                     <option value="" disabled selected>Selecione a região administrativa</option>
                     <?php foreach ($regioes as $regiao) : ?>
-                        <option value="<?=$regiao?>"<?=(isset($_GET['filtroRegiao']) && $regiao==$_GET['filtroRegiao'])?'selected':''?>><?=$regiao?></option>
+                        <option value="<?=$regiao['regiaoadm']?>"<?=(isset($_GET['filtroRegiao']) && $regiao['regiaoadm']==$_GET['filtroRegiao'])?'selected':''?>><?=$regiao['regiaoadm']?></option>
                     <?php endforeach ?>
                 </select>
 

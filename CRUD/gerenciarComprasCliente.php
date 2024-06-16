@@ -49,61 +49,65 @@ require_once '../inc/cabecalho.php';
             ?>
                 <div class="postagem ">
                     <caption><?= formatarDataHora($carrinho['data_criacao']) ?></caption>
-                    
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Mercado</th>
-                                    <th>Status</th>
-                                    <th>Contato</th>
-                                    <th>Informações adicionais</th>
-                                </tr>
-                            </thead>
-                            <?php foreach ($itens as $key => $item) {
-                                $produto = $produtoDAO->getProdutoById($item['id_produto']);
-                                $total += $produto['preco'] * $item['quantidade'];
-                            } ?>
-                            <tbody>
-                                <tr>
-                                    <td><a href="../home/verPerfilMercado.php?id_mercado=<?= $mercado['id_mercado'] ?>"><?= $mercado['nomeMerc'] ?></a></td>
 
-                                    <td><?= $carrinho['status'] ?></td>
-                                    <td><?= $mercado['telefone'] ?></td>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mercado</th>
+                                <th>Contato</th>
+                                <th>Informações adicionais</th>
+                            </tr>
+                        </thead>
+                        <?php foreach ($itens as $key => $item) {
+                            $produto = $produtoDAO->getProdutoById($item['id_produto']);
+                            $total += $produto['preco'] * $item['quantidade'];
+                        } ?>
+                        <tbody>
+                            <tr>
+                                <td><a class="btn_edit" href="../home/verPerfilMercado.php?id_mercado=<?= $mercado['id_mercado'] ?>"><?= $mercado['nomeMerc'] ?></a></td>
 
-                                    <td><?= $carrinho['descricao'] ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <br><div class="inline">
+                                <td><?= $mercado['telefone'] ?></td>
+
+                                <td><?= $carrinho['descricao'] ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <div class="inline">
                         <div class="center">
                             <picture>
                                 <img src="../home/img/qrcode.png" alt="" width="200px">
-                                <legend style="text-align:center;">Titular da conta:<?= $dono['nome'] ?><br>Valor Total:R$<?= number_format($total,2,',','.') ?></legend>
+                                <legend style="text-align:center;">Titular da conta:<?= $dono['nome'] ?><br>Valor Total:R$<?= number_format($total, 2, ',', '.') ?></legend>
                             </picture>
                         </div>
                     </div>
                     <h3>Produtos</h3>
                     <ul>
                         <?php foreach ($itens as $key => $item) :
-                        $total = 0;
+                            $total = 0;
                             $produto = $produtoDAO->getProdutoById($item['id_produto']);
                         ?> <li>
 
                                 <?= $produto['nome'] ?> - <?= $item['quantidade'] ?>
                                 unidade<?= unidade($item['quantidade']) ?> - R$
-                                <?= number_format($produto['preco'], 2, ',', '.'); ?> cada - Subtotal:R$ <?= $item['quantidade'] * $produto['preco'] ?>
+                                <?= number_format($produto['preco'], 2, ',', '.'); ?> cada - Subtotal:R$ <?= number_format( $item['quantidade'] * $produto['preco'], 2, ',', '.'); ?>
                                 <?php $total += $produto['preco'] * $item['quantidade']; ?>
 
                             </li>
                         <?php endforeach ?>
                     </ul>
+                    <br><br>
+                    <table>
+                        <th>Status do pagamento</th>
+                        <td><?= $carrinho['status'] ?></td>
 
+                    </table>
 
 
                 </div>
             <?php endforeach ?>
         <?php else : ?>
-            <div class="postagem home">
+            <div class="postagem ">
                 <h1>O histórico está vazio</h1>
             </div>
         <?php endif ?>

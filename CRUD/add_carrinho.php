@@ -6,7 +6,7 @@ $produtoDAO = new produtoDAO($conn);
 
 $id_produto = $_GET['id_produto'] ?? 0;
 if ($id_produto == 0) {
-    echo "<script>alert('Produto não encontrado');window.location.href='read-prod.php'</script>";
+    echo "<script>alert('Produto não encontrado');window.location.href='read-prod.php'</script>";exit();
 }
 
 if(empty($_SESSION['usuario']['carrinho'])){
@@ -23,16 +23,18 @@ foreach($carrinho as $key => $item) {
     if ($item['id_produto'] == $id_produto) {
         $carrinho[$key]['quantidade'] += 1;
         $achouItemCarrinho = true;
-        break;
+        
+        $_SESSION['usuario']['carrinho'] = $carrinho;
+        header("Location: read-prodCliente.php");
+        exit();
     }
 }    
 if ($achouItemCarrinho == false) {
     $produto['quantidade'] = 1;
     $carrinho[] = $produto;
+    $_SESSION['usuario']['carrinho'] = $carrinho;
 header("Location: read-prodCliente.php#$id_produto");
+exit();
 }
-$_SESSION['usuario']['carrinho'] = $carrinho;
-header("Location: read-prodCliente.php#$id_produto");
-exit;
 
 // header('location:../CRUD/read-prod.php?message=produto adicionado com sucesso');

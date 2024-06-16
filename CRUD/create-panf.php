@@ -52,10 +52,16 @@ if(isset($_FILES['foto'],$_POST['validade'],$_POST['descricao'])){
 						<form action="" method="POST" enctype="multipart/form-data">
 							
 							
-							<div class="input-group">
-								<label for="foto">Foto do panfleto:</label>
-								<input type="file" id="foto" name="foto" onkeydown="if(event.keyCode === 13) event.preventDefault()" required>
-							</div>
+                        <div class="input-group">
+						<label for="foto">Foto do panfleto</label>
+						<label for="foto">
+							<img class="icon_prod" src="../home/img/download-icon.jpeg" width="30px" title="Faça upload da foto do produto">
+						</label>
+						<div class="custom-file-upload">
+							<input type="file" id="foto" name="foto" onchange="displayFileName()" required>
+						</div>
+					</div>
+					<div id="fileNameDisplay"></div>
 							
 							<div class="input-group data">
 								<label for="validade">Validade:</label>

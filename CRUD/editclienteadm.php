@@ -30,9 +30,6 @@ if(isset($_POST['nome'] , $_POST['email'], $_POST['telefone'])){
 
 if($usuarioDAO->atualizarUsuario($nome , $email, $usuario['id_usuario']) && $clienteDAO->atualizarCliente($usuario['id_usuario'],$telefone)){
     
-    $_SESSION['usuario']['nome']=$_POST['nome'];
-    $_SESSION['usuario']['email']=$_POST['email'];
-    $_SESSION['usuario']['telefone']=$_POST['telefone'];
     echo "<script>alert('Perfil alterado com sucesso')</script>";
     echo "<script>window.location.href='admcliente.php'</script>";
      
