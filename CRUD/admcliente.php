@@ -37,7 +37,7 @@ require_once '../inc/cabecalhocadastro.php';
             <!-- <div class="cadastro_option">
             <div class="login-box"> -->
             <table class="center">
-            <caption>Mercados</caption>
+            <caption>Clientes</caption>
 
 
 

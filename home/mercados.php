@@ -45,10 +45,10 @@ require_once '../inc/cabecalho.php'; //mostra o cabeçalho
 
         <?php $mercados = $mercadoDAO->getAllMercados();
          if (!empty($mercados)) : ?>
-            <div class="postagem flex center">
+            <div  class="postagem flex center">
                 <?php foreach ($mercados as $mercado) : ?>
                     <?php if (empty($_GET['filtroRegiao']) || $_GET['filtroRegiao'] == $mercado['regiaoadm']) : ?>
-                        <div class="view_mercado">
+                        <div style="margin-bottom:15px;" class="view_mercado center">
                             <h2><?= ucwords($mercado['nomeMerc']); ?></h2>
                             <?php if (!mercadoEstaLogado()) : ?>
                                 <a href="verPerfilMercado.php?id_mercado=<?= $mercado['id_mercado']; ?>">
