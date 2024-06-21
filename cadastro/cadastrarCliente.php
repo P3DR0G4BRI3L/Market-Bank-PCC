@@ -96,7 +96,7 @@ require_once '../inc/cabecalhocadastro.php'; //mostra o cabeçalho
 <br>
                         <label for="senha">Senha:</label>
                         <div class="inline">
-                            <input type="password" id="senha" name="senha" placeholder="Insira sua senha " onkeydown="if(event.keyCode === 13) event.preventDefault()" oninput="restringirLetras(this)" required maxlength="16">
+                            <input type="password" id="senha" name="senha" placeholder="Insira sua senha " onkeydown="if(event.keyCode === 13) event.preventDefault()"  required maxlength="16">
                             <button type="button" id="mostrarSenha" onclick="mostrarsenha()"><span class="lnr lnr-eye"></span></button>
                         </div>
 
@@ -105,7 +105,7 @@ require_once '../inc/cabecalhocadastro.php'; //mostra o cabeçalho
                                 <h6><?= $_GET['confsenha'] ?></h6>
                                 <?php endif ?>
                         <div class="inline">
-                            <input type="password" id="senha" name="confirmasenha" placeholder="Confirme sua senha " onkeydown="if(event.keyCode === 13) event.preventDefault()" oninput="restringirLetras(this)" required maxlength="16">
+                            <input type="password" id="senha" name="confirmasenha" placeholder="Confirme sua senha " onkeydown="if(event.keyCode === 13) event.preventDefault()"  required maxlength="16">
                             <button type="button" id="mostrarSenha" onclick="mostrarsenha()"><span class="lnr lnr-eye"></span></button>
                         </div>
                         <button class="button_padrao" onclick="window.location.href='cadastrar.php'">Voltar</button>
