@@ -48,7 +48,7 @@ require_once '../inc/cabecalho.php';
 
 
             <!-- redireciona  o usuario para para deletar o perfil -->
-            <form action="../CRUD/delete.php" method="POST" onsubmit="return confirmarExclusaoCliente()">
+            <form action="../CRUD/delete-cliente.php" method="POST" onsubmit="return confirmarExclusaoCliente()">
                 <input type="hidden" name="deleteperfil" value="<?= $_SESSION['usuario']['id_usuario']; ?>">
                 <!-- input envia o id do usuario pra exclusão via post ocultamente -->
                 <button class='button_padrao btn_delete' type="submit">Excluir</button>

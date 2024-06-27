@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             } elseif (isset($_POST['deleteprod'], $_POST['deletefile'])) {
 
-                $deletefoto = "C:\xampp\htdocs\Market-Bank\cadastro\uploads\\";
+                $deletefoto = "../cadastro/uploads/";
                 $imagemPath = $deletefoto . $_POST['deletefile'];
                 if (file_exists($imagemPath)) {
                     unlink($imagemPath);

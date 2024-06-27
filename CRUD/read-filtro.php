@@ -76,7 +76,7 @@ require_once '../inc/cabecalho.php'; ?>
                                     <button class='button_padrao' type="submit">Editar</button>
                                 </form>
 
-                                <form action="delete.php" method="POST" onsubmit="return confirmarExclusaoFiltro()">
+                                <form action="delete-filtro.php" method="POST" onsubmit="return confirmarExclusaoFiltro()">
                                     <input type="hidden" name="deletefiltro" value="<?= $filtro['id_filtro']; ?>">
                                     <button class='button_padrao' type="submit">Excluir</button>
                                 </form>

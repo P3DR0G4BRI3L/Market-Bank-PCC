@@ -41,7 +41,6 @@ require_once '../inc/cabecalho.php'; ?>
             <?php endif ?>
         </div>
     </div>
-    <!--lista os produtos, cada vez que o metodo fetch_all() é chamado ele armazena uma linha em $row e mostra dentro do laço while  -->
     <?php
     $panfletoDAO = new panfletoDAO($conn);
 

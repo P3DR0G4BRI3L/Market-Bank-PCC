@@ -636,13 +636,16 @@ input[type="number"] {
 	margin: 0 auto;
   }
   .align{
-	align-content: center;
+	margin: auto auto;
   }
    select{
 	width: 100%;
 	padding: 10px;
 	margin: 0 auto;
 	border-radius: 10px;
+   }
+   .lista-itens{
+	margin-left: 20px;
    }
   
 /*input file*/

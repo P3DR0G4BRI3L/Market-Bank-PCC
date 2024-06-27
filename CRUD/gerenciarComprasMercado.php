@@ -40,15 +40,21 @@ require_once '../inc/cabecalho.php';
 
         <!--Abertura postagem -->
         <div class="postagem ">
+                <div style="display: flex;">
+                    
+                    <h2>Histórico de compras</h2>
+                    
+                    
+                </div>
+                <button class='button_padrao' type="submit" onclick="window.location.href='../cadastro/verMeuMercado.php'">Voltar</button>
 
-            <h2>Histórico de compras</h2>
-            <button class='button_padrao' type="submit" onclick="window.location.href='../cadastro/verMeuMercado.php'">Voltar</button>
-            
+                
             <?php if(isset($_GET['mess'])): ?>
                 
                 <div class="inline center align ">  <h2><a class="button_padrao" href="?">&times;</a></h2>  <h4><?= $_GET['mess'] ?></h4></div>
                 
-            <?php endif ?>
+                <?php endif ?>
+                
         </div>
         
         <?php if (!empty($carrinhos)) :  ?>
@@ -100,7 +106,7 @@ require_once '../inc/cabecalho.php';
                             $total = 0;
                             $produto = $produtoDAO->getProdutoById($item['id_produto']);
                         ?>
-                            <li>
+                            <li class="lista-itens">
 
                                 <?= $produto['nome'] ?> - <?= $item['quantidade'] ?>
                                 unidade<?= unidade($item['quantidade']) ?> - R$
@@ -114,9 +120,9 @@ require_once '../inc/cabecalho.php';
 
                     <table>
                         <tr>
-                            <th>Status do pagamento</th>
+                            <th class="no-border">Status do pagamento</th>
 
-                            <td>
+                            <td class="no-border">
                                 <form action="" method="post">
                                     <input type="hidden" name="id_carrinho" value="<?=$carrinho['id_carrinho']?>">
                                     <select name="status" id="status" onchange="this.form.submit()">

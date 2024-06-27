@@ -63,7 +63,7 @@ require_once '../inc/cabecalho.php'; ?>
                                 <button class='button_padrao' type="submit">Editar</button>
                             </form>
 
-                            <form action="delete.php" method="POST" onsubmit="return confirmarExclusaoProduto()">
+                            <form action="delete-produto.php" method="POST" onsubmit="return confirmarExclusaoProduto()">
                                 <input type="hidden" name="deleteprod" value="<?= $produto['id_produto']; ?>">
                                 <input type="hidden" name="deletefile" value="<?= $produto['fotoProduto']; ?>">
                                 <button class='button_padrao' type="submit">Excluir</button>

@@ -10,7 +10,7 @@
 </head>
 
 </html>
-<a?php
+<?php
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -59,11 +59,11 @@ $produtoDAO = new produtoDAO($conn);
 
 
                                 <td>
-                                    <p><?= $cart['preco']  ?></p>
+                                    <p><?= number_format($cart['preco'],2,',','.')  ?> R$</p>
                                 </td>
 
                                 <td>
-                                    <p><?= $cart['quantidade'] * $cart['preco']  ?></p>
+                                    <p><?= number_format($cart['quantidade'] * $cart['preco'],2,',','.')  ?> R$</p>
                                 </td>
                             </tr>
                         </tbody>
