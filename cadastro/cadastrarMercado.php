@@ -23,7 +23,7 @@ $horarioFecha = $_POST['horarioFecha'];
 $telefone = $_POST['telefone'];
 $imagem = ($_FILES['imagem']);
 $cnpj = $_POST['cnpj'];
-$descricao = $_POST['descricao'] ?? null;
+$descricao = $_POST['descricao'] ?? NULL;
 $compras = $_POST['compras'];
 
 
@@ -62,6 +62,8 @@ if ($usuarioDAO->inserirUsuario($nome, $email, md5($senha), 'dono')) {
                 $id = $usuarioDAO->getIdUsuarioByEmail($email);
                 echo "<script>alert('Cadastro realizado com sucesso!\nAgora só falta inserir as informações de pagamento');</script>";
                 header("location:cadastroInfopag.php?id=$id");exit;
+            }elseif($compras == 'nao'){
+                $infopagDAO->inserirInfoPag($mercadoDAO->getIdMercadoByIdDono($id_dono),'email',$email);
             }
             
                 echo "<script>alert('Cadastro realizado com sucesso!');</script>";

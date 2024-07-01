@@ -113,7 +113,7 @@ class mercadoDAO
                 // Verifica se o arquivo foi enviado com sucesso
 
                 // Diretório onde você deseja armazenar as imagens
-                $diretorioDestino = 'C:\xampp\htdocs\Market-Bank\cadastro\uploads\\';
+                $diretorioDestino = '../cadastro/uploads/';
                 $fileInfo = pathinfo($filesimagem['name']);
                 // Nome do arquivo original
                 $filesimagem['name'] = uniqid();

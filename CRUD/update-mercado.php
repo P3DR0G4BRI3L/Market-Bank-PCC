@@ -4,11 +4,13 @@ require_once '../func/func.php';
 require_once '../cadastro/cadastro.php';
 require_once '../model/mercadoDAO.php';
 require_once '../model/usuarioDAO.php';
+require_once '../model/infopagDAO.php';
 if($_SESSION['usuario']['tipo']!='dono'){
     header('location:../index.php');
     exit;
 }
 $mercadoDAO = new mercadoDAO($conn);
+$infopagDAO = new infopagDAO($conn);
 $usuarioDAO = new usuarioDAO($conn);
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'], $_POST['nome'], $_POST['nomeMerc'], $_POST['cnpj'], $_POST['endereco'], $_POST['horarioAbert'], $_POST['horarioFecha'],
 $_POST['telefone'],$_POST['regiaoadm'],$_POST['compras']) ) {
@@ -56,6 +58,7 @@ $_POST['telefone'],$_POST['regiaoadm'],$_POST['compras']) ) {
     if( $attUser && $attMercado){ 
         $user = $usuarioDAO->getUsuarioByDono($_SESSION['usuario']['mercado']['id_dono']);
         $mercado = $mercadoDAO->getMercadoByIdUsuario($_SESSION['usuario']['id_usuario']);
+        $infopag = $infopagDAO->getInfopagByIdMercado($_SESSION['usuario']['mercado']['id_mercado']);
 
         $_SESSION['usuario'] = [
             'id_usuario' => $user['id_usuario'],
@@ -75,7 +78,12 @@ $_POST['telefone'],$_POST['regiaoadm'],$_POST['compras']) ) {
                 'id_dono' => $mercado['id_dono'],
                 'compras' => $mercado['compras'],
                 'imagem' => $mercado['imagem'],
-                'cnpj' => $mercado['cnpj']
+                'cnpj' => $mercado['cnpj'],
+
+                'infopag'=>[
+                            'pix' => $infpag['pix'],
+                           'tipo' => $infpag['tipo']
+                        ]
             ]
         ];
         

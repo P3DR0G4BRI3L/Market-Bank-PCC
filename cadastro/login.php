@@ -6,6 +6,7 @@ session_start();
 require_once 'cadastro.php';
 require_once '../func/func.php';
 require_once '../model/mercadoDAO.php';
+require_once '../model/infopagDAO.php';
 require_once '../model/clienteDAO.php';
 require_once '../model/usuarioDAO.php';
 // Conexão com o banco de dados
@@ -51,7 +52,11 @@ if (isset($_POST['email'], $_POST['senha'])) {
 
             case "dono":
                 $mercadoDAO = new mercadoDAO($conn);
+                $infopagDAO = new infopagDAO($conn);
+
                 $infmercado = $mercadoDAO->getMercadoByIdUsuario($infoUser['id_usuario']);
+                $infpag = $infopagDAO->getInfopagByIdMercado($infmercado['id_mercado']);
+
                 $_SESSION['usuario'] = [
                     'id_usuario' => $infoUser['id_usuario'],
                     'email' => $infoUser['email'],
@@ -70,12 +75,17 @@ if (isset($_POST['email'], $_POST['senha'])) {
                         'id_dono' => $infmercado['id_dono'],
                         'compras' => $infmercado['compras'],
                         'imagem' => $infmercado['imagem'],
-                        'cnpj' => $infmercado['cnpj']
+                        'cnpj' => $infmercado['cnpj'],
+
+                        'infopag'=>[
+                            'pix' => $infpag['pix'],
+                           'tipo' => $infpag['tipo']
+                        ]
                     ]
                 ];
 
                 echo "<script>alert('Login realizado com sucesso');</script>";
-                echo "<script>window.location.href='../index.php'</script>";
+               echo "<script>window.location.href='../index.php'</script>";
                 exit;
                 break;
 

@@ -122,7 +122,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE IF NOT EXISTS `marketbank`.`infopag` (
   `id_infoPag` INT(11) NOT NULL AUTO_INCREMENT,
   `id_mercado` INT(11) NOT NULL,
-  `tipo` ENUM('telefone', 'cnpj', 'email') NOT NULL DEFAULT 'cnpj',
+  `tipo` ENUM('telefone', 'cnpj', 'email') NOT NULL DEFAULT 'email',
   `pix` VARCHAR(70) NOT NULL,
   PRIMARY KEY (`id_infoPag`),
   INDEX `id_mercado` (`id_mercado` ASC) ,

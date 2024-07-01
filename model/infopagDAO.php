@@ -7,7 +7,7 @@ class infopagDAO{
         $this->conn=$conn;
     }
     public function inserirInfoPag($id_mercado, $tipo, $chavepix){
-        $query = "INSERT INTO infopag(id_mercado,tipo,pix)VALUES(:id_mercado,:tipo,:chavepix)";
+        $query = "INSERT INTO infopag(id_mercado,tipo,pix)VALUES(:id_mercado , :tipo , :chavepix)";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(':id_mercado',$id_mercado,PDO::PARAM_INT);
         $stmt->bindValue(':chavepix',$chavepix,PDO::PARAM_STR);
