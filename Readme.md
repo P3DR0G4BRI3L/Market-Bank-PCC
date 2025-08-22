@@ -1,36 +1,64 @@
-Nome do projeto: Market Bank
+🛒 Market Bank
+👥 Integrantes
+Nome
+Davi
+Edileuza
+Israel
+Pedro
+📖 Sobre o projeto
 
-Integrantes: Davi, Edileuza, Israel, Pedro
+O Market Bank é um sistema web para registro e divulgação de supermercados.
+O objetivo é aproximar consumidores e mercados, permitindo que os estabelecimentos divulguem produtos, preços e panfletos promocionais de forma prática.
 
-O projeto será um registro de supermercados, onde os mesmos acessam o sistema web, realizam o cadastro informando nome, CNPJ, endereço, telefone, e-mail e horario de funcionamento.
+⚙️ Funcionalidades
+🔑 Autenticação e Usuários
 
-O CNPJ deverá ser validado automaticamente ou pelo moderador do sistema(pendente), após a validação, o supermercado poderá adicionar seus produtos em seu perfil, fazendo upload da imagem do produto, inserindo também o preço. 
+Cadastro, login, redefinição de senha e exclusão de conta.
 
-Na tela de adicionar produtos terá uma lista de produtos pré definidos que geralmente têm em todo supermercado, para facilitar a adição de produtos, o supermercado também terá a opção de divulgar promoções ou avisos aos usuários consumidores, que terão uma aba de notificações onde receberão essas informações, porém, somente se estiverem seguindo o mercado, entretando, podem olhar as informações manualmente de outros supermercados que não estão seguindo.
+Consumidor: CRUD do perfil (nome, e-mail, senha).
 
-O usuário consumidor deverá informar seu nome, email e senha, após o cadastro o usuário podera realizar um CRUD do seu perfil, assim como os supermercados.     
+Supermercado: CRUD do perfil (nome, CNPJ, endereço, telefone, e-mail, horário de funcionamento).
 
+🛒 Supermercados
 
-filtro de regiões administrativas
-filtro de produtos no perfil do supermercado
-opção do usuário consumidor seguir o supermercado
-aba de notificação no perfil do usuário consumidor
-aba de pesquisa de supermercados e produtos
-supermercado pode fazer o CRUD de seus produtos
+Upload de imagens dos produtos.
 
+Cadastro de preços e descrições.
 
-As principais funcionalidades do sistema, que são:
+CRUD completo de produtos.
 
-Módulo de login: Realiza o cadastro, login,  redefine a senha do usuário,deleta as informações e acrescenta essas informações  ao banco de dados.
+Divulgação de panfletos promocionais.
 
-Visualização de produtos:O cliente vai acessar os produtos na sessão.
+👤 Consumidores
 
-Gerenciar Pedidos: O cliente faz o pedido do seu produto no site,os pedidos são atualizados, excluídos e alterados 
+Gerenciam seu próprio perfil.
 
-Realizar Pedidos: O cliente poderá fazer seu pedido que será enviado ao mercado,ele também pode atualizar,excluir e alterar.
+Visualizam produtos e panfletos dos supermercados cadastrados.
 
-Gerenciar Produtos: O dono do mercado pode alterar,excluir  e adicionar novos produtos ao seu mercado.
+📦 Pedidos
 
-Gerenciar Clientes: O administrador  geral gerencia, exclui, altera ou atualizar os clientes.
+O cliente pode adicionar produtos ao carrinho e realizar o pedido.
 
+Pedidos podem ser editados apenas enquanto estão no carrinho.
 
+Após finalização:
+
+O consumidor não pode mais alterar.
+
+O supermercado pode alterar o status para "pendente" ou "finalizado".
+
+👨‍💼 Administração
+
+O administrador geral possui acesso a um CRUD completo de:
+
+Consumidores
+
+Supermercados
+
+✅ Resumo dos Módulos
+Módulo	Descrição
+Login & Cadastro	Controle de autenticação e gestão de usuários.
+Visualização de Produtos	Exibição de produtos cadastrados pelos supermercados.
+Gerenciar Pedidos	CRUD de pedidos (cliente enquanto no carrinho, mercado após finalização).
+Gerenciar Produtos	CRUD de produtos pelos mercados.
+Gerenciar Usuários	CRUD completo de consumidores e supermercados pelo administrador.
